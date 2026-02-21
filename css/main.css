@@ -767,12 +767,12 @@ sup > a::before,
 }
 html {
   font-size: 16px;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }
 html,
 body {
   height: 100%;
-  font-family: Microsoft YaHei, PingFang SC, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   overflow-wrap: break-word;
 }
 body {
@@ -835,54 +835,54 @@ i.iconfont {
 }
 :root {
   --color-mode: "light";
-  --body-bg-color: #fef7fb;
-  --board-bg-color: #ffffff;
-  --text-color: #7a4a68;
-  --sec-text-color: #b88ea8;
-  --post-text-color: #693d58;
-  --post-heading-color: #592f48;
-  --post-link-color: #d6709e;
-  --link-hover-color: #c9588e;
-  --link-hover-bg-color: #fcf1f7;
-  --line-color: #f0e0e8;
-  --navbar-bg-color: #e8c8d8;
-  --navbar-text-color: #8b5a78;
-  --subtitle-color: #8b5a78;
+  --body-bg-color: #fff5f8;
+  --board-bg-color: rgba(255, 255, 255, 0.95);
+  --text-color: #70405e;
+  --sec-text-color: #b0859e;
+  --post-text-color: #603550;
+  --post-heading-color: #502840;
+  --post-link-color: #d0789c;
+  --link-hover-color: #c5688e;
+  --link-hover-bg-color: rgba(252, 241, 247, 0.8);
+  --line-color: #f2e5eb;
+  --navbar-bg-color: rgba(232, 200, 216, 0.9);
+  --navbar-text-color: #80506e;
+  --subtitle-color: #80506e;
   --scrollbar-color: #e8c8d8;
-  --scrollbar-hover-color: #d8b0c4;
+  --scrollbar-hover-color: #d0b0c0;
   --button-bg-color: transparent;
-  --button-hover-bg-color: #faf0f5;
+  --button-hover-bg-color: rgba(250, 240, 245, 0.9);
   --highlight-bg-color: #f6f8fa;
   --inlinecode-bg-color: rgba(175,184,193,0.2);
-  --fold-title-color: #7a4a68;
-  --fold-border-color: #f0e0e8;
+  --fold-title-color: #70405e;
+  --fold-border-color: #f2e5eb;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --color-mode: "dark";
   }
   :root:not([data-user-color-scheme]) {
-    --body-bg-color: #2d242b;
-    --board-bg-color: #382c35;
-    --text-color: #e9d1dd;
-    --sec-text-color: #a78b9d;
-    --post-text-color: #e9d1dd;
-    --post-heading-color: #f0d9e5;
-    --post-link-color: #e88fb5;
-    --link-hover-color: #f0a5c5;
-    --link-hover-bg-color: #4a3a45;
-    --line-color: #5a4854;
-    --navbar-bg-color: #4a3a45;
-    --navbar-text-color: #f0d9e5;
-    --subtitle-color: #f0d9e5;
-    --scrollbar-color: #8b5a78;
-    --scrollbar-hover-color: #9b6a88;
+    --body-bg-color: #2b2228;
+    --board-bg-color: rgba(56, 44, 53, 0.95);
+    --text-color: #eed8e4;
+    --sec-text-color: #a08092;
+    --post-text-color: #eed8e4;
+    --post-heading-color: #f5e0ea;
+    --post-link-color: #e599b8;
+    --link-hover-color: #f2a8c5;
+    --link-hover-bg-color: rgba(74, 58, 69, 0.8);
+    --line-color: #554550;
+    --navbar-bg-color: rgba(74, 58, 69, 0.9);
+    --navbar-text-color: #f5e0ea;
+    --subtitle-color: #f5e0ea;
+    --scrollbar-color: #80506e;
+    --scrollbar-hover-color: #90607e;
     --button-bg-color: transparent;
-    --button-hover-bg-color: #5a4854;
+    --button-hover-bg-color: rgba(85, 68, 78, 0.9);
     --highlight-bg-color: #303030;
     --inlinecode-bg-color: rgba(99,110,123,0.4);
-    --fold-title-color: #e9d1dd;
-    --fold-border-color: #5a4854;
+    --fold-title-color: #eed8e4;
+    --fold-border-color: #554550;
   }
   :root:not([data-user-color-scheme]) img {
     -webkit-filter: brightness(0.9);
@@ -900,27 +900,27 @@ i.iconfont {
 }
 @media not print {
   [data-user-color-scheme="dark"] {
-    --body-bg-color: #2d242b;
-    --board-bg-color: #382c35;
-    --text-color: #e9d1dd;
-    --sec-text-color: #a78b9d;
-    --post-text-color: #e9d1dd;
-    --post-heading-color: #f0d9e5;
-    --post-link-color: #e88fb5;
-    --link-hover-color: #f0a5c5;
-    --link-hover-bg-color: #4a3a45;
-    --line-color: #5a4854;
-    --navbar-bg-color: #4a3a45;
-    --navbar-text-color: #f0d9e5;
-    --subtitle-color: #f0d9e5;
-    --scrollbar-color: #8b5a78;
-    --scrollbar-hover-color: #9b6a88;
+    --body-bg-color: #2b2228;
+    --board-bg-color: rgba(56, 44, 53, 0.95);
+    --text-color: #eed8e4;
+    --sec-text-color: #a08092;
+    --post-text-color: #eed8e4;
+    --post-heading-color: #f5e0ea;
+    --post-link-color: #e599b8;
+    --link-hover-color: #f2a8c5;
+    --link-hover-bg-color: rgba(74, 58, 69, 0.8);
+    --line-color: #554550;
+    --navbar-bg-color: rgba(74, 58, 69, 0.9);
+    --navbar-text-color: #f5e0ea;
+    --subtitle-color: #f5e0ea;
+    --scrollbar-color: #80506e;
+    --scrollbar-hover-color: #90607e;
     --button-bg-color: transparent;
-    --button-hover-bg-color: #5a4854;
+    --button-hover-bg-color: rgba(85, 68, 78, 0.9);
     --highlight-bg-color: #303030;
     --inlinecode-bg-color: rgba(99,110,123,0.4);
-    --fold-title-color: #e9d1dd;
-    --fold-border-color: #5a4854;
+    --fold-title-color: #eed8e4;
+    --fold-border-color: #554550;
   }
   [data-user-color-scheme="dark"] img {
     -webkit-filter: brightness(0.9);
@@ -1393,7 +1393,7 @@ figure.highlight td.code > pre {
 .markdown-body {
   font-size: 1rem;
   line-height: 1.6;
-  font-family: Microsoft YaHei, PingFang SC, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   margin-bottom: 2rem;
   color: var(--post-text-color);
 }
