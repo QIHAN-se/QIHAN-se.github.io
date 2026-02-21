@@ -8,9 +8,23 @@
     <link href="/2026/02/21/starting-blog/"/>
     <url>/2026/02/21/starting-blog/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>#这是一个测试<br>这是一个测试，用于测试文章发布与标签、分类功能！</p><p>附一张图在下<br><img src="/images/preview.png" alt="凉" title="凉！"></p>]]></content>
     
     
+    <categories>
+      
+      <category>测试</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>test</tag>
+      
+      <tag>测试</tag>
+      
+    </tags>
     
   </entry>
   
