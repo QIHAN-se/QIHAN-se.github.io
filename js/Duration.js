@@ -23,7 +23,7 @@
       snum = "0" + snum;
     }
     document.getElementById("duration-container").innerHTML = `
-        &nbsp;须弥藏芥&nbsp;已逾
+        &nbsp;这个博客已经存在
         <span id="time-day">${dnum}</span>
         日又
         <span id="time-hour">${hnum}</span>
@@ -31,7 +31,7 @@
         <span id="time-minute">${mnum}</span>
         分
         <span id="time-second">${snum}</span>
-        秒
+        秒了哦！
     `;
   }
 
