@@ -95,14 +95,21 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</loc>
+    <loc>http://example.com/tags/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://example.com/tags/%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2026-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</loc>
     <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -123,21 +130,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://example.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/tags/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2026-03-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</loc>
+    <loc>http://example.com/tags/%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -160,7 +160,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</loc>
+    <loc>http://example.com/categories/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -174,7 +174,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://example.com/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
