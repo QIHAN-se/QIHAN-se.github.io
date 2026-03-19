@@ -1,47 +1,52 @@
-/* ===== 第1部分：字体引入（必须放在文件最顶部）===== */
+/* ===== 第1部分：字体引入 ===== */
 @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600&family=Quicksand:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Ma+Shan+Zheng&family=Quicksand:wght@300;400;500&display=swap');
 
-/* ===== 第2部分：全局变量与基础样式 ===== */
+/* ===== 第2部分：全局变量（加深文字颜色）===== */
 :root {
-  /* 粉色系配色 */
-  --primary-pink: #e8b4b8;        /* 豆沙粉主色 */
-  --light-pink: #fce4ec;          /* 浅樱粉 */
-  --soft-purple: #d4a5a5;         /* 柔雾紫 */
-  --cream-white: #fff9fb;         /* 奶油白背景 */
-  --text-warm: #6b5b5b;           /* 暖灰文字 */
-  --title-color: #8b6b6b;         /* 标题色 */
+  /* 配色 - 保持粉色系但提高对比度 */
+  --primary-pink: #d48c8c;        /* 加深主色 */
+  --light-pink: #fce4ec;          
+  --soft-purple: #c08080;         /* 加深紫粉 */
+  --cream-white: #fff9fb;         
+  --text-dark: #4a3f3f;           /* 加深正文颜色 */
+  --text-gray: #5c5050;           /* 次要文字 */
+  --title-color: #6b5252;         /* 加深标题色 */
   
-  /* 字体变量 */
+  /* 字体 */
   --font-zh: 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --font-en: 'Dancing Script', cursive;
-  --font-art: 'Ma Shan Zheng', cursive; /* 中文艺术字 */
-  --font-sub: 'Quicksand', 'Noto Serif SC', sans-serif;
+  --font-sub: 'Quicksand', sans-serif;
 }
 
-/* 全局字体：正文用霞鹜文楷 */
+/* 全局字体与背景 */
 body {
   font-family: var(--font-zh);
   background-color: var(--cream-white);
-  background-image: 
-    radial-gradient(circle at 20% 50%, rgba(232, 180, 184, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(212, 165, 165, 0.03) 0%, transparent 50%);
-  color: var(--text-warm);
+  color: var(--text-dark);
   line-height: 1.8;
+  /* 两侧添加极淡的樱花纹理填补空白 */
+  background-image: 
+    radial-gradient(circle at 5% 10%, rgba(232, 180, 184, 0.08) 0%, transparent 25%),
+    radial-gradient(circle at 95% 20%, rgba(212, 165, 165, 0.06) 0%, transparent 25%),
+    radial-gradient(circle at 8% 90%, rgba(232, 180, 184, 0.05) 0%, transparent 20%);
 }
 
-/* 代码块保持等宽 */
+/* 代码块 */
 code, pre {
   font-family: 'Fira Code', Consolas, monospace !important;
 }
 
-/* ===== 第3部分：首页大图淡化（核心）===== */
+/* ===== 第3部分：首页大图（更淡更朦胧）===== */
 .index-header {
   position: relative;
   overflow: hidden;
+  /* 给头部加底部圆角，更柔和 */
+  border-radius: 0 0 30px 30px;
+  margin-bottom: 2rem;
 }
 
-/* 淡粉色渐变蒙层 - 让图片变得朦胧清新 */
+/* 大幅提高蒙层透明度，让背景更淡 */
 .index-header::before {
   content: '';
   position: absolute;
@@ -51,102 +56,99 @@ code, pre {
   height: 100%;
   background: linear-gradient(
     135deg,
-    rgba(255, 240, 245, 0.5) 0%,      /* 左上角淡粉白 */
-    rgba(252, 228, 236, 0.4) 50%,     /* 中间樱花粉透明 */
-    rgba(212, 165, 165, 0.5) 100%     /* 右下角柔雾紫 */
+    rgba(255, 245, 247, 0.75) 0%,      /* 提高透明度 0.5->0.75 */
+    rgba(255, 240, 245, 0.65) 50%,     
+    rgba(240, 220, 220, 0.7) 100%     
   );
-  backdrop-filter: blur(0.5px) brightness(1.1);
+  backdrop-filter: blur(2px) brightness(1.05); /* 增加模糊度 */
   z-index: 1;
-  pointer-events: none;
 }
 
-/* 底部自然过渡到内容区 */
+/* 底部过渡层 */
 .index-header::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 40%;
+  height: 50%; /* 增加高度 */
   background: linear-gradient(
     to top,
-    rgba(255, 255, 255, 0.98) 0%,
-    rgba(255, 255, 255, 0.7) 40%,
+    rgba(255, 249, 251, 1) 0%,        /* 完全不透明，确保衔接 */
+    rgba(255, 249, 251, 0.8) 30%,
     transparent 100%
   );
   z-index: 2;
-  pointer-events: none;
 }
 
-/* 原图提亮柔化 */
+/* 背景图片更透明 */
 .index-header .header-bg {
-  filter: brightness(1.15) saturate(0.85) contrast(0.95);
-  opacity: 0.85;
+  filter: brightness(1.2) saturate(0.7) contrast(0.9); /* 更亮更低饱和 */
+  opacity: 0.6 !important; /* 强制降低背景图透明度 */
 }
 
-/* 标题区域定位 */
+/* 标题区域 - 加深阴影确保看清 */
 .index-header .header-content {
   position: relative;
   z-index: 3;
   text-align: center;
-  padding-top: 16vh;
+  padding-top: 18vh;
 }
 
-/* 主标题 - 英文用Dancing Script，中文用毛笔字，白色发光 */
 .index-header .header-title {
-  font-family: var(--font-en), var(--font-art), cursive;
+  font-family: var(--font-en), 'Ma Shan Zheng', cursive;
   font-size: 4.5rem;
   font-weight: 700;
   color: #fff;
   letter-spacing: 6px;
+  /* 加深文字阴影确保清晰 */
   text-shadow: 
-    0 2px 4px rgba(232, 180, 184, 0.4),
-    0 0 30px rgba(232, 180, 184, 0.8),
-    0 0 60px rgba(255, 255, 255, 0.5);
+    0 2px 8px rgba(0, 0, 0, 0.15),     /* 深色投影增加可读性 */
+    0 0 40px rgba(232, 180, 184, 0.9),
+    0 0 80px rgba(255, 255, 255, 0.6);
   animation: float 6s ease-in-out infinite;
   margin-bottom: 1.5rem;
 }
 
-/* 副标题 - 霞鹜文楷细体 */
 .index-header .header-subtitle {
   font-family: var(--font-zh);
-  font-size: 1.2rem;
-  font-weight: 300;
+  font-size: 1.3rem;
+  font-weight: 400; /* 改为正常字重，细体看不清 */
   color: rgba(255, 255, 255, 0.95);
-  letter-spacing: 4px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  letter-spacing: 3px;
+  /* 增加文字描边效果确保在浅色背景上可见 */
+  text-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(232, 180, 184, 0.8);
   position: relative;
   display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.15); /* 轻微背景增加可读性 */
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
 }
 
-/* 副标题两侧樱花装饰 */
+/* 装饰符号 */
 .index-header .header-subtitle::before,
 .index-header .header-subtitle::after {
   content: '❀';
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.8rem;
-  opacity: 0.9;
-  font-family: var(--font-zh);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  text-shadow: 0 0 10px rgba(232, 180, 184, 0.8);
 }
 
-.index-header .header-subtitle::before {
-  left: -2.5rem;
-}
+.index-header .header-subtitle::before { left: -2rem; }
+.index-header .header-subtitle::after { right: -2rem; }
 
-.index-header .header-subtitle::after {
-  right: -2.5rem;
-}
-
-/* 呼吸浮动动画 */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+  50% { transform: translateY(-10px); }
 }
 
-/* ===== 第4部分：导航栏（透明+毛玻璃切换）===== */
+/* ===== 第4部分：导航栏（滚动后实心可见）===== */
 .navbar {
   background: transparent !important;
   box-shadow: none !important;
@@ -154,17 +156,17 @@ code, pre {
   padding: 1rem 2rem;
 }
 
-/* 滚动后的毛玻璃效果 */
+/* 关键：滚动后使用实色背景，确保看得见 */
 .navbar.scrolled,
 .navbar.navbar-scroll {
-  background: rgba(255, 255, 255, 0.88) !important;
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  box-shadow: 0 2px 20px rgba(232, 180, 184, 0.15) !important;
-  padding: 0.5rem 2rem;
+  background: rgba(255, 249, 251, 0.98) !important; /* 接近实色的奶油白 */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(212, 165, 165, 0.2) !important;
+  padding: 0.6rem 2rem;
+  border-bottom: 1px solid rgba(232, 180, 184, 0.3);
 }
 
-/* 品牌名 - Dancing Script手写体，白色发光 */
+/* 品牌名 */
 .navbar-brand {
   font-family: var(--font-en);
   font-size: 2.2rem;
@@ -172,35 +174,40 @@ code, pre {
   color: #fff !important;
   letter-spacing: 2px;
   text-shadow: 
-    0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 10px rgba(0, 0, 0, 0.1),
     0 0 30px rgba(232, 180, 184, 0.8);
-  transition: all 0.3s ease;
+  transition: all 0.3s;
+}
+
+/* 滚动后品牌名变色，确保在实色背景上可见 */
+.navbar.scrolled .navbar-brand,
+.navbar.navbar-scroll .navbar-brand {
+  color: var(--primary-pink) !important;
+  text-shadow: none; /* 移除阴影，实色背景不需要 */
 }
 
 .navbar-brand:hover {
-  color: #fce4ec !important;
-  text-shadow: 
-    0 0 20px rgba(255, 255, 255, 1),
-    0 0 40px rgba(232, 180, 184, 0.9);
   transform: scale(1.05);
 }
 
-/* 导航链接 */
+/* 导航链接 - 初始白色 */
 .nav-link {
   font-family: var(--font-sub);
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
   font-weight: 500;
   letter-spacing: 1px;
   font-size: 0.95rem;
   position: relative;
   margin: 0 0.5rem;
   transition: all 0.3s;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1); /* 增加可读性 */
 }
 
-/* 滚动后导航链接变色 */
+/* 滚动后导航链接变深色 */
 .navbar.scrolled .nav-link,
 .navbar.navbar-scroll .nav-link {
-  color: var(--text-warm) !important;
+  color: var(--text-dark) !important;
+  text-shadow: none;
 }
 
 .navbar.scrolled .nav-link:hover,
@@ -216,8 +223,8 @@ code, pre {
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--primary-pink), transparent);
-  transition: all 0.3s ease;
+  background: var(--primary-pink);
+  transition: all 0.3s;
   transform: translateX(-50%);
 }
 
@@ -225,14 +232,27 @@ code, pre {
   width: 80%;
 }
 
-/* ===== 第5部分：文章卡片（毛玻璃+粉色阴影）===== */
+/* ===== 第5部分：文章卡片（加深文字+两侧阴影层次）===== */
+/* 主容器增加两侧阴影，填补空白感 */
+#main.content-wrap {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255,255,255,0.8) 5%,
+    rgba(255,255,255,0.8) 95%,
+    transparent 100%
+  );
+  padding: 0 2rem;
+  border-radius: 20px;
+}
+
 .post-card {
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(232, 180, 184, 0.2);
-  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.95); /* 提高不透明度 */
+  border: 1px solid rgba(212, 165, 165, 0.3); /* 加深边框 */
+  border-radius: 16px;
   box-shadow: 
-    0 4px 20px rgba(232, 180, 184, 0.08),
-    0 1px 3px rgba(0, 0, 0, 0.02);
+    0 4px 20px rgba(139, 107, 107, 0.1), /* 加深阴影颜色 */
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
   backdrop-filter: blur(10px);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
@@ -240,155 +260,142 @@ code, pre {
 }
 
 .post-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-5px);
   box-shadow: 
-    0 16px 48px rgba(232, 180, 184, 0.15),
-    0 4px 12px rgba(0, 0, 0, 0.03);
-  border-color: rgba(232, 180, 184, 0.5);
+    0 12px 40px rgba(139, 107, 107, 0.15),
+    0 0 0 1px rgba(232, 180, 184, 0.3) inset;
 }
 
+/* 文章标题 - 加深确保看清 */
 .post-card .post-title {
   font-family: var(--font-zh);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.6rem; /* 稍微加大 */
   color: var(--title-color);
-  transition: color 0.3s;
+  margin-bottom: 0.8rem;
   line-height: 1.4;
 }
 
 .post-card:hover .post-title {
-  color: var(--soft-purple);
+  color: var(--primary-pink);
 }
 
-.post-card .post-content {
+/* 文章内容 - 加深颜色 */
+.post-card .post-content,
+.post-card .post-excerpt,
+.post-card .index-excerpt {
   font-family: var(--font-zh);
-  color: #7a6b6b;
+  color: var(--text-gray); /* 使用更深的灰色 */
   line-height: 1.9;
-  font-size: 0.95rem;
+  font-size: 1rem; /* 确保字号足够 */
 }
 
-/* 文章图片圆角和悬浮效果 */
-.post-card .post-img {
-  border-radius: 12px;
-  transition: transform 0.6s ease;
+/* 日期和元信息 */
+.post-card .post-meta {
+  color: #8b7b7b !important; /* 加深 */
+  font-size: 0.9rem;
 }
 
-.post-card:hover .post-img {
-  transform: scale(1.03);
+/* 两侧空白处添加装饰性内容（可选：如果要完全填补两侧，需要改布局，这里用阴影层次） */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 900px; /* 稍微收窄内容区，让两侧空白更协调 */
+  }
 }
 
-/* ===== 第6部分：标签与按钮（樱花胶囊风格）===== */
+/* ===== 第6部分：标签与按钮 ===== */
 .tag-cloud a, 
-.post-tags .tag,
-.post-tag {
-  background: rgba(232, 180, 184, 0.12) !important;
-  color: #c98b8b !important;
-  border: 1px solid rgba(232, 180, 184, 0.35) !important;
+.post-tags .tag {
+  background: rgba(212, 140, 140, 0.15) !important; /* 加深背景 */
+  color: #a06060 !important; /* 加深文字 */
+  border: 1px solid rgba(212, 140, 140, 0.4) !important;
   border-radius: 20px !important;
   padding: 0.3rem 1rem !important;
   font-family: var(--font-sub);
-  font-size: 0.8rem;
   font-weight: 500;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-  margin: 0.2rem;
-  display: inline-block;
+  transition: all 0.3s;
 }
 
 .tag-cloud a:hover, 
-.post-tags .tag:hover,
-.post-tag:hover {
+.post-tags .tag:hover {
   background: var(--primary-pink) !important;
   color: #fff !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(232, 180, 184, 0.4);
-  border-color: var(--primary-pink) !important;
+  box-shadow: 0 4px 12px rgba(212, 140, 140, 0.4);
 }
 
-/* 按钮 - 渐变粉色 */
-.btn-primary,
-.btn-info {
+/* 按钮 */
+.btn-primary {
   background: linear-gradient(135deg, var(--primary-pink) 0%, var(--soft-purple) 100%) !important;
   border: none !important;
   border-radius: 25px !important;
-  box-shadow: 0 4px 15px rgba(232, 180, 184, 0.4) !important;
-  font-family: var(--font-sub);
+  color: #fff !important;
+  box-shadow: 0 4px 15px rgba(212, 140, 140, 0.4) !important;
   font-weight: 500;
-  letter-spacing: 1px;
-  padding: 0.6rem 1.8rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s;
 }
 
-.btn-primary:hover,
-.btn-info:hover {
+.btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(232, 180, 184, 0.6) !important;
-  background: linear-gradient(135deg, var(--soft-purple) 0%, #c99595 100%) !important;
+  box-shadow: 0 8px 25px rgba(212, 140, 140, 0.6) !important;
 }
 
 /* ===== 第7部分：滚动条与页脚 ===== */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--light-pink);
-  border-radius: 3px;
+  background: #fff0f3;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--primary-pink), var(--soft-purple));
-  border-radius: 3px;
-  border: 1px solid var(--cream-white);
+  border-radius: 4px;
+  border: 2px solid var(--cream-white);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--soft-purple), #c99595);
-}
-
-/* 页脚 */
 footer {
-  background: rgba(255, 255, 255, 0.7) !important;
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(232, 180, 184, 0.25);
-  color: #9b8b8b;
-  font-family: var(--font-sub);
-  font-size: 0.9rem;
-  padding: 2rem 0;
+  background: rgba(255, 249, 251, 0.95) !important;
+  border-top: 1px solid rgba(212, 165, 165, 0.3);
+  color: #7a6a6a; /* 加深 */
+  margin-top: 3rem;
+  padding: 2.5rem 0;
 }
 
 /* ===== 第8部分：移动端适配 ===== */
 @media (max-width: 768px) {
   .index-header .header-title {
-    font-size: 3rem;
-    letter-spacing: 3px;
+    font-size: 2.8rem;
   }
   
   .index-header .header-subtitle {
-    font-size: 1rem;
-    letter-spacing: 2px;
+    font-size: 1.1rem;
+    padding: 0.4rem 0.8rem;
   }
   
   .index-header .header-subtitle::before,
   .index-header .header-subtitle::after {
-    display: none; /* 移动端隐藏装饰符号，避免拥挤 */
+    display: none;
   }
   
   .navbar-brand {
     font-size: 1.6rem;
   }
   
-  .post-card {
-    border-radius: 14px;
-    margin: 1rem 0.5rem;
+  /* 移动端主内容区全宽 */
+  #main.content-wrap {
+    padding: 0 1rem;
+    background: transparent;
   }
   
-  .nav-link {
-    margin: 0.2rem 0;
+  .post-card {
+    margin-bottom: 1.5rem;
   }
 }
 
-/* 页面加载淡入动画 */
+/* 页面加载动画 */
 #main {
   animation: fadeIn 0.8s ease;
 }
