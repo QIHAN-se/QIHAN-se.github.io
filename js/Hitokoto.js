@@ -1,6 +1,6 @@
 async function fetchSlogan() {
     try {
-        const res = await fetch('https://v1.hitokoto.cn/?c=d');
+        const res = await fetch('https://v1.hitokoto.cn/?c=j');
         const data = await res.json();
         const hitokotoElem = document.getElementById('hitokoto');
         if (hitokotoElem) {
