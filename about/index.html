@@ -73,6 +73,7 @@
 <link rel="stylesheet" href="/css/custom.css">
 <link rel="stylesheet" href="/css/ScrollAnimation.css">
 <link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/cloudedGlass.css">
 
 
 
@@ -95,7 +96,7 @@
 <meta name="generator" content="Hexo 8.1.1"></head>
 
 
-<body>
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
   
 
   <header>
@@ -260,7 +261,7 @@
     window.onresize = function() {
       postsChart.resize();
     };
-    let dataPosts = [{"title":"starting-blog","date":"2026-02-21","wordcount":33,"path":"2026/02/21/starting-blog/"},{"title":"OJ总结1","date":"2026-02-23","wordcount":11,"path":"2026/02/23/OJ总结1/"},{"title":"操作系统第一章","date":"2026-03-03","wordcount":1092,"path":"2026/03/03/操作系统第一章/"},{"title":"算法探究：一道腾讯面试题的思考","date":"2026-03-15","wordcount":856,"path":"2026/03/15/算法探究：一道腾讯面试题的思考/"},{"title":"词法分析","date":"2026-03-15","wordcount":996,"path":"2026/03/15/词法分析/"},{"title":"软件工程II-1","date":"2026-03-19","wordcount":0,"path":"2026/03/19/软件工程II-1/"}]
+    let dataPosts = [{"title":"starting-blog","date":"2026-02-21","wordcount":33,"path":"2026/02/21/starting-blog/"},{"title":"OJ总结1","date":"2026-02-23","wordcount":11,"path":"2026/02/23/OJ总结1/"},{"title":"操作系统第一章","date":"2026-03-03","wordcount":1092,"path":"2026/03/03/操作系统第一章/"},{"title":"算法探究：一道腾讯面试题的思考","date":"2026-03-15","wordcount":856,"path":"2026/03/15/算法探究：一道腾讯面试题的思考/"},{"title":"软件工程II-1","date":"2026-03-19","wordcount":0,"path":"2026/03/19/软件工程II-1/"},{"title":"词法分析","date":"2026-03-15","wordcount":996,"path":"2026/03/15/词法分析/"}]
     const dataMap = new Map(dataPosts.map((obj) => [obj.date, {title: obj.title, wordCount: obj.wordcount, path: obj.path}]));
 
     function heatmap_width(months){
@@ -352,7 +353,7 @@
     series: {
         type: 'heatmap',
         coordinateSystem: 'calendar',
-        data: [["2026-02-21",33],["2026-02-23",11],["2026-03-03",1092],["2026-03-15",856],["2026-03-15",996],["2026-03-19",0]]
+        data: [["2026-02-21",33],["2026-02-23",11],["2026-03-03",1092],["2026-03-15",856],["2026-03-19",0],["2026-03-15",996]]
     }
   };
 
@@ -598,5 +599,5 @@
   <noscript>
     <div class="noscript-warning">&#x535A;&#x5BA2;&#x5728;&#x5141;&#x8BB8; JavaScript &#x8FD0;&#x884C;&#x7684;&#x73AF;&#x5883;&#x4E0B;&#x6D4F;&#x89C8;&#x6548;&#x679C;&#x66F4;&#x4F73;</div>
   </noscript>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
