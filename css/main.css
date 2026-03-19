@@ -777,7 +777,7 @@ sup > a::before,
   padding: 3rem 0;
 }
 html {
-  font-size: 16px;
+  font-size: 25px;
   letter-spacing: 0.01em;
 }
 html,
@@ -858,7 +858,7 @@ i.iconfont {
   --line-color: #ffe8f0;
   --navbar-bg-color: rgba(255, 245, 250, 0.95);
   --navbar-text-color: #d4789c;
-  --subtitle-color: #ffffff;
+  --subtitle-color: #c75b7a;
   --scrollbar-color: #ffd6e8;
   --scrollbar-hover-color: #ffc2d6;
   --button-bg-color: rgba(255, 255, 255, 0.5);
@@ -885,7 +885,7 @@ i.iconfont {
     --line-color: #5a4a52;
     --navbar-bg-color: rgba(90, 70, 80, 0.85);
     --navbar-text-color: #ffd6e8;
-    --subtitle-color: #ffffff;
+    --subtitle-color: #c75b7a;
     --scrollbar-color: #b08090;
     --scrollbar-hover-color: #c090a0;
     --button-bg-color: rgba(100, 80, 90, 0.5);
@@ -939,7 +939,7 @@ i.iconfont {
     --line-color: #5a4a52;
     --navbar-bg-color: rgba(90, 70, 80, 0.85);
     --navbar-text-color: #ffd6e8;
-    --subtitle-color: #ffffff;
+    --subtitle-color: #c75b7a;
     --scrollbar-color: #b08090;
     --scrollbar-hover-color: #c090a0;
     --button-bg-color: rgba(100, 80, 90, 0.5);
