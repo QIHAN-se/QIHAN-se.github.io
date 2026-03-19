@@ -16,15 +16,8 @@
   /* 字体优先级：首选 Dancing Script，备选 Great Vibes，最后是系统草书 */
   font-family: 'Dancing Script', 'Great Vibes', 'Sacramento', cursive;
   font-size: 2rem;                    /* 字号稍大更唯美 */
-  font-weight: 700;
-  color: #d4789c !important;          /* 纯白 */
+  font-weight: 700;        
   letter-spacing: 2px;                /* 字间距稍宽 */
-  
-  /* 多层发光阴影 - 营造唯美光晕 */
-  text-shadow: 
-    0 0 10px rgba(255, 255, 255, 0.9),
-    0 0 20px rgba(255, 255, 255, 0.6),
-    0 0 30px rgba(200, 200, 255, 0.4);
     
   transition: all 0.4s ease;
 }
