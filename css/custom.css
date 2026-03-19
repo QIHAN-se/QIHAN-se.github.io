@@ -1,33 +1,47 @@
-/* 通过 @import 引入在线字体 */
+/* ===== 第1部分：字体引入（必须放在文件最顶部）===== */
 @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600&family=Quicksand:wght@300;400;500&display=swap');
 
-/* ===== 第1步：在文件最顶部引入字体 ===== */
-/* 注意：@import 必须放在 CSS 文件的第一行，前面不能有其他 CSS 规则 */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap');
-
-/* 如果想用多个字体备选，可以一起引入 */
-@import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Parisienne&display=swap');
-
-/* ===== 1. 引入文艺字体 ===== */
-@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600&family=Quicksand:wght@300;400;500&display=swap');
-
-/* ===== 2. 粉色系配色变量 ===== */
+/* ===== 第2部分：全局变量与基础样式 ===== */
 :root {
-  --primary-pink: #e8b4b8;        /* 豆沙粉 */
+  /* 粉色系配色 */
+  --primary-pink: #e8b4b8;        /* 豆沙粉主色 */
   --light-pink: #fce4ec;          /* 浅樱粉 */
   --soft-purple: #d4a5a5;         /* 柔雾紫 */
-  --cream-white: #fff9fb;         /* 奶油白 */
-  --text-gray: #6b5b5b;           /* 暖灰文字 */
-  --glass-bg: rgba(255, 255, 255, 0.25);
+  --cream-white: #fff9fb;         /* 奶油白背景 */
+  --text-warm: #6b5b5b;           /* 暖灰文字 */
+  --title-color: #8b6b6b;         /* 标题色 */
+  
+  /* 字体变量 */
+  --font-zh: 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-en: 'Dancing Script', cursive;
+  --font-art: 'Ma Shan Zheng', cursive; /* 中文艺术字 */
+  --font-sub: 'Quicksand', 'Noto Serif SC', sans-serif;
 }
 
-/* ===== 3. 首页大图淡化处理 - 核心代码 ===== */
+/* 全局字体：正文用霞鹜文楷 */
+body {
+  font-family: var(--font-zh);
+  background-color: var(--cream-white);
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(232, 180, 184, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(212, 165, 165, 0.03) 0%, transparent 50%);
+  color: var(--text-warm);
+  line-height: 1.8;
+}
+
+/* 代码块保持等宽 */
+code, pre {
+  font-family: 'Fira Code', Consolas, monospace !important;
+}
+
+/* ===== 第3部分：首页大图淡化（核心）===== */
 .index-header {
   position: relative;
   overflow: hidden;
 }
 
-/* 添加淡粉色渐变蒙层，让图片变得朦胧 */
+/* 淡粉色渐变蒙层 - 让图片变得朦胧清新 */
 .index-header::before {
   content: '';
   position: absolute;
@@ -37,16 +51,16 @@
   height: 100%;
   background: linear-gradient(
     135deg,
-    rgba(255, 240, 245, 0.4) 0%,      /* 左上角淡粉白 */
-    rgba(252, 228, 236, 0.3) 50%,     /* 中间樱花粉透明 */
-    rgba(212, 165, 165, 0.4) 100%     /* 右下角柔雾紫 */
+    rgba(255, 240, 245, 0.5) 0%,      /* 左上角淡粉白 */
+    rgba(252, 228, 236, 0.4) 50%,     /* 中间樱花粉透明 */
+    rgba(212, 165, 165, 0.5) 100%     /* 右下角柔雾紫 */
   );
-  backdrop-filter: blur(0.5px) brightness(1.1); /* 轻微模糊提亮 */
+  backdrop-filter: blur(0.5px) brightness(1.1);
   z-index: 1;
   pointer-events: none;
 }
 
-/* 底部淡入效果，让图片自然过渡到内容 */
+/* 底部自然过渡到内容区 */
 .index-header::after {
   content: '';
   position: absolute;
@@ -56,116 +70,145 @@
   height: 40%;
   background: linear-gradient(
     to top,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 255, 255, 0.6) 40%,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 255, 255, 0.7) 40%,
     transparent 100%
   );
   z-index: 2;
   pointer-events: none;
 }
 
-/* 如果原图太暗，可以再加一层提亮 */
+/* 原图提亮柔化 */
 .index-header .header-bg {
-  filter: brightness(1.15) saturate(0.85) contrast(0.95); /* 提亮、降饱和、柔化对比 */
-  opacity: 0.9;
+  filter: brightness(1.15) saturate(0.85) contrast(0.95);
+  opacity: 0.85;
 }
 
-/* ===== 4. 标题文字美化 ===== */
+/* 标题区域定位 */
 .index-header .header-content {
   position: relative;
-  z-index: 3; /* 确保在蒙层之上 */
+  z-index: 3;
   text-align: center;
-  padding-top: 15vh;
+  padding-top: 16vh;
 }
 
-/* 主标题 - 手写艺术字 + 发光效果 */
+/* 主标题 - 英文用Dancing Script，中文用毛笔字，白色发光 */
 .index-header .header-title {
-  font-family: 'LXGW WenKai', cursive; /* 马善政毛笔楷体，很文艺 */
-  font-size: 4rem;
-  font-weight: 400;
+  font-family: var(--font-en), var(--font-art), cursive;
+  font-size: 4.5rem;
+  font-weight: 700;
   color: #fff;
-  letter-spacing: 8px;
+  letter-spacing: 6px;
   text-shadow: 
-    0 2px 4px rgba(232, 180, 184, 0.3),    /* 浅粉投影 */
-    0 0 30px rgba(232, 180, 184, 0.6),     /* 粉色外发光 */
-    0 0 60px rgba(255, 255, 255, 0.4);     /* 白色光晕 */
+    0 2px 4px rgba(232, 180, 184, 0.4),
+    0 0 30px rgba(232, 180, 184, 0.8),
+    0 0 60px rgba(255, 255, 255, 0.5);
   animation: float 6s ease-in-out infinite;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-/* 副标题 - 优雅宋体 */
+/* 副标题 - 霞鹜文楷细体 */
 .index-header .header-subtitle {
-  font-family: 'LXGW WenKai', serif;
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.95);
+  font-family: var(--font-zh);
+  font-size: 1.2rem;
   font-weight: 300;
-  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 4px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
   display: inline-block;
 }
 
-/* 副标题装饰线 */
+/* 副标题两侧樱花装饰 */
 .index-header .header-subtitle::before,
 .index-header .header-subtitle::after {
   content: '❀';
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 0.8rem;
-  opacity: 0.8;
+  opacity: 0.9;
+  font-family: var(--font-zh);
 }
 
 .index-header .header-subtitle::before {
-  left: -2rem;
+  left: -2.5rem;
 }
 
 .index-header .header-subtitle::after {
-  right: -2rem;
+  right: -2.5rem;
 }
 
-/* 浮动动画 */
+/* 呼吸浮动动画 */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-12px); }
 }
 
-/* ===== 5. 导航栏透明化（与淡化大图融合）===== */
+/* ===== 第4部分：导航栏（透明+毛玻璃切换）===== */
 .navbar {
   background: transparent !important;
   box-shadow: none !important;
   transition: all 0.4s ease;
+  padding: 1rem 2rem;
 }
 
-/* 滚动后导航栏变成毛玻璃粉色 */
-.navbar.scrolled {
-  background: rgba(255, 255, 255, 0.85) !important;
-  backdrop-filter: blur(12px);
+/* 滚动后的毛玻璃效果 */
+.navbar.scrolled,
+.navbar.navbar-scroll {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
   box-shadow: 0 2px 20px rgba(232, 180, 184, 0.15) !important;
+  padding: 0.5rem 2rem;
 }
 
+/* 品牌名 - Dancing Script手写体，白色发光 */
 .navbar-brand {
-  font-family: 'Ma Shan Zheng', cursive;
-  font-size: 1.8rem;
+  font-family: var(--font-en);
+  font-size: 2.2rem;
+  font-weight: 700;
   color: #fff !important;
-  text-shadow: 0 0 20px rgba(232, 180, 184, 0.8);
-  transition: all 0.3s;
+  letter-spacing: 2px;
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 30px rgba(232, 180, 184, 0.8);
+  transition: all 0.3s ease;
 }
 
 .navbar-brand:hover {
   color: #fce4ec !important;
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+  text-shadow: 
+    0 0 20px rgba(255, 255, 255, 1),
+    0 0 40px rgba(232, 180, 184, 0.9);
+  transform: scale(1.05);
 }
 
+/* 导航链接 */
 .nav-link {
+  font-family: var(--font-sub);
   color: rgba(255, 255, 255, 0.9) !important;
-  font-family: 'Quicksand', sans-serif;
   font-weight: 500;
   letter-spacing: 1px;
+  font-size: 0.95rem;
   position: relative;
+  margin: 0 0.5rem;
+  transition: all 0.3s;
 }
 
+/* 滚动后导航链接变色 */
+.navbar.scrolled .nav-link,
+.navbar.navbar-scroll .nav-link {
+  color: var(--text-warm) !important;
+}
+
+.navbar.scrolled .nav-link:hover,
+.navbar.navbar-scroll .nav-link:hover {
+  color: var(--primary-pink) !important;
+}
+
+/* 下划线动画 */
 .nav-link::after {
   content: '';
   position: absolute;
@@ -173,8 +216,8 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #fff, transparent);
-  transition: all 0.3s;
+  background: linear-gradient(90deg, transparent, var(--primary-pink), transparent);
+  transition: all 0.3s ease;
   transform: translateX(-50%);
 }
 
@@ -182,145 +225,175 @@
   width: 80%;
 }
 
-/* ===== 6. 内容区域清新卡片 ===== */
+/* ===== 第5部分：文章卡片（毛玻璃+粉色阴影）===== */
 .post-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(232, 180, 184, 0.2);
-  border-radius: 16px;
+  border-radius: 18px;
   box-shadow: 
     0 4px 20px rgba(232, 180, 184, 0.08),
     0 1px 3px rgba(0, 0, 0, 0.02);
   backdrop-filter: blur(10px);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+  margin-bottom: 2.5rem;
 }
 
 .post-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
   box-shadow: 
-    0 12px 40px rgba(232, 180, 184, 0.15),
-    0 2px 8px rgba(0, 0, 0, 0.04);
-  border-color: rgba(232, 180, 184, 0.4);
+    0 16px 48px rgba(232, 180, 184, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.03);
+  border-color: rgba(232, 180, 184, 0.5);
 }
 
 .post-card .post-title {
-  font-family: 'Noto Serif SC', serif;
-  color: #8b6b6b; /* 暖灰色标题 */
-  font-weight: 600;
+  font-family: var(--font-zh);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--title-color);
   transition: color 0.3s;
+  line-height: 1.4;
 }
 
 .post-card:hover .post-title {
-  color: #d4a5a5; /* 悬停变柔雾紫 */
+  color: var(--soft-purple);
 }
 
-/* ===== 7. 标签美化 - 樱花胶囊 ===== */
-.tag-cloud a, .post-tags .tag {
+.post-card .post-content {
+  font-family: var(--font-zh);
+  color: #7a6b6b;
+  line-height: 1.9;
+  font-size: 0.95rem;
+}
+
+/* 文章图片圆角和悬浮效果 */
+.post-card .post-img {
+  border-radius: 12px;
+  transition: transform 0.6s ease;
+}
+
+.post-card:hover .post-img {
+  transform: scale(1.03);
+}
+
+/* ===== 第6部分：标签与按钮（樱花胶囊风格）===== */
+.tag-cloud a, 
+.post-tags .tag,
+.post-tag {
   background: rgba(232, 180, 184, 0.12) !important;
   color: #c98b8b !important;
-  border: 1px solid rgba(232, 180, 184, 0.3) !important;
+  border: 1px solid rgba(232, 180, 184, 0.35) !important;
   border-radius: 20px !important;
-  padding: 0.25rem 1rem !important;
-  font-family: 'Quicksand', sans-serif;
+  padding: 0.3rem 1rem !important;
+  font-family: var(--font-sub);
   font-size: 0.8rem;
-  transition: all 0.3s;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  margin: 0.2rem;
+  display: inline-block;
 }
 
-.tag-cloud a:hover, .post-tags .tag:hover {
-  background: rgba(232, 180, 184, 0.3) !important;
+.tag-cloud a:hover, 
+.post-tags .tag:hover,
+.post-tag:hover {
+  background: var(--primary-pink) !important;
   color: #fff !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(232, 180, 184, 0.3);
+  box-shadow: 0 4px 12px rgba(232, 180, 184, 0.4);
+  border-color: var(--primary-pink) !important;
 }
 
-/* ===== 8. 按钮 - 渐变粉色 ===== */
-.btn-primary {
-  background: linear-gradient(135deg, #e8b4b8 0%, #d4a5a5 100%) !important;
+/* 按钮 - 渐变粉色 */
+.btn-primary,
+.btn-info {
+  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--soft-purple) 100%) !important;
   border: none !important;
   border-radius: 25px !important;
   box-shadow: 0 4px 15px rgba(232, 180, 184, 0.4) !important;
-  font-family: 'Quicksand', sans-serif;
+  font-family: var(--font-sub);
   font-weight: 500;
   letter-spacing: 1px;
-  transition: all 0.3s;
+  padding: 0.6rem 1.8rem;
+  transition: all 0.3s ease;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-info:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(232, 180, 184, 0.6) !important;
-  background: linear-gradient(135deg, #d4a5a5 0%, #c99595 100%) !important;
+  box-shadow: 0 8px 25px rgba(232, 180, 184, 0.6) !important;
+  background: linear-gradient(135deg, var(--soft-purple) 0%, #c99595 100%) !important;
 }
 
-/* ===== 9. 滚动条 - 粉色细条 ===== */
+/* ===== 第7部分：滚动条与页脚 ===== */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #fff0f3;
+  background: var(--light-pink);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #e8b4b8, #d4a5a5);
+  background: linear-gradient(180deg, var(--primary-pink), var(--soft-purple));
   border-radius: 3px;
+  border: 1px solid var(--cream-white);
 }
 
-/* ===== 10. 页面整体背景 - 极淡粉色纹理 ===== */
-body {
-  background-color: #fff9fb;
-  background-image: 
-    radial-gradient(circle at 20% 50%, rgba(232, 180, 184, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(212, 165, 165, 0.03) 0%, transparent 50%);
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--soft-purple), #c99595);
 }
 
-/* ===== 第2步：导航栏标题样式 ===== */
-.navbar-brand {
-  /* 字体优先级：首选 Dancing Script，备选 Great Vibes，最后是系统草书 */
-  font-family: 'Dancing Script', 'Great Vibes', 'Sacramento', cursive;
-  font-size: 2rem;                    /* 字号稍大更唯美 */
-  font-weight: 700;
-  color: #ffffff !important;          /* 纯白 */
-  letter-spacing: 2px;                /* 字间距稍宽 */
-  
-  /* 多层发光阴影 - 营造唯美光晕 */
-  text-shadow: 
-    0 0 10px rgba(255, 255, 255, 0.9),
-    0 0 20px rgba(255, 255, 255, 0.6),
-    0 0 30px rgba(200, 200, 255, 0.4);
-    
-  transition: all 0.4s ease;
+/* 页脚 */
+footer {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(232, 180, 184, 0.25);
+  color: #9b8b8b;
+  font-family: var(--font-sub);
+  font-size: 0.9rem;
+  padding: 2rem 0;
 }
 
-/* 悬停效果：更亮 + 轻微放大 */
-.navbar-brand:hover {
-  color: #ffffff !important;
-  text-shadow: 
-    0 0 15px rgba(255, 255, 255, 1),
-    0 0 30px rgba(255, 255, 255, 0.8),
-    0 0 45px rgba(220, 220, 255, 0.6);
-  transform: scale(1.08);
-}
-
-/* 移动端适配：字号稍小 */
+/* ===== 第8部分：移动端适配 ===== */
 @media (max-width: 768px) {
+  .index-header .header-title {
+    font-size: 3rem;
+    letter-spacing: 3px;
+  }
+  
+  .index-header .header-subtitle {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+  
+  .index-header .header-subtitle::before,
+  .index-header .header-subtitle::after {
+    display: none; /* 移动端隐藏装饰符号，避免拥挤 */
+  }
+  
   .navbar-brand {
-    font-size: 1.5rem;
-    letter-spacing: 1px;
+    font-size: 1.6rem;
+  }
+  
+  .post-card {
+    border-radius: 14px;
+    margin: 1rem 0.5rem;
+  }
+  
+  .nav-link {
+    margin: 0.2rem 0;
   }
 }
-/* 全局应用字体 */
-body {
-  font-family: 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
+
+/* 页面加载淡入动画 */
+#main {
+  animation: fadeIn 0.8s ease;
 }
 
-/* 标题用更粗的字重 */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'LXGW WenKai', sans-serif !important;
-  font-weight: 700;
-}
-
-/* 代码块保持等宽 */
-code, pre {
-  font-family: 'Fira Code', Consolas, monospace !important;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
