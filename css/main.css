@@ -875,7 +875,7 @@ i.iconfont {
   :root:not([data-user-color-scheme]) {
     --body-bg-color: #3d3038;
     --board-bg-color: #5a465a80;
-    --text-color: #c75b7a;
+    --text-color: #fce4ec;
     --sec-text-color: #fce4ec;
     --post-text-color: #fce4ec;
     --post-heading-color: #fce4ec;
@@ -892,7 +892,7 @@ i.iconfont {
     --button-hover-bg-color: rgba(130, 100, 115, 0.8);
     --highlight-bg-color: #303030;
     --inlinecode-bg-color: rgba(99,110,123,0.4);
-    --fold-title-color: #c75b7a;
+    --fold-title-color: #fce4ec;
     --fold-border-color: #5a4a52;
   }
   :root:not([data-user-color-scheme]) img {
@@ -929,7 +929,7 @@ i.iconfont {
   [data-user-color-scheme="dark"] {
     --body-bg-color: #3d3038;
     --board-bg-color: #5a465a80;
-    --text-color: #c75b7a;
+    --text-color: #fce4ec;
     --sec-text-color: #fce4ec;
     --post-text-color: #fce4ec;
     --post-heading-color: #fce4ec;
@@ -946,7 +946,7 @@ i.iconfont {
     --button-hover-bg-color: rgba(130, 100, 115, 0.8);
     --highlight-bg-color: #303030;
     --inlinecode-bg-color: rgba(99,110,123,0.4);
-    --fold-title-color: #c75b7a;
+    --fold-title-color: #fce4ec;
     --fold-border-color: #5a4a52;
   }
   [data-user-color-scheme="dark"] img {
