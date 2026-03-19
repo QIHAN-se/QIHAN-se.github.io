@@ -1,6 +1,48 @@
 /* 通过 @import 引入在线字体 */
 @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css');
 
+/* ===== 第1步：在文件最顶部引入字体 ===== */
+/* 注意：@import 必须放在 CSS 文件的第一行，前面不能有其他 CSS 规则 */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap');
+
+/* 如果想用多个字体备选，可以一起引入 */
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Parisienne&display=swap');
+
+/* ===== 第2步：导航栏标题样式 ===== */
+.navbar-brand {
+  /* 字体优先级：首选 Dancing Script，备选 Great Vibes，最后是系统草书 */
+  font-family: 'Dancing Script', 'Great Vibes', 'Sacramento', cursive;
+  font-size: 2rem;                    /* 字号稍大更唯美 */
+  font-weight: 700;
+  color: #ffffff !important;          /* 纯白 */
+  letter-spacing: 2px;                /* 字间距稍宽 */
+  
+  /* 多层发光阴影 - 营造唯美光晕 */
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 20px rgba(255, 255, 255, 0.6),
+    0 0 30px rgba(200, 200, 255, 0.4);
+    
+  transition: all 0.4s ease;
+}
+
+/* 悬停效果：更亮 + 轻微放大 */
+.navbar-brand:hover {
+  color: #ffffff !important;
+  text-shadow: 
+    0 0 15px rgba(255, 255, 255, 1),
+    0 0 30px rgba(255, 255, 255, 0.8),
+    0 0 45px rgba(220, 220, 255, 0.6);
+  transform: scale(1.08);
+}
+
+/* 移动端适配：字号稍小 */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+}
 /* 全局应用字体 */
 body {
   font-family: 'LXGW WenKai', 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
