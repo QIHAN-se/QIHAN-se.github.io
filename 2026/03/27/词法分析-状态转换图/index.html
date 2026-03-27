@@ -21,29 +21,21 @@
   <meta name="author" content="QIHAN-se">
   <meta name="keywords" content="">
   
-    <meta name="description" content="编译原理第一节：词法分析  定义 词法分析：读入源程序的输入字符，将他们组成词素，生成并输出一个词法单元序列，每个词法单元对应于一个词素。   如何实现：由语法分析器调用，需要时不断读取，生成词法单元。（作用：避免额外输入输出！）   其他操作：一些简单处理，删除注释，连续空白符的压缩等。   For example(经典例子): position &#x3D;  initial + rate * 60">
-<meta property="og:type" content="article">
-<meta property="og:title" content="词法分析-正则表达式">
-<meta property="og:url" content="http://example.com/2026/03/15/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+    <meta property="og:type" content="article">
+<meta property="og:title" content="词法分析-状态转换图">
+<meta property="og:url" content="http://example.com/2026/03/27/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE/index.html">
 <meta property="og:site_name" content="ShiXiaoHanA">
-<meta property="og:description" content="编译原理第一节：词法分析  定义 词法分析：读入源程序的输入字符，将他们组成词素，生成并输出一个词法单元序列，每个词法单元对应于一个词素。   如何实现：由语法分析器调用，需要时不断读取，生成词法单元。（作用：避免额外输入输出！）   其他操作：一些简单处理，删除注释，连续空白符的压缩等。   For example(经典例子): position &#x3D;  initial + rate * 60">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2026/03/15/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/1.png">
-<meta property="og:image" content="http://example.com/2026/03/15/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/2.png">
-<meta property="og:image" content="http://example.com/2026/03/15/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/3.png">
-<meta property="article:published_time" content="2026-03-15T03:39:31.000Z">
-<meta property="article:modified_time" content="2026-03-27T03:01:00.586Z">
+<meta property="article:published_time" content="2026-03-27T03:05:08.000Z">
+<meta property="article:modified_time" content="2026-03-27T03:05:08.330Z">
 <meta property="article:author" content="QIHAN-se">
-<meta property="article:tag" content="笔记">
-<meta property="article:tag" content="编译原理">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2026/03/15/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>词法分析-正则表达式 - ShiXiaoHanA</title>
+  <title>词法分析-状态转换图 - ShiXiaoHanA</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -216,7 +208,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="词法分析-正则表达式"></span>
+            <span id="subtitle" data-typed-text="词法分析-状态转换图"></span>
           
         </div>
 
@@ -232,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-03-15 11:39" pubdate>
-          2026年3月15日 中午
+        <time datetime="2026-03-27 11:05" pubdate>
+          2026年3月27日 上午
         </time>
       </span>
     
@@ -244,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          970 字
+          0 字
         
       </span>
     
@@ -255,7 +247,7 @@
         
         
         
-          9 分钟
+          1 分钟
         
       </span>
     
@@ -301,12 +293,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">词法分析-正则表达式</h1>
+            <h1 id="seo-header">词法分析-状态转换图</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2026-03-27T11:01:00+08:00
+                    本文最后更新于 2026-03-27T11:05:08+08:00
                   
                   
 
@@ -316,161 +308,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="编译原理第一节词法分析"><a class="markdownIt-Anchor" href="#编译原理第一节词法分析"></a> 编译原理第一节：词法分析</h1>
-<h3 id="定义"><a class="markdownIt-Anchor" href="#定义"></a> 定义</h3>
-<p><strong>词法分析</strong>：读入源程序的输入字符，将他们组成词素，生成并输出一个词法单元序列，每个词法单元对应于一个词素。</p>
-<ul>
-<li>
-<p>如何实现：由语法分析器调用，需要时不断读取，生成词法单元。（作用：<em>避免额外输入输出！</em>）</p>
-</li>
-<li>
-<p>其他操作：一些简单处理，删除注释，连续空白符的压缩等。</p>
-</li>
-<li>
-<p><em>For example(经典例子)</em>:</p>
-<p>position =  initial + rate * 60</p>
-<p>分析：它的词法单元序列：<em>&lt;id,1&gt; &lt;=,&gt; &lt;id,2&gt; &lt;+,&gt; &lt;id,3&gt; &lt;*,&gt; &lt;number,4&gt;</em></p>
-</li>
-</ul>
-<hr>
-<h3 id="各种概念"><a class="markdownIt-Anchor" href="#各种概念"></a> 各种概念</h3>
-<p><strong>词素</strong>：<em>Lexeme</em>,源程序中的字符序列，和某类词法单元的模式匹配，被词法分析器识别为该词法单元的实例，是源程序中具有某种词法含义的一个字符序列，例如标识符“sum”、某个特定的关键字“if”、某个关系算符“&gt;”等。</p>
-<p><strong>词法单元</strong>：<em>Token</em>，单元名（<em>Token-name</em>，某种词法单位抽象符号，可确定词法单元序列的结构） + 可选属性值(<em>attribute-value</em>)。</p>
-<p><em><strong>关于词法单元的解释：</strong></em></p>
-<ul>
-<li>词素可以表示一类符号，比如整数，操作符，标识符，如何描述？<em><strong>模式匹配！</strong></em></li>
-<li>一个模式匹配多个词素；</li>
-<li>属性负责传递附加的信息；</li>
-<li>属性值用于语义分析，代码生成阶段；</li>
-<li>不同的目的需要不同的属性；</li>
-<li>属性值应该是一个结构化数据</li>
-</ul>
-<p><strong>模式怎么表示</strong>：正则表达式。</p>
-<hr>
-<h3 id="正则表达式"><a class="markdownIt-Anchor" href="#正则表达式"></a> 正则表达式</h3>
-<h4 id="基本概念"><a class="markdownIt-Anchor" href="#基本概念"></a> 基本概念</h4>
-<ul>
-<li>
-<p><strong>字母表</strong>：一个有限的符号集合。</p>
-<p>eg. <em>ASCII，Unicode</em>（包括字母，数位和标点符号）</p>
-<p>二进制符号表：{0，1}</p>
-</li>
-<li>
-<p><strong>串</strong>：字母表中符号组成的一个有穷序列；</p>
-<ul>
-<li>空串ε，长度为0</li>
-<li>串s长度为|s|</li>
-</ul>
-</li>
-<li>
-<p><strong>语言</strong>：给定字母表上一个任意的可数的串的集合</p>
-<ul>
-<li>合法c语言的集合</li>
-<li>汉语，英语等</li>
-</ul>
-</li>
-<li>
-<p><strong>前缀</strong>：从串的尾部删除0个或多个符号之后得到的串</p>
-</li>
-<li>
-<p><strong>后缀</strong>：从串的开始删除0个或多个符号之后得到的串</p>
-</li>
-<li>
-<p><strong>子串</strong>：删除某个前缀和某个后缀后得到的串</p>
-</li>
-<li>
-<p><strong>真前缀，真后缀，真子串</strong>：符合以上相应定义且不等于ε或原串</p>
-</li>
-<li>
-<p><strong>子序列</strong>：原串删除0个或多个符号后得到的串</p>
-</li>
-</ul>
-<p><strong>串的运算：</strong></p>
-<ul>
-<li><strong>串的连接：</strong>
-<ul>
-<li>x = dog， y = house, xy = doghouse</li>
-</ul>
-</li>
-<li><strong>指数运算（幂运算）：</strong>
-<ul>
-<li>x = dog, x<sup>0</sup> = ε, x<sup>2</sup> = dogdog, x<sup>3</sup> = dogdogdog …</li>
-</ul>
-</li>
-</ul>
-<p><strong>语言上的运算</strong></p>
-<ul>
-<li><strong>L和M的并</strong>    L∪M = {s|s属于L或者s属于M}</li>
-<li><strong>L和M的连接</strong>    LM = {st|s属于L且t属于M}</li>
-<li><strong>L的Kleene闭包</strong>    L<sup>*</sup> = ∪<sub>i = 0</sub><sup>∞</sup> L<sup>i</sup> ;</li>
-<li><strong>L的正闭包</strong>    L<sup>+</sup> = ∪<sub>i = 1</sub><sup>∞</sup> L<sup>i</sup></li>
-</ul>
-<p>每个正则表达式r都可以描述一个语言L ® ,即其定义的<em><strong>正则集合</strong></em>。</p>
-<h4 id="正则表达式定义"><a class="markdownIt-Anchor" href="#正则表达式定义"></a> 正则表达式定义</h4>
-<p>正则表达式可以由较小的正则表达式递归构建</p>
-<ul>
-<li>
-<p>ε是一个正则表达式，L(ε) = {ε}</p>
-</li>
-<li>
-<p>如果a是∑上的一个符号，a是正则表达式，L(a) = {a}</p>
-</li>
-<li>
-<p>选择：|</p>
-</li>
-<li>
-<p>连接：rs</p>
-</li>
-<li>
-<p>闭包：<sup>*</sup></p>
-</li>
-<li>
-<p>括号：（）</p>
-</li>
-<li>
-<p>优先级：<sup>*</sup> &gt; 连接 &gt; |</p>
-</li>
-<li>
-<p>举例：∑ = {a, b}</p>
-<p>L(a|b) = {a, b}</p>
-<p>L((a|b)(a|b)) = {aa, bb, ab, ba}</p>
-<p>L(a*) = {ε,a,aa,aaa}</p>
-<p>L((a|b)*) = {ε, a, b, aa, ab, ba, bb, aaa…}</p>
-</li>
-<li>
-<p>正则表达式的等价：</p>
-<p>两个正则表达式r和s表示同样的语言，则r = s</p>
-</li>
-</ul>
-<h4 id="正则定义"><a class="markdownIt-Anchor" href="#正则定义"></a> 正则定义</h4>
-<ul>
-<li>
-<p>对正则表达式命名：</p>
-<p>d1 —&gt; r1</p>
-<p>d2 —&gt; r2</p>
-<p>…</p>
-<p>dn —&gt; rn</p>
-<ul>
-<li>注：di都不在字母表里，但是结合了字母表和前i-1个di的定义（可以调用之前的d）。</li>
-<li>其实就是一个简单的递归表示法，看起来更加有条理性。</li>
-</ul>
-</li>
-<li>
-<p><em>例子：Pascal无符号数集合</em></p>
-<p><img src="/2026/03/15/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/1.png" srcset="/img/loading.gif" lazyload alt></p>
-</li>
-</ul>
-<h4 id="正则表达式的拓展"><a class="markdownIt-Anchor" href="#正则表达式的拓展"></a> 正则表达式的拓展</h4>
-<ul>
-<li>一个或多个：r<sup>+</sup></li>
-<li>零个或一个：r?</li>
-<li>字符：[abc] = a|b|c, [a-z] = a|b|…|z</li>
-</ul>
-<p><strong>更多拓展</strong></p>
-<p><img src="/2026/03/15/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/2.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>往年题（注意^,$,?:的用法）</p>
-<p><img src="/2026/03/15/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/3.png" srcset="/img/loading.gif" lazyload alt></p>
-
+                
                 
               </div>
             
@@ -478,36 +316,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" class="category-chain-item">编译原理</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" class="print-no-link">#编译原理</a>
-      
-        <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
-      
-    </div>
   
 </div>
 
@@ -517,8 +325,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>词法分析-正则表达式</div>
-      <div>http://example.com/2026/03/15/词法分析-正则表达式/</div>
+      <div>词法分析-状态转换图</div>
+      <div>http://example.com/2026/03/27/词法分析-状态转换图/</div>
     </div>
     <div class="license-meta">
       
@@ -530,7 +338,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年3月15日</div>
+          <div>2026年3月27日</div>
         </div>
       
       
@@ -562,18 +370,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E4%B8%80%E9%81%93%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/" title="算法探究：一道腾讯面试题的思考">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法探究：一道腾讯面试题的思考</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/03/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%AC%E4%B8%80%E7%AB%A0/" title="操作系统第一章">
-                        <span class="hidden-mobile">操作系统第一章</span>
+                      <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E4%B8%80%E9%81%93%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/" title="算法探究：一道腾讯面试题的思考">
+                        <span class="hidden-mobile">算法探究：一道腾讯面试题的思考</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

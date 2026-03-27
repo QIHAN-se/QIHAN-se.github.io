@@ -261,7 +261,7 @@
     window.onresize = function() {
       postsChart.resize();
     };
-    let dataPosts = [{"title":"starting-blog","date":"2026-02-21","wordcount":33,"path":"2026/02/21/starting-blog/"},{"title":"算法探究：一道腾讯面试题的思考","date":"2026-03-15","wordcount":856,"path":"2026/03/15/算法探究：一道腾讯面试题的思考/"},{"title":"词法分析-正则表达式","date":"2026-03-15","wordcount":996,"path":"2026/03/15/词法分析-正则表达式/"},{"title":"操作系统第一章","date":"2026-03-03","wordcount":4635,"path":"2026/03/03/操作系统第一章/"}]
+    let dataPosts = [{"title":"词法分析-状态转换图","date":"2026-03-27","wordcount":0,"path":"2026/03/27/词法分析-状态转换图/"},{"title":"starting-blog","date":"2026-02-21","wordcount":33,"path":"2026/02/21/starting-blog/"},{"title":"算法探究：一道腾讯面试题的思考","date":"2026-03-15","wordcount":853,"path":"2026/03/15/算法探究：一道腾讯面试题的思考/"},{"title":"词法分析-正则表达式","date":"2026-03-15","wordcount":970,"path":"2026/03/15/词法分析-正则表达式/"},{"title":"操作系统第一章","date":"2026-03-03","wordcount":4654,"path":"2026/03/03/操作系统第一章/"}]
     const dataMap = new Map(dataPosts.map((obj) => [obj.date, {title: obj.title, wordCount: obj.wordcount, path: obj.path}]));
 
     function heatmap_width(months){
@@ -353,7 +353,7 @@
     series: {
         type: 'heatmap',
         coordinateSystem: 'calendar',
-        data: [["2026-02-21",33],["2026-03-15",856],["2026-03-15",996],["2026-03-03",4635]]
+        data: [["2026-03-27",0],["2026-02-21",33],["2026-03-15",853],["2026-03-15",970],["2026-03-03",4654]]
     }
   };
 
