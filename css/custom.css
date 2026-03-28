@@ -31,6 +31,54 @@
     0 0 45px rgba(220, 220, 255, 0.6);
   transform: scale(1.08);
 }
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-item:hover .nav-link {
+  color: #f7e927 !important;
+}
+
+/* 2. 侧边栏目录悬停（你之前问的） */
+.tocbot-list a:hover,
+.post-toc .toc-item a:hover {
+  color: #f7e927 !important;
+}
+
+/* 3. 文章内所有链接悬停 */
+.markdown-body a:hover,
+.post-content a:hover,
+.index-card .index-content a:hover {
+  color: #f7e927 !important;
+  text-decoration: underline;  /* 悬停时显示下划线，可选 */
+}
+
+/* 4. 首页文章标题悬停 */
+.index-card .index-header a:hover,
+.post-title-link:hover {
+  color: #f7e927 !important;
+}
+
+/* 5. 标签/分类悬停 */
+.post-tags .post-tag:hover,
+.tag-cloud a:hover,
+.category-list a:hover,
+.archive-list a:hover {
+  color: #f7e927 !important;
+  border-color: #f7e927 !important;  /* 如果是带边框的标签 */
+}
+
+/* 6. 分页按钮悬停 */
+.pagination .page-number:hover,
+.pagination .prev:hover,
+.pagination .next:hover,
+.pagination .space:hover {
+  color: #f7e927 !important;
+  border-color: #f7e927 !important;
+}
+
+/* 7. 页脚链接悬停 */
+footer a:hover,
+.footer-link:hover {
+  color: #f7e927 !important;
+}
 
 /* 移动端适配：字号稍小 */
 @media (max-width: 768px) {
