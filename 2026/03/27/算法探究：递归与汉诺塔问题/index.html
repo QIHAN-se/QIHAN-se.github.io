@@ -24,23 +24,24 @@
     <meta name="description" content="算法探究：递归与汉诺塔问题一个简单问题入手递归 如何计算给定的一个自然数的阶乘？ 作为人，我们会直观地来计算1*2*3*…*n  对于阶乘问题，可以让计算机拟人一点，从1开始一直乘到n，代码： 12345678910public long factorial(int n) &#123;    if (n &lt; 0) throw new IllegalArgumentException();">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法探究：递归与汉诺塔问题">
-<meta property="og:url" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:url" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="ShiXiaoHanA">
 <meta property="og:description" content="算法探究：递归与汉诺塔问题一个简单问题入手递归 如何计算给定的一个自然数的阶乘？ 作为人，我们会直观地来计算1*2*3*…*n  对于阶乘问题，可以让计算机拟人一点，从1开始一直乘到n，代码： 12345678910public long factorial(int n) &#123;    if (n &lt; 0) throw new IllegalArgumentException();">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/1.png">
-<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/2.png">
-<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/3.png">
-<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/4.png">
-<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/5.png">
-<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/6.png">
-<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/7.png">
+<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/be78d204241fba495a0698c3afe158cb7afa00fb">
+<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/1.png">
+<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/2.png">
+<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/3.png">
+<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/4.png">
+<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/5.png">
+<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/6.png">
+<meta property="og:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/7.png">
 <meta property="article:published_time" content="2026-03-27T07:57:24.000Z">
-<meta property="article:modified_time" content="2026-03-28T02:31:13.724Z">
+<meta property="article:modified_time" content="2026-03-28T02:19:58.740Z">
 <meta property="article:author" content="QIHAN-se">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/1.png">
+<meta name="twitter:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/be78d204241fba495a0698c3afe158cb7afa00fb">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -309,7 +310,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2026-03-28T10:31:13+08:00
+                    本文最后更新于 2026-03-28T10:19:58+08:00
                   
                   
 
@@ -345,7 +346,7 @@
 <p>来自维基百科</p>
 </blockquote>
 <p>最早发明这个问题的人是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B3%95%E5%9C%8B">法国</a>数学家<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%88%B1%E5%BE%B7%E5%8D%8E%C2%B7%E5%8D%A2%E5%8D%A1%E6%96%AF">爱德华·卢卡斯</a>。根据他的描述，传说<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B6%8A%E5%8D%97">越南</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B2%B3%E5%86%85">河内</a>某间寺院有三根银棒，上串 64 个金盘。寺院里的僧侣依照一个古老的预言，以一定规则移动这些盘子；预言说当这些盘子移动完毕，世界就会灭亡。这个传说叫做<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A2%B5%E5%A4%A9">梵天</a>寺之塔问题（Tower of Brahma puzzle）。但不知道是卢卡斯自创的这个传说，还是他受他人启发。</p>
-<p>若传说属实，僧侣们需要 2<sup>N</sup>-1步才能完成这个任务；若他们每秒可完成一个盘子的移动，就需要 5849 亿年才能完成。整个宇宙现在也不过 137 亿年。</p>
+<p>若传说属实，僧侣们需要 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/be78d204241fba495a0698c3afe158cb7afa00fb" srcset="/img/loading.gif" lazyload alt="{\displaystyle 2^{64}-1}">步才能完成这个任务；若他们每秒可完成一个盘子的移动，就需要 5849 亿年才能完成。整个宇宙现在也不过 137 亿年。</p>
 <p>这个传说有若干变体：寺院换成修道院、僧侣换成修士等等。寺院的地点众说纷纭，其中一说是位于越南的河内，所以被命名为“河内塔”。另外亦有“金盘是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%89%B5%E4%B8%96">创世</a>时所造”、“僧侣们每天移动一盘”之类的背景设定。</p>
 <hr>
 <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>有三根杆子A、B、C。A杆上有 N 个（N&gt;1）穿孔圆盘，盘的尺寸由下到上依次变小。要求按下列规则将所有圆盘移至 C 杆：</p>
@@ -366,14 +367,14 @@
 <ul>
 <li>如果有两个盘子，一个大一个小，按题意，对于A柱，大盘子在下面，小盘子在上面，最好的情况是小盘子先移到B柱，大盘子移到C柱，然后把小盘子从B柱移动到C柱就可以了。如图：</li>
 </ul>
-<p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/1.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/2.png" srcset="/img/loading.gif" lazyload alt="2"></p>
-<p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/3.png" srcset="/img/loading.gif" lazyload alt="3"></p>
-<p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/4.png" srcset="/img/loading.gif" lazyload alt="4"></p>
+<p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/1.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/2.png" srcset="/img/loading.gif" lazyload alt="2"></p>
+<p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/3.png" srcset="/img/loading.gif" lazyload alt="3"></p>
+<p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/4.png" srcset="/img/loading.gif" lazyload alt="4"></p>
 <p>总共需要3步，因此<br>$$<br>f(2) &#x3D; 3<br>$$</p>
 <ul>
 <li><p>如果有三个盘子，如图：</p>
-<p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/5.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/5.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 </ul>
 <blockquote>
@@ -383,9 +384,9 @@
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HanoiSolution</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">Hanoi</span><span class="hljs-params">(<span class="hljs-type">int</span> n,<span class="hljs-type">char</span> A,<span class="hljs-type">char</span> B,<span class="hljs-type">char</span> C)</span>&#123;<span class="hljs-comment">//A是n个盘子现在在的柱子，C是目的地柱子，B是中转柱子</span><br>        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">1</span>)&#123;<span class="hljs-comment">//递归边界：n = 1时</span><br>            System.out.println(<span class="hljs-string">&quot;把&quot;</span> + n + <span class="hljs-string">&quot;号盘从&quot;</span> + A + <span class="hljs-string">&quot;移到&quot;</span> + C +<span class="hljs-string">&quot;号柱&quot;</span>);<span class="hljs-comment">//直接移动即可</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<span class="hljs-comment">//只用一步</span><br>        &#125;<br>        <span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">step1</span> <span class="hljs-operator">=</span> Hanoi(n-<span class="hljs-number">1</span>,A,C,B);<span class="hljs-comment">//上面N-1个盘子移动到中转柱子</span><br>            System.out.println(<span class="hljs-string">&quot;把&quot;</span> + n + <span class="hljs-string">&quot;号盘从&quot;</span> + A + <span class="hljs-string">&quot;移到&quot;</span> + C +<span class="hljs-string">&quot;号柱&quot;</span>);<span class="hljs-comment">//最底层盘子移动到目的地柱子</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">step2</span> <span class="hljs-operator">=</span> Hanoi(n-<span class="hljs-number">1</span>,B,A,C);<span class="hljs-comment">//上面N-1个盘子移动到目的地柱子</span><br>            <span class="hljs-keyword">return</span> step1 + <span class="hljs-number">1</span> + step2;<span class="hljs-comment">//计算步骤数</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;这是汉诺塔问题自动答案机^_^，输入一个大于1的数字（盘子总数）获取步骤数以及步骤细节信息，或者输出-1退出。&quot;</span>);<br>        <span class="hljs-type">Scanner</span> <span class="hljs-variable">scanner</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>       <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;<br>           <span class="hljs-keyword">try</span> &#123;<br>               <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> scanner.nextInt();<br>               <span class="hljs-keyword">if</span>(n == -<span class="hljs-number">1</span>)&#123;<br>                   <span class="hljs-keyword">return</span>;<br>               &#125;<br>               <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(n &lt;= <span class="hljs-number">1</span>)&#123;<br>                   System.out.println(<span class="hljs-string">&quot;盘子数要大于1！&quot;</span>);<br>               &#125;<br>               <span class="hljs-keyword">else</span>&#123;<br>                   <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> Hanoi(n,<span class="hljs-string">&#x27;A&#x27;</span>,<span class="hljs-string">&#x27;B&#x27;</span>,<span class="hljs-string">&#x27;C&#x27;</span>);<br>                   System.out.println(<span class="hljs-string">&quot;总共&quot;</span> + count + <span class="hljs-string">&quot;步！&quot;</span>);<br>               &#125;<br>           &#125; <span class="hljs-keyword">catch</span> (InputMismatchException e) &#123;<br>               System.out.println(<span class="hljs-string">&quot;请输入有效整数！&quot;</span>);<br>               scanner.next(); <span class="hljs-comment">// 如果不是正整数，报错并清除缓冲区的错误输入以免死循环</span><br>           &#125;<br><br>       &#125;<br>    &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/6.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/6.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/7.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/7.png" srcset="/img/loading.gif" lazyload></p>
 <p>报错测试成功，简单测试成功！</p>
 <p>通过自动机程序，汉诺塔的步骤:<br>$$<br>f(N) &#x3D; 2^N-1<br>$$</p>
 
@@ -434,7 +435,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>算法探究：递归与汉诺塔问题</div>
-      <div>http://example.com/2026/03/27/算法漫谈：递归与汉诺塔问题/</div>
+      <div>http://example.com/2026/03/27/算法探究：递归与汉诺塔问题/</div>
     </div>
     <div class="license-meta">
       
@@ -478,18 +479,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/" title="算法探究：递归与汉诺塔问题">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法探究：递归与汉诺塔问题</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/03/27/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE/" title="词法分析-状态转换图">
-                        <span class="hidden-mobile">词法分析-状态转换图</span>
+                      <a href="/2026/03/27/%E7%AE%97%E6%B3%95%E6%BC%AB%E8%B0%88%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/" title="算法探究：递归与汉诺塔问题">
+                        <span class="hidden-mobile">算法探究：递归与汉诺塔问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
