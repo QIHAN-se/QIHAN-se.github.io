@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
+<html lang="zh-CN" data-default-color-scheme=light>
 
 
 
@@ -21,12 +21,12 @@
   <meta name="author" content="QIHAN-se">
   <meta name="keywords" content="">
   
-    <meta name="description" content="词法分析-状态转换图（基本）   词法单元怎么识别   词法分析器需要怎么样的功能？ 能够检查输入字符串，在前缀中找出和某个模式匹配的词素。   具体步骤：  通过正则定义来表示各个词法单元的模式 用ws的定义*（ws→(blank | tab | newline)+）*来跳过空白，即识别到这个的时候就不返回词法单元，继续往后识别    具体实现，怎么识别？  你可能会想拿正则表达式来识别，是没">
+    <meta name="description" content="词法分析-状态转换图（基本） 词法单元怎么识别 词法分析器需要怎么样的功能？ 能够检查输入字符串，在前缀中找出和某个模式匹配的词素。  具体步骤：  通过正则定义来表示各个词法单元的模式 用ws的定义*（ws→(blank | tab | newline)+）*来跳过空白，即识别到这个的时候就不返回词法单元，继续往后识别   具体实现，怎么识别？  你可能会想拿正则表达式来识别，是没错，不过具体识">
 <meta property="og:type" content="article">
 <meta property="og:title" content="词法分析-状态转换图">
 <meta property="og:url" content="http://example.com/2026/03/27/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE/index.html">
 <meta property="og:site_name" content="ShiXiaoHanA">
-<meta property="og:description" content="词法分析-状态转换图（基本）   词法单元怎么识别   词法分析器需要怎么样的功能？ 能够检查输入字符串，在前缀中找出和某个模式匹配的词素。   具体步骤：  通过正则定义来表示各个词法单元的模式 用ws的定义*（ws→(blank | tab | newline)+）*来跳过空白，即识别到这个的时候就不返回词法单元，继续往后识别    具体实现，怎么识别？  你可能会想拿正则表达式来识别，是没">
+<meta property="og:description" content="词法分析-状态转换图（基本） 词法单元怎么识别 词法分析器需要怎么样的功能？ 能够检查输入字符串，在前缀中找出和某个模式匹配的词素。  具体步骤：  通过正则定义来表示各个词法单元的模式 用ws的定义*（ws→(blank | tab | newline)+）*来跳过空白，即识别到这个的时候就不返回词法单元，继续往后识别   具体实现，怎么识别？  你可能会想拿正则表达式来识别，是没错，不过具体识">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2026/03/27/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE/1.png">
 <meta property="og:image" content="http://example.com/2026/03/27/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE/2.png">
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          916 字
+          918 字
         
       </span>
     
@@ -320,23 +320,18 @@
             
               <div class="markdown-body">
                 
-                <h1 id="词法分析-状态转换图基本"><a class="markdownIt-Anchor" href="#词法分析-状态转换图基本"></a> 词法分析-状态转换图（基本）</h1>
-<hr>
-<h2 id="词法单元怎么识别"><a class="markdownIt-Anchor" href="#词法单元怎么识别"></a> 词法单元怎么识别</h2>
-<ul>
-<li>
-<p>词法分析器需要怎么样的功能？</p>
+                <h1 id="词法分析-状态转换图（基本）"><a href="#词法分析-状态转换图（基本）" class="headerlink" title="词法分析-状态转换图（基本）"></a>词法分析-状态转换图（基本）</h1><hr>
+<h2 id="词法单元怎么识别"><a href="#词法单元怎么识别" class="headerlink" title="词法单元怎么识别"></a>词法单元怎么识别</h2><ul>
+<li><p>词法分析器需要怎么样的功能？</p>
 <p><strong>能够检查输入字符串，在前缀中找出和某个模式匹配的词素。</strong></p>
 </li>
-<li>
-<p>具体步骤：</p>
+<li><p>具体步骤：</p>
 <ul>
 <li>通过<strong>正则定义</strong>来表示各个词法单元的模式</li>
 <li>用<em>ws</em>的定义*（ws→(blank | tab | newline)+）*来跳过空白，即识别到这个的时候就不返回词法单元，继续往后识别</li>
 </ul>
 </li>
-<li>
-<p>具体实现，怎么识别？</p>
+<li><p>具体实现，怎么识别？</p>
 <blockquote>
 <p>你可能会想拿正则表达式来识别，是没错，不过具体识别的时候正则表达式无法直观地匹配字符串，因此需要一个可视化，或者说直观的转换流程来完成对于字符串的识别！😊</p>
 </blockquote>
@@ -346,44 +341,35 @@
 </li>
 </ul>
 <hr>
-<h2 id="状态转化图"><a class="markdownIt-Anchor" href="#状态转化图"></a> 状态转化图</h2>
-<ul>
-<li>
-<p>是词法分析器的重要组件之一</p>
+<h2 id="状态转化图"><a href="#状态转化图" class="headerlink" title="状态转化图"></a>状态转化图</h2><ul>
+<li><p>是词法分析器的重要组件之一</p>
 </li>
-<li>
-<p><strong>可以将正则表达式转换成状态转换图</strong></p>
+<li><p><strong>可以将正则表达式转换成状态转换图</strong></p>
 </li>
-<li>
-<p>何谓<strong>状态（<em>state</em>）</strong>？</p>
+<li><p>何谓<strong>状态（<em>state</em>）</strong>？</p>
 <ul>
 <li>可以看做是对于已经处理完了的部分做的总结；</li>
-<li>某些状态作为接受状态/最终状态，表示已经找到了对应词素；</li>
+<li>某些状态作为接受状态&#x2F;最终状态，表示已经找到了对应词素；</li>
 <li>加上*符号的接受状态表示最后读入的符号不在要识别的词素中，即不包括；</li>
-<li>开始状态/初始状态用start边来表示；</li>
+<li>开始状态&#x2F;初始状态用start边来表示；</li>
 </ul>
 </li>
-<li>
-<p>何谓<strong>边（<em>edge</em>）</strong>？</p>
+<li><p>何谓<strong>边（<em>edge</em>）</strong>？</p>
 <ul>
 <li>如果当前状态为s，下一个输入符号为a，就沿着<strong>从s指向下一个状态且边上写有a</strong>的边（如果有的话）达到下一个状态。</li>
 </ul>
 </li>
-<li>
-<p>举个栗子🌰</p>
-<p><img src="/2026/03/27/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE/1.png" srcset="/img/loading.gif" lazyload alt></p>
+<li><p>举个栗子🌰</p>
+<p><img src="/2026/03/27/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE/1.png" srcset="/img/loading.gif" lazyload></p>
 </li>
-<li>
-<p>有什么问题吗？</p>
+<li><p>有什么问题吗？</p>
 <blockquote>
 <p><strong>保留字</strong>：<em>Reserved Words</em>，是指编程语言<strong>预先定义、具有特殊含义</strong>的标识符。</p>
 </blockquote>
 <ul>
-<li>
-<p><strong>保留字</strong>也符合标识符（变量名）的模式，识别标识符的状态转换图也可以识别保留字</p>
+<li><p><strong>保留字</strong>也符合标识符（变量名）的模式，识别标识符的状态转换图也可以识别保留字</p>
 </li>
-<li>
-<p>怎么解决：</p>
+<li><p>怎么解决：</p>
 <ul>
 <li>在符号表里预先填写保留字，指明不是普通的标志符；</li>
 <li>为保留字<strong>单独</strong>建立状态转换图，并将其状态转换图的<strong>优先级</strong>放在标识符的状态转换图之前。</li>
@@ -392,40 +378,29 @@
 </ul>
 </li>
 </ul>
-<h2 id="词法分析器的两个原则"><a class="markdownIt-Anchor" href="#词法分析器的两个原则"></a> 词法分析器的两个原则</h2>
-<h3 id="最长匹配原则"><a class="markdownIt-Anchor" href="#最长匹配原则"></a> 最长匹配原则</h3>
-<ul>
-<li>
-<p>定义：从当前位置开始，尽可能读取最多的字符，直到再读没办法匹配任何规则为止，这个时候回退到最后一个可匹配的字符处返回词法单元（<em>token</em>）。</p>
+<h2 id="词法分析器的两个原则"><a href="#词法分析器的两个原则" class="headerlink" title="词法分析器的两个原则"></a>词法分析器的两个原则</h2><h3 id="最长匹配原则"><a href="#最长匹配原则" class="headerlink" title="最长匹配原则"></a>最长匹配原则</h3><ul>
+<li><p>定义：从当前位置开始，尽可能读取最多的字符，直到再读没办法匹配任何规则为止，这个时候回退到最后一个可匹配的字符处返回词法单元（<em>token</em>）。</p>
 </li>
-<li>
-<p>栗子🌰：<em>abc123</em>不会识别为<em>abc</em>（标识符），而是识别为<em>abc123</em>（标识符）；</p>
+<li><p>栗子🌰：<em>abc123</em>不会识别为<em>abc</em>（标识符），而是识别为<em>abc123</em>（标识符）；</p>
 </li>
-<li>
-<p>再举一个🌰：<img src="/2026/03/27/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE/2.png" srcset="/img/loading.gif" lazyload alt></p>
+<li><p>再举一个🌰：<img src="/2026/03/27/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE/2.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 </ul>
-<h3 id="规则优先级原则"><a class="markdownIt-Anchor" href="#规则优先级原则"></a> 规则优先级原则</h3>
-<ul>
-<li>
-<p>定义：当多个规则在同一位置，同一长度都能匹配，采用此原则，即取优先级高的规则产出词法单元。</p>
+<h3 id="规则优先级原则"><a href="#规则优先级原则" class="headerlink" title="规则优先级原则"></a>规则优先级原则</h3><ul>
+<li><p>定义：当多个规则在同一位置，同一长度都能匹配，采用此原则，即取优先级高的规则产出词法单元。</p>
 </li>
-<li>
-<p>大部分词法工具都默认的是先写的规则优先级就高，先识别出来</p>
+<li><p>大部分词法工具都默认的是先写的规则优先级就高，先识别出来</p>
 <blockquote>
 <p>本人大胆猜测符合逻辑和性能，如果规则1和规则3都能识别这个词素，我按规则1识别了这个词素，规则3就不用看了，可以提升识别的效率，或可作为计算机科学哲学的一个生动体现！</p>
 </blockquote>
 </li>
-<li>
-<p>经典例子：上文说到的标识符与保留字之间的冲突与解决方案。</p>
+<li><p>经典例子：上文说到的标识符与保留字之间的冲突与解决方案。</p>
 </li>
-<li>
-<p>再来一个🌰：</p>
-<p><img src="/2026/03/27/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE/3.png" srcset="/img/loading.gif" lazyload alt></p>
+<li><p>再来一个🌰：</p>
+<p><img src="/2026/03/27/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE/3.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 </ul>
-<h2 id="一个问号"><a class="markdownIt-Anchor" href="#一个问号"></a> 一个问号</h2>
-<p>状态转换图可以很好地识别词素并产出词法单元，正则表达式可以描述要匹配的词法单元模式，二者底层逻辑是相同的，所以这里有一个问题：</p>
+<h2 id="一个问号"><a href="#一个问号" class="headerlink" title="一个问号"></a>一个问号</h2><p>状态转换图可以很好地识别词素并产出词法单元，正则表达式可以描述要匹配的词法单元模式，二者底层逻辑是相同的，所以这里有一个问题：</p>
 <p><em><strong>怎么把正则表达式转换为状态转换图呢？</strong></em></p>
 <p>由于篇幅较长，转换过程较为复杂，在《编译原理》系列的下一篇文章笔者将详细解释这个过程。😉</p>
 
