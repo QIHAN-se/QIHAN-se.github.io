@@ -24,7 +24,7 @@
 
 /* 悬停效果：更亮 + 轻微放大 */
 .navbar-brand:hover {
-  color: #faf6f3 !important;
+  color: #f7e927 !important;
   text-shadow: 
     0 0 15px rgba(255, 255, 255, 1),
     0 0 30px rgba(255, 255, 255, 0.8),
