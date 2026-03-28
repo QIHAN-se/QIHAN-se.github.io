@@ -17,16 +17,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="rgba(255, 245, 250, 0.95)">
+  <meta name="theme-color" content="#58c9b9">
   <meta name="author" content="QIHAN-se">
   <meta name="keywords" content="">
   
-    <meta name="description" content="算法探究——一道腾讯面试题的思考题目来源 腾讯面试真题，难度较高 时间限制：约45分钟完成  题面腾讯大厦有39层，你手里有两颗一模一样的玻璃球，当你拿着玻璃球在某一层往下扔的时候，一定会有两个结果:玻璃球碎了或者没碎，大厦有个临界楼层，低于它的楼层，往下扔玻璃球，玻璃球不会碎，等于或者高于它的楼层，扔下玻璃球一定会碎。玻璃球碎了就不能再扔了。现在让你设计一种方法，使得在该方法下，最坏情况下扔的次">
+    <meta name="description" content="算法探究——一道腾讯面试题的思考  题目来源  腾讯面试真题，难度较高 时间限制：约45分钟完成   题面 腾讯大厦有39层，你手里有两颗一模一样的玻璃球，当你拿着玻璃球在某一层往下扔的时候，一定会有两个结果:玻璃球碎了或者没碎，大厦有个临界楼层，低于它的楼层，往下扔玻璃球，玻璃球不会碎，等于或者高于它的楼层，扔下玻璃球一定会碎。玻璃球碎了就不能再扔了。现在让你设计一种方法，使得在该方法下，最坏">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法探究：一道腾讯面试题的思考">
 <meta property="og:url" content="http://example.com/2026/03/15/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E4%B8%80%E9%81%93%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/index.html">
 <meta property="og:site_name" content="ShiXiaoHanA">
-<meta property="og:description" content="算法探究——一道腾讯面试题的思考题目来源 腾讯面试真题，难度较高 时间限制：约45分钟完成  题面腾讯大厦有39层，你手里有两颗一模一样的玻璃球，当你拿着玻璃球在某一层往下扔的时候，一定会有两个结果:玻璃球碎了或者没碎，大厦有个临界楼层，低于它的楼层，往下扔玻璃球，玻璃球不会碎，等于或者高于它的楼层，扔下玻璃球一定会碎。玻璃球碎了就不能再扔了。现在让你设计一种方法，使得在该方法下，最坏情况下扔的次">
+<meta property="og:description" content="算法探究——一道腾讯面试题的思考  题目来源  腾讯面试真题，难度较高 时间限制：约45分钟完成   题面 腾讯大厦有39层，你手里有两颗一模一样的玻璃球，当你拿着玻璃球在某一层往下扔的时候，一定会有两个结果:玻璃球碎了或者没碎，大厦有个临界楼层，低于它的楼层，往下扔玻璃球，玻璃球不会碎，等于或者高于它的楼层，扔下玻璃球一定会碎。玻璃球碎了就不能再扔了。现在让你设计一种方法，使得在该方法下，最坏">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2026/03/15/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E4%B8%80%E9%81%93%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/2.png">
 <meta property="article:published_time" content="2026-03-15T10:20:51.000Z">
@@ -80,14 +80,13 @@
 <link rel="stylesheet" href="/css/custom.css">
 <link rel="stylesheet" href="/css/ScrollAnimation.css">
 <link rel="stylesheet" href="/css/macpanel.css">
-<link rel="stylesheet" href="/css/glassBg.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#c75b7a","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#a8dba8","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -247,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          856 字
+          853 字
         
       </span>
     
@@ -319,29 +318,35 @@
             
               <div class="markdown-body">
                 
-                <h1 id="算法探究——一道腾讯面试题的思考"><a href="#算法探究——一道腾讯面试题的思考" class="headerlink" title="算法探究——一道腾讯面试题的思考"></a>算法探究——一道腾讯面试题的思考</h1><h3 id="题目来源"><a href="#题目来源" class="headerlink" title="题目来源"></a>题目来源</h3><ul>
+                <h1 id="算法探究一道腾讯面试题的思考"><a class="markdownIt-Anchor" href="#算法探究一道腾讯面试题的思考"></a> 算法探究——一道腾讯面试题的思考</h1>
+<h3 id="题目来源"><a class="markdownIt-Anchor" href="#题目来源"></a> 题目来源</h3>
+<ul>
 <li>腾讯面试真题，难度较高</li>
 <li>时间限制：约45分钟完成</li>
 </ul>
-<h3 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h3><p>腾讯大厦有39层，你手里有两颗一模一样的玻璃球，当你拿着玻璃球在某一层往下扔的时候，一定会有两个结果:玻璃球碎了或者没碎，大厦有个临界楼层，低于它的楼层，往下扔玻璃球，玻璃球不会碎，等于或者高于它的楼层，扔下玻璃球一定会碎。玻璃球碎了就不能再扔了。现在让你设计一种方法，使得在该方法下，最坏情况下扔的次数比其他任何方式最坏的次数都少，也就是设计一种最有效的方法。请给出正确答案。</p>
-<h3 id="题目解释"><a href="#题目解释" class="headerlink" title="题目解释"></a>题目解释</h3><p>一栋39层的大楼，存在一个临界楼层，小于这个临界楼层一点事情没有，玻璃球<em><strong>安然无恙</strong></em>，但是在临界楼层或者再往上走，往下面扔玻璃球<em><strong>一定会碎</strong></em>，你现在有两个玻璃球，设计一种检验临界楼层的方法，使得最坏情况下比其他方法消耗的扔的次数要少。</p>
-<h3 id="思路引导"><a href="#思路引导" class="headerlink" title="思路引导"></a>思路引导</h3><p>一般来说，较为正确的思路就是第一颗球从1层开始跳着层扔下去，找到碎与不碎的区间，第二颗球在那个区间里从低到高一个一个尝试找到临界楼层，即模糊查找+精确定位的方法，那么，如何规定第一颗球怎么跳层，一次跳几层，就成为问题的关键。</p>
-<h3 id="关键思路"><a href="#关键思路" class="headerlink" title="关键思路"></a>关键思路</h3><p>在某一层扔了一个球之后，有两种情况：</p>
+<h3 id="题面"><a class="markdownIt-Anchor" href="#题面"></a> 题面</h3>
+<p>腾讯大厦有39层，你手里有两颗一模一样的玻璃球，当你拿着玻璃球在某一层往下扔的时候，一定会有两个结果:玻璃球碎了或者没碎，大厦有个临界楼层，低于它的楼层，往下扔玻璃球，玻璃球不会碎，等于或者高于它的楼层，扔下玻璃球一定会碎。玻璃球碎了就不能再扔了。现在让你设计一种方法，使得在该方法下，最坏情况下扔的次数比其他任何方式最坏的次数都少，也就是设计一种最有效的方法。请给出正确答案。</p>
+<h3 id="题目解释"><a class="markdownIt-Anchor" href="#题目解释"></a> 题目解释</h3>
+<p>一栋39层的大楼，存在一个临界楼层，小于这个临界楼层一点事情没有，玻璃球<em><strong>安然无恙</strong></em>，但是在临界楼层或者再往上走，往下面扔玻璃球<em><strong>一定会碎</strong></em>，你现在有两个玻璃球，设计一种检验临界楼层的方法，使得最坏情况下比其他方法消耗的扔的次数要少。</p>
+<h3 id="思路引导"><a class="markdownIt-Anchor" href="#思路引导"></a> 思路引导</h3>
+<p>一般来说，较为正确的思路就是第一颗球从1层开始跳着层扔下去，找到碎与不碎的区间，第二颗球在那个区间里从低到高一个一个尝试找到临界楼层，即模糊查找+精确定位的方法，那么，如何规定第一颗球怎么跳层，一次跳几层，就成为问题的关键。</p>
+<h3 id="关键思路"><a class="markdownIt-Anchor" href="#关键思路"></a> 关键思路</h3>
+<p>在某一层扔了一个球之后，有两种情况：</p>
 <ul>
 <li>球碎了，意味着上述目标区间已经确定，只用在其中一个一个扔第二个球确定区间即可；</li>
 <li>球没碎，意味着还没有找到目标区间，还需要在其上的楼层再检验。</li>
 </ul>
 <p><em><strong>注：第二种情况相当于重新开始找临界，只不过楼层数减少了！————前置数据，动态规划！！！</strong></em></p>
-<h3 id="解法展示"><a href="#解法展示" class="headerlink" title="解法展示"></a>解法展示</h3><p>用 T(m,n)  来表示，m楼层，n个球能找到临界楼层的最少次数，则满足下面的条件：</p>
-<p>​                                              <em><strong>T(m,2) &#x3D; min<sub>1&lt;&#x3D;k&lt;&#x3D;m</sub>(max(T(k-1,1) , T(m-k,2) ) +1 )</strong></em></p>
+<h3 id="解法展示"><a class="markdownIt-Anchor" href="#解法展示"></a> 解法展示</h3>
+<p>用 T(m,n)  来表示，m楼层，n个球能找到临界楼层的最少次数，则满足下面的条件：</p>
+<p>​                                              <em><strong>T(m,2) = min<sub>1&lt;=k&lt;=m</sub>(max(T(k-1,1) , T(m-k,2) ) +1 )</strong></em></p>
 <p>则我们的想法是建立一个39×2的数组，由于索引和0楼层原因我们创建40×3的：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span>[][] num = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">40</span>][<span class="hljs-number">3</span>];<br>num[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>num[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<br>num[<span class="hljs-number">0</span>][<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">39</span>;i++)&#123;<br>    num[i][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>    num[i][<span class="hljs-number">1</span>] = i;<span class="hljs-comment">//一层一层自上而下遍历</span><br>&#125;<br><span class="hljs-comment">//两个球的情况</span><br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">39</span>;i++)&#123;<br>    <span class="hljs-comment">//i层楼的情况，即T(i,2)</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> <span class="hljs-number">10000</span>;<span class="hljs-comment">//足够大的数</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;k&lt;=i;k++)&#123;<br>        tmp = Math.max(num[k - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>], num[i - k][<span class="hljs-number">2</span>]);<br>        <span class="hljs-keyword">if</span>(tmp&lt;min)&#123;<br>            min = tmp;<br>        &#125;<br>    &#125;<br>    num[i][<span class="hljs-number">2</span>] = min + <span class="hljs-number">1</span>;<br>&#125;<br>System.out.println(num[<span class="hljs-number">39</span>][<span class="hljs-number">2</span>]);<br><span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> <span class="hljs-number">39</span>;<br><span class="hljs-keyword">while</span>(n&gt;<span class="hljs-number">0</span>)&#123;<br>    System.out.print(num[n][<span class="hljs-number">2</span>]+<span class="hljs-string">&quot; &quot;</span>);<br>    n = n-num[n][<span class="hljs-number">2</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p><em><strong>输出结果为：</strong></em></p>
 <img src="/2026/03/15/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E4%B8%80%E9%81%93%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/2.png" srcset="/img/loading.gif" lazyload style="zoom:150%;">
-
 <p>即第一颗球检查9,17,24,29,33,36,38,39这几层楼，第二个球检查特定区间，最多为9次，最少为8次检查。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>解题的关键在于分析问题，将新的问题分解为两个或更多旧的问题，从而使用动态规划的思想解决。</p>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
+<p>解题的关键在于分析问题，将新的问题分解为两个或更多旧的问题，从而使用动态规划的思想解决。</p>
 
                 
               </div>
@@ -571,8 +576,8 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <div class="hitokoto" style="font-size: 1.50rem; margin: 0.15rem 0.15rem; color: #c75b7a"> <i class="fas fa-quote-left"></i> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span id="hitokoto">Getting poem...</span></a> <script src="/js/Hitokoto.js" defer></script> </div>
-<div class="duration" style="font-size: 1.20rem; margin: 0.15rem 0.15rem; color: #c75b7a" > <i class="fas fa-calendar"></i> <span id="duration-container">人生缓缓&nbsp;自有答案</span> <script src="/js/Duration.js"></script> </div> 
+       <div class="hitokoto" style="font-size: 1.50rem; margin: 0.15rem 0.15rem; color: #295943"> <i class="fas fa-quote-left"></i> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span id="hitokoto">Getting poem...</span></a> <script src="/js/Hitokoto.js" defer></script> </div>
+<div class="duration" style="font-size: 1.20rem; margin: 0.15rem 0.15rem; color: #295943" > <i class="fas fa-calendar"></i> <span id="duration-container">人生缓缓&nbsp;自有答案</span> <script src="/js/Duration.js"></script> </div> 
     </div>
   
   

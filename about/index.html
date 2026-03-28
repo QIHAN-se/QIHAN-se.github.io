@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="rgba(255, 245, 250, 0.95)">
+  <meta name="theme-color" content="#58c9b9">
   <meta name="author" content="QIHAN-se">
   <meta name="keywords" content>
   
@@ -73,14 +73,13 @@
 <link rel="stylesheet" href="/css/custom.css">
 <link rel="stylesheet" href="/css/ScrollAnimation.css">
 <link rel="stylesheet" href="/css/macpanel.css">
-<link rel="stylesheet" href="/css/glassBg.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#c75b7a","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#a8dba8","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -265,7 +264,7 @@
     window.onresize = function() {
       postsChart.resize();
     };
-    let dataPosts = [{"title":"操作系统-处理器","date":"2026-03-28","wordcount":2005,"path":"2026/03/28/操作系统-处理器/"},{"title":"starting-blog","date":"2026-02-21","wordcount":33,"path":"2026/02/21/starting-blog/"},{"title":"操作系统第一章","date":"2026-03-03","wordcount":4655,"path":"2026/03/03/操作系统第一章/"},{"title":"算法探究：一道腾讯面试题的思考","date":"2026-03-15","wordcount":856,"path":"2026/03/15/算法探究：一道腾讯面试题的思考/"},{"title":"算法探究：递归与汉诺塔问题","date":"2026-03-27","wordcount":2175,"path":"2026/03/27/算法探究：递归与汉诺塔问题/"},{"title":"词法分析-状态转换图","date":"2026-03-27","wordcount":918,"path":"2026/03/27/词法分析-状态转换图/"},{"title":"词法分析-正则表达式","date":"2026-03-15","wordcount":996,"path":"2026/03/15/词法分析-正则表达式/"}]
+    let dataPosts = [{"title":"操作系统-处理器","date":"2026-03-28","wordcount":1992,"path":"2026/03/28/操作系统-处理器/"},{"title":"starting-blog","date":"2026-02-21","wordcount":33,"path":"2026/02/21/starting-blog/"},{"title":"操作系统第一章","date":"2026-03-03","wordcount":4654,"path":"2026/03/03/操作系统第一章/"},{"title":"算法探究：一道腾讯面试题的思考","date":"2026-03-15","wordcount":853,"path":"2026/03/15/算法探究：一道腾讯面试题的思考/"},{"title":"算法探究：递归与汉诺塔问题","date":"2026-03-27","wordcount":2200,"path":"2026/03/27/算法探究：递归与汉诺塔问题/"},{"title":"词法分析-状态转换图","date":"2026-03-27","wordcount":916,"path":"2026/03/27/词法分析-状态转换图/"},{"title":"词法分析-正则表达式","date":"2026-03-15","wordcount":970,"path":"2026/03/15/词法分析-正则表达式/"}]
     const dataMap = new Map(dataPosts.map((obj) => [obj.date, {title: obj.title, wordCount: obj.wordcount, path: obj.path}]));
 
     function heatmap_width(months){
@@ -357,7 +356,7 @@
     series: {
         type: 'heatmap',
         coordinateSystem: 'calendar',
-        data: [["2026-03-28",2005],["2026-02-21",33],["2026-03-03",4655],["2026-03-15",856],["2026-03-27",2175],["2026-03-27",918],["2026-03-15",996]]
+        data: [["2026-03-28",1992],["2026-02-21",33],["2026-03-03",4654],["2026-03-15",853],["2026-03-27",2200],["2026-03-27",916],["2026-03-15",970]]
     }
   };
 
@@ -493,8 +492,8 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <div class="hitokoto" style="font-size: 1.50rem; margin: 0.15rem 0.15rem; color: #c75b7a"> <i class="fas fa-quote-left"></i> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span id="hitokoto">Getting poem...</span></a> <script src="/js/Hitokoto.js" defer></script> </div>
-<div class="duration" style="font-size: 1.20rem; margin: 0.15rem 0.15rem; color: #c75b7a"> <i class="fas fa-calendar"></i> <span id="duration-container">&#x4EBA;&#x751F;&#x7F13;&#x7F13;&#xA0;&#x81EA;&#x6709;&#x7B54;&#x6848;</span> <script src="/js/Duration.js"></script> </div> 
+       <div class="hitokoto" style="font-size: 1.50rem; margin: 0.15rem 0.15rem; color: #295943"> <i class="fas fa-quote-left"></i> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span id="hitokoto">Getting poem...</span></a> <script src="/js/Hitokoto.js" defer></script> </div>
+<div class="duration" style="font-size: 1.20rem; margin: 0.15rem 0.15rem; color: #295943"> <i class="fas fa-calendar"></i> <span id="duration-container">&#x4EBA;&#x751F;&#x7F13;&#x7F13;&#xA0;&#x81EA;&#x6709;&#x7B54;&#x6848;</span> <script src="/js/Duration.js"></script> </div> 
     </div>
   
   
