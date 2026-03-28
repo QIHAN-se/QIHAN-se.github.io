@@ -842,11 +842,11 @@ i.iconfont {
   --post-text-color: #295943;
   --post-heading-color: #44634f;
   --post-link-color: #44634f;
-  --link-hover-color: #44634f;
+  --link-hover-color: #efffe9;
   --link-hover-bg-color: #efffe9;
   --line-color: #295943;
-  --navbar-bg-color: #295943;
-  --navbar-text-color: #efffe9;
+  --navbar-bg-color: #efffe9;
+  --navbar-text-color: #295943;
   --subtitle-color: #295943;
   --scrollbar-color: #295943;
   --scrollbar-hover-color: #295943;
