@@ -847,9 +847,9 @@ i.iconfont {
   --line-color: #efffe9;
   --navbar-bg-color: #295943;
   --navbar-text-color: #efffe9;
-  --subtitle-color: #5a9367;
-  --scrollbar-color: #efffe9;
-  --scrollbar-hover-color: #efffe9;
+  --subtitle-color: #295943;
+  --scrollbar-color: #295943;
+  --scrollbar-hover-color: #295943;
   --button-bg-color: #efffe9;
   --button-hover-bg-color: #efffe9;
   --highlight-bg-color: #f6f8fa;
@@ -863,7 +863,7 @@ i.iconfont {
   }
   :root:not([data-user-color-scheme]) {
     --body-bg-color: #295943;
-    --board-bg-color: #44634f;
+    --board-bg-color: #295943;
     --text-color: #fffcf0;
     --sec-text-color: #cff0d3;
     --post-text-color: #fffcf0;
@@ -872,9 +872,9 @@ i.iconfont {
     --link-hover-color: #efffe9;
     --link-hover-bg-color: #295943;
     --line-color: #295943;
-    --navbar-bg-color: #D7FFF1;
-    --navbar-text-color: #295943;
-    --subtitle-color: #5a9367;
+    --navbar-bg-color: #295943;
+    --navbar-text-color: #efffe9;
+    --subtitle-color: #295943;
     --scrollbar-color: #295943;
     --scrollbar-hover-color: #295943;
     --button-bg-color: #295943;
@@ -901,7 +901,7 @@ i.iconfont {
 @media not print {
   [data-user-color-scheme="dark"] {
     --body-bg-color: #295943;
-    --board-bg-color: #44634f;
+    --board-bg-color: #295943;
     --text-color: #fffcf0;
     --sec-text-color: #cff0d3;
     --post-text-color: #fffcf0;
@@ -910,9 +910,9 @@ i.iconfont {
     --link-hover-color: #efffe9;
     --link-hover-bg-color: #295943;
     --line-color: #295943;
-    --navbar-bg-color: #D7FFF1;
-    --navbar-text-color: #295943;
-    --subtitle-color: #5a9367;
+    --navbar-bg-color: #295943;
+    --navbar-text-color: #efffe9;
+    --subtitle-color: #295943;
     --scrollbar-color: #295943;
     --scrollbar-hover-color: #295943;
     --button-bg-color: #295943;
