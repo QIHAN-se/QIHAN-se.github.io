@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="#58c9b9">
+  <meta name="theme-color" content="#295943">
   <meta name="author" content="QIHAN-se">
   <meta name="keywords" content="">
   
@@ -65,13 +65,14 @@
 <link rel="stylesheet" href="/css/custom.css">
 <link rel="stylesheet" href="/css/ScrollAnimation.css">
 <link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/glassBg.css">
 
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#a8dba8","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#295943","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -199,7 +200,7 @@
 <div id="banner" class="banner" parallax=true
      style="background: url('/img/1.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.7)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
@@ -249,7 +250,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2026/03/28/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%A4%84%E7%90%86%E5%99%A8/" target="_self">
         <div>
-          处理器  中央处理器结构    CPU包括算数逻辑单元和控制单元这两个重要部分   算术逻辑单元  负责计算——加减乘除，整数浮点数…； 好的计算机可能有乘法器或者浮点运算器；    控制单元  指令译码器（Instruction Decoder, ID）：负责解释指令执行； 指令寄存器（Instruction Register, IR）：指令放在这里； 程序计数器（Program counte
+          处理器中央处理器结构  CPU包括算数逻辑单元和控制单元这两个重要部分  算术逻辑单元  负责计算——加减乘除，整数浮点数……； 好的计算机可能有乘法器或者浮点运算器；   控制单元  指令译码器（Instruction Decoder, ID）：负责解释指令执行； 指令寄存器（Instruction Register, IR）：指令放在这里； 程序计数器（Program counter, PC）
         </div>
       </a>
 
@@ -312,7 +313,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2026/03/27/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E9%80%92%E5%BD%92%E4%B8%8E%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/" target="_self">
         <div>
-          算法探究：递归与汉诺塔问题  一个简单问题入手递归  如何计算给定的一个自然数的阶乘？ 作为人，我们会直观地来计算1*2*3*…*n  对于阶乘问题，可以让计算机拟人一点，从1开始一直乘到n，代码： 12345678910public long factorial(int n) &#123;    if (n &lt; 0) throw new IllegalArgumentException(
+          算法探究：递归与汉诺塔问题一个简单问题入手递归 如何计算给定的一个自然数的阶乘？ 作为人，我们会直观地来计算1*2*3*…*n  对于阶乘问题，可以让计算机拟人一点，从1开始一直乘到n，代码： 12345678910public long factorial(int n) &#123;    if (n &lt; 0) throw new IllegalArgumentException();
         </div>
       </a>
 
@@ -373,7 +374,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2026/03/27/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE/" target="_self">
         <div>
-          词法分析-状态转换图（基本）   词法单元怎么识别   词法分析器需要怎么样的功能？ 能够检查输入字符串，在前缀中找出和某个模式匹配的词素。   具体步骤：  通过正则定义来表示各个词法单元的模式 用ws的定义*（ws→(blank | tab | newline)+）*来跳过空白，即识别到这个的时候就不返回词法单元，继续往后识别    具体实现，怎么识别？  你可能会想拿正则表达式来识别，是没
+          词法分析-状态转换图（基本） 词法单元怎么识别 词法分析器需要怎么样的功能？ 能够检查输入字符串，在前缀中找出和某个模式匹配的词素。  具体步骤：  通过正则定义来表示各个词法单元的模式 用ws的定义*（ws→(blank | tab | newline)+）*来跳过空白，即识别到这个的时候就不返回词法单元，继续往后识别   具体实现，怎么识别？  你可能会想拿正则表达式来识别，是没错，不过具体识
         </div>
       </a>
 
@@ -436,7 +437,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%8E%A2%E7%A9%B6%EF%BC%9A%E4%B8%80%E9%81%93%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/" target="_self">
         <div>
-          算法探究——一道腾讯面试题的思考  题目来源  腾讯面试真题，难度较高 时间限制：约45分钟完成   题面 腾讯大厦有39层，你手里有两颗一模一样的玻璃球，当你拿着玻璃球在某一层往下扔的时候，一定会有两个结果:玻璃球碎了或者没碎，大厦有个临界楼层，低于它的楼层，往下扔玻璃球，玻璃球不会碎，等于或者高于它的楼层，扔下玻璃球一定会碎。玻璃球碎了就不能再扔了。现在让你设计一种方法，使得在该方法下，最坏
+          算法探究——一道腾讯面试题的思考题目来源 腾讯面试真题，难度较高 时间限制：约45分钟完成  题面腾讯大厦有39层，你手里有两颗一模一样的玻璃球，当你拿着玻璃球在某一层往下扔的时候，一定会有两个结果:玻璃球碎了或者没碎，大厦有个临界楼层，低于它的楼层，往下扔玻璃球，玻璃球不会碎，等于或者高于它的楼层，扔下玻璃球一定会碎。玻璃球碎了就不能再扔了。现在让你设计一种方法，使得在该方法下，最坏情况下扔的次
         </div>
       </a>
 
@@ -501,7 +502,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2026/03/15/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_self">
         <div>
-          编译原理第一节：词法分析  定义 词法分析：读入源程序的输入字符，将他们组成词素，生成并输出一个词法单元序列，每个词法单元对应于一个词素。   如何实现：由语法分析器调用，需要时不断读取，生成词法单元。（作用：避免额外输入输出！）   其他操作：一些简单处理，删除注释，连续空白符的压缩等。   For example(经典例子): position =  initial + rate * 60
+          编译原理第一节：词法分析定义词法分析：读入源程序的输入字符，将他们组成词素，生成并输出一个词法单元序列，每个词法单元对应于一个词素。  如何实现：由语法分析器调用，需要时不断读取，生成词法单元。（作用：避免额外输入输出！）  其他操作：一些简单处理，删除注释，连续空白符的压缩等。  For example(经典例子): position &#x3D;  initial + rate * 60 分析
         </div>
       </a>
 
@@ -564,7 +565,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2026/03/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%AC%E4%B8%80%E7%AB%A0/" target="_self">
         <div>
-          第一章：概述  计算机系统    计算机技术:   ​	科学计算，数据处理 ==&gt; 实时控制，辅助设计，智能模拟 ​	     冯诺依曼结构： 五大件：运算器，逻辑控制器，存储器，输入设备和输出设备。      计算机系统组成： ”硬件子系统 + 软件子系统“  硬件: 借助电、磁、光、机械等原理构成的各种物理部件的有机结合，是系统工作的实体。  CPU，主储存器，I/O控制系统，外围设备
+          第一章：概述计算机系统 计算机技术:  ​	科学计算，数据处理 &#x3D;&#x3D;&gt; 实时控制，辅助设计，智能模拟 ​	   冯诺依曼结构：五大件：运算器，逻辑控制器，存储器，输入设备和输出设备。     计算机系统组成：”硬件子系统 + 软件子系统“  硬件: 借助电、磁、光、机械等原理构成的各种物理部件的有机结合，是系统工作的实体。  CPU，主储存器，I&#x2F;O控制系统，外
         </div>
       </a>
 
@@ -627,7 +628,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2026/02/21/starting-blog/" target="_self">
         <div>
-          这是一个测试 这是一个测试，用于测试文章发布与标签、分类功能！ 附一张图在下
+          这是一个测试这是一个测试，用于测试文章发布与标签、分类功能！ 附一张图在下
         </div>
       </a>
 
@@ -724,7 +725,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <div class="hitokoto" style="font-size: 1.50rem; margin: 0.15rem 0.15rem; color: #295943"> <i class="fas fa-quote-left"></i> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span id="hitokoto">Getting poem...</span></a> <script src="/js/Hitokoto.js" defer></script> </div>
+      
 <div class="duration" style="font-size: 1.20rem; margin: 0.15rem 0.15rem; color: #295943" > <i class="fas fa-calendar"></i> <span id="duration-container">人生缓缓&nbsp;自有答案</span> <script src="/js/Duration.js"></script> </div> 
     </div>
   

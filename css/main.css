@@ -564,10 +564,10 @@ sup > a::before,
 }
 #nprogress .bar {
   height: 3px !important;
-  background-color: #a8dba8 !important;
+  background-color: #295943 !important;
 }
 #nprogress .peg {
-  box-shadow: 0 0 14px #a8dba8, 0 0 8px #a8dba8 !important;
+  box-shadow: 0 0 14px #295943, 0 0 8px #295943 !important;
 }
 @media (max-width: 575px) {
   #nprogress .bar {
@@ -836,21 +836,21 @@ i.iconfont {
 :root {
   --color-mode: "light";
   --body-bg-color: #efffe9;
-  --board-bg-color: #cff0d34D;
+  --board-bg-color: #ffffe9;
   --text-color: #295943;
   --sec-text-color: #295943;
   --post-text-color: #295943;
   --post-heading-color: #44634f;
   --post-link-color: #44634f;
-  --link-hover-color: #30a9de;
+  --link-hover-color: #44634f;
   --link-hover-bg-color: #efffe9;
   --line-color: #efffe9;
-  --navbar-bg-color: #58c9b9;
+  --navbar-bg-color: #295943;
   --navbar-text-color: #efffe9;
   --subtitle-color: #5a9367;
   --scrollbar-color: #efffe9;
   --scrollbar-hover-color: #efffe9;
-  --button-bg-color: #efffe980;
+  --button-bg-color: #efffe9;
   --button-hover-bg-color: #efffe9;
   --highlight-bg-color: #f6f8fa;
   --inlinecode-bg-color: rgba(175,184,193,0.2);
@@ -863,9 +863,9 @@ i.iconfont {
   }
   :root:not([data-user-color-scheme]) {
     --body-bg-color: #295943;
-    --board-bg-color: #44634f80;
-    --text-color: #99f19e;
-    --sec-text-color: #99f19e;
+    --board-bg-color: #44634f;
+    --text-color: #fffcf0;
+    --sec-text-color: #cff0d3;
     --post-text-color: #fffcf0;
     --post-heading-color: #cff0d3;
     --post-link-color: #cff0d3;
@@ -877,11 +877,11 @@ i.iconfont {
     --subtitle-color: #5a9367;
     --scrollbar-color: #295943;
     --scrollbar-hover-color: #295943;
-    --button-bg-color: #29594380;
-    --button-hover-bg-color: #29594380;
+    --button-bg-color: #295943;
+    --button-hover-bg-color: #295943;
     --highlight-bg-color: #303030;
     --inlinecode-bg-color: rgba(99,110,123,0.4);
-    --fold-title-color: #99f19e;
+    --fold-title-color: #fffcf0;
     --fold-border-color: #295943;
   }
   :root:not([data-user-color-scheme]) img {
@@ -901,9 +901,9 @@ i.iconfont {
 @media not print {
   [data-user-color-scheme="dark"] {
     --body-bg-color: #295943;
-    --board-bg-color: #44634f80;
-    --text-color: #99f19e;
-    --sec-text-color: #99f19e;
+    --board-bg-color: #44634f;
+    --text-color: #fffcf0;
+    --sec-text-color: #cff0d3;
     --post-text-color: #fffcf0;
     --post-heading-color: #cff0d3;
     --post-link-color: #cff0d3;
@@ -915,11 +915,11 @@ i.iconfont {
     --subtitle-color: #5a9367;
     --scrollbar-color: #295943;
     --scrollbar-hover-color: #295943;
-    --button-bg-color: #29594380;
-    --button-hover-bg-color: #29594380;
+    --button-bg-color: #295943;
+    --button-hover-bg-color: #295943;
     --highlight-bg-color: #303030;
     --inlinecode-bg-color: rgba(99,110,123,0.4);
-    --fold-title-color: #99f19e;
+    --fold-title-color: #fffcf0;
     --fold-border-color: #295943;
   }
   [data-user-color-scheme="dark"] img {
