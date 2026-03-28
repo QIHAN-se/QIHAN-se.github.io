@@ -844,7 +844,7 @@ i.iconfont {
   --post-link-color: #44634f;
   --link-hover-color: #44634f;
   --link-hover-bg-color: #efffe9;
-  --line-color: #efffe9;
+  --line-color: #295943;
   --navbar-bg-color: #efffe9;
   --navbar-text-color: #295943;
   --subtitle-color: #295943;
@@ -855,7 +855,7 @@ i.iconfont {
   --highlight-bg-color: #f6f8fa;
   --inlinecode-bg-color: rgba(175,184,193,0.2);
   --fold-title-color: #295943;
-  --fold-border-color: #efffe9;
+  --fold-border-color: #295943;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -871,7 +871,7 @@ i.iconfont {
     --post-link-color: #cff0d3;
     --link-hover-color: #efffe9;
     --link-hover-bg-color: #295943;
-    --line-color: #295943;
+    --line-color: #efffe9;
     --navbar-bg-color: #efffe9;
     --navbar-text-color: #295943;
     --subtitle-color: #295943;
@@ -882,7 +882,7 @@ i.iconfont {
     --highlight-bg-color: #303030;
     --inlinecode-bg-color: rgba(99,110,123,0.4);
     --fold-title-color: #fffcf0;
-    --fold-border-color: #295943;
+    --fold-border-color: #efffe9;
   }
   :root:not([data-user-color-scheme]) img {
     -webkit-filter: brightness(0.9);
@@ -909,7 +909,7 @@ i.iconfont {
     --post-link-color: #cff0d3;
     --link-hover-color: #efffe9;
     --link-hover-bg-color: #295943;
-    --line-color: #295943;
+    --line-color: #efffe9;
     --navbar-bg-color: #efffe9;
     --navbar-text-color: #295943;
     --subtitle-color: #295943;
@@ -920,7 +920,7 @@ i.iconfont {
     --highlight-bg-color: #303030;
     --inlinecode-bg-color: rgba(99,110,123,0.4);
     --fold-title-color: #fffcf0;
-    --fold-border-color: #295943;
+    --fold-border-color: #efffe9;
   }
   [data-user-color-scheme="dark"] img {
     -webkit-filter: brightness(0.9);
