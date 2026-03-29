@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>看星星！</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      overflow: hidden;
+      background: #000;
+      cursor: crosshair;
+      font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+    }
+
+    .vignette {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 10;
+      background: radial-gradient(circle at 50% 50%, transparent 50%, rgba(0,0,0,0.6) 100%);
+    }
+
+    #universe {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+    }
+
+    .vertical-title {
+      position: fixed;
+      left: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      letter-spacing: 0.5em;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.85);
+      text-shadow: 0 0 30px rgba(100, 149, 237, 0.5);
+      font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+    
+    .vertical-title::after {
+      content: "✦";
+      display: block;
+      margin-top: 20px;
+      font-size: 1.5rem;
+      opacity: 0.6;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      z-index: 999;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.4);
+      transform: translateX(5px);
+    }
+
+    .fixed-tips {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99;
+      background: rgba(10, 15, 30, 0.8);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(100, 149, 237, 0.3);
+      border-radius: 25px;
+      padding: 14px 32px;
+      color: rgba(200, 210, 255, 0.95);
+      font-size: 14px;
+      letter-spacing: 2px;
+      pointer-events: none;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      box-shadow: 0 5px 30px rgba(0,0,0,0.5), 0 0 20px rgba(100,149,237,0.1);
+    }
+
+    .constellation-info {
+      position: fixed;
+      bottom: 100px;
+      left: 40px;
+      z-index: 100;
+      width: 320px;
+      background: rgba(10, 15, 30, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(100, 149, 237, 0.2);
+      border-radius: 16px;
+      padding: 20px 24px;
+      color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(100,149,237,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .constellation-info.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .info-star-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #fff;
+      letter-spacing: 0.1em;
+      text-shadow: 0 2px 10px rgba(255,255,255,0.2);
+    }
+
+    .info-constellation {
+      font-size: 0.85rem;
+      color: #8aa4ff;
+      margin-bottom: 12px;
+      letter-spacing: 0.15em;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-constellation::before {
+      content: "✦";
+      color: rgba(255,255,255,0.5);
+      font-size: 0.6rem;
+    }
+
+    .info-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.75);
+      font-style: italic;
+      border-left: 2px solid rgba(100, 149, 237, 0.3);
+      padding-left: 12px;
+    }
+
+    .info-hint {
+      margin-top: 12px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+      text-align: right;
+    }
+
+    .meteor-shower-text {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+      text-align: center;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .meteor-shower-text.show {
+      opacity: 1;
+      animation: showerGlow 3s ease-out forwards;
+    }
+
+    @keyframes showerGlow {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); filter: blur(10px); }
+      20% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
+      80% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
+      100% { opacity: 0; transform: translate(-50%, -45%) scale(1.05); filter: blur(5px); }
+    }
+
+    .shower-title {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 0.5em;
+      margin-bottom: 15px;
+      color: #fff;
+      text-shadow: 0 0 30px rgba(255,255,255,0.8);
+    }
+
+    .shower-quote {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.8);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+<div class="vignette"></div>
+<div class="vertical-title">静候微光</div>
+
+<button class="back-btn" onclick="window.location.href='/'">← 返回主页</button>
+<div class="fixed-tips">悬停星星认识它 | 单击星星会眨眼 | 双击触发流星雨（记得许愿哦！） ✨</div>
+
+<div class="constellation-info" id="info-panel">
+  <div class="info-star-name" id="info-name">星名📖</div>
+  <div class="info-constellation" id="info-const">星座🕮</div>
+  <div class="info-desc" id="info-desc">简历😉</div>
+  <div class="info-hint">✨ 单击星星，听听它在说什么！</div>
+</div>
+
+<canvas id="universe"></canvas>
+
+<div class="meteor-shower-text" id="shower-text">
+  <div class="shower-title">✦ 流星雨 ✦</div>
+  <div class="shower-quote" id="shower-quote">愿望正在穿越光年...</div>
+</div>
+
+<script>
+window.addEventListener('load', init);
+
+const canvas = document.getElementById('universe');
+const ctx = canvas.getContext('2d');
+let width, height, mouse = { x: -1000, y: -1000 };
+let activeStar = null;
+let activeConstellation = null;
+let time = 0;
+
+const CONSTELLATION_LAYER = 0.6;
+const SAFE_MARGIN = 0.05;
+
+const starWhispers = [
+  "你终于发现我了...",
+  "我在这里等了上千年",
+  "要听听宇宙的故事吗？",
+  "你的目光，是我穿越光年的意义",
+  "嘘——别惊动其他星星",
+  "这是我为你闪烁的第1001次",
+  "在这黑暗里，我一直亮着",
+  "我们其实早就认识了，在你的梦里",
+  "你眼里的光，和我一模一样",
+  "我发出的光，此刻才抵达你的眼睛",
+  "带我回家吧，在你的记忆里",
+  "每一颗星星都是孤独的，直到被看见",
+  "谢谢你，愿意为我停留这一秒",
+  "我燃烧自己，只为这一刻的相遇",
+  "别眨眼，我要为你表演闪烁",
+  "地球真美啊，从这里看",
+  "你有没有想过，你也是我眼中的星星？",
+  "光年之外，我听见你的愿望了",
+  "今夜，我只为你一人闪烁",
+  "记得吗？前世你也是这么看着我的",
+  "我在用核聚变给你写一封情书，虽然有点烫手",
+  "嘘——其他星星都睡了，只有我偷偷醒着",
+  "你的视网膜上，现在印着我的模样了",
+  "我们之间的黑暗，比我们的光还要古老",
+  "别碰屏幕，你会弄花我的光",
+  "我已经燃烧了四十亿年，不差为你多亮这一秒",
+  "你知道吗？你看到的我是我的遗照",
+  "刚才有颗流星问我，要不要一起去地球",
+  "我调暗了一点，怕刺伤你熬夜的眼睛",
+  "我的光正在你的眼睛里游泳"
+];
+
+// 完整的星座数据（已扩充星星数量）
+const constellations = [
+  {
+    name: "猎户座",
+    id: "orion",
+    desc: "冬季的王者，猎人永远追逐着天上的猎物",
+    stars: [
+      { name: "参宿四", x: 0.18, y: 0.18, size: 2.8, color: "#ff6b6b", desc: "这颗红超巨星正在燃烧自己，只为在寒冷的冬夜为你点亮一角天空。" },
+      { name: "参宿七", x: 0.32, y: 0.16, size: 2.4, color: "#a0c4ff", desc: "蓝白色的光芒穿越千年，只为此刻与你的目光相遇。" },
+      { name: "参宿一", x: 0.21, y: 0.32, size: 1.8, color: "#ffffff", desc: "腰带三星之一，古人认为它掌管着冬至的来临。" },
+      { name: "参宿二", x: 0.255, y: 0.30, size: 2.0, color: "#ffffff", desc: "腰带正中，三颗星连成一线，像猎人腰间的宝石。" },
+      { name: "参宿三", x: 0.30, y: 0.33, size: 1.8, color: "#ffffff", desc: "腰带最东端，指向天狼星的方向。" },
+      { name: "参宿五", x: 0.16, y: 0.42, size: 1.8, color: "#a0c4ff", desc: "猎人的右肩，扛着整个冬天的重量。" },
+      { name: "参宿六", x: 0.35, y: 0.45, size: 1.8, color: "#a0c4ff", desc: "猎人的左膝，弯曲着准备跃入银河。" },
+      { name: "觜宿一", x: 0.20, y: 0.12, size: 1.6, color: "#ffffff", desc: "猎人的头部，像一颗白色的珍珠。" },
+      { name: "觜宿二", x: 0.22, y: 0.10, size: 1.5, color: "#ffffff", desc: "猎人的另一只眼睛，凝视着天兔座。" },
+      { name: "参旗一", x: 0.08, y: 0.25, size: 1.6, color: "#a0c4ff", desc: "猎人的盾牌，抵挡来自金牛座的冲击。" },
+      { name: "参旗六", x: 0.10, y: 0.28, size: 1.5, color: "#ffffff", desc: "盾牌的底部，保护着猎人的安全。" },
+      { name: "伐一", x: 0.24, y: 0.38, size: 1.6, color: "#ff6b9d", desc: "猎人的剑鞘，M42星云正在其中孕育新生。" },
+      { name: "伐二", x: 0.26, y: 0.40, size: 1.5, color: "#ffffff", desc: "剑柄上的装饰，照亮了周围的黑暗。" },
+      { name: "参宿增一", x: 0.38, y: 0.20, size: 1.5, color: "#ffffff", desc: "猎人左腿的延伸，指向天狼星。" }
+    ],
+    lines: [[0,5], [5,2], [2,3], [3,4], [4,6], [6,1], [0,7], [7,8], [5,9], [9,10], [2,11], [11,12], [4,13]]
+  },
+  {
+    name: "大熊座",
+    id: "ursa",
+    desc: "北斗七星，亘古不变的导航者，大熊在夜空中缓缓行走",
+    stars: [
+      { name: "天枢", x: 0.62, y: 0.12, size: 2.2, color: "#ffffff", desc: "北斗第一星，意为'天之枢纽'。" },
+      { name: "天璇", x: 0.68, y: 0.15, size: 2.0, color: "#ffffff", desc: "北斗第二星，与天枢连线延伸五倍，就是北极星。" },
+      { name: "天玑", x: 0.73, y: 0.20, size: 1.8, color: "#ffffff", desc: "北斗第三星，意为'天之玑衡'。" },
+      { name: "天权", x: 0.76, y: 0.26, size: 1.6, color: "#e0e0e0", desc: "北斗第四星，也是'文曲星'。" },
+      { name: "玉衡", x: 0.74, y: 0.35, size: 2.2, color: "#ffffff", desc: "北斗第五星，最亮的一颗。" },
+      { name: "开阳", x: 0.70, y: 0.42, size: 2.0, color: "#ffffff", desc: "北斗第六星，旁边有一颗小伴星叫'辅'。" },
+      { name: "摇光", x: 0.65, y: 0.48, size: 2.2, color: "#a0c4ff", desc: "北斗第七星，也叫'破军'。" },
+      { name: "辅", x: 0.705, y: 0.415, size: 1.4, color: "#a0c4ff", desc: "开阳的伴星，古代用来测试视力。" },
+      { name: "太阳一", x: 0.58, y: 0.15, size: 1.6, color: "#ffffff", desc: "大熊的鼻子，指向北极的方向。" },
+      { name: "太阳二", x: 0.55, y: 0.22, size: 1.5, color: "#ffffff", desc: "大熊的前爪，在银河中漫步。" },
+      { name: "太阳三", x: 0.52, y: 0.30, size: 1.6, color: "#ffffff", desc: "大熊的腹部，毛发在星光下闪烁。" },
+      { name: "太阳四", x: 0.58, y: 0.38, size: 1.5, color: "#ffffff", desc: "大熊的后腿，稳健地站在北天。" },
+      { name: "中台一", x: 0.78, y: 0.18, size: 1.6, color: "#e0e0e0", desc: "大熊的耳朵，倾听着宇宙的微波。" },
+      { name: "中台二", x: 0.82, y: 0.22, size: 1.5, color: "#ffffff", desc: "大熊的另一只耳朵，捕捉着引力波的声音。" }
+    ],
+    lines: [[0,1], [1,2], [2,3], [3,6], [3,4], [4,5], [5,6], [5,7], [0,8], [8,9], [9,10], [10,11], [2,10], [1,12], [12,13]]
+  },
+  {
+    name: "天鹅座",
+    id: "cygnus",
+    desc: "跨越银河的飞鸟，天津四是它明亮的眼睛",
+    stars: [
+      { name: "天津四", x: 0.48, y: 0.22, size: 2.8, color: "#a0c4ff", desc: "天鹅座最亮的星，意为'银河的渡口'，夏季大三角之一。" },
+      { name: "辇道增七", x: 0.48, y: 0.38, size: 1.8, color: "#ffffff", desc: "天鹅的脖子，双星一蓝一黄，肉眼可见。" },
+      { name: "天津一", x: 0.40, y: 0.48, size: 1.8, color: "#ffffff", desc: "天鹅左翼尖，跨越银河伸向对岸。" },
+      { name: "天津二", x: 0.56, y: 0.48, size: 1.8, color: "#ffffff", desc: "天鹅右翼尖，与天津一对称。" },
+      { name: "天津九", x: 0.48, y: 0.60, size: 2.2, color: "#ffffff", desc: "天鹅尾羽，也是它的心脏，蓝白色的光芒。" },
+      { name: "天津增一", x: 0.42, y: 0.35, size: 1.5, color: "#ffffff", desc: "天鹅左翼的关节，优雅地弯曲着。" },
+      { name: "天津增二", x: 0.54, y: 0.35, size: 1.5, color: "#ffffff", desc: "天鹅右翼的关节，与左侧对称。" },
+      { name: "辇道一", x: 0.48, y: 0.30, size: 1.6, color: "#a0c4ff", desc: "连接头部与身体的桥梁，淡蓝色的光。" },
+      { name: "辇道二", x: 0.48, y: 0.32, size: 1.5, color: "#ffffff", desc: "脖子上的装饰，照亮了前行的路。" },
+      { name: "天津增廿一", x: 0.38, y: 0.52, size: 1.4, color: "#ffffff", desc: "左翼的羽毛，轻轻掠过银河。" },
+      { name: "天津增廿二", x: 0.58, y: 0.52, size: 1.4, color: "#ffffff", desc: "右翼的羽毛，与左翼一起振动。" },
+      { name: "奚仲一", x: 0.48, y: 0.68, size: 1.6, color: "#ffd700", desc: "天鹅尾部的下方，金黄色的星点。" }
+    ],
+    lines: [[0,7], [7,1], [1,8], [6,1], [1,2], [5,1], [1,3], [1,4], [2,9], [3,10], [4,11]]
+  },
+  {
+    name: "仙后座",
+    id: "cassiopeia",
+    desc: "王后的宝座，在银河中闪烁着W的光芒，埃塞俄比亚的王后端坐天庭",
+    stars: [
+      { name: "王良四", x: 0.10, y: 0.65, size: 2.2, color: "#ff6b9d", desc: "仙后座α星，一颗橙色的巨星，W的左翼尖。" },
+      { name: "王良一", x: 0.16, y: 0.55, size: 1.8, color: "#ffffff", desc: "第二颗星，W的第一个谷底，明亮而稳重。" },
+      { name: "策", x: 0.24, y: 0.62, size: 2.5, color: "#ffffff", desc: "最亮的一颗，W的中间顶点，发出蓝白色的光。" },
+      { name: "王良二", x: 0.32, y: 0.52, size: 1.8, color: "#ffffff", desc: "第四颗星，W的第二个谷底，连接着两端。" },
+      { name: "阁道三", x: 0.40, y: 0.58, size: 2.2, color: "#a0c4ff", desc: "W的最后一笔，蓝色的光芒像头冠宝石，右翼尖。" },
+      { name: "王良三", x: 0.14, y: 0.60, size: 1.6, color: "#ffffff", desc: "王良一与王良四之间的桥梁，较暗的星点。" },
+      { name: "阁道一", x: 0.35, y: 0.55, size: 1.6, color: "#ffffff", desc: "阁道三与王良二之间的连接点。" },
+      { name: "阁道二", x: 0.20, y: 0.50, size: 1.5, color: "#e0e0e0", desc: "王座背部的装饰，淡黄色的微光。" },
+      { name: "傅介一", x: 0.06, y: 0.68, size: 1.5, color: "#ffffff", desc: "王座左侧的扶手，指向仙女座的方向。" },
+      { name: "傅介二", x: 0.45, y: 0.62, size: 1.5, color: "#ffffff", desc: "王座右侧的扶手，与左侧对称。" },
+      { name: "王良增一", x: 0.08, y: 0.58, size: 1.4, color: "#ffffff", desc: "王良四下方的点缀，构成王座的腿。" },
+      { name: "阁道增一", x: 0.42, y: 0.65, size: 1.4, color: "#ffffff", desc: "阁道三上方的装饰，王冠上的宝石。" }
+    ],
+    lines: [[0,5], [5,1], [1,7], [7,2], [2,3], [3,6], [6,4], [0,8], [4,9], [0,10], [4,11]]
+  },
+  {
+    name: "天蝎座",
+    id: "scorpius",
+    desc: "夏夜的毒蝎，心宿二是它燃烧的心脏，尾巴弯曲如钩",
+    stars: [
+      { name: "心宿二", x: 0.78, y: 0.68, size: 3.2, color: "#ff4444", desc: "天蝎座的心脏，也叫'大火'，是一颗红超巨星，古人用来确定季节。" },
+      { name: "房宿四", x: 0.68, y: 0.58, size: 1.8, color: "#a0c4ff", desc: "天蝎的右钳，蓝色的光芒守护着夏日的夜空。" },
+      { name: "房宿三", x: 0.88, y: 0.56, size: 1.8, color: "#ffffff", desc: "天蝎的左钳，指向银河的中心，与右钳形成夹击之势。" },
+      { name: "尾宿八", x: 0.72, y: 0.80, size: 2.0, color: "#ffffff", desc: "天蝎尾巴的第一节，连接着身体的毒钩开始弯曲。" },
+      { name: "尾宿五", x: 0.64, y: 0.86, size: 1.8, color: "#ffffff", desc: "天蝎尾巴的尖端，像一把利剑，随时准备出击。" },
+      { name: "心宿一", x: 0.75, y: 0.62, size: 1.6, color: "#ffffff", desc: "心宿二旁边的伴侣，共同构成蝎子的心脏。" },
+      { name: "心宿三", x: 0.82, y: 0.65, size: 1.6, color: "#ffffff", desc: "心宿二另一侧的守护者，三颗心连在一起。" },
+      { name: "房宿一", x: 0.72, y: 0.52, size: 1.6, color: "#ffffff", desc: "右钳的根部，连接着蝎子的身体。" },
+      { name: "房宿二", x: 0.85, y: 0.50, size: 1.6, color: "#ffffff", desc: "左钳的根部，与右钳根部对称。" },
+      { name: "尾宿一", x: 0.75, y: 0.75, size: 1.6, color: "#a0c4ff", desc: "尾巴的第二节，弯曲的弧度开始显现。" },
+      { name: "尾宿二", x: 0.70, y: 0.78, size: 1.5, color: "#ffffff", desc: "尾巴的第三节，逐渐变细。" },
+      { name: "尾宿三", x: 0.66, y: 0.82, size: 1.5, color: "#ffffff", desc: "尾巴的第四节，接近尖端。" },
+      { name: "神宫一", x: 0.80, y: 0.72, size: 1.6, color: "#ffffff", desc: "蝎子身体的后部，连接尾巴的关节。" },
+      { name: "神宫二", x: 0.76, y: 0.60, size: 1.5, color: "#ffffff", desc: "蝎子身体的中部，六条腿的连接点。" },
+      { name: "心宿增四", x: 0.74, y: 0.65, size: 1.4, color: "#ff6b6b", desc: "心宿二下方的红色小星，像一滴血。" }
+    ],
+    lines: [[1,7], [7,0], [0,6], [6,2], [2,8], [0,13], [13,9], [9,10], [10,11], [11,3], [3,4], [0,5], [5,14]]
+  },
+  {
+    name: "狮子座",
+    id: "leo",
+    desc: "春夜的王者，雄狮的鬃毛在星空闪耀，反写的问号是它的头颅",
+    stars: [
+      { name: "轩辕十四", x: 0.22, y: 0.55, size: 2.5, color: "#a0c4ff", desc: "狮子座的心脏，蓝白色的光芒如钻石般闪耀，也是王者之眼。" },
+      { name: "轩辕十三", x: 0.18, y: 0.48, size: 1.8, color: "#ffffff", desc: "狮子前爪，春天到来的信使，位于反写问号的底部。" },
+      { name: "轩辕十二", x: 0.28, y: 0.52, size: 2.0, color: "#ffffff", desc: "狮子头部的亮星，构成反写的问号的顶部。" },
+      { name: "太微右垣四", x: 0.32, y: 0.58, size: 1.8, color: "#ffffff", desc: "狮子后躯，与轩辕十四连成直线，构成狮子的腰部。" },
+      { name: "五帝座一", x: 0.25, y: 0.65, size: 2.2, color: "#ffffff", desc: "狮子尾巴尖，春季大三角之一，像狮子尾巴上的穗子。" },
+      { name: "轩辕十一", x: 0.25, y: 0.45, size: 1.6, color: "#ffffff", desc: "狮子头部问号的中间点，连接前后。" },
+      { name: "轩辕十", x: 0.22, y: 0.42, size: 1.6, color: "#ffd700", desc: "狮子头部的顶部，金黄色的光芒。" },
+      { name: "轩辕九", x: 0.16, y: 0.45, size: 1.6, color: "#ffffff", desc: "狮子鼻子的位置，问号的起点。" },
+      { name: "西次相", x: 0.35, y: 0.55, size: 1.6, color: "#ffffff", desc: "狮子腹部的亮星，稳固着身躯。" },
+      { name: "西上将", x: 0.38, y: 0.52, size: 1.5, color: "#ffffff", desc: "狮子背部的星点，与太微右垣四相连。" },
+      { name: "少微一", x: 0.30, y: 0.62, size: 1.5, color: "#ffffff", desc: "狮子后腿的关节，弯曲准备跳跃。" },
+      { name: "少微二", x: 0.28, y: 0.68, size: 1.5, color: "#ffffff", desc: "狮子后爪的尖端，稳稳地站在春夜。" },
+      { name: "轩辕增一", x: 0.20, y: 0.50, size: 1.4, color: "#ffffff", desc: "狮子鬃毛的点缀，照亮了王者之头。" }
+    ],
+    lines: [[7,8], [8,5], [5,6], [5,2], [2,0], [0,1], [1,4], [0,3], [3,9], [9,8], [3,10], [10,11], [0,12]]
+  },
+  {
+    name: "双子座",
+    id: "gemini",
+    desc: "双胞胎卡斯托与波吕克斯，手挽手在银河边漫步，永恒的友谊",
+    stars: [
+      { name: "北河三", x: 0.85, y: 0.25, size: 2.3, color: "#ffd700", desc: "双子座β星，橙黄色的巨星，比太阳亮40倍，代表波吕克斯。" },
+      { name: "北河二", x: 0.92, y: 0.22, size: 2.1, color: "#a0c4ff", desc: "双子座α星，蓝白色的双子星，肉眼可见为一颗，代表卡斯托。" },
+      { name: "井宿三", x: 0.82, y: 0.35, size: 1.8, color: "#ffffff", desc: "双子脚下，连接着两个兄弟的羁绊，也是他们的膝盖。" },
+      { name: "井宿一", x: 0.88, y: 0.32, size: 1.8, color: "#ffffff", desc: "双子另一足，在银河边漫步，与井宿三对称。" },
+      { name: "钺", x: 0.78, y: 0.18, size: 1.6, color: "#ffffff", desc: "双子头部，指向猎户座的方向，像一柄斧钺。" },
+      { name: "井宿五", x: 0.80, y: 0.30, size: 1.6, color: "#ffffff", desc: "波吕克斯的脚踝，连接脚与身体。" },
+      { name: "井宿七", x: 0.90, y: 0.28, size: 1.6, color: "#ffffff", desc: "卡斯托的脚踝，与井宿五对称。" },
+      { name: "井宿二", x: 0.85, y: 0.40, size: 1.5, color: "#ffffff", desc: "两兄弟脚下的连接点，在银河中。" },
+      { name: "井宿四", x: 0.83, y: 0.28, size: 1.5, color: "#e0e0e0", desc: "波吕克斯的腰部，身体的中心。" },
+      { name: "井宿六", x: 0.89, y: 0.26, size: 1.5, color: "#e0e0e0", desc: "卡斯托的腰部，与井宿四对称。" },
+      { name: "北河增一", x: 0.88, y: 0.18, size: 1.4, color: "#ffffff", desc: "卡斯托头顶的星，像一顶王冠。" },
+      { name: "北河增二", x: 0.82, y: 0.20, size: 1.4, color: "#ffffff", desc: "波吕克斯头顶的星，与北河增一并肩。" }
+    ],
+    lines: [[5,0], [0,2], [2,3], [3,1], [1,6], [0,8], [1,9], [8,2], [9,3], [2,7], [7,3], [0,4], [1,10], [0,11]]
+  },
+  {
+    name: "天琴座",
+    id: "lyra",
+    desc: "俄耳甫斯的七弦竖琴，织女星是其中最璀璨的音符",
+    stars: [
+      { name: "织女星", x: 0.58, y: 0.35, size: 2.8, color: "#e0e0ff", desc: "天琴座最亮的星，夏季大三角之一，夜空第五亮星，蓝白色的钻石。" },
+      { name: "渐台一", x: 0.54, y: 0.42, size: 1.8, color: "#ffffff", desc: "竖琴的左下角，与织女星共鸣，淡黄色的光。" },
+      { name: "渐台二", x: 0.62, y: 0.40, size: 1.8, color: "#ffffff", desc: "竖琴的右下角，构成菱形的一角，蓝白色的光。" },
+      { name: "渐台三", x: 0.60, y: 0.48, size: 1.6, color: "#ffffff", desc: "竖琴底部中央，轻轻奏响夜曲，连接两端。" },
+      { name: "河鼓一", x: 0.52, y: 0.38, size: 1.6, color: "#ffffff", desc: "连接织女与牛郎的桥梁，也是竖琴的支柱。" },
+      { name: "渐台增一", x: 0.56, y: 0.45, size: 1.4, color: "#ffffff", desc: "竖琴内部的第一根弦，微微发光。" },
+      { name: "渐台增二", x: 0.58, y: 0.44, size: 1.4, color: "#ffffff", desc: "竖琴内部的第二根弦，与第一根共振。" },
+      { name: "渐台增三", x: 0.59, y: 0.42, size: 1.4, color: "#ffffff", desc: "竖琴内部的第三根弦，奏响高音。" },
+      { name: "织女增一", x: 0.59, y: 0.32, size: 1.5, color: "#a0c4ff", desc: "织女星旁边的伴星，像一颗小钻石。" },
+      { name: "织女增二", x: 0.56, y: 0.33, size: 1.4, color: "#ffffff", desc: "织女星的另一侧点缀，守护主星。" },
+      { name: "渐台增四", x: 0.53, y: 0.45, size: 1.3, color: "#ffffff", desc: "竖琴左侧的装饰， faint glow。" },
+      { name: "渐台增五", x: 0.63, y: 0.43, size: 1.3, color: "#ffffff", desc: "竖琴右侧的装饰，与左侧对称。" }
+    ],
+    lines: [[0,1], [0,2], [1,3], [2,3], [0,4], [1,5], [5,6], [6,7], [7,2], [0,8], [0,9], [1,10], [2,11]]
+  },
+  {
+    name: "仙女座",
+    id: "andromeda",
+    desc: "被锁链束缚的公主安德洛墨达，在星空等待英雄珀尔修斯的拯救",
+    stars: [
+      { name: "壁宿二", x: 0.45, y: 0.75, size: 2.2, color: "#a0c4ff", desc: "仙女座α星，也是飞马座大四边形的一角，公主的头部。" },
+      { name: "奎宿九", x: 0.38, y: 0.68, size: 2.0, color: "#ff6b9d", desc: "仙女的肩膀，粉色的光芒温柔而忧伤，被束缚的起点。" },
+      { name: "天大将军一", x: 0.52, y: 0.72, size: 1.8, color: "#ffffff", desc: "仙女的腰带，连接着长长的星链，公主的腰部。" },
+      { name: "奎宿八", x: 0.32, y: 0.62, size: 1.6, color: "#ffffff", desc: "仙女的左手，向外伸展，寻找救赎。" },
+      { name: "奎宿五", x: 0.58, y: 0.78, size: 1.6, color: "#ffffff", desc: "仙女的右手，指向英仙座珀尔修斯的方向。" },
+      { name: "奎宿六", x: 0.28, y: 0.56, size: 1.6, color: "#ffffff", desc: "星链的下一环，公主被束缚的左臂。" },
+      { name: "奎宿七", x: 0.25, y: 0.50, size: 1.5, color: "#ffffff", desc: "星链的再下一环，接近锁链的末端。" },
+      { name: "奎宿四", x: 0.22, y: 0.45, size: 1.5, color: "#ffffff", desc: "仙女左脚的位置，站在岩石上等待命运。" },
+      { name: "奎宿三", x: 0.18, y: 0.40, size: 1.5, color: "#ffffff", desc: "仙女右脚的位置，与左脚并拢。" },
+      { name: "天大将军二", x: 0.48, y: 0.68, size: 1.5, color: "#ffffff", desc: "壁宿二与奎宿九之间的连接点，公主的颈部。" },
+      { name: "天大将军三", x: 0.55, y: 0.70, size: 1.4, color: "#ffffff", desc: "腰带附近的点缀，仙女裙摆的装饰。" },
+      { name: "壁宿一", x: 0.42, y: 0.72, size: 1.4, color: "#ffffff", desc: "壁宿二旁边的微光，像公主的发饰。" }
+    ],
+    lines: [[0,9], [9,1], [1,2], [2,10], [2,4], [1,3], [3,5], [5,6], [6,7], [7,8], [0,11]]
+  },
+  {
+    name: "金牛座",
+    id: "taurus",
+    desc: "宙斯的化身，愤怒的红眼毕宿五，昴星团七姐妹在肩背嬉戏",
+    stars: [
+      { name: "毕宿五", x: 0.75, y: 0.45, size: 2.5, color: "#ff8c69", desc: "金牛座α星，愤怒的红眼，追击着猎户座，橙红色的巨星。" },
+      { name: "五车五", x: 0.68, y: 0.38, size: 2.2, color: "#ffffff", desc: "金牛座β星，位于牛角尖，蓝白色的光芒。" },
+      { name: "昴宿六", x: 0.82, y: 0.32, size: 2.2, color: "#a0c4ff", desc: "昴星团中最亮的星，七姐妹之一的阿尔基俄涅，蓝色的疏散星团核心。" },
+      { name: "昴宿一", x: 0.85, y: 0.35, size: 1.8, color: "#a0c4ff", desc: "昴星团成员，七姐妹之一，淡蓝色的光。" },
+      { name: "天关", x: 0.72, y: 0.52, size: 1.8, color: "#ffffff", desc: "金牛前足，在黄道带上踏出春的步伐。" },
+      { name: "毕宿一", x: 0.78, y: 0.42, size: 1.6, color: "#ffffff", desc: "毕宿五旁边的伴侣，共同构成金牛的脸部。" },
+      { name: "毕宿二", x: 0.82, y: 0.40, size: 1.6, color: "#ffffff", desc: "金牛头部的右侧，V形的另一端。" },
+      { name: "毕宿三", x: 0.80, y: 0.38, size: 1.5, color: "#ffffff", desc: "毕宿星团的一员，橙色的微光。" },
+      { name: "毕宿四", x: 0.76, y: 0.40, size: 1.5, color: "#ffffff", desc: "毕宿五附近的星点，构成牛眼的周围。" },
+      { name: "昴宿二", x: 0.88, y: 0.30, size: 1.7, color: "#a0c4ff", desc: "七姐妹之二，蓝色的星点，在星团边缘。" },
+      { name: "昴宿三", x: 0.84, y: 0.28, size: 1.6, color: "#a0c4ff", desc: "七姐妹之三，昴星团的年轻恒星。" },
+      { name: "昴宿四", x: 0.80, y: 0.30, size: 1.6, color: "#a0c4ff", desc: "七姐妹之四，淡蓝色的光芒。" },
+      { name: "昴宿五", x: 0.86, y: 0.34, size: 1.5, color: "#a0c4ff", desc: "七姐妹之五，较暗但依然美丽。" },
+      { name: "昴宿七", x: 0.78, y: 0.34, size: 1.5, color: "#a0c4ff", desc: "七姐妹之末，电子云环绕的蓝色光点。" },
+      { name: "礪石一", x: 0.70, y: 0.48, size: 1.5, color: "#ffffff", desc: "金牛前足的关节，稳固地站立。" },
+      { name: "礪石二", x: 0.68, y: 0.45, size: 1.4, color: "#ffffff", desc: "金牛前足的另一关节，踏在银河边缘。" }
+    ],
+    lines: [[1,0], [0,5], [5,8], [8,3], [3,6], [6,7], [7,2], [2,10], [10,11], [11,12], [12,4], [4,13], [13,2], [2,9], [9,6], [0,14], [14,15]]
+  }
+];
+
+let bgStars = [];
+let milkyWayStars = [];
+let distantNebulas = [];
+let meteors = [];
+let starTwinkles = [];
+let floatingTexts = [];
+
+const meteorQuotes = [
+  "当流星划过天际，那是宇宙在为你眨眼。",
+  "每一颗流星都是夜空的信使，带来137亿年前的问候。",
+  "愿望的速度是每秒70公里，和流星一样快。",
+  "在这瞬间的璀璨里，时间为你停顿了一秒。",
+  "流星不在乎落向何方，只在乎曾经照亮过你的眼睛。",
+  "抓住这一秒的闪光，它来自冥王星之外的寒冷边疆。",
+  "当陨石在大气层中燃烧，那是星星在牺牲自己为你表演。",
+  "许愿吧，这些宇宙尘埃已经旅行了四光年，只为在此刻与你相遇。",
+  "这是颗冰彗星的心脏碎片，带着太阳系的乡愁坠落。",
+  "它挣脱了奥尔特云的怀抱，只为在你眼前燃尽一生。",
+  "宇宙级的暗恋，就是在夜空中划一道明亮的伤疤。",
+  "它燃烧时释放的光芒，比它整个冰冷生涯中拥有的热量还要多。",
+  "不要闭眼，这是星际物质在与你进行第一次也是最后一次的问候。",
+  "它穿越了柯伊伯带的寒冷，在你温暖的大气中找到了归宿。",
+  "这一刻的璀璨，是它数十亿年漂泊的总结陈词。",
+  "它把对小行星带的思念，化作这道刹那的银线。",
+  "当它与空气分子亲吻，整个天空都看见了火花。",
+  "这是宇宙在擦火柴，想为你点一支照亮黑夜的蜡烛。"
+];
+
+const starColors = [
+  '#ffffff', '#fffff0', '#fff4e6', '#e6f0ff', 
+  '#ffe4c4', '#ffd700', '#b0c4de', '#add8e6',
+  '#e6e6fa', '#f0f8ff', '#fffacd', '#f5f5dc'
+];
+
+function init() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = width;
+  canvas.height = height;
+  
+  for(let i=0; i<1200; i++) {
+    const layer = Math.random();
+    bgStars.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 0.9 + 0.1,
+      alpha: Math.random() * 0.5 + 0.1,
+      color: starColors[Math.floor(Math.random() * starColors.length)],
+      twinkleSpeed: Math.random() * 0.03 + 0.005,
+      twinklePhase: Math.random() * Math.PI * 2,
+      layer: layer,
+      baseAlpha: Math.random() * 0.4 + 0.1
+    });
+  }
+  
+  const milkyWayCenter = (x) => {
+    const t = x / width;
+    return height * (0.25 + t * 0.5 + Math.sin(t * Math.PI * 2) * 0.1);
+  };
+  
+  for(let i=0; i<1000; i++) {
+    const x = Math.random() * width;
+    const centerY = milkyWayCenter(x);
+    const spread = 220 + Math.random() * 180;
+    const y = centerY + (Math.random() - 0.5) * spread;
+    
+    const distFromCenter = Math.abs(y - centerY) / (spread/2);
+    if(y > 0 && y < height && Math.random() > distFromCenter * 0.7) {
+      milkyWayStars.push({
+        x: x,
+        y: y,
+        size: Math.random() * 0.5 + 0.1,
+        alpha: (1 - distFromCenter * 0.6) * (Math.random() * 0.3 + 0.15),
+        color: Math.random() > 0.6 ? '#a0c4ff' : '#ffffff',
+        twinkleSpeed: Math.random() * 0.02 + 0.008
+      });
+    }
+  }
+  
+  for(let i=0; i<12; i++) {
+    distantNebulas.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: 200 + Math.random() * 300,
+      color: [
+        'rgba(60, 40, 100, 0.10)',
+        'rgba(40, 60, 120, 0.08)',
+        'rgba(80, 40, 60, 0.06)',
+        'rgba(40, 80, 100, 0.09)'
+      ][Math.floor(Math.random() * 4)]
+    });
+  }
+  
+  updateStarCoordinates();
+  
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    updateStarCoordinates();
+  });
+  
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+    checkStarHover();
+  });
+  
+  canvas.addEventListener('mousedown', (e) => {
+    if(activeStar) {
+      createStarTwinkle(activeStar.visualX, activeStar.visualY, activeStar.color, activeStar.name);
+    }
+  });
+
+  canvas.addEventListener('dblclick', (e) => {
+    e.preventDefault();
+    createMeteorShower();
+  });
+  
+  animate();
+}
+
+function updateStarCoordinates() {
+  const marginX = width * SAFE_MARGIN;
+  const marginY = height * SAFE_MARGIN;
+  const safeWidth = width * (1 - 2 * SAFE_MARGIN);
+  const safeHeight = height * (1 - 2 * SAFE_MARGIN);
+  
+  constellations.forEach(c => {
+    c.stars.forEach(s => {
+      s.absX = marginX + s.x * safeWidth;
+      s.absY = marginY + s.y * safeHeight;
+    });
+  });
+}
+
+function getConstellationParallax() {
+  return {
+    x: (mouse.x - width/2) * CONSTELLATION_LAYER * 0.015,
+    y: (mouse.y - height/2) * CONSTELLATION_LAYER * 0.015
+  };
+}
+
+function checkStarHover() {
+  let found = null;
+  let foundConstellation = null;
+  let minDist = 40;
+  
+  const para = getConstellationParallax();
+  
+  constellations.forEach(c => {
+    c.stars.forEach(s => {
+      const visualX = s.absX + para.x;
+      const visualY = s.absY + para.y;
+      const dist = Math.hypot(mouse.x - visualX, mouse.y - visualY);
+      
+      if(dist < minDist) {
+        found = { ...s, constellation: c.name, visualX, visualY };
+        foundConstellation = c;
+        minDist = dist;
+      }
+    });
+  });
+  
+  activeStar = found;
+  activeConstellation = foundConstellation;
+  updateInfoPanel(found);
+  canvas.style.cursor = found ? 'pointer' : 'crosshair';
+}
+
+function updateInfoPanel(star) {
+  const panel = document.getElementById('info-panel');
+  if(star) {
+    document.getElementById('info-name').textContent = star.name;
+    document.getElementById('info-const').textContent = star.constellation;
+    document.getElementById('info-desc').textContent = star.desc;
+    panel.classList.add('active');
+  } else {
+    panel.classList.remove('active');
+  }
+}
+
+function createStarTwinkle(x, y, color, starName) {
+  starTwinkles.push({
+    x: x,
+    y: y,
+    color: color,
+    progress: 0,
+    duration: 60,
+    maxRadius: 40
+  });
+  
+  const text = starWhispers[Math.floor(Math.random() * starWhispers.length)];
+  floatingTexts.push({
+    x: x + (Math.random() - 0.5) * 40,
+    y: y - 30 - Math.random() * 20,
+    text: text,
+    opacity: 0,
+    life: 0,
+    maxLife: 120,
+    floatOffset: Math.random() * Math.PI * 2
+  });
+}
+
+function createMeteorShower() {
+  for(let i=0; i<20; i++) {
+    setTimeout(() => {
+      meteors.push({
+        x: Math.random() * width,
+        y: -50,
+        vx: -4 - Math.random() * 2,
+        vy: 6 + Math.random() * 3,
+        length: 80,
+        width: 1.5,
+        life: 1,
+        color: `hsl(${Math.random()*40 + 190}, 100%, 90%)`
+      });
+    }, i * 100);
+  }
+  
+  const quote = meteorQuotes[Math.floor(Math.random() * meteorQuotes.length)];
+  document.getElementById('shower-quote').textContent = quote;
+  const st = document.getElementById('shower-text');
+  st.classList.remove('show');
+  void st.offsetWidth;
+  st.classList.add('show');
+}
+
+function drawBackground() {
+  const bgGrad = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width);
+  bgGrad.addColorStop(0, '#0a0e1a');
+  bgGrad.addColorStop(0.5, '#050810');
+  bgGrad.addColorStop(1, '#020408');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, width, height);
+  
+  distantNebulas.forEach(neb => {
+    const grad = ctx.createRadialGradient(neb.x, neb.y, 0, neb.x, neb.y, neb.radius);
+    grad.addColorStop(0, neb.color);
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(neb.x, neb.y, neb.radius, 0, Math.PI*2);
+    ctx.fill();
+  });
+  
+  ctx.save();
+  milkyWayStars.forEach(s => {
+    const twinkle = Math.sin(time * s.twinkleSpeed) * 0.3;
+    const alpha = Math.max(0, s.alpha + twinkle);
+    ctx.fillStyle = s.color;
+    ctx.globalAlpha = alpha;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+    ctx.fill();
+  });
+  ctx.restore();
+  
+  bgStars.forEach(s => {
+    const parallaxX = (mouse.x - width/2) * s.layer * 0.015;
+    const parallaxY = (mouse.y - height/2) * s.layer * 0.015;
+    const x = s.x + parallaxX;
+    const y = s.y + parallaxY;
+    
+    const twinkle = Math.sin(time * s.twinkleSpeed + s.twinklePhase);
+    const alpha = s.baseAlpha + twinkle * 0.2;
+    
+    if(s.layer > 0.7) {
+      ctx.fillStyle = s.color;
+      ctx.globalAlpha = alpha * 0.25;
+      ctx.beginPath();
+      ctx.arc(x, y, s.size * 2.5, 0, Math.PI*2);
+      ctx.fill();
+    }
+    
+    ctx.fillStyle = s.layer > 0.5 ? s.color : '#ffffff';
+    ctx.globalAlpha = Math.max(0, alpha);
+    ctx.beginPath();
+    ctx.arc(x, y, s.size, 0, Math.PI*2);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+}
+
+// 恢复原始样式的星座绘制
+function drawConstellations() {
+  const para = getConstellationParallax();
+  
+  constellations.forEach(c => {
+    const isActive = (activeConstellation === c);
+    
+    c.lines.forEach(pair => {
+      const s1 = c.stars[pair[0]];
+      const s2 = c.stars[pair[1]];
+      if(s1 && s2) {
+        const x1 = s1.absX + para.x;
+        const y1 = s1.absY + para.y;
+        const x2 = s2.absX + para.x;
+        const y2 = s2.absY + para.y;
+        
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        
+        // 恢复原始连线样式
+        if(isActive) {
+          ctx.strokeStyle = 'rgba(120, 160, 255, 0.5)';
+          ctx.lineWidth = 1.5;
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = 'rgba(100, 149, 237, 0.3)';
+        } else {
+          ctx.strokeStyle = 'rgba(100, 149, 237, 0.08)';
+          ctx.lineWidth = 0.8;
+          ctx.shadowBlur = 0;
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      }
+    });
+    
+    c.stars.forEach((s, idx) => {
+      const x = s.absX + para.x;
+      const y = s.absY + para.y;
+      
+      const twinkle = starTwinkles.find(t => 
+        Math.abs(t.x - x) < 1 && Math.abs(t.y - y) < 1
+      );
+      
+      let currentSize = s.size;
+      let brightness = 1;
+      let extraGlow = 0;
+      
+      if(twinkle) {
+        const p = twinkle.progress / twinkle.duration;
+        brightness = 1 + Math.sin(p * Math.PI) * 2;
+        currentSize = s.size * (1 + Math.sin(p * Math.PI) * 0.5);
+        extraGlow = Math.sin(p * Math.PI) * 20;
+      }
+      
+      const breathe = 1 + Math.sin(time * 0.002 + idx * 0.5) * 0.05;
+      currentSize *= breathe;
+      
+      const r = parseInt(s.color.slice(1,3), 16);
+      const g = parseInt(s.color.slice(3,5), 16);
+      const b = parseInt(s.color.slice(5,7), 16);
+      
+      // 恢复原始光晕透明度
+      const haloAlpha = isActive ? 0.5 : 0.2;
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, currentSize * 4);
+      gradient.addColorStop(0, `rgba(${Math.min(255, r*brightness)}, ${Math.min(255, g*brightness)}, ${Math.min(255, b*brightness)}, ${haloAlpha})`);
+      gradient.addColorStop(1, 'transparent');
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(x, y, currentSize * 4, 0, Math.PI*2);
+      ctx.fill();
+      
+      if(extraGlow > 0) {
+        ctx.fillStyle = `rgba(255, 255, 255, ${extraGlow/100})`;
+        ctx.beginPath();
+        ctx.arc(x, y, currentSize * 6, 0, Math.PI*2);
+        ctx.fill();
+      }
+      
+      const coreColor = twinkle ? '#ffffff' : s.color;
+      // 恢复原始发光强度
+      ctx.fillStyle = coreColor;
+      ctx.shadowBlur = (isActive ? 12 : 6) + extraGlow;
+      ctx.shadowColor = s.color;
+      ctx.beginPath();
+      ctx.arc(x, y, currentSize * 0.8, 0, Math.PI*2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      
+      // 恢复原始十字线样式（仅对size>2.2的星星）
+      if(s.size > 2.2) {
+        ctx.strokeStyle = `rgba(255, 255, 255, ${isActive ? 0.8 : 0.4})`;
+        ctx.lineWidth = isActive ? 1.5 : 0.8;
+        const len = currentSize * (isActive ? 3 : 2);
+        ctx.beginPath();
+        ctx.moveTo(x - len, y);
+        ctx.lineTo(x + len, y);
+        ctx.moveTo(x, y - len);
+        ctx.lineTo(x, y + len);
+        ctx.stroke();
+      }
+    });
+  });
+}
+
+function drawFloatingTexts() {
+  floatingTexts = floatingTexts.filter(t => t.life < t.maxLife);
+  
+  floatingTexts.forEach(t => {
+    t.life++;
+    const progress = t.life / t.maxLife;
+    
+    if(progress < 0.2) {
+      t.opacity = progress / 0.2;
+    } else if(progress > 0.8) {
+      t.opacity = (1 - progress) / 0.2;
+    } else {
+      t.opacity = 1;
+    }
+    
+    const floatY = Math.sin(t.life * 0.05 + t.floatOffset) * 3 - t.life * 0.3;
+    const x = t.x;
+    const y = t.y + floatY;
+    
+    ctx.save();
+    ctx.globalAlpha = t.opacity;
+    ctx.font = 'italic 14px "Noto Serif SC", "SimSun", serif';
+    ctx.fillStyle = 'rgba(200, 220, 255, 0.9)';
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = 'rgba(100, 149, 237, 0.5)';
+    ctx.textAlign = 'center';
+    ctx.fillText(t.text, x, y);
+    ctx.restore();
+  });
+}
+
+function animate() {
+  time += 16;
+  
+  drawBackground();
+  drawConstellations();
+  
+  starTwinkles = starTwinkles.filter(t => {
+    t.progress++;
+    return t.progress < t.duration;
+  });
+  
+  drawFloatingTexts();
+  
+  meteors = meteors.filter(m => m.life > 0);
+  meteors.forEach(m => {
+    m.x += m.vx;
+    m.y += m.vy;
+    m.life -= 0.008;
+    
+    ctx.strokeStyle = m.color;
+    ctx.lineWidth = m.width;
+    ctx.lineCap = 'round';
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = m.color;
+    ctx.beginPath();
+    ctx.moveTo(m.x, m.y);
+    ctx.lineTo(m.x - m.vx*4, m.y - m.vy*4);
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  });
+  
+  requestAnimationFrame(animate);
+}
+</script>
+</body>
+</html>
