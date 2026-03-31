@@ -21,12 +21,12 @@
   <meta name="author" content="QIHAN-se">
   <meta name="keywords" content="">
   
-    <meta name="description" content="中断   概念理解   中断是指程序在执行过程中，遇到急需处理事件时，暂时中止CPU上现行程序的运行，进而转向执行相应的事件处理程序，处理完成后在回到原程序执行中断处或者调度其他程序执行的过程。 直观显示： flowchart TD     A[&quot;CPU执行现行程序&quot;] --&gt; B&#123;&quot;遇到急需处理的事件?&quot;&#125;     B --&amp;g">
+    <meta name="description" content="中断 概念理解 中断是指程序在执行过程中，遇到急需处理事件时，暂时中止CPU上现行程序的运行，进而转向执行相应的事件处理程序，处理完成后在回到原程序执行中断处或者调度其他程序执行的过程。 直观显示： flowchart TD     A[&quot;CPU执行现行程序&quot;] --&gt; B&#123;&quot;遇到急需处理的事件?&quot;&#125;     B --&gt;|&amp;q">
 <meta property="og:type" content="article">
 <meta property="og:title" content="有关中断的一切">
 <meta property="og:url" content="http://example.com/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/index.html">
 <meta property="og:site_name" content="ShiXiaoHanA">
-<meta property="og:description" content="中断   概念理解   中断是指程序在执行过程中，遇到急需处理事件时，暂时中止CPU上现行程序的运行，进而转向执行相应的事件处理程序，处理完成后在回到原程序执行中断处或者调度其他程序执行的过程。 直观显示： flowchart TD     A[&quot;CPU执行现行程序&quot;] --&gt; B&#123;&quot;遇到急需处理的事件?&quot;&#125;     B --&amp;g">
+<meta property="og:description" content="中断 概念理解 中断是指程序在执行过程中，遇到急需处理事件时，暂时中止CPU上现行程序的运行，进而转向执行相应的事件处理程序，处理完成后在回到原程序执行中断处或者调度其他程序执行的过程。 直观显示： flowchart TD     A[&quot;CPU执行现行程序&quot;] --&gt; B&#123;&quot;遇到急需处理的事件?&quot;&#125;     B --&gt;|&amp;q">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/1.png">
 <meta property="og:image" content="http://example.com/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/2.png">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/5.png">
 <meta property="og:image" content="http://example.com/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/tu.jpg">
 <meta property="article:published_time" content="2026-03-31T00:20:19.000Z">
-<meta property="article:modified_time" content="2026-03-31T13:25:44.958Z">
+<meta property="article:modified_time" content="2026-03-31T13:32:54.102Z">
 <meta property="article:author" content="QIHAN-se">
 <meta property="article:tag" content="操作系统">
 <meta property="article:tag" content="笔记">
@@ -256,7 +256,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k 字
+          3.1k 字
         
       </span>
     
@@ -318,7 +318,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2026-03-31T21:25:44+08:00
+                    本文最后更新于 2026-03-31T21:32:54+08:00
                   
                   
 
@@ -328,12 +328,9 @@
             
               <div class="markdown-body">
                 
-                <h1 id="中断"><a class="markdownIt-Anchor" href="#中断"></a> 中断</h1>
-<hr>
-<h2 id="概念理解"><a class="markdownIt-Anchor" href="#概念理解"></a> 概念理解</h2>
-<ul>
-<li>
-<p>中断是指程序在执行过程中，遇到<strong>急需处理事件</strong>时，<strong>暂时中止</strong>CPU上现行程序的运行，进而转向执行相应的<strong>事件处理程序</strong>，处理完成后在<strong>回到原程序执行中断处</strong>或者<strong>调度其他程序执行</strong>的过程。</p>
+                <h1 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h1><hr>
+<h2 id="概念理解"><a href="#概念理解" class="headerlink" title="概念理解"></a>概念理解</h2><ul>
+<li><p>中断是指程序在执行过程中，遇到<strong>急需处理事件</strong>时，<strong>暂时中止</strong>CPU上现行程序的运行，进而转向执行相应的<strong>事件处理程序</strong>，处理完成后在<strong>回到原程序执行中断处</strong>或者<strong>调度其他程序执行</strong>的过程。</p>
 <p>直观显示：</p>
 <pre><code class=" mermaid">flowchart TD
     A[&quot;CPU执行现行程序&quot;] --&gt; B&#123;&quot;遇到急需处理的事件?&quot;&#125;
@@ -350,50 +347,46 @@
     I --&gt; A
 </code></pre>
 </li>
-<li>
-<p>一个重要的理论（对于广义的中断）：</p>
+<li><p>一个重要的理论（对于广义的中断）：</p>
 <p><strong>操作系统是“中断驱动”的</strong></p>
 <p>即中断是激活操作系统的唯一方式；</p>
 </li>
-<li>
-<p>广义的中断和狭义的中断：</p>
+<li><p>广义的中断和狭义的中断：</p>
 <p><strong>广义的中断包括狭义的中断，异常，系统异常。</strong></p>
 <ul>
-<li>
-<p>狭义中断</p>
+<li><p>狭义中断</p>
 <ul>
-<li>来源于<strong>处理器之外</strong>的中断事件，就是与当前的运行指令无关的中断事件，比如I/O中断，外部信号中断，时钟中断等。</li>
+<li>来源于<strong>处理器之外</strong>的中断事件，就是与当前的运行指令无关的中断事件，比如I&#x2F;O中断，外部信号中断，时钟中断等。</li>
 </ul>
 </li>
-<li>
-<p>异常</p>
+<li><p>异常</p>
 <ul>
 <li>指<strong>运行指令引起</strong>的中断事件，比如地址异常，处理器硬件故障，算数异常等。</li>
 </ul>
 </li>
-<li>
-<p>系统异常</p>
+<li><p>系统异常</p>
 <ul>
-<li><strong>执行陷入指令</strong>从而触发系统调用引起的中断事件，比如请求设备，请求I/O，创建进程等。</li>
+<li><strong>执行陷入指令</strong>从而触发系统调用引起的中断事件，比如请求设备，请求I&#x2F;O，创建进程等。</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <hr>
-<h2 id="中断源"><a class="markdownIt-Anchor" href="#中断源"></a> 中断源</h2>
+<h2 id="中断源"><a href="#中断源" class="headerlink" title="中断源"></a>中断源</h2><ul>
+<li><p>硬件故障中断</p>
 <ul>
-<li>
-<p>狭义中断相关</p>
-<ul>
-<li>
-<p>I/O中断</p>
-<ul>
-<li>
-<p>来源于外部设备，用于报告I/O状态的中断事件；</p>
+<li>电源故障，主存故障，内部和系统总线的奇偶性检验出错等。</li>
+<li>措施：保护现场，停止设备工作，停止处理器运行，向操作员报告故障信息，并对故障造成的破坏进行估计和恢复</li>
+</ul>
 </li>
-<li>
-<p>I/O完成，调整进程状态，释放等待队列，加入就绪进程队列；</p>
+<li><p>狭义中断相关</p>
+<ul>
+<li><p>I&#x2F;O中断</p>
+<ul>
+<li><p>来源于外部设备，用于报告I&#x2F;O状态的中断事件；</p>
+</li>
+<li><p>I&#x2F;O完成，调整进程状态，释放等待队列，加入就绪进程队列；</p>
 <pre><code class=" mermaid">flowchart LR
     A[&quot;进程运行&quot;] --&gt;|&quot;请求I/O&quot;| B[&quot;阻塞态&lt;br/&gt;进入设备等待队列&quot;]
     B --&gt;|&quot;I/O完成中断&quot;| C[&quot;调整状态为就绪&quot;]
@@ -403,20 +396,18 @@
     F --&gt;|&quot;选中&quot;| A
     F --&gt;|&quot;未选中&quot;| E
 </code></pre>
+
+
 </li>
-<li>
-<p>I/O异常或出错需要等待人工干预；</p>
+<li><p>I&#x2F;O异常或出错需要等待人工干预；</p>
 </li>
 </ul>
 </li>
-<li>
-<p>外部中断事件</p>
+<li><p>外部中断事件</p>
 <ul>
-<li>
-<p>由外部设备发出的信号引起的中断事件</p>
+<li><p>由外部设备发出的信号引起的中断事件</p>
 <ul>
-<li>
-<p>时钟/间隔时钟中断，记时，时间片处理；</p>
+<li><p>时钟&#x2F;间隔时钟中断，记时，时间片处理；</p>
 <pre><code class=" mermaid">flowchart TD
     A[&quot;硬件时钟&lt;br/&gt;周期性触发&quot;] --&gt;|&quot;每隔N毫秒&quot;| B[&quot;时钟中断处理程序&quot;]
     B --&gt; C[&quot;更新系统时间&quot;]
@@ -429,30 +420,26 @@
     
     B --&gt; J[&quot;处理定时器队列&lt;br/&gt;检查sleep/alarm到期&quot;]
 </code></pre>
+
+
 </li>
-<li>
-<p>设备报到与结束中断，调整设备表；</p>
+<li><p>设备报到与结束中断，调整设备表；</p>
 </li>
-<li>
-<p>鼠标中断，根据相应的信号做出相应处理；</p>
+<li><p>鼠标中断，根据相应的信号做出相应处理；</p>
 </li>
-<li>
-<p>关机/重启中断，写回文件，结束CPU和设备；</p>
-</li>
-</ul>
+<li><p>关机&#x2F;重启中断，写回文件，结束CPU和设备；</p>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<p>异常相关</p>
+</ul>
+</li>
+<li><p>异常相关</p>
 <ul>
-<li>程序性中断事件
-<ul>
+<li>程序性中断事件<ul>
 <li>定义：处理器执行机器指令引起的中断事件；</li>
-<li>🌰
-<ul>
+<li>🌰<ul>
 <li>除数为0，操作数溢出等算数异常：简单处理，报告用户；也可以用户编写中断续元程序处理；</li>
 <li>非法指令，用户态使用特权指令，访问地址越界，非法存取等指令异常：终止进程；</li>
 <li>终止进程指令：终止指令；</li>
@@ -463,23 +450,18 @@
 </li>
 </ul>
 </li>
-<li>
-<p>系统异常相关</p>
+<li><p>系统异常相关</p>
 <ul>
-<li>
-<p>处理器执行陷入指令请求OS服务引起的中断事件，即系统调用；</p>
+<li><p>处理器执行陷入指令请求OS服务引起的中断事件，即系统调用；</p>
 </li>
-<li>
-<p>🌰</p>
+<li><p>🌰</p>
 <ul>
-<li>请求分配外设，请求I/O等等；</li>
+<li>请求分配外设，请求I&#x2F;O等等；</li>
 </ul>
 </li>
-<li>
-<p>处理过程：陷入OS，保护现场，根据功能号查询入口地址，跳转具体的处理程序。</p>
+<li><p>处理过程：陷入OS，保护现场，根据功能号查询入口地址，跳转具体的处理程序。</p>
 <ul>
-<li>
-<p>简单图示</p>
+<li><p>简单图示</p>
 <pre><code class=" mermaid">flowchart LR
     A[&quot;用户程序&lt;br/&gt;执行SYSCALL&quot;] --&gt; B[&quot;CPU从用户态&lt;br/&gt;切换到内核态&quot;]
     B --&gt; C[&quot;保护现场&lt;br/&gt;保存寄存器/程序计数器&quot;]
@@ -488,63 +470,48 @@
     E --&gt; F[&quot;如sys_read&lt;br/&gt;或sys_write&quot;]
     F --&gt; G[&quot;执行完毕&lt;br/&gt;恢复现场&quot;]
     G --&gt; H[&quot;返回用户程序&lt;br/&gt;继续执行&quot;]
-</code></pre>
-</li>
+</code></pre></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <hr>
-<h2 id="中断系统"><a class="markdownIt-Anchor" href="#中断系统"></a> 中断系统</h2>
-<h3 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h3>
-<ul>
-<li>
-<p>中断系统是计算机中响应和处理中断的系统，包括<strong>硬件子系统</strong>和<strong>软件子系统</strong></p>
+<h2 id="中断系统"><a href="#中断系统" class="headerlink" title="中断系统"></a>中断系统</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li><p>中断系统是计算机中响应和处理中断的系统，包括<strong>硬件子系统</strong>和<strong>软件子系统</strong></p>
 </li>
-<li>
-<p>硬件子系统：响应中断</p>
+<li><p>硬件子系统：响应中断</p>
 </li>
-<li>
-<p>软件子系统：处理中断</p>
+<li><p>软件子系统：处理中断</p>
 </li>
-<li>
-<p>软硬件协同思想</p>
+<li><p>软硬件协同思想</p>
 </li>
 </ul>
-<h3 id="中断响应"><a class="markdownIt-Anchor" href="#中断响应"></a> 中断响应</h3>
+<h3 id="中断响应"><a href="#中断响应" class="headerlink" title="中断响应"></a>中断响应</h3><ul>
+<li><p>过程：</p>
 <ul>
-<li>
-<p>过程：</p>
-<ul>
-<li>
-<p>回顾：指令执行的步骤是取址，解码，执行这三步。</p>
+<li><p>回顾：指令执行的步骤是取址，解码，执行这三步。</p>
 </li>
-<li>
-<p>操作系统如何在里面加入对于中断的支持？</p>
+<li><p>操作系统如何在里面加入对于中断的支持？</p>
 <ul>
 <li><strong>在后面加上一个检查中断的微操作</strong></li>
 </ul>
 </li>
-<li>
-<p>操作系统在执行运行操作后检查是否允许被中断</p>
+<li><p>操作系统在执行运行操作后检查是否允许被中断</p>
 <ul>
 <li>中断不被允许：继续执行下一条</li>
 <li>（大部分情况下）中断允许，检查中断是否出现。如果有，控制单元触发相应的硬件电路，启动操作系统的中断处理程序</li>
 </ul>
 </li>
-<li>
-<p>具体见下图</p>
-<p><img src="/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/1.png" srcset="/img/loading.gif" lazyload alt></p>
+<li><p>具体见下图</p>
+<p><img src="/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/1.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 </ul>
 </li>
-<li>
-<p><strong>中断装置：</strong></p>
+<li><p><strong>中断装置：</strong></p>
 <ul>
 <li>定义：计算机系统发现并响应中断、异常的硬件装置。</li>
-<li>分类（共分为三类）
-<ul>
+<li>分类（共分为三类）<ul>
 <li>中断控制器</li>
 <li>陷阱</li>
 <li>系统陷阱</li>
@@ -555,50 +522,39 @@
 <p>为什么种类多？前面说的中断源多样，要支持每种的响应，就必须有多种的中断装置。</p>
 </blockquote>
 </li>
-<li>
-<p><strong>中断控制器</strong></p>
+<li><p><strong>中断控制器</strong></p>
 <ul>
-<li>
-<p>应对对象：来自处理器外的异步中断事件</p>
+<li><p>应对对象：来自处理器外的异步中断事件</p>
 </li>
-<li>
-<p>存在：一套进行正常处理的解译电路</p>
+<li><p>存在：一套进行正常处理的解译电路</p>
 </li>
-<li>
-<p>结构（包括不限于，列出最重要的）：</p>
+<li><p>结构（包括不限于，列出最重要的）：</p>
 <ul>
 <li>中断寄存器：记录中断的来源</li>
 <li>中断逻辑电路（在译码器中）：形成中断的一个通路</li>
 </ul>
 </li>
-<li>
-<p>过程</p>
+<li><p>过程</p>
 <ul>
-<li>
-<p>外部设备向其发出中断请求IRQ，在中断寄存器中设置已经发生的中断</p>
+<li><p>外部设备向其发出中断请求IRQ，在中断寄存器中设置已经发生的中断</p>
 </li>
-<li>
-<p>译码器中的中断逻辑电路检查中断寄存器有无中断发生，如果有不被屏蔽的中断发生，将改变操作顺序，引入操作系统的中断处理程序；</p>
+<li><p>译码器中的中断逻辑电路检查中断寄存器有无中断发生，如果有不被屏蔽的中断发生，将改变操作顺序，引入操作系统的中断处理程序；</p>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<p><strong>陷阱</strong></p>
+<li><p><strong>陷阱</strong></p>
 <ul>
 <li>处理对象：处理器执行指令引发的程序性中断事件（异常）</li>
 <li>存在：由指令的控制逻辑和实现指令触发的一套指令例外处理的解译电路</li>
-<li>过程
-<ul>
+<li>过程<ul>
 <li>通过电路来向操作系统报告，引入操作系统的异常处理程序</li>
 </ul>
 </li>
 <li>一般不同的异常都具有不同的相关电路</li>
-<li>举个🌰
-<ul>
-<li>虚拟地址异常
-<ul>
+<li>举个🌰<ul>
+<li>虚拟地址异常<ul>
 <li>一方面重新执行指令</li>
 <li>一方面需要执行请求操作系统服务的系统服务，因此往往要越过陷阱进一步独立设置页面异常处理程序。</li>
 </ul>
@@ -607,22 +563,18 @@
 </li>
 </ul>
 </li>
-<li>
-<p><strong>系统陷阱</strong></p>
+<li><p><strong>系统陷阱</strong></p>
 <ul>
 <li>处理对象：请求操作系统服务的自愿性中断事件</li>
 <li>存在：处理器执行陷入指令触发的指令正常解译电路。</li>
 <li>过程：执行系统陷入指令时，越过陷阱机制，触发系统陷阱机制，引入操作系统的系统调用处理程序</li>
 </ul>
 </li>
-<li>
-<p>中断典型相应过程：</p>
+<li><p>中断典型相应过程：</p>
 <ul>
-<li>
-<p>发现中断源，判断这些中断是否应该屏蔽，如果存在多个需要相应的中断源，根据规定优先级选择优先级高的提出中断请求</p>
+<li><p>发现中断源，判断这些中断是否应该屏蔽，如果存在多个需要相应的中断源，根据规定优先级选择优先级高的提出中断请求</p>
 </li>
-<li>
-<p>置中断码以备分析</p>
+<li><p>置中断码以备分析</p>
 <table>
 <thead>
 <tr>
@@ -631,8 +583,7 @@
 <th>处理方向</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>0x01</code></td>
 <td>时钟中断</td>
 <td>计时+时间片处理</td>
@@ -644,7 +595,7 @@
 </tr>
 <tr>
 <td><code>0x03</code></td>
-<td>磁盘I/O完成</td>
+<td>磁盘I&#x2F;O完成</td>
 <td>唤醒等待进程</td>
 </tr>
 <tr>
@@ -657,83 +608,66 @@
 <td>缺页异常</td>
 <td>调页处理</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 </li>
-<li>
-<p>保存当前的PSW和PC到核心栈，准备中断当前程序的执行</p>
+<li><p>保存当前的PSW和PC到核心栈，准备中断当前程序的执行</p>
 </li>
-<li>
-<p>处理器从用户态切换到内核态，调出响应中断处理程序的PSW和PC，转向操作系统的中断处理程序开始工作</p>
+<li><p>处理器从用户态切换到内核态，调出响应中断处理程序的PSW和PC，转向操作系统的中断处理程序开始工作</p>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="中断处理程序"><a class="markdownIt-Anchor" href="#中断处理程序"></a> 中断处理程序</h3>
-<ul>
-<li>
-<p>定义</p>
+<h3 id="中断处理程序"><a href="#中断处理程序" class="headerlink" title="中断处理程序"></a>中断处理程序</h3><ul>
+<li><p>定义</p>
 <ul>
 <li>操作系统处理中断的控制程序</li>
-<li>主要包括
-<ul>
+<li>主要包括<ul>
 <li>处理中断事件</li>
 <li>恢复正常操作</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<p><strong>中断处理过程</strong></p>
+<li><p><strong>中断处理过程</strong></p>
 <ul>
 <li>保护未被硬件保护的处理器状态</li>
 <li>分析被中断程序PSW中的中断码，识别中断源</li>
-<li>分别处理发生的中断事件（查询中断向量表，执行中断处理子程序）
-<ul>
+<li>分别处理发生的中断事件（查询中断向量表，执行中断处理子程序）<ul>
 <li>中断处理程序主要是查找中断向量表（Interrupt vector table），中断向量表包含中断服务地址的特定内存区域，这些服务程序是处理中断请求的代码。</li>
 </ul>
 </li>
-<li><strong>恢复正常操作</strong>
-<ol>
+<li><strong>恢复正常操作</strong><ol>
 <li>返回刚刚被中断的进程</li>
 <li>调整进程队列，启动进程调度（低级调度），选择下一个执行的进程并恢复执行</li>
 </ol>
 </li>
 </ul>
 </li>
-<li>
-<p><strong>中断处理流程图示</strong></p>
-<p><img src="/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/2.png" srcset="/img/loading.gif" lazyload alt></p>
+<li><p><strong>中断处理流程图示</strong></p>
+<p><img src="/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/2.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 </ul>
 <hr>
-<h2 id="中断的一些特性"><a class="markdownIt-Anchor" href="#中断的一些特性"></a> 中断的一些特性</h2>
-<h3 id="中断屏蔽"><a class="markdownIt-Anchor" href="#中断屏蔽"></a> 中断屏蔽</h3>
-<blockquote>
+<h2 id="中断的一些特性"><a href="#中断的一些特性" class="headerlink" title="中断的一些特性"></a>中断的一些特性</h2><h3 id="中断屏蔽"><a href="#中断屏蔽" class="headerlink" title="中断屏蔽"></a>中断屏蔽</h3><blockquote>
 <p>实现基础：计算机通常会配置可编程中断控制器，CPU可以通过指令设置可编程中断控制器的屏蔽码，用以屏蔽中断。</p>
 </blockquote>
 <ul>
-<li><strong>定义（有两个）</strong>
-<ul>
-<li><strong>禁止CPU响应中断</strong>
-<ul>
+<li><strong>定义（有两个）</strong><ul>
+<li><strong>禁止CPU响应中断</strong><ul>
 <li>硬件产生中断请求后，CPU暂时不予响应，等到中断开放后，被屏蔽的中断才能响应并获得处理</li>
-<li>用途
-<ul>
+<li>用途<ul>
 <li>常用于处理某个中断请求时，防止其他中断干扰。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>禁止产生中断</strong>
-<ul>
+<li><strong>禁止产生中断</strong><ul>
 <li>当引起中断的事件发生的时候，硬件不允许提出中断请求，通常设备中断、时钟中断等可以被暂时禁止。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>中断屏蔽的作用</strong>
-<ul>
+<li><strong>中断屏蔽的作用</strong><ul>
 <li>延迟或者禁止某些中断的响应，系统程序执行时其实是不希望发生其他中断干扰的事件的，以免共享数据结构受到破坏</li>
 <li>协调中断响应与中断处理的关系，确保高优先级中断可以打断低优先级中断，反之不可以</li>
 <li>防止同级中断互相干扰，以免造成混乱</li>
@@ -741,47 +675,40 @@
 </ul>
 </li>
 </ul>
-<h3 id="中断优先级"><a class="markdownIt-Anchor" href="#中断优先级"></a> 中断优先级</h3>
-<ul>
+<h3 id="中断优先级"><a href="#中断优先级" class="headerlink" title="中断优先级"></a>中断优先级</h3><ul>
 <li>一般来说优先级顺序</li>
 </ul>
 <ol>
 <li>硬件故障中断</li>
 <li>自愿性中断</li>
 <li>程序性中断</li>
-<li>外部中断和I/O中断</li>
+<li>外部中断和I&#x2F;O中断</li>
 </ol>
 <ul>
 <li>优先级还是以实际为准没有固定的顺序</li>
 </ul>
-<h3 id="多重中断事件处理"><a class="markdownIt-Anchor" href="#多重中断事件处理"></a> 多重中断事件处理</h3>
-<ul>
-<li>
-<p>多重中断时间处理/中断嵌套处理</p>
+<h3 id="多重中断事件处理"><a href="#多重中断事件处理" class="headerlink" title="多重中断事件处理"></a>多重中断事件处理</h3><ul>
+<li><p>多重中断时间处理&#x2F;中断嵌套处理</p>
 <ul>
 <li>计算机系统运行过程中同时可能出现多个中断，或者前一个中断没有处理完又来一个新的中断，所以CPU可能暂停正在运行的中断处理程序转而执行新的中断处理程序。</li>
 </ul>
 </li>
-<li>
-<p>通过中断屏蔽机制，中断嵌套处理可以设置一个优先级队列，按照优先级决定中断屏蔽，即屏蔽同级和低优先级的中断事件，从而改变中断处理次序，先响应的可能后处理。</p>
+<li><p>通过中断屏蔽机制，中断嵌套处理可以设置一个优先级队列，按照优先级决定中断屏蔽，即屏蔽同级和低优先级的中断事件，从而改变中断处理次序，先响应的可能后处理。</p>
 </li>
-<li>
-<p>举几个🌰（优先级SIGUSR2&gt;SIGUSR1）</p>
+<li><p>举几个🌰（优先级SIGUSR2&gt;SIGUSR1）</p>
 <ul>
-<li><img src="/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/4.png" srcset="/img/loading.gif" lazyload alt></li>
-<li><img src="/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/5.png" srcset="/img/loading.gif" lazyload alt></li>
+<li><img src="/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/4.png" srcset="/img/loading.gif" lazyload></li>
+<li><img src="/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/5.png" srcset="/img/loading.gif" lazyload></li>
 </ul>
 </li>
-<li>
-<p>低优先级中断不会没了的原因</p>
+<li><p>低优先级中断不会没了的原因</p>
 <p>屏蔽期间中断信号会进入未决队列，操作系统会先把它记录下来，等到对应屏蔽解除后再递送给进程处理，因此它只是“延后执行”，而不是“直接消失”，这也体现了中断管理中优先级控制、屏蔽机制和未决队列的基本思想。</p>
 </li>
 </ul>
 <hr>
-<h2 id="后记"><a class="markdownIt-Anchor" href="#后记"></a> 后记</h2>
-<p>基本上中断的基础知识点总结的差不多了，后面在做题时也会继续补充完善或者修改，写了整整一天。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>基本上中断的基础知识点总结的差不多了，后面在做题时也会继续补充完善或者修改，写了整整一天。</p>
 <p>下贴一张图，是喜欢摄影的W同学贡献的，H同学说这个云像一匹马，我也觉得挺好看的🥳</p>
-<p><img src="/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/tu.jpg" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/tu.jpg" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
