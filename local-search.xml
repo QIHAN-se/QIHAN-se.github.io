@@ -4,6 +4,60 @@
   
   
   <entry>
+    <title>怎样理解进程</title>
+    <link href="/2026/04/16/%E6%80%8E%E6%A0%B7%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B/"/>
+    <url>/2026/04/16/%E6%80%8E%E6%A0%B7%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="怎样理解进程"><a href="#怎样理解进程" class="headerlink" title="怎样理解进程"></a>怎样理解进程</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote><p>操作系统必须全方位地<strong>管理</strong>计算机系统中正在运行的程序，因此操作系统为正在运行的程序建立了一个<strong>管理实体</strong>——进程。</p></blockquote><ul><li><p>进程是一个<strong>具有独立功能的程序</strong>关于<strong>某个数据集合</strong>的<strong>一次</strong>运行活动</p><blockquote><p>时间，数据集，代码：三者有一个不同就不是同一个进程，而是两个不同的进程。</p></blockquote></li><li><p>进程是操作系统关于<strong>资源分配</strong>与<strong>处理器调度</strong>的一个独立单位</p></li><li><p>进程的组成：</p><ol><li>操作系统管理运行程序的数据结构P；</li><li>运行程序的主存或虚拟内存代码C；</li><li>运行程序的主存或虚拟内存数据D；</li><li>运行程序的通用寄存器信息R；</li><li>操作系统控制执行的程序状态字PSW；</li></ol></li></ul><div style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 12px 15px; border-radius: 0 6px 6px 0; margin: 15px 0;"><strong style="color: #856404;">关键理解</strong><br>从原理上看，进程是支持程序执行的一种系统机制，它对处理器上运行程序的活动进行抽象；    从实现角度看，进程是一种数据结构，用来准确刻画程序的状态和系统的动态变化状况；</div><h2 id="进程作用"><a href="#进程作用" class="headerlink" title="进程作用"></a>进程作用</h2><h3 id="刻画运行程序之间的并发性"><a href="#刻画运行程序之间的并发性" class="headerlink" title="刻画运行程序之间的并发性"></a>刻画运行程序之间的并发性</h3><ul><li><p><strong>什么是程序的并发性？</strong></p><p><strong>多个程序在同一时间间隔内交替推进、共同向前执行的现象</strong>。</p><p><strong>具体理解</strong></p><ul><li>从宏观上看，多个程序似乎是在<strong>同时运行</strong>。</li><li>但在单核 CPU 上，实际上通常是通过<strong>时间片轮转</strong>等方式，让多个程序<strong>快速交替执行</strong>，形成并发。</li><li>在多核 CPU 上，部分程序也可能真的<strong>同时执行</strong>，但“并发”更强调的是<strong>多个任务在同一时间段内共同推进</strong>，不要求必须真正同一时刻都在运行。</li><li><em><strong>在程序设计的角度来看，用户可以设计若干个交互的可运行程序，通过共享程序共同完成一个计算问题的求解过程。</strong></em></li></ul><p>🌰</p><p>比如你同时：</p><ul><li>一边听音乐</li><li>一边写文档</li><li>一边下载文件</li></ul><p>这些任务看起来是一起进行的，这就是并发。</p><p><strong>和“并行”的区别？</strong></p><ul><li><strong>并发</strong>：多个任务在同一时间段内交替或部分重叠执行。</li><li><strong>并行</strong>：多个任务在同一时刻真正同时执行。</li></ul></li><li><p>由上面我们可以看出，运行程序的执行可能不是连续完成的，而是走走停停的</p></li><li><p>程序自身这个概念，只是对于计算任务的指令和数据的描述，这种静态概念无法刻画程序的并发性，需要寻找可以描述程序并发执行过程的概念，即进程。</p></li></ul><h3 id="解决资源的共享性"><a href="#解决资源的共享性" class="headerlink" title="解决资源的共享性"></a>解决资源的共享性</h3><ul><li><p>一个重要概念——可再入程序</p><p>能够被多个程序调用的程序，本质纯代码，执行的时候不能被修改，哪个应用程序调用它哪个应用程序提供数据工作区。</p><p>🌰</p><p>编译器程序，编辑器程序等</p></li><li><p>可再入程序的概念是一种便利化的设计，也在客观上要求了程序本身与程序的执行不再对应，而是程序与各用户程序自有的数据工作区结合构成了不同的进程</p></li></ul><h2 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h2><blockquote><p>我们采用从特殊到一般，从局部到整体的一种理解方式</p></blockquote><ul><li><p><strong>进程在执行过程中需要定义三种状态（执行过程里任何时刻都在其中一种状态）</strong></p><ul><li><p><strong>运行态(Running)</strong> : 进程占有处理器正在运行的状态；</p><blockquote><p>一个显而易见的道理是，运行态的进程个数不能大于处理器的个数。</p></blockquote></li><li><p><strong>就绪态(ready)</strong> : 进程具备运行条件，等待系统分配处理器以便运行的状态；</p></li><li><p><strong>等待态(waiting)</strong> : 又称阻塞态(blocked)&#x2F;睡眠态(sleep) ，不具备运行条件，等待某个事件完成的状态；</p></li></ul></li><li><p><strong>通常进程在创建之后处于就绪态</strong></p></li><li><p><strong>执行中的状态转换：</strong></p><ul><li>运行态󠀩➡等待态：出现等待事件</li><li>等待态➡就绪态：等待事件结束</li><li>就绪态➡运行态：系统选中，分配处理器</li><li>运行态➡就绪态：被抢占或者时间片到</li></ul><p>图示</p><p><img src="/2026/04/16/%E6%80%8E%E6%A0%B7%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B/1.png"></p><p><img src="/2026/04/16/%E6%80%8E%E6%A0%B7%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B/2.png"></p></li><li><p><strong>如果进程不处于执行过程中？——执行之外进程的状态</strong></p><p>除了执行中，进程还存在<strong>新建态</strong>和<strong>终止态</strong></p><ul><li><p><strong>新建态(new)</strong> : 进程被创建时的状态，此时进程还没有进入就绪队列；</p><div style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 12px 15px; border-radius: 0 6px 6px 0; margin: 15px 0;"><strong style="color: #856404;">创建进程</strong><br>步骤一：为进程分配所需资源以及建立必要的管理信息；<br>    步骤二：设置为就绪态并等待被调度执行；</div></li><li><p><strong>终止态(exit)</strong> : 有三种情况，处于终止态的进程不可再被调度执行</p><ul><li>进程完成任务达到正常结束点；</li><li>出现无法克服的问题异常终止；</li><li>被操作系统或者有终止权限的进程所终止；</li></ul><div style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 12px 15px; border-radius: 0 6px 6px 0; margin: 15px 0;"><strong style="color: #856404;">终止进程</strong><br>步骤一：等操作系统或者相应进程进行后续处理；<br>步骤二：回收占用的资源并被系统删除；  </div></li></ul></li><li><p><strong>如果进程不在内存里？——内存之外的进程的状态</strong></p><p>实际可能出现的场景：</p><ol><li>不断创建进程，主存资源已经不足以满足进程运行的要求，可能出现性能低或者死锁的问题，必须要将某些进程挂起并且对换到磁盘对换区里释放它占有的资源，暂时不参与低级调度；</li><li>系统出现故障，需要暂时挂起一些进程，故障消除之后再解除挂起，恢复进程运行；</li><li>用户调试程序过程可以请求挂起这个进程来进行检查修改；</li></ol><p>因此引入两个新状态：<strong>挂起就绪态(ready suspend)<strong>和</strong>挂起等待态(blocked suspend)</strong>，挂起状态不参与处理器调度直到他们被对换进主存；</p><ul><li><strong>挂起就绪态(ready suspend)</strong> : 具备运行条件，但是目前在如磁盘等外存里；</li><li><strong>挂起等待态(blocked suspend)</strong> : 正在等待事件发生且在外存；</li></ul><p>图示</p><p><img src="/2026/04/16/%E6%80%8E%E6%A0%B7%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B/3.png" title="带挂起的转换图"></p><p><img src="/2026/04/16/%E6%80%8E%E6%A0%B7%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B/4.png" alt="          " title="较为完整的图例"></p></li></ul><h2 id="进程的数据"><a href="#进程的数据" class="headerlink" title="进程的数据"></a>进程的数据</h2><h3 id="进程控制块（PCB）"><a href="#进程控制块（PCB）" class="headerlink" title="进程控制块（PCB）"></a>进程控制块（PCB）</h3><blockquote><p>PCB &#x3D; <em>process control block</em></p></blockquote><ul><li><p>作用</p><p>管理进程，是进程存在的唯一标识，记录刻画进程状态和环境信息，是操作系统掌握进程的唯一资源结构和管理进程的主要依据；</p></li><li><p>组成</p><ul><li><p>标识信息：</p><ul><li>用于唯一地标识一个进程。</li><li>组成：<ul><li>系统分配的标识号；</li><li>系统分配的进程组标识号；</li><li>用户定义的进程名；</li><li>用户定义的进程组名；</li></ul></li></ul></li><li><p>现场信息</p><ul><li><p>存放该进程运行时的处理器现场信息</p></li><li><p>组成</p><ul><li><p>用户可见寄存器内容：数据寄存器，地址寄存器</p></li><li><p>控制与状态寄存器内容：PC，IR，PSW</p><details><summary><span style="color:#ffffff; background-color:#409eff; padding:4px 10px; border-radius:6px;">PCB 和 PSW 的区别</span></summary><div style="padding:12px; border:1px solid #dcdfe6; border-radius:8px; margin-top:10px;"><p><span style="color:#67c23a; font-weight:bold;">一句话记忆：</span>  PCB 是“进程的管理档案”，PSW 是“CPU 的运行状态”。</p><hr><p><span style="color:#e6a23c; font-weight:bold;">PCB（进程控制块）</span></p><ul><li>操作系统为 <strong>每个进程</strong> 建立的数据结构</li><li>保存进程的管理信息，例如：  <ul>  <li>PID</li>  <li>进程状态</li>  <li>程序计数器 PC</li>  <li>CPU 寄存器内容</li>  <li>优先级</li>  <li>打开的文件</li>  <li>内存管理信息</li>  </ul></li></ul><p><span style="color:#e6a23c;">理解：</span> PCB 更像进程的“档案袋”。</p><hr><p><span style="color:#f56c6c; font-weight:bold;">PSW（程序状态字）</span></p><ul><li>CPU 中保存的状态寄存器</li><li>记录当前处理器运行状态，例如：  <ul>  <li>条件码</li>  <li>中断屏蔽位</li>  <li>运行模式</li>  <li>特权级信息</li>  <li>下一条指令相关信息</li>  </ul></li></ul><p><span style="color:#f56c6c;">理解：</span> PSW 更像 CPU 当前执行现场的一部分。</p><hr><p><span style="color:#409eff; font-weight:bold;">区别</span></p><ul><li><strong>位置不同</strong>：  <ul>    <li>PCB 在 <span style="color:#67c23a;">内存中</span></li>    <li>PSW 在 <span style="color:#f56c6c;">CPU 内部</span></li>  </ul></li><li><strong>作用不同</strong>：  <ul>    <li>PCB 用于 <span style="color:#67c23a;">管理进程</span></li>    <li>PSW 用于 <span style="color:#f56c6c;">描述 CPU 的运行状态</span></li>  </ul></li><li><strong>保存内容不同</strong>：  <ul>    <li>PCB 保存的信息更全面</li>    <li>PSW 主要保存处理器状态信息</li>  </ul></li><li><strong>切换时的关系</strong>：  <ul>    <li>进程切换时，CPU 会把当前运行状态保存到 PCB</li>    <li>其中 PSW 是现场信息的一部分</li>  </ul></li></ul><p><span style="color:#67c23a; font-weight:bold;">记忆口诀：</span><br>PCB 管进程，PSW 管 CPU 状态</p></div></details></li><li><p>栈指针：核心栈与用户栈指针</p></li></ul></li><li><p>进程让出处理器时，必须要将此时的现场信息保存在进程控制块中，以便进程恢复时恢复处理器现场；</p></li></ul></li><li><p>控制信息</p><ul><li><p>用于存放与管理、调度进程相关的信息</p></li><li><p>组成较多，见图示</p><p><img src="/2026/04/16/%E6%80%8E%E6%A0%B7%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B/5.png"></p></li></ul></li></ul></li><li><p>进程控制块包含管理一个进程需要的全部信息，实际上定义了一个进程的当前状态，使用权和修改权属于操作系统。</p></li><li><p>进程控制块在进程创建时创建，进程被撤销时回收其进程控制块所占有的空间。</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>操作系统</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>操作系统</tag>
+      
+      <tag>笔记</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>自动状态机</title>
+    <link href="/2026/04/01/%E8%87%AA%E5%8A%A8%E7%8A%B6%E6%80%81%E6%9C%BA/"/>
+    <url>/2026/04/01/%E8%87%AA%E5%8A%A8%E7%8A%B6%E6%80%81%E6%9C%BA/</url>
+    
+    <content type="html"><![CDATA[<h1 id="自动状态机"><a href="#自动状态机" class="headerlink" title="自动状态机"></a>自动状态机</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>编译原理</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>笔记</tag>
+      
+      <tag>编译原理</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>有关中断的一切</title>
     <link href="/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/"/>
     <url>/2026/03/31/%E6%9C%89%E5%85%B3%E4%B8%AD%E6%96%AD%E7%9A%84%E4%B8%80%E5%88%87/</url>
