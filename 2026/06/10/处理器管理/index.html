@@ -29,7 +29,7 @@
 <meta property="og:description" content="操作系统复习指南：第二章 处理器管理 目录 一、整章总览：处理器管理到底在管什么 二、2.1 处理器 2.1.1 处理器与寄存器 2.1.2 指令与处理器模式   三、2.2 中断管理 2.2.1 中断 2.2.2 中断源 2.2.3 中断系统 2.2.4 多中断的响应与处理   四、2.3 进程管理 2.3.1 进程及其状态 2.3.2 进程的数据描述 2.3.3 进程管理的实现 2.3.4 进">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-10T02:52:32.000Z">
-<meta property="article:modified_time" content="2026-06-10T02:55:49.970Z">
+<meta property="article:modified_time" content="2026-06-10T03:58:12.781Z">
 <meta property="article:author" content="QIHAN-se">
 <meta property="article:tag" content="复习">
 <meta property="article:tag" content="操作系统">
@@ -312,7 +312,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2026-06-10T10:55:49+08:00
+                    本文最后更新于 2026-06-10T11:58:12+08:00
                   
                   
 
@@ -610,24 +610,42 @@ E --&gt; F[写回结果/更新CC/修改PC]
 <li>第 3 条在取指</li>
 </ul>
 <p>这样可以提高吞吐量。</p>
-<pre><code class=" mermaid">gantt
-title 指令流水线示意
-dateFormat  X
-axisFormat %s
-section 指令1
-取指 :a1, 0, 1
-解码 :a2, 1, 1
-执行 :a3, 2, 1
-section 指令2
-取指 :b1, 1, 1
-解码 :b2, 2, 1
-执行 :b3, 3, 1
-section 指令3
-取指 :c1, 2, 1
-解码 :c2, 3, 1
-执行 :c3, 4, 1
-</code></pre>
-
+<table>
+<thead>
+<tr>
+<th>指令\周期</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>指令1</td>
+<td>取指</td>
+<td>解码</td>
+<td>执行</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>指令2</td>
+<td></td>
+<td>取指</td>
+<td>解码</td>
+<td>执行</td>
+<td></td>
+</tr>
+<tr>
+<td>指令3</td>
+<td></td>
+<td></td>
+<td>取指</td>
+<td>解码</td>
+<td>执行</td>
+</tr>
+</tbody></table>
 <hr>
 <h2 id="4-特权指令与非特权指令"><a href="#4-特权指令与非特权指令" class="headerlink" title="4. 特权指令与非特权指令"></a>4. 特权指令与非特权指令</h2><h3 id="为什么要区分？"><a href="#为什么要区分？" class="headerlink" title="为什么要区分？"></a>为什么要区分？</h3><p>因为有些指令会直接影响系统核心资源，如果所有程序都能执行，系统会失控。</p>
 <h3 id="特权指令"><a href="#特权指令" class="headerlink" title="特权指令"></a>特权指令</h3><p>只能由操作系统内核执行，例如：</p>
