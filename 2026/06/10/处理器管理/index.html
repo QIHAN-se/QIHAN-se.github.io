@@ -1,0 +1,3504 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" >
+
+
+
+<head><!-- hexo injector head_begin start --><meta name="msvalidate.01" content="0D58EE7D5C4A4AC77C5FFD19D7D2ADCB" />
+<meta name="google-site-verification" content="TCpxVUPihMio0gDgP8-jRGMDkamfBLxrZbxdt36PBvA" />
+<!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/phead.jpg">
+  <link rel="icon" href="/img/phead.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#efffe9">
+  <meta name="author" content="QIHAN-se">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="操作系统复习指南：第二章 处理器管理 目录 一、整章总览：处理器管理到底在管什么 二、2.1 处理器 2.1.1 处理器与寄存器 2.1.2 指令与处理器模式   三、2.2 中断管理 2.2.1 中断 2.2.2 中断源 2.2.3 中断系统 2.2.4 多中断的响应与处理   四、2.3 进程管理 2.3.1 进程及其状态 2.3.2 进程的数据描述 2.3.3 进程管理的实现 2.3.4 进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="处理器管理">
+<meta property="og:url" content="http://example.com/2026/06/10/%E5%A4%84%E7%90%86%E5%99%A8%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="ShiXiaoHanA">
+<meta property="og:description" content="操作系统复习指南：第二章 处理器管理 目录 一、整章总览：处理器管理到底在管什么 二、2.1 处理器 2.1.1 处理器与寄存器 2.1.2 指令与处理器模式   三、2.2 中断管理 2.2.1 中断 2.2.2 中断源 2.2.3 中断系统 2.2.4 多中断的响应与处理   四、2.3 进程管理 2.3.1 进程及其状态 2.3.2 进程的数据描述 2.3.3 进程管理的实现 2.3.4 进">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-06-10T02:52:32.000Z">
+<meta property="article:modified_time" content="2026-06-10T02:55:49.970Z">
+<meta property="article:author" content="QIHAN-se">
+<meta property="article:tag" content="复习">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>处理器管理 - ShiXiaoHanA</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/ScrollAnimation.css">
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/glassBg.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#295943","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ShiXiaoHanA</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/cosmos/" target="_self">
+                <i class="iconfont clipboard-check"></i>
+                <span>看星星</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.7)">
+      <div class="banner-text text-center fade-in-up">
+          <!-- 天气板块 - 插入到这里（副标题上方） -->
+          
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="处理器管理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        QIHAN-se
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-06-10 10:52" pubdate>
+          2026年6月10日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          20k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          164 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">处理器管理</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    本文最后更新于 2026-06-10T10:55:49+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="操作系统复习指南：第二章-处理器管理"><a href="#操作系统复习指南：第二章-处理器管理" class="headerlink" title="操作系统复习指南：第二章 处理器管理"></a>操作系统复习指南：第二章 处理器管理</h1><hr>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li><a href="#%E4%B8%80%E6%95%B4%E7%AB%A0%E6%80%BB%E8%A7%88%E5%A4%84%E7%90%86%E5%99%A8%E7%AE%A1%E7%90%86%E5%88%B0%E5%BA%95%E5%9C%A8%E7%AE%A1%E4%BB%80%E4%B9%88">一、整章总览：处理器管理到底在管什么</a></li>
+<li><a href="#%E4%BA%8C21-%E5%A4%84%E7%90%86%E5%99%A8">二、2.1 处理器</a><ul>
+<li><a href="#211-%E5%A4%84%E7%90%86%E5%99%A8%E4%B8%8E%E5%AF%84%E5%AD%98%E5%99%A8">2.1.1 处理器与寄存器</a></li>
+<li><a href="#212-%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%A4%84%E7%90%86%E5%99%A8%E6%A8%A1%E5%BC%8F">2.1.2 指令与处理器模式</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%8922-%E4%B8%AD%E6%96%AD%E7%AE%A1%E7%90%86">三、2.2 中断管理</a><ul>
+<li><a href="#221-%E4%B8%AD%E6%96%AD">2.2.1 中断</a></li>
+<li><a href="#222-%E4%B8%AD%E6%96%AD%E6%BA%90">2.2.2 中断源</a></li>
+<li><a href="#223-%E4%B8%AD%E6%96%AD%E7%B3%BB%E7%BB%9F">2.2.3 中断系统</a></li>
+<li><a href="#224-%E5%A4%9A%E4%B8%AD%E6%96%AD%E7%9A%84%E5%93%8D%E5%BA%94%E4%B8%8E%E5%A4%84%E7%90%86">2.2.4 多中断的响应与处理</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B23-%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86">四、2.3 进程管理</a><ul>
+<li><a href="#231-%E8%BF%9B%E7%A8%8B%E5%8F%8A%E5%85%B6%E7%8A%B6%E6%80%81">2.3.1 进程及其状态</a></li>
+<li><a href="#232-%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E6%8F%8F%E8%BF%B0">2.3.2 进程的数据描述</a></li>
+<li><a href="#233-%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%9E%E7%8E%B0">2.3.3 进程管理的实现</a></li>
+<li><a href="#234-%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2%E4%B8%8E%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2">2.3.4 进程切换与模式切换</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%9424-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%8A%80%E6%9C%AF">五、2.4 多线程技术</a><ul>
+<li><a href="#241-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%8E%AF%E5%A2%83%E6%A6%82%E8%BF%B0">2.4.1 多线程环境概述</a></li>
+<li><a href="#242-klt-%E4%B8%8E-ult">2.4.2 KLT 与 ULT</a></li>
+<li><a href="#243-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E7%9A%84%E6%B7%B7%E5%90%88%E7%AD%96%E7%95%A5">2.4.3 多线程实现的混合策略</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%AD25-%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6">六、2.5 处理器调度</a><ul>
+<li><a href="#251-%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6%E7%9A%84%E5%B1%82%E6%AC%A1">2.5.1 处理器调度的层次</a></li>
+<li><a href="#252253-%E5%A4%84%E7%90%86%E5%99%A8%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95">2.5.2&#x2F;2.5.3 处理器调度算法</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%83%E5%85%A8%E7%AB%A0%E9%AB%98%E9%A2%91%E8%80%83%E7%82%B9%E6%80%BB%E6%B1%87">七、全章高频考点总汇</a></li>
+<li><a href="#%E5%85%AB%E6%9C%9F%E6%9C%AB%E7%AE%80%E7%AD%94%E9%A2%98%E4%B8%87%E8%83%BD%E6%A8%A1%E6%9D%BF">八、期末简答题万能模板</a></li>
+<li><a href="#%E4%B9%9D%E8%80%83%E5%89%8D%E9%80%9F%E8%83%8C%E7%89%88">九、考前速背版</a></li>
+</ul>
+<hr>
+<h1 id="一、整章总览：处理器管理到底在管什么"><a href="#一、整章总览：处理器管理到底在管什么" class="headerlink" title="一、整章总览：处理器管理到底在管什么"></a>一、整章总览：处理器管理到底在管什么</h1><h2 id="一句话理解"><a href="#一句话理解" class="headerlink" title="一句话理解"></a>一句话理解</h2><p><strong>处理器管理</strong>就是：操作系统如何借助处理器硬件、中断机制、进程&#x2F;线程抽象和调度算法，<strong>让 CPU 安全、高效、公平地为多个程序服务</strong>。</p>
+<h2 id="这一章的主线逻辑"><a href="#这一章的主线逻辑" class="headerlink" title="这一章的主线逻辑"></a>这一章的主线逻辑</h2><p>可以把整章看成一个闭环：</p>
+<pre><code class=" mermaid">flowchart LR
+A[处理器硬件基础&lt;br/&gt;寄存器/指令/模式] --&gt; B[中断机制&lt;br/&gt;让OS被激活]
+B --&gt; C[进程/线程管理&lt;br/&gt;描述执行实体]
+C --&gt; D[调度算法&lt;br/&gt;决定谁上CPU]
+D --&gt; E[进程切换/模式切换&lt;br/&gt;真正完成执行转换]
+E --&gt; B
+</code></pre>
+
+<h2 id="你必须建立的整体认识"><a href="#你必须建立的整体认识" class="headerlink" title="你必须建立的整体认识"></a>你必须建立的整体认识</h2><p>处理器管理不是零散知识点，而是一套完整机制：</p>
+<ol>
+<li><strong>CPU 本身</strong>有寄存器、指令系统、工作模式。</li>
+<li><strong>操作系统平时并不是一直“主动运行”</strong>，而是依靠<strong>中断&#x2F;异常&#x2F;系统调用</strong>被激活。</li>
+<li>为了管理“运行中的程序”，OS 引入了<strong>进程</strong>；为了更细粒度并发，又引入了<strong>线程</strong>。</li>
+<li>当多个进程&#x2F;线程都想运行时，需要<strong>调度算法</strong>决定先后次序。</li>
+<li>调度做出决定后，要靠<strong>上下文切换</strong>与<strong>模式切换</strong>真正把 CPU 交给新实体。</li>
+</ol>
+<h2 id="本章常见考试题型"><a href="#本章常见考试题型" class="headerlink" title="本章常见考试题型"></a>本章常见考试题型</h2><ul>
+<li>名词解释：PSW、PCB、进程映像、上下文、线程、KLT、ULT</li>
+<li>简答题：中断过程、进程切换过程、模式切换过程</li>
+<li>对比题：进程 vs 程序、进程 vs 线程、KLT vs ULT</li>
+<li>图示题：三态模型、五态&#x2F;挂起模型、调度层次图</li>
+<li>论述题：为什么 OS 是中断驱动的？为什么线程能提升并发？</li>
+<li>算法题：FCFS、SPN、SRT、HRRN、RR、多级反馈队列</li>
+</ul>
+<hr>
+<h1 id="二、2-1-处理器"><a href="#二、2-1-处理器" class="headerlink" title="二、2.1 处理器"></a>二、2.1 处理器</h1><hr>
+<h2 id="2-1-1-处理器与寄存器"><a href="#2-1-1-处理器与寄存器" class="headerlink" title="2.1.1 处理器与寄存器"></a>2.1.1 处理器与寄存器</h2><h3 id="一句话理解-1"><a href="#一句话理解-1" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>处理器是执行指令的核心硬件，而寄存器是处理器内部速度最快、最关键的状态存储单元。</strong></p>
+<hr>
+<h2 id="1-处理器的基本组成"><a href="#1-处理器的基本组成" class="headerlink" title="1. 处理器的基本组成"></a>1. 处理器的基本组成</h2><p>课件给出了处理器的简单示意。核心包括：</p>
+<ul>
+<li><strong>运算器（ALU）</strong>：完成算术、逻辑运算</li>
+<li><strong>控制器</strong>：控制指令执行流程</li>
+<li><strong>寄存器组</strong>：存储地址、数据、状态、指令等</li>
+<li><strong>内部总线</strong>：连接各部件</li>
+<li><strong>与主存、I&#x2F;O 的接口部件</strong></li>
+</ul>
+<h3 id="可视化理解"><a href="#可视化理解" class="headerlink" title="可视化理解"></a>可视化理解</h3><pre><code class=" mermaid">flowchart TB
+CPU[CPU]
+ALU[算术逻辑单元 ALU]
+CU[控制单元]
+REG[寄存器组]
+MEM[主存]
+IO[I/O设备]
+
+CPU --&gt; ALU
+CPU --&gt; CU
+CPU --&gt; REG
+CPU &lt;--&gt; MEM
+CPU &lt;--&gt; IO
+</code></pre>
+
+<hr>
+<h2 id="2-常见寄存器及作用"><a href="#2-常见寄存器及作用" class="headerlink" title="2. 常见寄存器及作用"></a>2. 常见寄存器及作用</h2><h3 id="2-1-用户程序可见寄存器"><a href="#2-1-用户程序可见寄存器" class="headerlink" title="2.1 用户程序可见寄存器"></a>2.1 用户程序可见寄存器</h3><p>这类寄存器程序员可以直接或间接使用，其目的主要是：</p>
+<ul>
+<li>减少访问主存的次数</li>
+<li>提高指令执行效率</li>
+</ul>
+<p>包括：</p>
+<ul>
+<li><strong>数据寄存器</strong>：又称通用寄存器，用于保存操作数、中间结果</li>
+<li><strong>地址寄存器</strong>：保存地址信息，如：<ul>
+<li>索引寄存器</li>
+<li>栈指针</li>
+<li>段地址寄存器等</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-控制与状态寄存器"><a href="#2-2-控制与状态寄存器" class="headerlink" title="2.2 控制与状态寄存器"></a>2.2 控制与状态寄存器</h3><p>主要用于控制处理器运行，通常由 OS 内核使用。</p>
+<p>包括：</p>
+<table>
+<thead>
+<tr>
+<th>寄存器</th>
+<th>含义</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PC</td>
+<td>Program Counter，程序计数器</td>
+<td>存放下一条要取的指令地址</td>
+</tr>
+<tr>
+<td>IR</td>
+<td>Instruction Register，指令寄存器</td>
+<td>存放当前正在执行或刚取出的指令</td>
+</tr>
+<tr>
+<td>CC</td>
+<td>Condition Code，条件码</td>
+<td>反映运算结果，如正&#x2F;负&#x2F;零&#x2F;溢出</td>
+</tr>
+<tr>
+<td>Flag&#x2F;状态位</td>
+<td>中断允许、屏蔽、模式位等</td>
+<td>反映和控制 CPU 状态</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="3-程序状态字-PSW"><a href="#3-程序状态字-PSW" class="headerlink" title="3. 程序状态字 PSW"></a>3. 程序状态字 PSW</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><strong>PSW（Program Status Word，程序状态字）</strong> 是记录当前程序运行动态信息的一组状态信息。</p>
+<p>课件中强调两层含义：</p>
+<ol>
+<li><strong>OS 概念上的 PSW</strong>：记录程序执行状态</li>
+<li><strong>硬件实现上的 PSW 寄存器</strong>：可能专设，也可能分散在一组控制&#x2F;状态寄存器中</li>
+</ol>
+<h3 id="PSW-通常包含的内容"><a href="#PSW-通常包含的内容" class="headerlink" title="PSW 通常包含的内容"></a>PSW 通常包含的内容</h3><ul>
+<li>程序计数器 PC</li>
+<li>指令寄存器 IR</li>
+<li>条件码 CC</li>
+<li>中断允许&#x2F;禁止位</li>
+<li>中断屏蔽位</li>
+<li>处理器模式位</li>
+<li>内存保护位</li>
+<li>调试控制位等</li>
+</ul>
+<h3 id="为什么-PSW-很重要？"><a href="#为什么-PSW-很重要？" class="headerlink" title="为什么 PSW 很重要？"></a>为什么 PSW 很重要？</h3><p>因为它本质上描述了“<strong>此刻 CPU 正处于什么状态</strong>”。</p>
+<p>操作系统要实现：</p>
+<ul>
+<li>中断返回</li>
+<li>进程切换</li>
+<li>模式切换</li>
+<li>异常恢复</li>
+</ul>
+<p>都离不开 PSW。</p>
+<hr>
+<h2 id="4-核心概念辨析：寄存器、PSW、现场"><a href="#4-核心概念辨析：寄存器、PSW、现场" class="headerlink" title="4. 核心概念辨析：寄存器、PSW、现场"></a>4. 核心概念辨析：寄存器、PSW、现场</h2><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>本质</th>
+<th>关注点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>寄存器</td>
+<td>CPU 内部高速存储单元</td>
+<td>存数据、地址、状态</td>
+</tr>
+<tr>
+<td>PSW</td>
+<td>状态信息集合&#x2F;寄存器</td>
+<td>描述程序执行状态</td>
+</tr>
+<tr>
+<td>现场</td>
+<td>程序被打断时 CPU 的当前状态</td>
+<td>为了以后恢复执行</td>
+</tr>
+</tbody></table>
+<h3 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h3><ul>
+<li><strong>PSW 不是全部现场，但属于现场的重要组成部分</strong></li>
+<li><strong>现场不只是 PC</strong>，还包括通用寄存器、栈指针、PSW 等</li>
+<li><strong>PCB 不是现场本身，而是保存现场及管理信息的数据结构</strong></li>
+</ul>
+<hr>
+<h2 id="5-典型例子"><a href="#5-典型例子" class="headerlink" title="5. 典型例子"></a>5. 典型例子</h2><p>假设程序正在执行加法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">a = b + c;<br></code></pre></td></tr></table></figure>
+
+<p>CPU 可能会经历：</p>
+<ol>
+<li>把 <code>b</code>、<code>c</code> 从主存取到寄存器</li>
+<li>ALU 完成加法</li>
+<li>把结果写入寄存器或主存</li>
+<li>根据结果设置条件码（如是否为 0）</li>
+</ol>
+<p>此时：</p>
+<ul>
+<li>数据寄存器保存操作数&#x2F;结果</li>
+<li>PC 指向下一条指令</li>
+<li>IR 保存当前指令</li>
+<li>CC 反映运算结果状态</li>
+</ul>
+<hr>
+<h2 id="6-高频考点"><a href="#6-高频考点" class="headerlink" title="6. 高频考点"></a>6. 高频考点</h2><ul>
+<li>用户可见寄存器与控制&#x2F;状态寄存器区别</li>
+<li>PC、IR、CC 的作用</li>
+<li>PSW 的组成与作用</li>
+<li>为什么寄存器能提高执行效率</li>
+</ul>
+<hr>
+<h2 id="7-易错点"><a href="#7-易错点" class="headerlink" title="7. 易错点"></a>7. 易错点</h2><ol>
+<li><strong>PC 不是当前指令内容，而是下一条指令地址</strong></li>
+<li><strong>IR 存的是指令本身，不是地址</strong></li>
+<li><strong>CC 是结果标志，不是调度优先级</strong></li>
+<li><strong>PSW 不是进程控制块 PCB</strong></li>
+<li><strong>寄存器属于硬件，PCB 属于 OS 数据结构</strong></li>
+</ol>
+<hr>
+<h2 id="8-简答题模板"><a href="#8-简答题模板" class="headerlink" title="8. 简答题模板"></a>8. 简答题模板</h2><h3 id="题目：简述-PSW-的作用"><a href="#题目：简述-PSW-的作用" class="headerlink" title="题目：简述 PSW 的作用"></a>题目：简述 PSW 的作用</h3><p><strong>答题模板：</strong></p>
+<blockquote>
+<p>程序状态字 PSW 是记录当前程序运行动态信息的一组状态信息，通常包含程序计数器、条件码、中断允许&#x2F;屏蔽位、处理器模式位等内容。PSW 一方面反映处理器当前执行状态，另一方面是中断处理、模式切换和进程切换时保存与恢复现场的重要依据，因此在操作系统中具有关键作用。</p>
+</blockquote>
+<hr>
+<h2 id="9-考前速背版"><a href="#9-考前速背版" class="headerlink" title="9. 考前速背版"></a>9. 考前速背版</h2><ul>
+<li>寄存器分两类：<strong>用户可见寄存器</strong>、<strong>控制与状态寄存器</strong></li>
+<li>PC：下一条指令地址</li>
+<li>IR：当前指令</li>
+<li>CC：运算结果标志</li>
+<li>PSW：记录程序运行状态，是中断&#x2F;切换恢复的重要依据</li>
+</ul>
+<hr>
+<h2 id="2-1-2-指令与处理器模式"><a href="#2-1-2-指令与处理器模式" class="headerlink" title="2.1.2 指令与处理器模式"></a>2.1.2 指令与处理器模式</h2><h3 id="一句话理解-2"><a href="#一句话理解-2" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>指令决定 CPU 做什么，处理器模式决定“谁有权做什么”。</strong></p>
+<hr>
+<h2 id="1-机器指令是什么"><a href="#1-机器指令是什么" class="headerlink" title="1. 机器指令是什么"></a>1. 机器指令是什么</h2><p>机器指令是 CPU 能直接执行的基本命令，是处理器工作的最小功能单位之一。</p>
+<p>一般包含：</p>
+<ul>
+<li><strong>操作码字段</strong>：做什么操作</li>
+<li><strong>操作数地址字段</strong>：操作谁</li>
+<li>可能还包含一些状态&#x2F;特征信息</li>
+</ul>
+<h3 id="指令能完成什么"><a href="#指令能完成什么" class="headerlink" title="指令能完成什么"></a>指令能完成什么</h3><ul>
+<li>算术运算</li>
+<li>逻辑运算</li>
+<li>数据传送</li>
+<li>控制流跳转</li>
+</ul>
+<hr>
+<h2 id="2-指令执行过程"><a href="#2-指令执行过程" class="headerlink" title="2. 指令执行过程"></a>2. 指令执行过程</h2><p>课件给出的标准过程是：</p>
+<ol>
+<li><strong>取指</strong></li>
+<li><strong>解码</strong></li>
+<li><strong>执行</strong></li>
+</ol>
+<h3 id="Step-1：取指"><a href="#Step-1：取指" class="headerlink" title="Step 1：取指"></a>Step 1：取指</h3><p>CPU 根据 PC 从主存或 Cache 取出指令，放到 IR。</p>
+<h3 id="Step-2：解码"><a href="#Step-2：解码" class="headerlink" title="Step 2：解码"></a>Step 2：解码</h3><p>分析 IR 中的操作码，决定这条指令应该如何执行。</p>
+<h3 id="Step-3：执行"><a href="#Step-3：执行" class="headerlink" title="Step 3：执行"></a>Step 3：执行</h3><p>完成运算、数据传送或跳转；并更新结果和状态位。</p>
+<h3 id="Mermaid-流程图"><a href="#Mermaid-流程图" class="headerlink" title="Mermaid 流程图"></a>Mermaid 流程图</h3><pre><code class=" mermaid">flowchart LR
+A[PC给出指令地址] --&gt; B[从主存/Cache取指]
+B --&gt; C[指令送入IR]
+C --&gt; D[译码]
+D --&gt; E[执行微操作序列]
+E --&gt; F[写回结果/更新CC/修改PC]
+</code></pre>
+
+<hr>
+<h2 id="3-指令执行周期与流水线"><a href="#3-指令执行周期与流水线" class="headerlink" title="3. 指令执行周期与流水线"></a>3. 指令执行周期与流水线</h2><h3 id="指令执行周期"><a href="#指令执行周期" class="headerlink" title="指令执行周期"></a>指令执行周期</h3><p>一条指令通常经历：</p>
+<ul>
+<li>取指</li>
+<li>解码</li>
+<li>执行</li>
+</ul>
+<h3 id="指令流水线"><a href="#指令流水线" class="headerlink" title="指令流水线"></a>指令流水线</h3><p>多个指令可以重叠执行不同阶段：</p>
+<ul>
+<li>第 1 条在执行</li>
+<li>第 2 条在解码</li>
+<li>第 3 条在取指</li>
+</ul>
+<p>这样可以提高吞吐量。</p>
+<pre><code class=" mermaid">gantt
+title 指令流水线示意
+dateFormat  X
+axisFormat %s
+section 指令1
+取指 :a1, 0, 1
+解码 :a2, 1, 1
+执行 :a3, 2, 1
+section 指令2
+取指 :b1, 1, 1
+解码 :b2, 2, 1
+执行 :b3, 3, 1
+section 指令3
+取指 :c1, 2, 1
+解码 :c2, 3, 1
+执行 :c3, 4, 1
+</code></pre>
+
+<hr>
+<h2 id="4-特权指令与非特权指令"><a href="#4-特权指令与非特权指令" class="headerlink" title="4. 特权指令与非特权指令"></a>4. 特权指令与非特权指令</h2><h3 id="为什么要区分？"><a href="#为什么要区分？" class="headerlink" title="为什么要区分？"></a>为什么要区分？</h3><p>因为有些指令会直接影响系统核心资源，如果所有程序都能执行，系统会失控。</p>
+<h3 id="特权指令"><a href="#特权指令" class="headerlink" title="特权指令"></a>特权指令</h3><p>只能由操作系统内核执行，例如：</p>
+<ul>
+<li>启动 I&#x2F;O</li>
+<li>设置中断控制</li>
+<li>修改 PC&#x2F;PSW 的某些关键位</li>
+<li>内存管理控制等</li>
+</ul>
+<h3 id="非特权指令"><a href="#非特权指令" class="headerlink" title="非特权指令"></a>非特权指令</h3><p>普通用户程序也可执行，如：</p>
+<ul>
+<li>加减乘除</li>
+<li>普通数据传送</li>
+<li>一般逻辑操作</li>
+</ul>
+<h3 id="对比表"><a href="#对比表" class="headerlink" title="对比表"></a>对比表</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>谁能执行</th>
+<th>典型内容</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>特权指令</td>
+<td>内核态程序</td>
+<td>启动I&#x2F;O、改模式位、关中断</td>
+<td>影响系统安全</td>
+</tr>
+<tr>
+<td>非特权指令</td>
+<td>所有程序</td>
+<td>普通计算、传送、比较</td>
+<td>风险较小</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-处理器模式"><a href="#5-处理器模式" class="headerlink" title="5. 处理器模式"></a>5. 处理器模式</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>处理器模式是 CPU 运行时的权限级别，用于控制不同程序可执行的指令范围和可访问的资源范围。</p>
+<p>课件提到可有 0&#x2F;1&#x2F;2&#x2F;3 等多级保护环，但现代 OS 常用的是：</p>
+<ul>
+<li><strong>内核模式（Kernel Mode）</strong></li>
+<li><strong>用户模式（User Mode）</strong></li>
+</ul>
+<h3 id="常见对应关系"><a href="#常见对应关系" class="headerlink" title="常见对应关系"></a>常见对应关系</h3><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>权限</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内核模式</td>
+<td>高</td>
+<td>可执行特权指令，访问核心资源</td>
+</tr>
+<tr>
+<td>用户模式</td>
+<td>低</td>
+<td>只能执行非特权指令</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="6-为什么必须有模式切换"><a href="#6-为什么必须有模式切换" class="headerlink" title="6. 为什么必须有模式切换"></a>6. 为什么必须有模式切换</h2><p>如果用户程序想访问设备、文件、内存管理结构，不能直接做，必须请求 OS 代办。</p>
+<p>于是就要发生：</p>
+<ul>
+<li><strong>用户态 → 内核态</strong></li>
+<li><strong>内核态 → 用户态</strong></li>
+</ul>
+<h3 id="触发用户态到内核态的原因"><a href="#触发用户态到内核态的原因" class="headerlink" title="触发用户态到内核态的原因"></a>触发用户态到内核态的原因</h3><ul>
+<li>系统调用</li>
+<li>异常</li>
+<li>中断</li>
+</ul>
+<h3 id="返回用户态的方式"><a href="#返回用户态的方式" class="headerlink" title="返回用户态的方式"></a>返回用户态的方式</h3><ul>
+<li>内核处理结束后执行中断返回指令，如 <code>iret</code></li>
+</ul>
+<hr>
+<h2 id="7-模式切换不是进程切换"><a href="#7-模式切换不是进程切换" class="headerlink" title="7. 模式切换不是进程切换"></a>7. 模式切换不是进程切换</h2><p>这是<strong>非常高频的辨析题</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>模式切换</th>
+<th>进程切换</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>本质</td>
+<td>权限级别变化</td>
+<td>执行实体变化</td>
+</tr>
+<tr>
+<td>是否一定换进程</td>
+<td>不一定</td>
+<td>一定</td>
+</tr>
+<tr>
+<td>是否一定进内核</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>开销</td>
+<td>相对较小</td>
+<td>较大</td>
+</tr>
+<tr>
+<td>例子</td>
+<td>系统调用后又回到原进程</td>
+<td>时间片到后换另一个进程</td>
+</tr>
+</tbody></table>
+<h3 id="核心结论"><a href="#核心结论" class="headerlink" title="核心结论"></a>核心结论</h3><ul>
+<li><strong>模式切换可以不换进程</strong></li>
+<li><strong>进程切换一定包含模式切换</strong></li>
+</ul>
+<hr>
+<h2 id="8-典型例子"><a href="#8-典型例子" class="headerlink" title="8. 典型例子"></a>8. 典型例子</h2><p>用户程序调用 <code>read()</code>：</p>
+<ol>
+<li>用户态执行库函数</li>
+<li>触发系统调用陷入内核</li>
+<li>CPU 切到内核态</li>
+<li>OS 执行特权操作访问设备&#x2F;文件系统</li>
+<li>完成后返回用户态</li>
+</ol>
+<p>这里可能：</p>
+<ul>
+<li><strong>只发生模式切换</strong>：若调用很快完成并返回原进程</li>
+<li><strong>同时发生进程切换</strong>：若该进程因 I&#x2F;O 阻塞，CPU 转给别的进程</li>
+</ul>
+<hr>
+<h2 id="9-高频考点"><a href="#9-高频考点" class="headerlink" title="9. 高频考点"></a>9. 高频考点</h2><ul>
+<li>特权指令和非特权指令区别</li>
+<li>为什么要引入处理器模式</li>
+<li>用户态与内核态区别</li>
+<li>模式切换的触发条件</li>
+<li>模式切换与进程切换区别</li>
+</ul>
+<hr>
+<h2 id="10-易错点"><a href="#10-易错点" class="headerlink" title="10. 易错点"></a>10. 易错点</h2><ol>
+<li><strong>系统调用本质上会引起用户态到内核态转换</strong></li>
+<li><strong>用户态不能执行特权指令</strong></li>
+<li><strong>中断&#x2F;异常&#x2F;系统调用都可触发模式切换</strong></li>
+<li><strong>模式切换不一定导致进程切换</strong></li>
+</ol>
+<hr>
+<h2 id="11-简答题模板"><a href="#11-简答题模板" class="headerlink" title="11. 简答题模板"></a>11. 简答题模板</h2><h3 id="题目：简述特权指令与处理器模式的关系"><a href="#题目：简述特权指令与处理器模式的关系" class="headerlink" title="题目：简述特权指令与处理器模式的关系"></a>题目：简述特权指令与处理器模式的关系</h3><blockquote>
+<p>为了保护系统核心资源，处理器把指令划分为特权指令和非特权指令。特权指令只能在内核模式下执行，普通用户程序在用户模式下只能执行非特权指令。处理器模式的设置使操作系统能够限制用户程序对关键资源的直接访问，从而保证系统的安全性和稳定性。</p>
+</blockquote>
+<hr>
+<h2 id="12-考前速背版"><a href="#12-考前速背版" class="headerlink" title="12. 考前速背版"></a>12. 考前速背版</h2><ul>
+<li>指令执行三步：<strong>取指、解码、执行</strong></li>
+<li>指令分：<strong>特权指令、非特权指令</strong></li>
+<li>模式分：<strong>内核态、用户态</strong></li>
+<li>用户态不能执行特权指令</li>
+<li>中断&#x2F;异常&#x2F;系统调用可触发用户态到内核态</li>
+<li>进程切换一定含模式切换，反之不一定</li>
+</ul>
+<hr>
+<h1 id="三、2-2-中断管理"><a href="#三、2-2-中断管理" class="headerlink" title="三、2.2 中断管理"></a>三、2.2 中断管理</h1><hr>
+<h2 id="2-2-1-中断"><a href="#2-2-1-中断" class="headerlink" title="2.2.1 中断"></a>2.2.1 中断</h2><h3 id="一句话理解-3"><a href="#一句话理解-3" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>中断就是 CPU 正在干一件事时，被更紧急的事情打断，先去处理，再决定是否回来继续。</strong></p>
+<hr>
+<h2 id="1-中断的概念"><a href="#1-中断的概念" class="headerlink" title="1. 中断的概念"></a>1. 中断的概念</h2><p>课件定义：</p>
+<blockquote>
+<p>程序执行过程中，遇到急需处理事件时，暂时中止 CPU 上现行程序运行，转去执行相应事件处理程序，待处理完成后再返回原程序被中断处或调度其他程序执行的过程。</p>
+</blockquote>
+<h3 id="关键词拆解"><a href="#关键词拆解" class="headerlink" title="关键词拆解"></a>关键词拆解</h3><ul>
+<li><strong>暂时中止</strong></li>
+<li><strong>转去处理紧急事件</strong></li>
+<li><strong>处理完成后恢复或重新调度</strong></li>
+</ul>
+<hr>
+<h2 id="2-为什么说操作系统是“中断驱动”的"><a href="#2-为什么说操作系统是“中断驱动”的" class="headerlink" title="2. 为什么说操作系统是“中断驱动”的"></a>2. 为什么说操作系统是“中断驱动”的</h2><p>课件强调：</p>
+<blockquote>
+<p><strong>中断是激活操作系统的唯一方式。</strong></p>
+</blockquote>
+<p>更准确地理解是：</p>
+<ul>
+<li>用户程序在用户态运行</li>
+<li>OS 内核通常不会无缘无故主动介入</li>
+<li>必须通过<strong>中断 &#x2F; 异常 &#x2F; 系统调用</strong>进入内核</li>
+</ul>
+<p>也就是说，OS 的运行常常是“被事件触发”的。</p>
+<h3 id="图示：中断驱动的本质"><a href="#图示：中断驱动的本质" class="headerlink" title="图示：中断驱动的本质"></a>图示：中断驱动的本质</h3><pre><code class=" mermaid">flowchart LR
+U[用户程序执行] --&gt; T&#123;是否发生事件?&#125;
+T -- 否 --&gt; U
+T -- 是: 中断/异常/系统调用 --&gt; K[进入OS内核处理]
+K --&gt; R&#123;处理结果&#125;
+R -- 返回原程序 --&gt; U
+R -- 切换到其他程序 --&gt; N[新程序运行]
+</code></pre>
+
+<hr>
+<h2 id="3-广义中断与狭义中断"><a href="#3-广义中断与狭义中断" class="headerlink" title="3. 广义中断与狭义中断"></a>3. 广义中断与狭义中断</h2><h3 id="广义中断"><a href="#广义中断" class="headerlink" title="广义中断"></a>广义中断</h3><p>广义上包括：</p>
+<ul>
+<li>中断（外部事件）</li>
+<li>异常（指令执行出错）</li>
+<li>系统异常&#x2F;陷入（系统调用）</li>
+</ul>
+<h3 id="狭义中断"><a href="#狭义中断" class="headerlink" title="狭义中断"></a>狭义中断</h3><p>狭义通常只指：</p>
+<ul>
+<li><strong>来自处理器外部</strong></li>
+<li><strong>与当前正在执行的指令无关</strong></li>
+<li>如 I&#x2F;O 中断、时钟中断、外部设备信号中断</li>
+</ul>
+<hr>
+<h2 id="4-中断、异常、系统调用的区别"><a href="#4-中断、异常、系统调用的区别" class="headerlink" title="4. 中断、异常、系统调用的区别"></a>4. 中断、异常、系统调用的区别</h2><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>来源</th>
+<th>是否与当前指令有关</th>
+<th>典型例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>中断</td>
+<td>处理器外部</td>
+<td>无关</td>
+<td>时钟中断、键盘中断、I&#x2F;O完成</td>
+</tr>
+<tr>
+<td>异常</td>
+<td>当前指令执行</td>
+<td>有关</td>
+<td>除零、地址越界、非法指令</td>
+</tr>
+<tr>
+<td>系统调用&#x2F;陷入</td>
+<td>程序主动请求</td>
+<td>有关</td>
+<td>请求I&#x2F;O、创建设备、创建进程</td>
+</tr>
+</tbody></table>
+<h3 id="更标准的补充说明"><a href="#更标准的补充说明" class="headerlink" title="更标准的补充说明"></a>更标准的补充说明</h3><p>从体系结构角度看：</p>
+<ul>
+<li><strong>异常（exception）</strong> 多是同步的</li>
+<li><strong>中断（interrupt）</strong> 多是异步的</li>
+<li><strong>系统调用</strong> 往往通过陷入指令主动触发，属于同步进入内核</li>
+</ul>
+<hr>
+<h2 id="5-进程状态转换与中断的关系"><a href="#5-进程状态转换与中断的关系" class="headerlink" title="5. 进程状态转换与中断的关系"></a>5. 进程状态转换与中断的关系</h2><p>中断不是孤立的，它和进程三态紧密相关。</p>
+<pre><code class=" mermaid">stateDiagram-v2
+    [*] --&gt; 就绪态
+    就绪态 --&gt; 运行态: 被调度
+    运行态 --&gt; 等待态: 等待I/O/资源/系统调用阻塞
+    等待态 --&gt; 就绪态: 事件完成
+    运行态 --&gt; 就绪态: 时间片到/被抢占
+</code></pre>
+
+<h3 id="核心理解"><a href="#核心理解" class="headerlink" title="核心理解"></a>核心理解</h3><ul>
+<li><strong>中断&#x2F;异常&#x2F;系统调用会激活内核</strong></li>
+<li>内核根据事件结果，决定：<ul>
+<li>返回原进程</li>
+<li>让进程阻塞</li>
+<li>抢占当前进程</li>
+<li>调度其他进程</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="6-高频考点-1"><a href="#6-高频考点-1" class="headerlink" title="6. 高频考点"></a>6. 高频考点</h2><ul>
+<li>中断概念</li>
+<li>为什么说 OS 是中断驱动</li>
+<li>中断、异常、系统调用区别</li>
+<li>中断在进程状态转换中的作用</li>
+</ul>
+<hr>
+<h2 id="7-易错点-1"><a href="#7-易错点-1" class="headerlink" title="7. 易错点"></a>7. 易错点</h2><ol>
+<li><strong>系统调用不是“出错”，而是程序主动请求 OS 服务</strong></li>
+<li><strong>异常通常和当前指令有关，中断通常和当前指令无关</strong></li>
+<li><strong>中断处理完不一定返回原进程，也可能调度其他进程</strong></li>
+</ol>
+<hr>
+<h2 id="8-简答题模板-1"><a href="#8-简答题模板-1" class="headerlink" title="8. 简答题模板"></a>8. 简答题模板</h2><h3 id="题目：说明中断、异常和系统调用的区别"><a href="#题目：说明中断、异常和系统调用的区别" class="headerlink" title="题目：说明中断、异常和系统调用的区别"></a>题目：说明中断、异常和系统调用的区别</h3><blockquote>
+<p>中断、异常和系统调用都能使处理器进入内核态，但三者来源不同。中断通常来自处理器外部，与当前正在执行的指令无关，如时钟中断和 I&#x2F;O 中断；异常由当前指令执行引起，如除零、非法指令和地址越界；系统调用则是用户程序通过陷入指令主动请求操作系统服务所引起的内核介入。三者共同构成操作系统被激活的重要机制。</p>
+</blockquote>
+<hr>
+<h2 id="9-考前速背版-1"><a href="#9-考前速背版-1" class="headerlink" title="9. 考前速背版"></a>9. 考前速背版</h2><ul>
+<li>中断：外部事件、异步</li>
+<li>异常：执行指令出错、同步</li>
+<li>系统调用：程序主动请求 OS 服务</li>
+<li>OS 是中断驱动的</li>
+<li>中断后可能返回原进程，也可能切换进程</li>
+</ul>
+<hr>
+<h2 id="2-2-2-中断源"><a href="#2-2-2-中断源" class="headerlink" title="2.2.2 中断源"></a>2.2.2 中断源</h2><h3 id="一句话理解-4"><a href="#一句话理解-4" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>中断源就是“谁发起了打断 CPU 的请求”。</strong></p>
+<hr>
+<h2 id="1-中断源分类总览"><a href="#1-中断源分类总览" class="headerlink" title="1. 中断源分类总览"></a>1. 中断源分类总览</h2><p>课件列出四类重要中断源：</p>
+<ol>
+<li>处理器硬件故障中断事件</li>
+<li>程序性中断事件</li>
+<li>自愿性中断事件</li>
+<li>I&#x2F;O 中断事件</li>
+<li>外部中断事件</li>
+</ol>
+<p>可以归纳如下：</p>
+<pre><code class=" mermaid">mindmap
+  root((中断源))
+    硬件故障
+      CPU故障
+      内存故障
+      总线故障
+    程序性中断
+      除零
+      溢出
+      非法指令
+      地址越界
+      缺页
+    自愿性中断
+      系统调用
+      请求I/O
+      请求设备
+    I/O中断
+      I/O完成
+      I/O错误
+    外部中断
+      时钟中断
+      键盘鼠标
+      重启/关机
+</code></pre>
+
+<hr>
+<h2 id="2-处理器硬件故障中断事件"><a href="#2-处理器硬件故障中断事件" class="headerlink" title="2. 处理器硬件故障中断事件"></a>2. 处理器硬件故障中断事件</h2><h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><ul>
+<li>处理器故障</li>
+<li>内存故障</li>
+<li>总线故障等</li>
+</ul>
+<h3 id="处理原则"><a href="#处理原则" class="headerlink" title="处理原则"></a>处理原则</h3><p>课件给出的典型原则：</p>
+<ul>
+<li>保护现场</li>
+<li>停止设备</li>
+<li>停止 CPU</li>
+<li>向操作员报告</li>
+<li>等待人工干预</li>
+</ul>
+<h3 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h3><p>这类问题一般不是普通程序能解决的，而是系统级严重错误。</p>
+<hr>
+<h2 id="3-程序性中断事件"><a href="#3-程序性中断事件" class="headerlink" title="3. 程序性中断事件"></a>3. 程序性中断事件</h2><h3 id="来源-1"><a href="#来源-1" class="headerlink" title="来源"></a>来源</h3><p>处理器执行机器指令时产生的问题。</p>
+<h3 id="典型情况"><a href="#典型情况" class="headerlink" title="典型情况"></a>典型情况</h3><ul>
+<li>除数为零</li>
+<li>溢出</li>
+<li>非法指令</li>
+<li>用户态执行特权指令</li>
+<li>地址越界</li>
+<li>非法存取</li>
+<li>虚拟地址异常（如缺页）</li>
+</ul>
+<h3 id="处理方式"><a href="#处理方式" class="headerlink" title="处理方式"></a>处理方式</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>处理方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>简单算术异常</td>
+<td>报告用户或异常处理</td>
+</tr>
+<tr>
+<td>非法指令&#x2F;非法访问</td>
+<td>终止进程</td>
+</tr>
+<tr>
+<td>虚拟地址异常</td>
+<td>调整内存后重新执行指令</td>
+</tr>
+</tbody></table>
+<h3 id="易考点"><a href="#易考点" class="headerlink" title="易考点"></a>易考点</h3><p><strong>缺页异常为什么常常不终止进程？</strong></p>
+<p>因为缺页是“执行环境暂时不满足”，不是程序必然错误。OS 只需把页面调入，再让该指令重执行。</p>
+<hr>
+<h2 id="4-自愿性中断事件"><a href="#4-自愿性中断事件" class="headerlink" title="4. 自愿性中断事件"></a>4. 自愿性中断事件</h2><p>这就是<strong>系统调用</strong>。</p>
+<h3 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h3><ul>
+<li>程序主动发出</li>
+<li>目的是请求 OS 服务</li>
+<li>常通过陷入指令触发</li>
+</ul>
+<h3 id="典型请求"><a href="#典型请求" class="headerlink" title="典型请求"></a>典型请求</h3><ul>
+<li>请求 I&#x2F;O</li>
+<li>请求设备</li>
+<li>创建进程</li>
+<li>申请资源</li>
+</ul>
+<h3 id="处理流程"><a href="#处理流程" class="headerlink" title="处理流程"></a>处理流程</h3><p>课件给出的关键词：</p>
+<ul>
+<li>陷入 OS</li>
+<li>保护现场</li>
+<li>根据功能号查入口地址</li>
+<li>跳转到具体处理程序</li>
+</ul>
+<hr>
+<h2 id="5-I-O-中断事件"><a href="#5-I-O-中断事件" class="headerlink" title="5. I&#x2F;O 中断事件"></a>5. I&#x2F;O 中断事件</h2><h3 id="来源-2"><a href="#来源-2" class="headerlink" title="来源"></a>来源</h3><p>外围设备报告 I&#x2F;O 状态。</p>
+<h3 id="典型情况-1"><a href="#典型情况-1" class="headerlink" title="典型情况"></a>典型情况</h3><ul>
+<li>I&#x2F;O 完成</li>
+<li>I&#x2F;O 出错</li>
+<li>I&#x2F;O 异常</li>
+</ul>
+<h3 id="OS-的动作"><a href="#OS-的动作" class="headerlink" title="OS 的动作"></a>OS 的动作</h3><p>若 I&#x2F;O 完成，通常要：</p>
+<ul>
+<li>调整进程状态</li>
+<li>唤醒等待进程</li>
+<li>把其加入就绪队列</li>
+</ul>
+<h3 id="为什么-I-O-中断很重要？"><a href="#为什么-I-O-中断很重要？" class="headerlink" title="为什么 I&#x2F;O 中断很重要？"></a>为什么 I&#x2F;O 中断很重要？</h3><p>因为没有它，CPU 无法及时知道外设“已经做完了”。</p>
+<hr>
+<h2 id="6-外部中断事件"><a href="#6-外部中断事件" class="headerlink" title="6. 外部中断事件"></a>6. 外部中断事件</h2><p>包括：</p>
+<ul>
+<li>时钟&#x2F;间隔时钟中断</li>
+<li>设备报到&#x2F;结束中断</li>
+<li>键盘&#x2F;鼠标信号中断</li>
+<li>关机&#x2F;重启中断</li>
+</ul>
+<h3 id="最重要的是时钟中断"><a href="#最重要的是时钟中断" class="headerlink" title="最重要的是时钟中断"></a>最重要的是时钟中断</h3><p>因为它支撑了：</p>
+<ul>
+<li>计时</li>
+<li>时间片轮转</li>
+<li>抢占调度</li>
+</ul>
+<p>没有时钟中断，就很难实现现代抢占式分时系统。</p>
+<hr>
+<h2 id="7-高频考点"><a href="#7-高频考点" class="headerlink" title="7. 高频考点"></a>7. 高频考点</h2><ul>
+<li>中断源分类</li>
+<li>程序性中断 vs 自愿性中断</li>
+<li>缺页异常的处理特点</li>
+<li>I&#x2F;O 中断与唤醒进程的关系</li>
+<li>时钟中断在调度中的作用</li>
+</ul>
+<hr>
+<h2 id="8-易错点"><a href="#8-易错点" class="headerlink" title="8. 易错点"></a>8. 易错点</h2><ol>
+<li><strong>系统调用是自愿性中断，不是硬件故障</strong></li>
+<li><strong>I&#x2F;O 完成中断常导致等待进程转就绪</strong></li>
+<li><strong>虚拟地址异常通常是“修复后重试”，不是立即终止</strong></li>
+<li><strong>时钟中断是实现抢占的重要基础</strong></li>
+</ol>
+<hr>
+<h2 id="9-简答题模板"><a href="#9-简答题模板" class="headerlink" title="9. 简答题模板"></a>9. 简答题模板</h2><h3 id="题目：简述常见中断源及其处理特点"><a href="#题目：简述常见中断源及其处理特点" class="headerlink" title="题目：简述常见中断源及其处理特点"></a>题目：简述常见中断源及其处理特点</h3><blockquote>
+<p>常见中断源包括硬件故障中断、程序性中断、自愿性中断、I&#x2F;O 中断和外部中断。硬件故障中断通常需要保护现场、停止设备并等待人工干预；程序性中断由指令执行异常引起，严重者终止进程，缺页等可修复异常则调整后重执行；自愿性中断即系统调用，由程序主动请求操作系统服务；I&#x2F;O 中断用于报告设备完成或出错，常伴随等待进程唤醒；外部中断如时钟中断则支持记时与抢占调度。</p>
+</blockquote>
+<hr>
+<h2 id="10-考前速背版"><a href="#10-考前速背版" class="headerlink" title="10. 考前速背版"></a>10. 考前速背版</h2><ul>
+<li>中断源：<strong>硬件故障、程序异常、系统调用、I&#x2F;O、外部事件</strong></li>
+<li>缺页：修复后重执行</li>
+<li>I&#x2F;O 完成：唤醒等待进程</li>
+<li>时钟中断：时间片与抢占基础</li>
+</ul>
+<hr>
+<h2 id="2-2-3-中断系统"><a href="#2-2-3-中断系统" class="headerlink" title="2.2.3 中断系统"></a>2.2.3 中断系统</h2><h3 id="一句话理解-5"><a href="#一句话理解-5" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>中断系统就是“发现中断、决定是否响应、转到处理程序、再恢复运行”的整套软硬件机制。</strong></p>
+<hr>
+<h2 id="1-中断系统的组成"><a href="#1-中断系统的组成" class="headerlink" title="1. 中断系统的组成"></a>1. 中断系统的组成</h2><p>课件指出：</p>
+<ul>
+<li><strong>硬件子系统</strong>：负责中断响应</li>
+<li><strong>软件子系统</strong>：负责中断处理</li>
+</ul>
+<p>这体现了<strong>软硬件协同设计</strong>思想。</p>
+<h3 id="图示"><a href="#图示" class="headerlink" title="图示"></a>图示</h3><pre><code class=" mermaid">flowchart LR
+A[中断源] --&gt; B[中断装置/中断控制器&lt;br/&gt;硬件]
+B --&gt; C[保存PSW/PC 切入内核&lt;br/&gt;硬件]
+C --&gt; D[中断处理程序 ISR&lt;br/&gt;软件]
+D --&gt; E[恢复现场/调度/返回]
+</code></pre>
+
+<hr>
+<h2 id="2-中断装置"><a href="#2-中断装置" class="headerlink" title="2. 中断装置"></a>2. 中断装置</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><p>负责发现并响应中断&#x2F;异常的硬件装置。</p>
+<h3 id="不同来源的中断，发现机制不同"><a href="#不同来源的中断，发现机制不同" class="headerlink" title="不同来源的中断，发现机制不同"></a>不同来源的中断，发现机制不同</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>发现&#x2F;响应主体</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>外部中断</td>
+<td>中断控制器</td>
+</tr>
+<tr>
+<td>内部异常</td>
+<td>指令控制逻辑&#x2F;陷阱机构</td>
+</tr>
+<tr>
+<td>系统调用</td>
+<td>陷入指令触发系统陷阱</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="3-中断控制器"><a href="#3-中断控制器" class="headerlink" title="3. 中断控制器"></a>3. 中断控制器</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>接收外设发来的 IRQ</li>
+<li>在中断寄存器中记录中断</li>
+<li>在合适时机让 CPU 响应</li>
+<li>查询中断向量表找到服务程序地址</li>
+</ul>
+<h3 id="中断向量表是什么"><a href="#中断向量表是什么" class="headerlink" title="中断向量表是什么"></a>中断向量表是什么</h3><p><strong>中断向量表（Interrupt Vector Table）</strong> 是存放各类中断服务程序入口地址的表。</p>
+<p>当发生某种中断时，系统通过“中断号&#x2F;向量号”找到对应处理程序。</p>
+<hr>
+<h2 id="4-陷阱与系统陷阱"><a href="#4-陷阱与系统陷阱" class="headerlink" title="4. 陷阱与系统陷阱"></a>4. 陷阱与系统陷阱</h2><h3 id="陷阱（Trap）"><a href="#陷阱（Trap）" class="headerlink" title="陷阱（Trap）"></a>陷阱（Trap）</h3><p>通常指执行指令过程中检测到异常，转入异常处理程序。</p>
+<h3 id="系统陷阱"><a href="#系统陷阱" class="headerlink" title="系统陷阱"></a>系统陷阱</h3><p>执行陷入指令后，转入系统调用处理程序。</p>
+<h3 id="区分"><a href="#区分" class="headerlink" title="区分"></a>区分</h3><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>来源</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>陷阱</td>
+<td>异常检测</td>
+<td>处理指令执行异常</td>
+</tr>
+<tr>
+<td>系统陷阱</td>
+<td>系统调用指令</td>
+<td>激活 OS 服务程序</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-中断响应过程"><a href="#5-中断响应过程" class="headerlink" title="5. 中断响应过程"></a>5. 中断响应过程</h2><p>课件给出的响应过程要点非常重要，几乎可以直接出简答题。</p>
+<h3 id="Step-1：发现中断源，提出中断请求"><a href="#Step-1：发现中断源，提出中断请求" class="headerlink" title="Step 1：发现中断源，提出中断请求"></a>Step 1：发现中断源，提出中断请求</h3><h3 id="Step-2：检测中断寄存器中记录的中断"><a href="#Step-2：检测中断寄存器中记录的中断" class="headerlink" title="Step 2：检测中断寄存器中记录的中断"></a>Step 2：检测中断寄存器中记录的中断</h3><h3 id="Step-3：判断是否被屏蔽"><a href="#Step-3：判断是否被屏蔽" class="headerlink" title="Step 3：判断是否被屏蔽"></a>Step 3：判断是否被屏蔽</h3><h3 id="Step-4：若有多个中断，按优先级选择"><a href="#Step-4：若有多个中断，按优先级选择" class="headerlink" title="Step 4：若有多个中断，按优先级选择"></a>Step 4：若有多个中断，按优先级选择</h3><h3 id="Step-5：中断当前程序执行"><a href="#Step-5：中断当前程序执行" class="headerlink" title="Step 5：中断当前程序执行"></a>Step 5：中断当前程序执行</h3><h3 id="Step-6：保存当前程序-PSW-PC-到核心栈"><a href="#Step-6：保存当前程序-PSW-PC-到核心栈" class="headerlink" title="Step 6：保存当前程序 PSW&#x2F;PC 到核心栈"></a>Step 6：保存当前程序 PSW&#x2F;PC 到核心栈</h3><h3 id="Step-7：转向-OS-的中断处理程序"><a href="#Step-7：转向-OS-的中断处理程序" class="headerlink" title="Step 7：转向 OS 的中断处理程序"></a>Step 7：转向 OS 的中断处理程序</h3><h3 id="Mermaid-流程图-1"><a href="#Mermaid-流程图-1" class="headerlink" title="Mermaid 流程图"></a>Mermaid 流程图</h3><pre><code class=" mermaid">flowchart TD
+A[中断源提出请求] --&gt; B[中断装置检测请求]
+B --&gt; C&#123;是否屏蔽?&#125;
+C -- 是 --&gt; Z[暂不响应]
+C -- 否 --&gt; D&#123;是否多个中断?&#125;
+D -- 是 --&gt; E[按优先级选择]
+D -- 否 --&gt; F[直接响应]
+E --&gt; F
+F --&gt; G[中断当前程序]
+G --&gt; H[保存PSW/PC到核心栈]
+H --&gt; I[进入中断处理程序]
+</code></pre>
+
+<hr>
+<h2 id="6-中断处理程序的任务"><a href="#6-中断处理程序的任务" class="headerlink" title="6. 中断处理程序的任务"></a>6. 中断处理程序的任务</h2><p>课件总结：</p>
+<ul>
+<li>保护未被硬件保护的处理器状态</li>
+<li>分析 PSW 中断码识别中断源</li>
+<li>查中断向量表并执行相应处理子程序</li>
+<li>恢复正常操作</li>
+</ul>
+<h3 id="“恢复正常操作”有两种情况"><a href="#“恢复正常操作”有两种情况" class="headerlink" title="“恢复正常操作”有两种情况"></a>“恢复正常操作”有两种情况</h3><h4 id="情况一：返回原进程"><a href="#情况一：返回原进程" class="headerlink" title="情况一：返回原进程"></a>情况一：返回原进程</h4><p>如果该中断不影响当前进程继续执行，则处理完直接返回。</p>
+<h4 id="情况二：不返回原进程，而进行调度"><a href="#情况二：不返回原进程，而进行调度" class="headerlink" title="情况二：不返回原进程，而进行调度"></a>情况二：不返回原进程，而进行调度</h4><p>如果该中断导致：</p>
+<ul>
+<li>当前进程阻塞</li>
+<li>时间片用完</li>
+<li>更高优先级进程到达</li>
+<li>当前进程终止</li>
+</ul>
+<p>那么 OS 会调整队列并启动调度。</p>
+<hr>
+<h2 id="7-中断处理总流程"><a href="#7-中断处理总流程" class="headerlink" title="7. 中断处理总流程"></a>7. 中断处理总流程</h2><pre><code class=" mermaid">flowchart TD
+A[运行中的进程] --&gt; B[发现中断源]
+B --&gt; C[置中断码]
+C --&gt; D[交换/保存PSW]
+D --&gt; E[保护现场]
+E --&gt; F[分析中断源]
+F --&gt; G[执行相应处理程序]
+G --&gt; H&#123;是否需要调度?&#125;
+H -- 否 --&gt; I[恢复现场]
+I --&gt; J[中断返回]
+J --&gt; K[原进程继续]
+H -- 是 --&gt; L[调整进程队列]
+L --&gt; M[进程调度]
+M --&gt; N[恢复新进程现场]
+N --&gt; O[中断返回]
+O --&gt; P[新进程运行]
+</code></pre>
+
+<hr>
+<h2 id="8-高频考点"><a href="#8-高频考点" class="headerlink" title="8. 高频考点"></a>8. 高频考点</h2><ul>
+<li>中断系统的组成</li>
+<li>中断控制器的作用</li>
+<li>中断向量表的作用</li>
+<li>中断响应过程</li>
+<li>中断处理过程</li>
+<li>“返回原进程”和“切换其他进程”的两种结局</li>
+</ul>
+<hr>
+<h2 id="9-易错点"><a href="#9-易错点" class="headerlink" title="9. 易错点"></a>9. 易错点</h2><ol>
+<li><strong>中断响应主要靠硬件，中断处理主要靠软件</strong></li>
+<li><strong>保存 PC&#x2F;PSW 往往由硬件先做一部分，但完整现场通常还需软件补充保存</strong></li>
+<li><strong>中断处理结束不一定回原程序</strong></li>
+<li><strong>中断向量表存的是入口地址，不是处理代码本身的全部内容</strong></li>
+</ol>
+<hr>
+<h2 id="10-简答题模板"><a href="#10-简答题模板" class="headerlink" title="10. 简答题模板"></a>10. 简答题模板</h2><h3 id="题目：简述中断响应与中断处理过程"><a href="#题目：简述中断响应与中断处理过程" class="headerlink" title="题目：简述中断响应与中断处理过程"></a>题目：简述中断响应与中断处理过程</h3><blockquote>
+<p>中断响应是由硬件完成的，主要过程包括：发现中断源、提出中断请求、检测是否允许中断、按优先级选择中断、保存当前程序的 PSW&#x2F;PC 并转入操作系统中断处理程序。中断处理是由软件完成的，主要包括保护未保存的现场、分析中断源、执行相应的中断服务程序、调整进程状态和队列，并根据情况恢复原进程或启动调度切换到新进程。</p>
+</blockquote>
+<hr>
+<h2 id="11-考前速背版"><a href="#11-考前速背版" class="headerlink" title="11. 考前速背版"></a>11. 考前速背版</h2><ul>
+<li>中断系统 &#x3D; <strong>硬件响应 + 软件处理</strong></li>
+<li>中断控制器：接 IRQ、查向量表</li>
+<li>响应步骤：<strong>发现、判断屏蔽、选优先级、保存 PSW&#x2F;PC、转 ISR</strong></li>
+<li>处理后两种结果：<strong>回原进程 &#x2F; 调度新进程</strong></li>
+</ul>
+<hr>
+<h2 id="2-2-4-多中断的响应与处理"><a href="#2-2-4-多中断的响应与处理" class="headerlink" title="2.2.4 多中断的响应与处理"></a>2.2.4 多中断的响应与处理</h2><h3 id="一句话理解-6"><a href="#一句话理解-6" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>多个中断同时或嵌套出现时，要靠屏蔽、优先级和嵌套规则来维持系统有序。</strong></p>
+<hr>
+<h2 id="1-中断屏蔽"><a href="#1-中断屏蔽" class="headerlink" title="1. 中断屏蔽"></a>1. 中断屏蔽</h2><h3 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h3><p>通过中断屏蔽位决定某类中断是否允许被响应。</p>
+<h3 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>选择性响应中断</li>
+<li>防止关键处理过程被不合适地打断</li>
+<li>保证某些原子操作的完整性</li>
+</ul>
+<hr>
+<h2 id="2-中断优先级"><a href="#2-中断优先级" class="headerlink" title="2. 中断优先级"></a>2. 中断优先级</h2><h3 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h3><p>多个中断同时到达时，决定先响应哪个。</p>
+<h3 id="课件示例中的可能次序"><a href="#课件示例中的可能次序" class="headerlink" title="课件示例中的可能次序"></a>课件示例中的可能次序</h3><ul>
+<li>处理器硬件故障</li>
+<li>自愿性中断</li>
+<li>程序性中断</li>
+<li>时钟等外部中断</li>
+<li>I&#x2F;O 中断</li>
+<li>重启动和关机中断</li>
+</ul>
+<blockquote>
+<p>注意：不同系统实现可以不同，考试一般答“系统按预定优先级响应”。</p>
+</blockquote>
+<hr>
+<h2 id="3-中断嵌套"><a href="#3-中断嵌套" class="headerlink" title="3. 中断嵌套"></a>3. 中断嵌套</h2><h3 id="定义-5"><a href="#定义-5" class="headerlink" title="定义"></a>定义</h3><p>在处理中断 A 的过程中，又响应了中断 B。</p>
+<h3 id="为什么允许？"><a href="#为什么允许？" class="headerlink" title="为什么允许？"></a>为什么允许？</h3><p>因为有的中断更紧急，不能等。</p>
+<h3 id="为什么要限制层数？"><a href="#为什么要限制层数？" class="headerlink" title="为什么要限制层数？"></a>为什么要限制层数？</h3><p>因为每嵌套一层，都要：</p>
+<ul>
+<li>继续保存现场</li>
+<li>增加系统开销</li>
+<li>增加控制复杂度</li>
+</ul>
+<p>所以一般要限制嵌套层数。</p>
+<hr>
+<h2 id="4-三者关系：屏蔽、优先级、嵌套"><a href="#4-三者关系：屏蔽、优先级、嵌套" class="headerlink" title="4. 三者关系：屏蔽、优先级、嵌套"></a>4. 三者关系：屏蔽、优先级、嵌套</h2><table>
+<thead>
+<tr>
+<th>机制</th>
+<th>解决什么问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>中断屏蔽</td>
+<td>某个中断能不能响应</td>
+</tr>
+<tr>
+<td>中断优先级</td>
+<td>多个中断先响应谁</td>
+</tr>
+<tr>
+<td>中断嵌套</td>
+<td>响应后处理中能否再被打断</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-典型情形分析"><a href="#5-典型情形分析" class="headerlink" title="5. 典型情形分析"></a>5. 典型情形分析</h2><h3 id="情形-1：X、Y-同时发生，Y-被屏蔽"><a href="#情形-1：X、Y-同时发生，Y-被屏蔽" class="headerlink" title="情形 1：X、Y 同时发生，Y 被屏蔽"></a>情形 1：X、Y 同时发生，Y 被屏蔽</h3><ul>
+<li>先响应 X</li>
+<li>因 Y 被屏蔽，不响应 Y</li>
+<li>X 处理完后再看是否可处理 Y</li>
+</ul>
+<h3 id="情形-2：X、Y-同时发生，Y-未屏蔽且优先级更高"><a href="#情形-2：X、Y-同时发生，Y-未屏蔽且优先级更高" class="headerlink" title="情形 2：X、Y 同时发生，Y 未屏蔽且优先级更高"></a>情形 2：X、Y 同时发生，Y 未屏蔽且优先级更高</h3><ul>
+<li>可能先按规则响应 X</li>
+<li>处理中若允许嵌套，Y 可以打断 X</li>
+<li>先处理 Y，再回来处理 X</li>
+</ul>
+<hr>
+<h2 id="6-Mermaid-图示"><a href="#6-Mermaid-图示" class="headerlink" title="6. Mermaid 图示"></a>6. Mermaid 图示</h2><pre><code class=" mermaid">flowchart TD
+A[多个中断到达] --&gt; B&#123;是否被屏蔽?&#125;
+B -- 被屏蔽 --&gt; C[暂不响应]
+B -- 未屏蔽 --&gt; D[按优先级选中断]
+D --&gt; E[进入处理]
+E --&gt; F&#123;处理中是否允许更高优先级中断嵌套?&#125;
+F -- 否 --&gt; G[处理完当前中断]
+F -- 是 --&gt; H[响应更高优先级中断]
+H --&gt; I[处理嵌套中断]
+I --&gt; G
+</code></pre>
+
+<hr>
+<h2 id="7-高频考点-1"><a href="#7-高频考点-1" class="headerlink" title="7. 高频考点"></a>7. 高频考点</h2><ul>
+<li>什么是中断屏蔽</li>
+<li>什么是中断优先级</li>
+<li>什么是中断嵌套</li>
+<li>三者区别与联系</li>
+<li>为什么中断嵌套层数要受限</li>
+</ul>
+<hr>
+<h2 id="8-易错点-1"><a href="#8-易错点-1" class="headerlink" title="8. 易错点"></a>8. 易错点</h2><ol>
+<li><strong>优先级高不代表一定立刻响应，前提是没被屏蔽</strong></li>
+<li><strong>先响应的不一定先处理完，因为可能被更高优先级中断嵌套</strong></li>
+<li><strong>中断嵌套提升实时性，但会增加开销</strong></li>
+</ol>
+<hr>
+<h2 id="9-简答题模板-1"><a href="#9-简答题模板-1" class="headerlink" title="9. 简答题模板"></a>9. 简答题模板</h2><h3 id="题目：简述多重中断处理中的屏蔽、优先级和嵌套"><a href="#题目：简述多重中断处理中的屏蔽、优先级和嵌套" class="headerlink" title="题目：简述多重中断处理中的屏蔽、优先级和嵌套"></a>题目：简述多重中断处理中的屏蔽、优先级和嵌套</h3><blockquote>
+<p>在多重中断环境下，中断屏蔽用于决定某类中断是否允许被响应；中断优先级用于在多个未屏蔽中断同时存在时确定响应顺序；中断嵌套则表示在处理中断过程中再次响应新的中断。三者共同保证系统能够有选择地、按重要程度处理多个中断，同时兼顾实时性与系统开销。</p>
+</blockquote>
+<hr>
+<h2 id="10-考前速背版-1"><a href="#10-考前速背版-1" class="headerlink" title="10. 考前速背版"></a>10. 考前速背版</h2><ul>
+<li>屏蔽：<strong>能不能响</strong></li>
+<li>优先级：<strong>先响谁</strong></li>
+<li>嵌套：<strong>处理中还能不能再响</strong></li>
+<li>高优先级前提：<strong>未被屏蔽</strong></li>
+<li>嵌套层数不能太深</li>
+</ul>
+<hr>
+<h1 id="四、2-3-进程管理"><a href="#四、2-3-进程管理" class="headerlink" title="四、2.3 进程管理"></a>四、2.3 进程管理</h1><hr>
+<h2 id="2-3-1-进程及其状态"><a href="#2-3-1-进程及其状态" class="headerlink" title="2.3.1 进程及其状态"></a>2.3.1 进程及其状态</h2><h3 id="一句话理解-7"><a href="#一句话理解-7" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>进程就是操作系统为了管理“正在运行的程序”而建立的执行实体。</strong></p>
+<hr>
+<h2 id="1-为什么要提出进程"><a href="#1-为什么要提出进程" class="headerlink" title="1. 为什么要提出进程"></a>1. 为什么要提出进程</h2><p>课件的逻辑很直接：</p>
+<ul>
+<li>OS 必须全方位管理运行中的程序</li>
+<li>所以要为每个运行中的程序建立一个管理实体</li>
+<li>这个实体就是<strong>进程</strong></li>
+</ul>
+<h3 id="关键思想"><a href="#关键思想" class="headerlink" title="关键思想"></a>关键思想</h3><p>程序只是静态代码文件，<strong>进程才是动态运行实体</strong>。</p>
+<hr>
+<h2 id="2-进程的概念"><a href="#2-进程的概念" class="headerlink" title="2. 进程的概念"></a>2. 进程的概念</h2><p>课件定义：</p>
+<blockquote>
+<p>进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。</p>
+</blockquote>
+<p>还强调：</p>
+<blockquote>
+<p>进程是操作系统进行资源分配和处理器调度的一个独立单位。</p>
+</blockquote>
+<h3 id="两层含义都要会写"><a href="#两层含义都要会写" class="headerlink" title="两层含义都要会写"></a>两层含义都要会写</h3><ol>
+<li><strong>运行观点</strong>：程序的一次执行</li>
+<li><strong>管理观点</strong>：资源分配和调度的基本单位（经典说法）</li>
+</ol>
+<hr>
+<h2 id="3-进程的形式化组成"><a href="#3-进程的形式化组成" class="headerlink" title="3. 进程的形式化组成"></a>3. 进程的形式化组成</h2><p>课件给出五部分：</p>
+<ul>
+<li><strong>P</strong>：OS 管理运行程序的数据结构</li>
+<li><strong>C</strong>：内存代码</li>
+<li><strong>D</strong>：内存数据</li>
+<li><strong>R</strong>：通用寄存器信息</li>
+<li><strong>PSW</strong>：程序状态字信息</li>
+</ul>
+<p>即：</p>
+<blockquote>
+<p>一个进程 &#x3D; 管理信息 + 程序代码 + 数据 + 寄存器上下文 + 状态信息</p>
+</blockquote>
+<p>这很重要，因为它说明进程绝不是“只有程序代码”。</p>
+<hr>
+<h2 id="4-程序与进程的区别"><a href="#4-程序与进程的区别" class="headerlink" title="4. 程序与进程的区别"></a>4. 程序与进程的区别</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>程序</th>
+<th>进程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>性质</td>
+<td>静态</td>
+<td>动态</td>
+</tr>
+<tr>
+<td>存在形式</td>
+<td>文件&#x2F;指令集合</td>
+<td>运行活动</td>
+</tr>
+<tr>
+<td>生命周期</td>
+<td>长</td>
+<td>有创建和撤销</td>
+</tr>
+<tr>
+<td>是否占用资源</td>
+<td>不一定</td>
+<td>必然占用</td>
+</tr>
+<tr>
+<td>是否可并发</td>
+<td>程序本身不谈并发</td>
+<td>进程可以并发</td>
+</tr>
+</tbody></table>
+<h3 id="高频结论"><a href="#高频结论" class="headerlink" title="高频结论"></a>高频结论</h3><ul>
+<li>同一个程序可对应多个进程</li>
+<li>同一个外存文件，两次运行是两个不同进程</li>
+<li>不同程序也可形成不同进程</li>
+<li>相同代码可共享，但进程仍不同</li>
+</ul>
+<hr>
+<h2 id="5-进程的典型例子"><a href="#5-进程的典型例子" class="headerlink" title="5. 进程的典型例子"></a>5. 进程的典型例子</h2><h3 id="情形-1：不同程序，不同数据集"><a href="#情形-1：不同程序，不同数据集" class="headerlink" title="情形 1：不同程序，不同数据集"></a>情形 1：不同程序，不同数据集</h3><p>形成两个无关进程。</p>
+<h3 id="情形-2：不同程序，相同数据集"><a href="#情形-2：不同程序，相同数据集" class="headerlink" title="情形 2：不同程序，相同数据集"></a>情形 2：不同程序，相同数据集</h3><p>形成共享数据的交往进程。</p>
+<h3 id="情形-3：相同代码，不同数据集"><a href="#情形-3：相同代码，不同数据集" class="headerlink" title="情形 3：相同代码，不同数据集"></a>情形 3：相同代码，不同数据集</h3><p>形成两个共享代码的无关进程。</p>
+<h3 id="什么是可再入程序"><a href="#什么是可再入程序" class="headerlink" title="什么是可再入程序"></a>什么是可再入程序</h3><p>课件提到：</p>
+<ul>
+<li>可再入程序可被多个进程共享</li>
+<li>它应是“纯代码”，不依赖被破坏的共享可修改状态</li>
+</ul>
+<hr>
+<h2 id="6-进程的三态模型"><a href="#6-进程的三态模型" class="headerlink" title="6. 进程的三态模型"></a>6. 进程的三态模型</h2><h3 id="三种基本状态"><a href="#三种基本状态" class="headerlink" title="三种基本状态"></a>三种基本状态</h3><ul>
+<li><strong>运行态</strong>：占有处理器执行</li>
+<li><strong>就绪态</strong>：具备运行条件，等待 CPU</li>
+<li><strong>等待态（阻塞态）</strong>：因等待资源、I&#x2F;O、信号等暂时不能运行</li>
+</ul>
+<h3 id="状态转换图"><a href="#状态转换图" class="headerlink" title="状态转换图"></a>状态转换图</h3><pre><code class=" mermaid">stateDiagram-v2
+    [*] --&gt; 就绪态
+    就绪态 --&gt; 运行态: 被选中
+    运行态 --&gt; 等待态: 等待资源/I-O/信号
+    等待态 --&gt; 就绪态: 事件完成
+    运行态 --&gt; 就绪态: 时间片到/被抢占
+</code></pre>
+
+<h3 id="课件特别强调的两个“不可能”"><a href="#课件特别强调的两个“不可能”" class="headerlink" title="课件特别强调的两个“不可能”"></a>课件特别强调的两个“不可能”</h3><ul>
+<li><strong>不可能从等待态直接到运行态</strong></li>
+<li><strong>不可能从就绪态直接到等待态</strong></li>
+</ul>
+<h4 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h4><p>因为：</p>
+<ul>
+<li>等待态结束后，先变成就绪态，再等待调度</li>
+<li>就绪态本来就在等 CPU，没有执行，就不可能主动发出阻塞请求</li>
+</ul>
+<p>这是考试特别爱问的判断题。</p>
+<hr>
+<h2 id="7-挂起状态"><a href="#7-挂起状态" class="headerlink" title="7. 挂起状态"></a>7. 挂起状态</h2><h3 id="为什么要引入挂起"><a href="#为什么要引入挂起" class="headerlink" title="为什么要引入挂起"></a>为什么要引入挂起</h3><p>当系统资源不足，尤其是内存不足时，为了缓解负载：</p>
+<ul>
+<li>可把某些进程从内存换出</li>
+<li>放到外存对换区</li>
+<li>暂时不参与调度</li>
+</ul>
+<p>这就是<strong>挂起</strong></p>
+<h3 id="挂起-vs-等待-的本质区别"><a href="#挂起-vs-等待-的本质区别" class="headerlink" title="挂起 vs 等待 的本质区别"></a>挂起 vs 等待 的本质区别</h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>等待态</th>
+<th>挂起态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否在内存中</td>
+<td>一般在</td>
+<td>可不在</td>
+</tr>
+<tr>
+<td>是否保留已获资源</td>
+<td>通常保留部分</td>
+<td>常被剥夺主要资源</td>
+</tr>
+<tr>
+<td>产生原因</td>
+<td>等待事件</td>
+<td>系统负载&#x2F;内存不足</td>
+</tr>
+<tr>
+<td>是否参与调度</td>
+<td>否</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<h3 id="挂起扩展状态"><a href="#挂起扩展状态" class="headerlink" title="挂起扩展状态"></a>挂起扩展状态</h3><ul>
+<li>挂起就绪态</li>
+<li>挂起等待态</li>
+</ul>
+<h3 id="图示-1"><a href="#图示-1" class="headerlink" title="图示"></a>图示</h3><pre><code class=" mermaid">stateDiagram-v2
+    运行态 --&gt; 等待态: 等待事件
+    等待态 --&gt; 就绪态: 事件结束
+    就绪态 --&gt; 运行态: 调度
+    运行态 --&gt; 就绪态: 时间片到/抢占
+
+    就绪态 --&gt; 挂起就绪态: 挂起
+    等待态 --&gt; 挂起等待态: 挂起
+    挂起等待态 --&gt; 挂起就绪态: 事件结束
+    挂起就绪态 --&gt; 就绪态: 解除挂起
+    挂起等待态 --&gt; 等待态: 解除挂起
+</code></pre>
+
+<hr>
+<h2 id="8-进程状态模型补充理解"><a href="#8-进程状态模型补充理解" class="headerlink" title="8. 进程状态模型补充理解"></a>8. 进程状态模型补充理解</h2><p>现代系统中状态可能更细：</p>
+<ul>
+<li>新建</li>
+<li>就绪</li>
+<li>运行</li>
+<li>阻塞</li>
+<li>挂起就绪</li>
+<li>挂起阻塞</li>
+<li>终止</li>
+</ul>
+<p>考试时：</p>
+<ul>
+<li>若问“基本三态”，答三态</li>
+<li>若问“扩展状态模型”，答挂起&#x2F;新建&#x2F;终止</li>
+</ul>
+<hr>
+<h2 id="9-高频考点-1"><a href="#9-高频考点-1" class="headerlink" title="9. 高频考点"></a>9. 高频考点</h2><ul>
+<li>进程概念</li>
+<li>程序与进程区别</li>
+<li>进程五部分组成</li>
+<li>三态模型及状态转换</li>
+<li>为什么等待态不能直接到运行态</li>
+<li>挂起态含义及与等待态区别</li>
+</ul>
+<hr>
+<h2 id="10-易错点-1"><a href="#10-易错点-1" class="headerlink" title="10. 易错点"></a>10. 易错点</h2><ol>
+<li><strong>进程不是程序文件</strong></li>
+<li><strong>进程是动态概念，程序是静态概念</strong></li>
+<li><strong>就绪态并不缺资源，只缺 CPU</strong></li>
+<li><strong>等待态是因事件未完成，缺的是运行条件</strong></li>
+<li><strong>挂起不是普通阻塞，它涉及换出内存与资源剥夺</strong></li>
+</ol>
+<hr>
+<h2 id="11-简答题模板-1"><a href="#11-简答题模板-1" class="headerlink" title="11. 简答题模板"></a>11. 简答题模板</h2><h3 id="题目：说明进程的概念及三态模型"><a href="#题目：说明进程的概念及三态模型" class="headerlink" title="题目：说明进程的概念及三态模型"></a>题目：说明进程的概念及三态模型</h3><blockquote>
+<p>进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动，也是操作系统进行资源分配和处理器调度的独立单位。进程的基本状态包括运行态、就绪态和等待态。运行态表示进程正在占用 CPU 执行；就绪态表示进程具备运行条件，只等待 CPU；等待态表示进程因等待 I&#x2F;O、资源或事件而暂时不能执行。进程在这些状态之间通过调度、阻塞、唤醒和抢占实现转换。</p>
+</blockquote>
+<hr>
+<h2 id="12-考前速背版-1"><a href="#12-考前速背版-1" class="headerlink" title="12. 考前速背版"></a>12. 考前速背版</h2><ul>
+<li>进程 &#x3D; 程序的一次运行活动</li>
+<li>进程 &#x3D; 资源分配和处理器调度单位</li>
+<li>三态：<strong>运行、就绪、等待</strong></li>
+<li>等待不能直达运行；就绪不能直达等待</li>
+<li>挂起是被换出，不参与调度</li>
+</ul>
+<hr>
+<h2 id="2-3-2-进程的数据描述"><a href="#2-3-2-进程的数据描述" class="headerlink" title="2.3.2 进程的数据描述"></a>2.3.2 进程的数据描述</h2><h3 id="一句话理解-8"><a href="#一句话理解-8" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>操作系统要管理进程，必须先“把进程描述清楚”，而 PCB 就是这张总档案。</strong></p>
+<hr>
+<h2 id="1-PCB：进程控制块"><a href="#1-PCB：进程控制块" class="headerlink" title="1. PCB：进程控制块"></a>1. PCB：进程控制块</h2><h3 id="定义-6"><a href="#定义-6" class="headerlink" title="定义"></a>定义</h3><p><strong>PCB（Process Control Block）</strong> 是操作系统用于记录和刻画进程状态及环境信息的数据结构。</p>
+<h3 id="为什么-PCB-是进程存在的标志？"><a href="#为什么-PCB-是进程存在的标志？" class="headerlink" title="为什么 PCB 是进程存在的标志？"></a>为什么 PCB 是进程存在的标志？</h3><p>因为操作系统并不是“凭感觉”管理进程，而是靠 PCB 管理：</p>
+<ul>
+<li>进程是谁</li>
+<li>现在什么状态</li>
+<li>在哪里</li>
+<li>占了什么资源</li>
+<li>下次怎么恢复执行</li>
+</ul>
+<p>通常说：</p>
+<blockquote>
+<p><strong>PCB 是进程存在的唯一标志（经典表述）</strong></p>
+</blockquote>
+<hr>
+<h2 id="2-PCB-的三大类信息"><a href="#2-PCB-的三大类信息" class="headerlink" title="2. PCB 的三大类信息"></a>2. PCB 的三大类信息</h2><p>课件将 PCB 内容概括为：</p>
+<ul>
+<li>标识信息</li>
+<li>现场信息</li>
+<li>控制信息</li>
+</ul>
+<h3 id="2-1-标识信息"><a href="#2-1-标识信息" class="headerlink" title="2.1 标识信息"></a>2.1 标识信息</h3><p>用于唯一标识进程，例如：</p>
+<ul>
+<li>进程 ID</li>
+<li>进程组 ID</li>
+<li>进程名</li>
+<li>进程组名</li>
+</ul>
+<h3 id="2-2-现场信息"><a href="#2-2-现场信息" class="headerlink" title="2.2 现场信息"></a>2.2 现场信息</h3><p>用于保存进程被切换时的处理器现场：</p>
+<ul>
+<li>通用寄存器内容</li>
+<li>控制&#x2F;状态寄存器内容（PC、IR、PSW）</li>
+<li>用户栈&#x2F;核心栈指针</li>
+</ul>
+<h3 id="2-3-控制信息"><a href="#2-3-控制信息" class="headerlink" title="2.3 控制信息"></a>2.3 控制信息</h3><p>用于调度与管理：</p>
+<ul>
+<li>进程状态</li>
+<li>等待原因</li>
+<li>优先级</li>
+<li>代码&#x2F;数据地址</li>
+<li>外存映像地址</li>
+<li>队列指针</li>
+<li>父子兄弟进程指针</li>
+<li>通信信息</li>
+<li>特权信息</li>
+<li>CPU 使用时间&#x2F;时间片&#x2F;记账信息</li>
+<li>资源清单</li>
+</ul>
+<h3 id="结构图"><a href="#结构图" class="headerlink" title="结构图"></a>结构图</h3><pre><code class=" mermaid">mindmap
+  root((PCB))
+    标识信息
+      PID
+      进程组ID
+      进程名
+    现场信息
+      通用寄存器
+      PC
+      IR
+      PSW
+      栈指针
+    控制信息
+      状态
+      优先级
+      等待原因
+      队列指针
+      资源清单
+      通信信息
+      特权信息
+      记账信息
+</code></pre>
+
+<hr>
+<h2 id="3-进程映像（Process-Image）"><a href="#3-进程映像（Process-Image）" class="headerlink" title="3. 进程映像（Process Image）"></a>3. 进程映像（Process Image）</h2><h3 id="定义-7"><a href="#定义-7" class="headerlink" title="定义"></a>定义</h3><p>某一时刻进程的内容及其执行状态的集合。</p>
+<p>课件列出包括：</p>
+<ul>
+<li>PCB</li>
+<li>进程程序块</li>
+<li>进程数据块</li>
+<li>核心栈</li>
+</ul>
+<h3 id="注意：进程映像-≠-PCB"><a href="#注意：进程映像-≠-PCB" class="headerlink" title="注意：进程映像 ≠ PCB"></a>注意：进程映像 ≠ PCB</h3><p>这是高频辨析题。</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PCB</td>
+<td>进程的管理控制数据结构</td>
+</tr>
+<tr>
+<td>进程映像</td>
+<td>PCB + 代码 + 数据 + 核心栈等整体内存实体</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="4-进程上下文（Process-Context）"><a href="#4-进程上下文（Process-Context）" class="headerlink" title="4. 进程上下文（Process Context）"></a>4. 进程上下文（Process Context）</h2><h3 id="定义-8"><a href="#定义-8" class="headerlink" title="定义"></a>定义</h3><p>进程执行需要的环境与状态信息的总和。</p>
+<p>课件把上下文分为：</p>
+<ul>
+<li><strong>用户级上下文</strong>：用户程序块、数据区、用户栈、共享内存</li>
+<li><strong>寄存器上下文</strong>：PSW、栈指针、通用寄存器</li>
+<li><strong>系统级上下文</strong>：PCB、内存区表、核心栈</li>
+</ul>
+<h3 id="进程映像-与-上下文-的区别"><a href="#进程映像-与-上下文-的区别" class="headerlink" title="进程映像 与 上下文 的区别"></a>进程映像 与 上下文 的区别</h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>进程映像</th>
+<th>进程上下文</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>重点</td>
+<td>进程“拥有什么”</td>
+<td>进程“运行到哪、如何恢复”</td>
+</tr>
+<tr>
+<td>组成</td>
+<td>PCB+代码+数据+栈</td>
+<td>映像 + 执行环境&#x2F;寄存器状态</td>
+</tr>
+<tr>
+<td>用途</td>
+<td>描述进程实体</td>
+<td>支持切换与恢复</td>
+</tr>
+</tbody></table>
+<p>可以粗略理解为：</p>
+<blockquote>
+<p><strong>上下文更强调“恢复执行所需的一切信息”</strong></p>
+</blockquote>
+<hr>
+<h2 id="5-高频考点"><a href="#5-高频考点" class="headerlink" title="5. 高频考点"></a>5. 高频考点</h2><ul>
+<li>PCB 的定义和作用</li>
+<li>PCB 的组成</li>
+<li>进程映像概念</li>
+<li>进程上下文概念</li>
+<li>PCB、进程映像、进程上下文的区别</li>
+</ul>
+<hr>
+<h2 id="6-易错点"><a href="#6-易错点" class="headerlink" title="6. 易错点"></a>6. 易错点</h2><ol>
+<li><strong>PCB 不是进程全部，只是其核心管理描述</strong></li>
+<li><strong>进程映像 &gt; PCB</strong></li>
+<li><strong>上下文强调可恢复执行</strong></li>
+<li><strong>现场信息是 PCB 的一部分，不等于 PCB 全部</strong></li>
+</ol>
+<hr>
+<h2 id="7-简答题模板"><a href="#7-简答题模板" class="headerlink" title="7. 简答题模板"></a>7. 简答题模板</h2><h3 id="题目：简述-PCB-的作用及其主要内容"><a href="#题目：简述-PCB-的作用及其主要内容" class="headerlink" title="题目：简述 PCB 的作用及其主要内容"></a>题目：简述 PCB 的作用及其主要内容</h3><blockquote>
+<p>PCB 即进程控制块，是操作系统记录和管理进程状态及环境信息的数据结构。操作系统通过 PCB 识别进程、保存进程现场、控制进程执行和组织进程调度。PCB 的主要内容包括三部分：一是标识信息，如进程 ID；二是现场信息，如通用寄存器、PC、PSW 和栈指针；三是控制信息，如进程状态、优先级、资源清单、队列指针和通信信息等。</p>
+</blockquote>
+<hr>
+<h2 id="8-考前速背版"><a href="#8-考前速背版" class="headerlink" title="8. 考前速背版"></a>8. 考前速背版</h2><ul>
+<li>PCB：进程的管理档案</li>
+<li>PCB 三类信息：<strong>标识、现场、控制</strong></li>
+<li>进程映像 &#x3D; PCB + 程序 + 数据 + 核心栈</li>
+<li>上下文 &#x3D; 进程运行恢复所需环境</li>
+</ul>
+<hr>
+<h2 id="2-3-3-进程管理的实现"><a href="#2-3-3-进程管理的实现" class="headerlink" title="2.3.3 进程管理的实现"></a>2.3.3 进程管理的实现</h2><h3 id="一句话理解-9"><a href="#一句话理解-9" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>进程管理不是空谈概念，而是依靠队列、原语和控制程序真正做出来的。</strong></p>
+<hr>
+<h2 id="1-进程管理软件包括什么"><a href="#1-进程管理软件包括什么" class="headerlink" title="1. 进程管理软件包括什么"></a>1. 进程管理软件包括什么</h2><p>课件列出关键组成：</p>
+<ul>
+<li>系统调用&#x2F;中断&#x2F;异常处理程序</li>
+<li>队列管理模块</li>
+<li>进程控制程序</li>
+<li>进程调度程序</li>
+<li>进程通信程序</li>
+<li>登录、作业控制、监控等外围程序</li>
+</ul>
+<h3 id="核心中的核心"><a href="#核心中的核心" class="headerlink" title="核心中的核心"></a>核心中的核心</h3><p>其中最关键的是：</p>
+<ul>
+<li><strong>队列管理</strong></li>
+<li><strong>进程控制原语</strong></li>
+<li><strong>调度程序</strong></li>
+</ul>
+<hr>
+<h2 id="2-队列模型"><a href="#2-队列模型" class="headerlink" title="2. 队列模型"></a>2. 队列模型</h2><p>进程管理围绕各种队列展开：</p>
+<ul>
+<li>就绪队列</li>
+<li>各种等待队列（按事件分类）</li>
+<li>挂起相关队列</li>
+</ul>
+<h3 id="图示-2"><a href="#图示-2" class="headerlink" title="图示"></a>图示</h3><pre><code class=" mermaid">flowchart LR
+A[提交/创建] --&gt; B[就绪队列]
+B --&gt; C[处理器运行]
+C --&gt; D&#123;发生什么?&#125;
+D -- 时间片到/被抢占 --&gt; B
+D -- 等待事件1 --&gt; E[事件1等待队列]
+D -- 等待事件2 --&gt; F[事件2等待队列]
+D -- 结束 --&gt; G[撤销]
+E -- 事件1完成 --&gt; B
+F -- 事件2完成 --&gt; B
+</code></pre>
+
+<h3 id="为什么要多个等待队列？"><a href="#为什么要多个等待队列？" class="headerlink" title="为什么要多个等待队列？"></a>为什么要多个等待队列？</h3><p>因为不同进程可能等待不同事件：</p>
+<ul>
+<li>等待某设备完成</li>
+<li>等待某信号量</li>
+<li>等待某消息</li>
+<li>等待某资源</li>
+</ul>
+<p>分队列便于唤醒和管理。</p>
+<hr>
+<h2 id="3-队列管理模块"><a href="#3-队列管理模块" class="headerlink" title="3. 队列管理模块"></a>3. 队列管理模块</h2><h3 id="作用-2"><a href="#作用-2" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>维护各种进程队列</li>
+<li>支持入队、出队</li>
+<li>根据策略组织为 FIFO 或优先队列</li>
+<li>通过 PCB 中的队列指针连接各 PCB</li>
+</ul>
+<h3 id="为什么说它是核心模块？"><a href="#为什么说它是核心模块？" class="headerlink" title="为什么说它是核心模块？"></a>为什么说它是核心模块？</h3><p>因为进程状态变化，本质上常表现为：</p>
+<blockquote>
+<p><strong>从一个队列移到另一个队列</strong></p>
+</blockquote>
+<p>例如：</p>
+<ul>
+<li>就绪 → 运行</li>
+<li>运行 → 等待</li>
+<li>等待 → 就绪</li>
+</ul>
+<hr>
+<h2 id="4-进程控制原语"><a href="#4-进程控制原语" class="headerlink" title="4. 进程控制原语"></a>4. 进程控制原语</h2><p>课件列出了典型操作：</p>
+<ul>
+<li>进程创建</li>
+<li>进程撤销</li>
+<li>进程阻塞</li>
+<li>进程唤醒</li>
+<li>进程挂起</li>
+<li>进程激活</li>
+</ul>
+<h3 id="各原语含义"><a href="#各原语含义" class="headerlink" title="各原语含义"></a>各原语含义</h3><h4 id="进程创建"><a href="#进程创建" class="headerlink" title="进程创建"></a>进程创建</h4><ul>
+<li>进程表加项</li>
+<li>申请 PCB 并初始化</li>
+<li>分配标识</li>
+<li>建立映像</li>
+<li>分配资源</li>
+<li>入就绪队列</li>
+</ul>
+<h4 id="进程撤销"><a href="#进程撤销" class="headerlink" title="进程撤销"></a>进程撤销</h4><ul>
+<li>从队列中移除</li>
+<li>回收资源</li>
+<li>回收 PCB</li>
+<li>删除进程表项</li>
+</ul>
+<h4 id="进程阻塞"><a href="#进程阻塞" class="headerlink" title="进程阻塞"></a>进程阻塞</h4><ul>
+<li>保存现场</li>
+<li>修改 PCB 状态</li>
+<li>入等待队列</li>
+<li>调度其他进程</li>
+</ul>
+<h4 id="进程唤醒"><a href="#进程唤醒" class="headerlink" title="进程唤醒"></a>进程唤醒</h4><ul>
+<li>从等待队列移出</li>
+<li>修改状态</li>
+<li>入就绪队列</li>
+<li>若优先级高，可触发抢占</li>
+</ul>
+<h4 id="进程挂起"><a href="#进程挂起" class="headerlink" title="进程挂起"></a>进程挂起</h4><ul>
+<li>修改状态</li>
+<li>出入相关队列</li>
+<li>回收主存等资源</li>
+<li>送对换区</li>
+</ul>
+<h4 id="进程激活"><a href="#进程激活" class="headerlink" title="进程激活"></a>进程激活</h4><ul>
+<li>调回内存</li>
+<li>恢复资源</li>
+<li>修改状态</li>
+<li>回到合适队列</li>
+</ul>
+<hr>
+<h2 id="5-什么是原语（Primitive）"><a href="#5-什么是原语（Primitive）" class="headerlink" title="5. 什么是原语（Primitive）"></a>5. 什么是原语（Primitive）</h2><h3 id="定义-9"><a href="#定义-9" class="headerlink" title="定义"></a>定义</h3><p>原语是由若干条指令组成、完成特定功能、<strong>执行上不可分割</strong>的程序段。</p>
+<h3 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h3><ul>
+<li>不可分割</li>
+<li>原子性</li>
+<li>常通过关中断等方式保证</li>
+</ul>
+<h3 id="为什么进程控制必须用原语？"><a href="#为什么进程控制必须用原语？" class="headerlink" title="为什么进程控制必须用原语？"></a>为什么进程控制必须用原语？</h3><p>因为进程控制要修改核心数据结构：</p>
+<ul>
+<li>进程表</li>
+<li>PCB 池</li>
+<li>队列</li>
+<li>资源表</li>
+</ul>
+<p>如果执行到一半被打断，可能产生“与时间有关的错误”，即数据结构混乱。</p>
+<hr>
+<h2 id="6-高频考点-2"><a href="#6-高频考点-2" class="headerlink" title="6. 高频考点"></a>6. 高频考点</h2><ul>
+<li>进程管理软件构成</li>
+<li>队列管理模块作用</li>
+<li>典型进程控制原语</li>
+<li>原语的定义与特点</li>
+<li>为什么进程控制必须是原子操作</li>
+</ul>
+<hr>
+<h2 id="7-易错点-2"><a href="#7-易错点-2" class="headerlink" title="7. 易错点"></a>7. 易错点</h2><ol>
+<li><strong>原语不是单条机器指令，而是一段不可分割的程序</strong></li>
+<li><strong>原语的重点是执行原子性</strong></li>
+<li><strong>阻塞后要进等待队列，不是直接删除</strong></li>
+<li><strong>唤醒后先进就绪队列，不是直接运行</strong></li>
+</ol>
+<hr>
+<h2 id="8-简答题模板-2"><a href="#8-简答题模板-2" class="headerlink" title="8. 简答题模板"></a>8. 简答题模板</h2><h3 id="题目：为什么进程控制操作必须由原语实现？"><a href="#题目：为什么进程控制操作必须由原语实现？" class="headerlink" title="题目：为什么进程控制操作必须由原语实现？"></a>题目：为什么进程控制操作必须由原语实现？</h3><blockquote>
+<p>进程控制操作需要修改进程表、PCB、进程队列和资源表等操作系统核心数据结构。如果这些操作在执行过程中被中断，就可能造成数据不一致或系统状态混乱，产生与时间有关的错误。因此，进程控制操作必须通过具有原子性的原语实现。原语虽然由多条指令组成，但执行时不可分割，常通过关中断等方式保证其完整性。</p>
+</blockquote>
+<hr>
+<h2 id="9-考前速背版-2"><a href="#9-考前速背版-2" class="headerlink" title="9. 考前速背版"></a>9. 考前速背版</h2><ul>
+<li>进程管理核心：<strong>队列 + 原语 + 调度</strong></li>
+<li>原语特点：<strong>不可分割、原子性</strong></li>
+<li>阻塞：运行→等待</li>
+<li>唤醒：等待→就绪</li>
+<li>创建：建 PCB、建映像、分资源、入就绪</li>
+</ul>
+<hr>
+<h2 id="2-3-4-进程切换与模式切换"><a href="#2-3-4-进程切换与模式切换" class="headerlink" title="2.3.4 进程切换与模式切换"></a>2.3.4 进程切换与模式切换</h2><h3 id="一句话理解-10"><a href="#一句话理解-10" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>进程切换是“换人上 CPU”，模式切换是“换权限级别”。</strong></p>
+<hr>
+<h2 id="1-进程切换的定义"><a href="#1-进程切换的定义" class="headerlink" title="1. 进程切换的定义"></a>1. 进程切换的定义</h2><p>课件定义：</p>
+<blockquote>
+<p>从正在运行的进程中收回处理器，让待运行进程占有处理器运行。</p>
+</blockquote>
+<p>本质上：</p>
+<blockquote>
+<p><strong>被中断运行进程 与 待运行进程 的上下文切换</strong></p>
+</blockquote>
+<hr>
+<h2 id="2-进程切换的三大步骤"><a href="#2-进程切换的三大步骤" class="headerlink" title="2. 进程切换的三大步骤"></a>2. 进程切换的三大步骤</h2><h3 id="Step-1：保存被中断进程的上下文"><a href="#Step-1：保存被中断进程的上下文" class="headerlink" title="Step 1：保存被中断进程的上下文"></a>Step 1：保存被中断进程的上下文</h3><h3 id="Step-2：转向进程调度"><a href="#Step-2：转向进程调度" class="headerlink" title="Step 2：转向进程调度"></a>Step 2：转向进程调度</h3><h3 id="Step-3：恢复待运行进程的上下文"><a href="#Step-3：恢复待运行进程的上下文" class="headerlink" title="Step 3：恢复待运行进程的上下文"></a>Step 3：恢复待运行进程的上下文</h3><p>这是最经典的答题框架。</p>
+<hr>
+<h2 id="3-为什么进程切换必须在内核态完成"><a href="#3-为什么进程切换必须在内核态完成" class="headerlink" title="3. 为什么进程切换必须在内核态完成"></a>3. 为什么进程切换必须在内核态完成</h2><p>因为进程切换涉及：</p>
+<ul>
+<li>保存&#x2F;恢复寄存器</li>
+<li>修改 PCB</li>
+<li>修改进程状态</li>
+<li>修改地址空间</li>
+<li>切换队列</li>
+<li>调用调度程序</li>
+</ul>
+<p>这些都属于特权操作，必须在<strong>内核模式</strong>下进行。</p>
+<hr>
+<h2 id="4-模式切换回顾"><a href="#4-模式切换回顾" class="headerlink" title="4. 模式切换回顾"></a>4. 模式切换回顾</h2><h3 id="用户态-→-内核态"><a href="#用户态-→-内核态" class="headerlink" title="用户态 → 内核态"></a>用户态 → 内核态</h3><p>由以下事件触发：</p>
+<ul>
+<li>中断</li>
+<li>异常</li>
+<li>系统调用</li>
+</ul>
+<h3 id="内核态-→-用户态"><a href="#内核态-→-用户态" class="headerlink" title="内核态 → 用户态"></a>内核态 → 用户态</h3><p>由中断返回指令触发，把控制权交还用户进程。</p>
+<hr>
+<h2 id="5-模式切换的具体工作"><a href="#5-模式切换的具体工作" class="headerlink" title="5. 模式切换的具体工作"></a>5. 模式切换的具体工作</h2><h3 id="正向模式切换（用户-→-内核）"><a href="#正向模式切换（用户-→-内核）" class="headerlink" title="正向模式切换（用户 → 内核）"></a>正向模式切换（用户 → 内核）</h3><p>中断装置完成：</p>
+<ul>
+<li>模式位置内核态</li>
+<li>保存当前进程 PC&#x2F;PSW 到核心栈</li>
+<li>跳转到中断&#x2F;异常&#x2F;系统调用处理程序</li>
+</ul>
+<h3 id="逆向模式切换（内核-→-用户）"><a href="#逆向模式切换（内核-→-用户）" class="headerlink" title="逆向模式切换（内核 → 用户）"></a>逆向模式切换（内核 → 用户）</h3><p>中断返回指令完成：</p>
+<ul>
+<li>从待运行进程核心栈中弹出 PSW&#x2F;PC</li>
+<li>恢复用户态</li>
+<li>继续执行</li>
+</ul>
+<hr>
+<h2 id="6-进程切换的完整流程"><a href="#6-进程切换的完整流程" class="headerlink" title="6. 进程切换的完整流程"></a>6. 进程切换的完整流程</h2><p>课件给出的 12 步非常重要。</p>
+<h3 id="标准流程"><a href="#标准流程" class="headerlink" title="标准流程"></a>标准流程</h3><ol>
+<li>中断&#x2F;异常等触发正向模式切换并压入 PSW&#x2F;PC  </li>
+<li>保存被中断进程的现场信息  </li>
+<li>处理具体中断&#x2F;异常  </li>
+<li>把被中断进程系统栈指针 SP 保存到 PCB  </li>
+<li>调整被中断进程 PCB 信息（如状态）  </li>
+<li>把被中断进程 PCB 加入相关队列  </li>
+<li>选择下一个占用 CPU 的进程  </li>
+<li>修改被选中进程 PCB 信息（如状态）  </li>
+<li>设置被选中进程地址空间，恢复存储管理信息  </li>
+<li>恢复被选中进程 SP 到处理器寄存器  </li>
+<li>恢复被选中进程现场信息  </li>
+<li>中断返回，逆向模式切换并弹出 PSW&#x2F;PC</li>
+</ol>
+<h3 id="Mermaid-图"><a href="#Mermaid-图" class="headerlink" title="Mermaid 图"></a>Mermaid 图</h3><pre><code class=" mermaid">flowchart TD
+A[中断/异常/系统调用] --&gt; B[用户态-&gt;内核态]
+B --&gt; C[保存当前进程PC/PSW及现场]
+C --&gt; D[处理中断/异常]
+D --&gt; E[修改当前进程PCB与状态]
+E --&gt; F[把当前进程放入相应队列]
+F --&gt; G[调度器选择新进程]
+G --&gt; H[修改新进程PCB状态]
+H --&gt; I[恢复地址空间和SP]
+I --&gt; J[恢复新进程现场]
+J --&gt; K[中断返回]
+K --&gt; L[内核态-&gt;用户态]
+L --&gt; M[新进程运行]
+</code></pre>
+
+<hr>
+<h2 id="7-什么时候会发生进程切换"><a href="#7-什么时候会发生进程切换" class="headerlink" title="7. 什么时候会发生进程切换"></a>7. 什么时候会发生进程切换</h2><p>课件列出了三类典型情况：</p>
+<h3 id="1）阻塞式系统调用-缺页异常"><a href="#1）阻塞式系统调用-缺页异常" class="headerlink" title="1）阻塞式系统调用 &#x2F; 缺页异常"></a>1）阻塞式系统调用 &#x2F; 缺页异常</h3><p>当前进程进入等待态，需要换别人运行。</p>
+<h3 id="2）时间片中断-更高优先级进程到达"><a href="#2）时间片中断-更高优先级进程到达" class="headerlink" title="2）时间片中断 &#x2F; 更高优先级进程到达"></a>2）时间片中断 &#x2F; 更高优先级进程到达</h3><p>当前进程从运行态转就绪态，被抢占。</p>
+<h3 id="3）终止调用-无法继续执行的异常"><a href="#3）终止调用-无法继续执行的异常" class="headerlink" title="3）终止调用 &#x2F; 无法继续执行的异常"></a>3）终止调用 &#x2F; 无法继续执行的异常</h3><p>当前进程进入终止态，必须换别的进程。</p>
+<hr>
+<h2 id="8-什么情况不会引起进程切换"><a href="#8-什么情况不会引起进程切换" class="headerlink" title="8. 什么情况不会引起进程切换"></a>8. 什么情况不会引起进程切换</h2><p>有些中断&#x2F;异常只是短暂处理一下，处理后还回原进程：</p>
+<ul>
+<li>保存现场</li>
+<li>处理中断&#x2F;异常</li>
+<li>恢复现场</li>
+<li>返回原进程</li>
+</ul>
+<p>例如某些不影响继续执行的内核服务处理。</p>
+<hr>
+<h2 id="9-模式切换与进程切换对比"><a href="#9-模式切换与进程切换对比" class="headerlink" title="9. 模式切换与进程切换对比"></a>9. 模式切换与进程切换对比</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>模式切换</th>
+<th>进程切换</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否换执行主体</td>
+<td>不一定</td>
+<td>一定</td>
+</tr>
+<tr>
+<td>是否切换地址空间</td>
+<td>通常不一定</td>
+<td>通常要</td>
+</tr>
+<tr>
+<td>是否修改 PCB&#x2F;队列</td>
+<td>一般不必</td>
+<td>必须</td>
+</tr>
+<tr>
+<td>开销</td>
+<td>较小</td>
+<td>较大</td>
+</tr>
+<tr>
+<td>关系</td>
+<td>可单独发生</td>
+<td>必然伴随模式切换</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="10-高频考点"><a href="#10-高频考点" class="headerlink" title="10. 高频考点"></a>10. 高频考点</h2><ul>
+<li>进程切换定义</li>
+<li>进程切换步骤</li>
+<li>为什么进程切换要在内核态</li>
+<li>模式切换步骤</li>
+<li>两者区别与联系</li>
+<li>哪些事件会&#x2F;不会引起进程切换</li>
+</ul>
+<hr>
+<h2 id="11-易错点"><a href="#11-易错点" class="headerlink" title="11. 易错点"></a>11. 易错点</h2><ol>
+<li><strong>系统调用一定有模式切换，但不一定有进程切换</strong></li>
+<li><strong>时间片到一般会导致抢占，从运行态到就绪态</strong></li>
+<li><strong>恢复现场时恢复的是“将要运行的进程”的现场</strong></li>
+<li><strong>进程切换比模式切换开销大得多</strong></li>
+</ol>
+<hr>
+<h2 id="12-简答题模板"><a href="#12-简答题模板" class="headerlink" title="12. 简答题模板"></a>12. 简答题模板</h2><h3 id="题目：简述进程切换过程"><a href="#题目：简述进程切换过程" class="headerlink" title="题目：简述进程切换过程"></a>题目：简述进程切换过程</h3><blockquote>
+<p>进程切换是指操作系统收回当前运行进程的处理器使用权，并把处理器分派给另一个待运行进程。其本质是进程上下文的切换。一般过程包括：首先由中断、异常或系统调用触发进入内核态；然后保存当前进程的现场和系统栈指针，修改其 PCB 状态并放入相应队列；接着由调度程序选择新的进程，恢复其地址空间、栈指针和现场信息；最后通过中断返回指令恢复用户态，使新进程开始运行。</p>
+</blockquote>
+<hr>
+<h2 id="13-考前速背版"><a href="#13-考前速背版" class="headerlink" title="13. 考前速背版"></a>13. 考前速背版</h2><ul>
+<li>进程切换 &#x3D; <strong>保存旧上下文 + 调度 + 恢复新上下文</strong></li>
+<li>必在内核态完成</li>
+<li>模式切换：用户态↔内核态</li>
+<li>进程切换一定含模式切换</li>
+<li>系统调用不一定导致进程切换</li>
+</ul>
+<hr>
+<h1 id="五、2-4-多线程技术"><a href="#五、2-4-多线程技术" class="headerlink" title="五、2.4 多线程技术"></a>五、2.4 多线程技术</h1><hr>
+<h2 id="2-4-1-多线程环境概述"><a href="#2-4-1-多线程环境概述" class="headerlink" title="2.4.1 多线程环境概述"></a>2.4.1 多线程环境概述</h2><h3 id="一句话理解-11"><a href="#一句话理解-11" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>线程把“资源拥有者”和“执行者”分离，让并发更轻、更快、更细。</strong></p>
+<hr>
+<h2 id="1-单线程进程的问题"><a href="#1-单线程进程的问题" class="headerlink" title="1. 单线程进程的问题"></a>1. 单线程进程的问题</h2><p>传统进程是单线程结构：</p>
+<ul>
+<li>一个进程只有一条执行流</li>
+<li>一个 PCB</li>
+<li>一个用户地址空间</li>
+<li>一个执行序列</li>
+</ul>
+<h3 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h3><p>课件列出：</p>
+<ul>
+<li>进程切换开销大</li>
+<li>进程通信开销大</li>
+<li>限制并发粒度（进程内不能并发）</li>
+<li>降低并行计算效率（只有一个执行流）</li>
+</ul>
+<hr>
+<h2 id="2-为什么引入线程"><a href="#2-为什么引入线程" class="headerlink" title="2. 为什么引入线程"></a>2. 为什么引入线程</h2><p>核心思路：</p>
+<p>把进程的两项功能分离：</p>
+<ol>
+<li><strong>资源分配与保护</strong></li>
+<li><strong>被调度分派执行</strong></li>
+</ol>
+<p>于是：</p>
+<ul>
+<li><strong>进程</strong>负责资源拥有与保护</li>
+<li><strong>线程</strong>负责执行与调度</li>
+</ul>
+<p>这就是线程思想的本质。</p>
+<hr>
+<h2 id="3-多线程结构进程"><a href="#3-多线程结构进程" class="headerlink" title="3. 多线程结构进程"></a>3. 多线程结构进程</h2><p>多线程进程中：</p>
+<ul>
+<li>多个线程共享同一进程地址空间和资源</li>
+<li>每个线程有自己的执行序列</li>
+<li>每个线程有自己的栈、寄存器上下文、线程控制块</li>
+</ul>
+<h3 id="图示-3"><a href="#图示-3" class="headerlink" title="图示"></a>图示</h3><pre><code class=" mermaid">flowchart TB
+P[进程]
+AS[共享地址空间]
+R[共享资源]
+T1[线程1: PC/寄存器/栈]
+T2[线程2: PC/寄存器/栈]
+T3[线程3: PC/寄存器/栈]
+
+P --&gt; AS
+P --&gt; R
+P --&gt; T1
+P --&gt; T2
+P --&gt; T3
+</code></pre>
+
+<hr>
+<h2 id="4-多线程环境下的进程概念"><a href="#4-多线程环境下的进程概念" class="headerlink" title="4. 多线程环境下的进程概念"></a>4. 多线程环境下的进程概念</h2><p>在多线程环境中，进程是：</p>
+<ul>
+<li>资源分配和保护的独立单位</li>
+<li>拥有虚拟地址空间</li>
+<li>拥有文件&#x2F;设备访问保护机制</li>
+</ul>
+<p>换句话说：</p>
+<blockquote>
+<p><strong>进程更像“容器”</strong></p>
+</blockquote>
+<hr>
+<h2 id="5-多线程环境下的线程概念"><a href="#5-多线程环境下的线程概念" class="headerlink" title="5. 多线程环境下的线程概念"></a>5. 多线程环境下的线程概念</h2><p>线程是：</p>
+<ul>
+<li>进程中的一条执行路径</li>
+<li>调度的基本单位</li>
+<li>共享所属进程的主存空间和资源</li>
+</ul>
+<p>线程具有：</p>
+<ul>
+<li>执行状态</li>
+<li>线程上下文</li>
+<li>独立程序计数器</li>
+<li>执行栈</li>
+<li>局部变量存储</li>
+</ul>
+<h3 id="线程与进程对比"><a href="#线程与进程对比" class="headerlink" title="线程与进程对比"></a>线程与进程对比</h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>进程</th>
+<th>线程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>资源拥有者</td>
+<td>是</td>
+<td>否（共享所属进程资源）</td>
+</tr>
+<tr>
+<td>调度单位</td>
+<td>传统系统中常是</td>
+<td>现代系统常是</td>
+</tr>
+<tr>
+<td>地址空间</td>
+<td>独立</td>
+<td>共享进程地址空间</td>
+</tr>
+<tr>
+<td>切换开销</td>
+<td>大</td>
+<td>小</td>
+</tr>
+<tr>
+<td>通信开销</td>
+<td>大</td>
+<td>小</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="6-线程状态"><a href="#6-线程状态" class="headerlink" title="6. 线程状态"></a>6. 线程状态</h2><p>课件给出线程状态：</p>
+<ul>
+<li>运行</li>
+<li>就绪</li>
+<li>睡眠&#x2F;阻塞</li>
+</ul>
+<p>并强调：</p>
+<ul>
+<li><strong>挂起状态与资源相关，属于进程，不属于线程</strong></li>
+</ul>
+<p>这点很重要。</p>
+<hr>
+<h2 id="7-线程调度的两种环境"><a href="#7-线程调度的两种环境" class="headerlink" title="7. 线程调度的两种环境"></a>7. 线程调度的两种环境</h2><h3 id="OS-感知线程"><a href="#OS-感知线程" class="headerlink" title="OS 感知线程"></a>OS 感知线程</h3><ul>
+<li>处理器调度对象是线程</li>
+<li>进程不再体现经典三态（或只有挂起层面的意义）</li>
+</ul>
+<h3 id="OS-不感知线程"><a href="#OS-不感知线程" class="headerlink" title="OS 不感知线程"></a>OS 不感知线程</h3><ul>
+<li>OS 调度对象还是进程</li>
+<li>线程由用户空间线程库调度</li>
+</ul>
+<p>这恰好对应后面的 KLT 与 ULT。</p>
+<hr>
+<h2 id="8-多线程的优点"><a href="#8-多线程的优点" class="headerlink" title="8. 多线程的优点"></a>8. 多线程的优点</h2><p>课件列出：</p>
+<ul>
+<li>快速线程切换</li>
+<li>减少系统管理开销</li>
+<li>线程通信易实现</li>
+<li>提高并行程度</li>
+<li>节省内存空间</li>
+</ul>
+<h3 id="为什么通信更容易？"><a href="#为什么通信更容易？" class="headerlink" title="为什么通信更容易？"></a>为什么通信更容易？</h3><p>因为线程共享进程地址空间，直接访问共享变量即可；而进程间通信通常要借助 OS 机制。</p>
+<hr>
+<h2 id="9-多线程的应用场景"><a href="#9-多线程的应用场景" class="headerlink" title="9. 多线程的应用场景"></a>9. 多线程的应用场景</h2><ul>
+<li>前台&#x2F;后台工作</li>
+<li>C&#x2F;S 应用</li>
+<li>提升执行速度</li>
+<li>设计用户界面响应</li>
+</ul>
+<p>例如浏览器：</p>
+<ul>
+<li>一个线程负责 UI</li>
+<li>一个线程负责网络</li>
+<li>一个线程负责渲染</li>
+<li>一个线程负责脚本执行</li>
+</ul>
+<hr>
+<h2 id="10-高频考点-1"><a href="#10-高频考点-1" class="headerlink" title="10. 高频考点"></a>10. 高频考点</h2><ul>
+<li>为什么引入线程</li>
+<li>进程与线程关系</li>
+<li>线程的属性</li>
+<li>多线程的优点</li>
+<li>为什么挂起属于进程而不是线程</li>
+</ul>
+<hr>
+<h2 id="11-易错点-1"><a href="#11-易错点-1" class="headerlink" title="11. 易错点"></a>11. 易错点</h2><ol>
+<li><strong>线程是调度单位，进程是资源分配单位</strong></li>
+<li><strong>同一进程中的线程共享地址空间，但不共享寄存器和栈</strong></li>
+<li><strong>线程切换通常比进程切换轻量</strong></li>
+<li><strong>挂起主要和进程资源、内存换出有关</strong></li>
+</ol>
+<hr>
+<h2 id="12-简答题模板-1"><a href="#12-简答题模板-1" class="headerlink" title="12. 简答题模板"></a>12. 简答题模板</h2><h3 id="题目：为什么多线程比单线程进程更适合并发？"><a href="#题目：为什么多线程比单线程进程更适合并发？" class="headerlink" title="题目：为什么多线程比单线程进程更适合并发？"></a>题目：为什么多线程比单线程进程更适合并发？</h3><blockquote>
+<p>在单线程进程中，一个进程只有一条执行流，进程切换和进程间通信开销较大，且进程内部无法并发，限制了并发粒度。多线程技术把资源分配和执行调度分离开来，进程作为资源拥有者，线程作为执行和调度的基本单位。多个线程共享同一进程的地址空间和资源，因此线程切换开销较小、线程间通信方便，并且能够提高系统并发性和并行计算效率。</p>
+</blockquote>
+<hr>
+<h2 id="13-考前速背版-1"><a href="#13-考前速背版-1" class="headerlink" title="13. 考前速背版"></a>13. 考前速背版</h2><ul>
+<li>进程管资源，线程管执行</li>
+<li>线程是调度基本单位</li>
+<li>同进程线程共享地址空间和资源</li>
+<li>线程有自己的 PC、寄存器、栈</li>
+<li>线程切换比进程切换轻量</li>
+</ul>
+<hr>
+<h2 id="2-4-2-KLT-与-ULT"><a href="#2-4-2-KLT-与-ULT" class="headerlink" title="2.4.2 KLT 与 ULT"></a>2.4.2 KLT 与 ULT</h2><h3 id="一句话理解-12"><a href="#一句话理解-12" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>KLT 由内核管、能真并行；ULT 由用户管、切换更轻但易整进程阻塞。</strong></p>
+<hr>
+<h2 id="1-KLT：内核级线程"><a href="#1-KLT：内核级线程" class="headerlink" title="1. KLT：内核级线程"></a>1. KLT：内核级线程</h2><h3 id="定义-10"><a href="#定义-10" class="headerlink" title="定义"></a>定义</h3><p>线程管理工作由 OS 内核完成，OS 直接感知并调度线程。</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>一个线程阻塞，内核可调度同进程其他线程</li>
+<li>多处理器下可让同进程多个线程并行</li>
+<li>调度与管理在内核中实现</li>
+<li>线程切换往往需要模式切换，开销较大</li>
+</ul>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul>
+<li>支持真正并行</li>
+<li>阻塞影响局部，不拖垮整个进程</li>
+<li>内核统一管理，功能强</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>线程切换成本较高</li>
+<li>内核参与多，系统开销较大</li>
+</ul>
+<hr>
+<h2 id="2-ULT：用户级线程"><a href="#2-ULT：用户级线程" class="headerlink" title="2. ULT：用户级线程"></a>2. ULT：用户级线程</h2><h3 id="定义-11"><a href="#定义-11" class="headerlink" title="定义"></a>定义</h3><p>线程库在用户空间实现线程管理，内核不知道线程存在。</p>
+<h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>所有线程数据结构都在用户空间</li>
+<li>线程切换不必进入内核</li>
+<li>可按应用需求自定义调度算法</li>
+<li>可运行在不支持线程的 OS 上</li>
+</ul>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>一个线程阻塞，整个进程阻塞</li>
+<li>不能充分利用多处理器真正并行</li>
+<li>内核看到的仍只是一个进程</li>
+</ul>
+<hr>
+<h2 id="3-KLT-与-ULT-对比表"><a href="#3-KLT-与-ULT-对比表" class="headerlink" title="3. KLT 与 ULT 对比表"></a>3. KLT 与 ULT 对比表</h2><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>KLT</th>
+<th>ULT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>管理者</td>
+<td>OS 内核</td>
+<td>用户空间线程库</td>
+</tr>
+<tr>
+<td>OS 是否感知线程</td>
+<td>感知</td>
+<td>不感知</td>
+</tr>
+<tr>
+<td>调度对象</td>
+<td>线程</td>
+<td>OS 调度进程，线程由库调度</td>
+</tr>
+<tr>
+<td>切换是否需内核介入</td>
+<td>通常需要</td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>切换开销</td>
+<td>较大</td>
+<td>较小</td>
+</tr>
+<tr>
+<td>阻塞影响</td>
+<td>单线程阻塞不影响其他线程</td>
+<td>一个线程阻塞整个进程阻塞</td>
+</tr>
+<tr>
+<td>多核并行</td>
+<td>可以</td>
+<td>一般不行</td>
+</tr>
+<tr>
+<td>调度灵活性</td>
+<td>内核统一</td>
+<td>应用自定义强</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="4-Jacketing-技术"><a href="#4-Jacketing-技术" class="headerlink" title="4. Jacketing 技术"></a>4. Jacketing 技术</h2><h3 id="作用-3"><a href="#作用-3" class="headerlink" title="作用"></a>作用</h3><p>将阻塞式系统调用改造成尽量不把整个 ULT 进程拖死的方式。</p>
+<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>当线程陷入系统调用时：</p>
+<ul>
+<li>由 jacketing 程序先检查资源情况</li>
+<li>决定是否做进程切换或控制权转给另一个线程</li>
+</ul>
+<h3 id="理解-1"><a href="#理解-1" class="headerlink" title="理解"></a>理解</h3><p>它是 ULT 为弥补“一个线程阻塞整个进程阻塞”的缺陷而采取的折中技巧。</p>
+<hr>
+<h2 id="5-课件中的经典结论"><a href="#5-课件中的经典结论" class="headerlink" title="5. 课件中的经典结论"></a>5. 课件中的经典结论</h2><ul>
+<li><strong>ULT 适合解决逻辑并行性问题</strong></li>
+<li><strong>KLT 适合解决物理并行性问题</strong></li>
+</ul>
+<h3 id="如何理解"><a href="#如何理解" class="headerlink" title="如何理解"></a>如何理解</h3><ul>
+<li>逻辑并行：程序结构上看起来多个任务并发</li>
+<li>物理并行：在多核 CPU 上真正同时跑多个线程</li>
+</ul>
+<hr>
+<h2 id="6-高频考点-3"><a href="#6-高频考点-3" class="headerlink" title="6. 高频考点"></a>6. 高频考点</h2><ul>
+<li>KLT 与 ULT 的定义</li>
+<li>两者优缺点</li>
+<li>为什么 ULT 切换快</li>
+<li>为什么 ULT 不能很好利用多处理器</li>
+<li>为什么 KLT 更适合并行计算</li>
+<li>Jacketing 技术作用</li>
+</ul>
+<hr>
+<h2 id="7-易错点-3"><a href="#7-易错点-3" class="headerlink" title="7. 易错点"></a>7. 易错点</h2><ol>
+<li><strong>ULT 不是没有调度，而是由用户空间调度</strong></li>
+<li><strong>KLT 切换一般更重，因为需要内核介入</strong></li>
+<li><strong>ULT 的阻塞问题是整进程级别的</strong></li>
+<li><strong>多核上真正并行通常要靠 KLT 或内核可见线程</strong></li>
+</ol>
+<hr>
+<h2 id="8-简答题模板-3"><a href="#8-简答题模板-3" class="headerlink" title="8. 简答题模板"></a>8. 简答题模板</h2><h3 id="题目：比较-KLT-与-ULT"><a href="#题目：比较-KLT-与-ULT" class="headerlink" title="题目：比较 KLT 与 ULT"></a>题目：比较 KLT 与 ULT</h3><blockquote>
+<p>内核级线程 KLT 由操作系统内核管理，内核能够直接感知和调度线程，因此一个线程阻塞时仍可调度同进程其他线程，并且在多处理器环境中可以实现真正并行，但线程管理和切换需要内核介入，开销较大。用户级线程 ULT 由用户空间线程库管理，线程切换不需要进入内核，开销较小，且调度灵活；但内核并不知道线程存在，因此一个线程阻塞会导致整个进程阻塞，也难以充分利用多处理器并行能力。</p>
+</blockquote>
+<hr>
+<h2 id="9-考前速背版-3"><a href="#9-考前速背版-3" class="headerlink" title="9. 考前速背版"></a>9. 考前速背版</h2><ul>
+<li>KLT：内核管，能并行，阻塞不拖全进程，开销大</li>
+<li>ULT：用户管，切换快，调度灵活，但一个阻塞全阻塞</li>
+<li>ULT 适合逻辑并发</li>
+<li>KLT 适合物理并行</li>
+</ul>
+<hr>
+<h2 id="2-4-3-多线程实现的混合策略"><a href="#2-4-3-多线程实现的混合策略" class="headerlink" title="2.4.3 多线程实现的混合策略"></a>2.4.3 多线程实现的混合策略</h2><h3 id="一句话理解-13"><a href="#一句话理解-13" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>混合策略就是把 ULT 的轻量和 KLT 的并行性结合起来。</strong></p>
+<hr>
+<h2 id="1-基本思想"><a href="#1-基本思想" class="headerlink" title="1. 基本思想"></a>1. 基本思想</h2><p>课件描述：</p>
+<ul>
+<li>线程创建在用户空间完成</li>
+<li>多个 ULT 映射到若干 KLT</li>
+<li>通过调整 KLT 数量，获得更好的并行效果</li>
+</ul>
+<p>这本质上就是一种 <strong>M:N 映射模型</strong>。</p>
+<hr>
+<h2 id="2-为什么要混合"><a href="#2-为什么要混合" class="headerlink" title="2. 为什么要混合"></a>2. 为什么要混合</h2><p>纯 ULT 的问题：</p>
+<ul>
+<li>阻塞影响整个进程</li>
+<li>无法充分利用多核</li>
+</ul>
+<p>纯 KLT 的问题：</p>
+<ul>
+<li>切换和管理成本较高</li>
+</ul>
+<p>混合模型的目标：</p>
+<ul>
+<li>继承 ULT 的灵活和轻量</li>
+<li>结合 KLT 的内核并行支持</li>
+</ul>
+<hr>
+<h2 id="3-主要特点"><a href="#3-主要特点" class="headerlink" title="3. 主要特点"></a>3. 主要特点</h2><ul>
+<li>线程创建在用户空间完成</li>
+<li>线程调度和同步可在应用层进行</li>
+<li>多个用户线程映射到少量或若干内核线程</li>
+<li>程序员&#x2F;运行时可调整 KLT 数量以优化性能</li>
+</ul>
+<hr>
+<h2 id="4-状态理解"><a href="#4-状态理解" class="headerlink" title="4. 状态理解"></a>4. 状态理解</h2><p>课件给出：</p>
+<ul>
+<li>KLT 有三态，系统调度负责</li>
+<li>ULT 也有三态，用户调度负责</li>
+<li>活跃态 ULT 代表已绑定 KLT 的线程</li>
+<li>可借助 jacketing 和用户调度调整活跃线程</li>
+</ul>
+<h3 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h3><p>这是一个“双层调度”：</p>
+<ol>
+<li>用户级调度器先在 ULT 中选</li>
+<li>OS 再在 KLT 层面调度</li>
+</ol>
+<hr>
+<h2 id="5-Mermaid-图示"><a href="#5-Mermaid-图示" class="headerlink" title="5. Mermaid 图示"></a>5. Mermaid 图示</h2><pre><code class=" mermaid">flowchart TB
+subgraph UserSpace[用户空间]
+U1[ULT1]
+U2[ULT2]
+U3[ULT3]
+U4[ULT4]
+SCHU[用户级调度器]
+end
+
+subgraph KernelSpace[内核空间]
+K1[KLT1]
+K2[KLT2]
+SCHK[内核调度器]
+end
+
+U1 --&gt; SCHU
+U2 --&gt; SCHU
+U3 --&gt; SCHU
+U4 --&gt; SCHU
+SCHU --&gt; K1
+SCHU --&gt; K2
+K1 --&gt; SCHK
+K2 --&gt; SCHK
+SCHK --&gt; CPU[CPU]
+</code></pre>
+
+<hr>
+<h2 id="6-高频考点-4"><a href="#6-高频考点-4" class="headerlink" title="6. 高频考点"></a>6. 高频考点</h2><ul>
+<li>混合策略的基本思想</li>
+<li>为什么提出混合策略</li>
+<li>它解决了 ULT&#x2F;KLT 的哪些问题</li>
+<li>M:N 映射思想</li>
+</ul>
+<hr>
+<h2 id="7-易错点-4"><a href="#7-易错点-4" class="headerlink" title="7. 易错点"></a>7. 易错点</h2><ol>
+<li><strong>混合策略不是简单叠加，而是双层调度</strong></li>
+<li><strong>ULT 数一般多于或等于 KLT 数</strong></li>
+<li><strong>线程创建常在用户空间，但真正并行能力依赖底层 KLT</strong></li>
+</ol>
+<hr>
+<h2 id="8-简答题模板-4"><a href="#8-简答题模板-4" class="headerlink" title="8. 简答题模板"></a>8. 简答题模板</h2><h3 id="题目：简述多线程实现的混合策略"><a href="#题目：简述多线程实现的混合策略" class="headerlink" title="题目：简述多线程实现的混合策略"></a>题目：简述多线程实现的混合策略</h3><blockquote>
+<p>多线程实现的混合策略综合了用户级线程和内核级线程两种方法。在线程创建、部分调度和同步方面主要在用户空间完成，而多个用户级线程再映射到若干个内核级线程上，由内核对这些内核级线程进行调度。这样既保留了用户级线程切换开销小、调度灵活的优点，又利用了内核级线程可并行执行、阻塞影响较小的优势，从而在整体上获得更好的性能。</p>
+</blockquote>
+<hr>
+<h2 id="9-考前速背版-4"><a href="#9-考前速背版-4" class="headerlink" title="9. 考前速背版"></a>9. 考前速背版</h2><ul>
+<li>混合策略 &#x3D; <strong>ULT + KLT</strong></li>
+<li>本质：<strong>M:N 映射</strong></li>
+<li>用户层轻量调度，内核层支持并行</li>
+<li>目标：结合优点、减少缺点</li>
+</ul>
+<hr>
+<h1 id="六、2-5-处理器调度"><a href="#六、2-5-处理器调度" class="headerlink" title="六、2.5 处理器调度"></a>六、2.5 处理器调度</h1><hr>
+<h2 id="2-5-1-处理器调度的层次"><a href="#2-5-1-处理器调度的层次" class="headerlink" title="2.5.1 处理器调度的层次"></a>2.5.1 处理器调度的层次</h2><h3 id="一句话理解-14"><a href="#一句话理解-14" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>调度不是只有“选谁上 CPU”这一层，而是从“让谁进系统”“谁留在内存”“谁此刻运行”三层共同完成。</strong></p>
+<hr>
+<h2 id="1-三个层次"><a href="#1-三个层次" class="headerlink" title="1. 三个层次"></a>1. 三个层次</h2><p>课件给出：</p>
+<ol>
+<li><strong>高级调度（长程调度&#x2F;作业调度）</strong></li>
+<li><strong>中级调度（中程调度&#x2F;平衡负载调度）</strong></li>
+<li><strong>低级调度（短程调度&#x2F;进程调度）</strong></li>
+</ol>
+<hr>
+<h2 id="2-各层次的作用"><a href="#2-各层次的作用" class="headerlink" title="2. 各层次的作用"></a>2. 各层次的作用</h2><h3 id="2-1-高级调度"><a href="#2-1-高级调度" class="headerlink" title="2.1 高级调度"></a>2.1 高级调度</h3><p>决定：</p>
+<ul>
+<li>是否接受作业&#x2F;用户连接</li>
+<li>是否让新建进程进入系统</li>
+<li>是否把作业从后备队列调入主存</li>
+</ul>
+<h4 id="批处理系统中"><a href="#批处理系统中" class="headerlink" title="批处理系统中"></a>批处理系统中</h4><p>高级调度就是典型的<strong>作业调度</strong>。</p>
+<h4 id="分时系统中"><a href="#分时系统中" class="headerlink" title="分时系统中"></a>分时系统中</h4><p>也可以体现在是否接纳新任务。</p>
+<hr>
+<h3 id="2-2-中级调度"><a href="#2-2-中级调度" class="headerlink" title="2.2 中级调度"></a>2.2 中级调度</h3><p>决定：</p>
+<ul>
+<li>哪些进程允许驻留主存</li>
+<li>哪些进程应被换出成为挂起态</li>
+<li>哪些挂起进程应恢复</li>
+</ul>
+<h4 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h4><ul>
+<li>提高内存利用率</li>
+<li>平衡系统负载</li>
+<li>提高吞吐量</li>
+</ul>
+<hr>
+<h3 id="2-3-低级调度"><a href="#2-3-低级调度" class="headerlink" title="2.3 低级调度"></a>2.3 低级调度</h3><p>决定：</p>
+<ul>
+<li>就绪队列中哪个进程&#x2F;线程下一刻占用 CPU</li>
+</ul>
+<p>这是考试中“调度算法”大多实际针对的层次。</p>
+<hr>
+<h2 id="3-三层关系图"><a href="#3-三层关系图" class="headerlink" title="3. 三层关系图"></a>3. 三层关系图</h2><pre><code class=" mermaid">flowchart TD
+A[后备作业/新建进程] --&gt;|高级调度| B[就绪/等待等在内存中的进程]
+B --&gt;|中级调度: 换入换出| C[挂起就绪/挂起等待]
+C --&gt;|中级调度恢复| B
+B --&gt;|低级调度| D[运行态]
+D --&gt;|阻塞/时间片到/结束| B
+</code></pre>
+
+<hr>
+<h2 id="4-低级调度的主要功能"><a href="#4-低级调度的主要功能" class="headerlink" title="4. 低级调度的主要功能"></a>4. 低级调度的主要功能</h2><p>课件列出：</p>
+<ul>
+<li>记住进程&#x2F;线程状态</li>
+<li>决定什么时候获得处理器</li>
+<li>决定占用多长时间</li>
+<li>把处理器分派给谁</li>
+<li>收回处理器</li>
+</ul>
+<h3 id="本质-1"><a href="#本质-1" class="headerlink" title="本质"></a>本质</h3><p>低级调度就是：</p>
+<blockquote>
+<p><strong>在所有可运行实体之间做瞬时 CPU 分配决策</strong></p>
+</blockquote>
+<hr>
+<h2 id="5-高频考点-1"><a href="#5-高频考点-1" class="headerlink" title="5. 高频考点"></a>5. 高频考点</h2><ul>
+<li>调度层次划分</li>
+<li>高级&#x2F;中级&#x2F;低级调度的区别</li>
+<li>中级调度与挂起的关系</li>
+<li>低级调度为什么是 OS 最核心部分</li>
+</ul>
+<hr>
+<h2 id="6-易错点-1"><a href="#6-易错点-1" class="headerlink" title="6. 易错点"></a>6. 易错点</h2><ol>
+<li><strong>低级调度才是真正“选谁上 CPU”</strong></li>
+<li><strong>中级调度处理的是“换入换出、挂起恢复”</strong></li>
+<li><strong>高级调度更偏向“是否让任务进入系统”</strong></li>
+<li><strong>并非所有系统都同样强调三级调度，但概念上要会分</strong></li>
+</ol>
+<hr>
+<h2 id="7-简答题模板-1"><a href="#7-简答题模板-1" class="headerlink" title="7. 简答题模板"></a>7. 简答题模板</h2><h3 id="题目：说明处理器调度的三个层次"><a href="#题目：说明处理器调度的三个层次" class="headerlink" title="题目：说明处理器调度的三个层次"></a>题目：说明处理器调度的三个层次</h3><blockquote>
+<p>处理器调度通常分为高级调度、中级调度和低级调度。高级调度又称长程调度或作业调度，主要决定哪些作业或新建进程可以进入系统并参与执行；中级调度又称中程调度，主要通过换入换出决定哪些进程驻留主存、哪些进程进入挂起状态，以平衡系统负载；低级调度又称短程调度或进程调度，主要从就绪进程或线程中选择一个分派处理器执行，是操作系统中最核心的调度层次。</p>
+</blockquote>
+<hr>
+<h2 id="8-考前速背版-1"><a href="#8-考前速背版-1" class="headerlink" title="8. 考前速背版"></a>8. 考前速背版</h2><ul>
+<li>高级：<strong>谁能进系统</strong></li>
+<li>中级：<strong>谁留在内存</strong></li>
+<li>低级：<strong>谁上 CPU</strong></li>
+<li>低级调度最核心</li>
+</ul>
+<hr>
+<h2 id="2-5-2-2-5-3-处理器调度算法"><a href="#2-5-2-2-5-3-处理器调度算法" class="headerlink" title="2.5.2&#x2F;2.5.3 处理器调度算法"></a>2.5.2&#x2F;2.5.3 处理器调度算法</h2><h3 id="一句话理解-15"><a href="#一句话理解-15" class="headerlink" title="一句话理解"></a>一句话理解</h3><p><strong>调度算法就是 CPU 的分配规则，不同算法在公平性、响应速度、吞吐量和周转时间之间做不同权衡。</strong></p>
+<hr>
+<h2 id="1-选择调度算法的原则"><a href="#1-选择调度算法的原则" class="headerlink" title="1. 选择调度算法的原则"></a>1. 选择调度算法的原则</h2><p>课件给出五个核心指标：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>含义</th>
+<th>希望目标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>资源利用率</td>
+<td>CPU&#x2F;设备尽量忙</td>
+<td>越高越好</td>
+</tr>
+<tr>
+<td>响应时间</td>
+<td>用户发请求到首次响应时间</td>
+<td>越短越好</td>
+</tr>
+<tr>
+<td>周转时间</td>
+<td>提交到完成总时间</td>
+<td>越短越好</td>
+</tr>
+<tr>
+<td>吞吐量</td>
+<td>单位时间完成进程数</td>
+<td>越大越好</td>
+</tr>
+<tr>
+<td>公平性</td>
+<td>各进程获得合理份额</td>
+<td>越公平越好</td>
+</tr>
+</tbody></table>
+<h3 id="常见矛盾"><a href="#常见矛盾" class="headerlink" title="常见矛盾"></a>常见矛盾</h3><ul>
+<li>响应时间优先时，可能牺牲公平性</li>
+<li>吞吐量优先时，可能牺牲长作业体验</li>
+<li>公平性太强时，可能影响平均性能</li>
+</ul>
+<hr>
+<h2 id="2-抢占式与非抢占式"><a href="#2-抢占式与非抢占式" class="headerlink" title="2. 抢占式与非抢占式"></a>2. 抢占式与非抢占式</h2><h3 id="非抢占式"><a href="#非抢占式" class="headerlink" title="非抢占式"></a>非抢占式</h3><p>当前运行进程除非：</p>
+<ul>
+<li>结束</li>
+<li>阻塞</li>
+<li>主动放弃</li>
+</ul>
+<p>否则不会被强制剥夺 CPU。</p>
+<h3 id="抢占式"><a href="#抢占式" class="headerlink" title="抢占式"></a>抢占式</h3><p>OS 可以因：</p>
+<ul>
+<li>时间片到</li>
+<li>更高优先级进程到达</li>
+</ul>
+<p>强行收回 CPU。</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>非抢占式</th>
+<th>抢占式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>实现</td>
+<td>简单</td>
+<td>较复杂</td>
+</tr>
+<tr>
+<td>响应性</td>
+<td>差</td>
+<td>好</td>
+</tr>
+<tr>
+<td>适合</td>
+<td>批处理</td>
+<td>分时&#x2F;实时</td>
+</tr>
+<tr>
+<td>风险</td>
+<td>长作业霸占 CPU</td>
+<td>开销更大</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="3-优先数调度算法"><a href="#3-优先数调度算法" class="headerlink" title="3. 优先数调度算法"></a>3. 优先数调度算法</h2><h3 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h3><p>根据优先级选择下一个运行进程。</p>
+<h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><ul>
+<li>抢占式优先级调度</li>
+<li>非抢占式优先级调度</li>
+</ul>
+<h3 id="优先级确定依据"><a href="#优先级确定依据" class="headerlink" title="优先级确定依据"></a>优先级确定依据</h3><ul>
+<li>任务紧迫程度</li>
+<li>交互性</li>
+<li>外设使用频度</li>
+<li>CPU 服务时间长短</li>
+<li>进入系统时间等</li>
+</ul>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>能体现任务轻重缓急</li>
+</ul>
+<h3 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>可能造成低优先级进程饥饿</li>
+</ul>
+<hr>
+<h2 id="4-FCFS：先来先服务"><a href="#4-FCFS：先来先服务" class="headerlink" title="4. FCFS：先来先服务"></a>4. FCFS：先来先服务</h2><h3 id="思想-1"><a href="#思想-1" class="headerlink" title="思想"></a>思想</h3><p>谁先进入就绪队列，谁先运行。</p>
+<h3 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>非抢占式</li>
+<li>实现简单</li>
+<li>按到达顺序服务</li>
+</ul>
+<h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>公平直观</li>
+<li>实现最简单</li>
+</ul>
+<h3 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>短进程可能长时间等待</li>
+<li>有“护航效应”：I&#x2F;O 型短任务被长 CPU 型任务拖住</li>
+<li>响应差</li>
+</ul>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>简单批处理</li>
+<li>对响应性要求不高的系统</li>
+</ul>
+<hr>
+<h2 id="5-SPN：最短进程优先（SJF-思想）"><a href="#5-SPN：最短进程优先（SJF-思想）" class="headerlink" title="5. SPN：最短进程优先（SJF 思想）"></a>5. SPN：最短进程优先（SJF 思想）</h2><h3 id="思想-2"><a href="#思想-2" class="headerlink" title="思想"></a>思想</h3><p>选择估计运行时间最短的进程。</p>
+<h3 id="特点-3"><a href="#特点-3" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>非抢占式</li>
+<li>有利于降低平均周转时间</li>
+</ul>
+<h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>对平均周转时间很有利</li>
+</ul>
+<h3 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>需要预估执行时间</li>
+<li>长进程可能饥饿</li>
+</ul>
+<hr>
+<h2 id="6-SRT：最短剩余时间优先"><a href="#6-SRT：最短剩余时间优先" class="headerlink" title="6. SRT：最短剩余时间优先"></a>6. SRT：最短剩余时间优先</h2><h3 id="思想-3"><a href="#思想-3" class="headerlink" title="思想"></a>思想</h3><p>始终选择<strong>剩余执行时间最短</strong>的进程。</p>
+<h3 id="特点-4"><a href="#特点-4" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>抢占式</li>
+<li>新到达的更短任务可抢占当前任务</li>
+</ul>
+<h3 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>对平均完成时间&#x2F;周转时间通常更优</li>
+</ul>
+<h3 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>更依赖精确预测</li>
+<li>长作业更容易被饿死</li>
+<li>抢占频繁带来开销</li>
+</ul>
+<hr>
+<h2 id="7-HRRN：最高响应比优先"><a href="#7-HRRN：最高响应比优先" class="headerlink" title="7. HRRN：最高响应比优先"></a>7. HRRN：最高响应比优先</h2><h3 id="思想-4"><a href="#思想-4" class="headerlink" title="思想"></a>思想</h3><p>选择响应比最高的进程。</p>
+<h3 id="正确公式"><a href="#正确公式" class="headerlink" title="正确公式"></a>正确公式</h3><p>更标准的写法是：</p>
+<p>$$<br>响应比 &#x3D; \frac{等待时间 + 要求服务时间}{要求服务时间}<br>&#x3D; 1 + \frac{等待时间}{要求服务时间}<br>$$</p>
+<blockquote>
+<p>说明：课件部分位置把“响应比”写成 <code>等待时间 / 估计计算时间</code>，这<strong>不够标准</strong>。标准教材中的 HRRN 公式应为上式。</p>
+</blockquote>
+<h3 id="为什么这个算法好？"><a href="#为什么这个算法好？" class="headerlink" title="为什么这个算法好？"></a>为什么这个算法好？</h3><ul>
+<li>短进程初始响应比高</li>
+<li>长进程随着等待时间增长，响应比也会提高</li>
+<li>因而比 SJF 更不容易饿死长进程</li>
+</ul>
+<h3 id="特点-5"><a href="#特点-5" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>非抢占式</li>
+<li>综合考虑等待时间和服务时间</li>
+</ul>
+<hr>
+<h2 id="8-RR：时间片轮转"><a href="#8-RR：时间片轮转" class="headerlink" title="8. RR：时间片轮转"></a>8. RR：时间片轮转</h2><h3 id="思想-5"><a href="#思想-5" class="headerlink" title="思想"></a>思想</h3><p>就绪进程按顺序轮流使用 CPU，每次只用一个时间片。</p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><ul>
+<li>时钟周期性中断</li>
+<li>时间片到，当前进程被放回就绪队列尾部</li>
+<li>选择下一个进程运行</li>
+</ul>
+<h3 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>公平</li>
+<li>响应好</li>
+<li>适合交互式系统</li>
+</ul>
+<h3 id="缺点-6"><a href="#缺点-6" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>时间片太大：退化成 FCFS</li>
+<li>时间片太小：切换开销大</li>
+</ul>
+<h3 id="时间片选择原则"><a href="#时间片选择原则" class="headerlink" title="时间片选择原则"></a>时间片选择原则</h3><ul>
+<li>过长：交互性差</li>
+<li>过短：系统忙于切换</li>
+<li>一般应在“响应性”和“开销”间折中</li>
+</ul>
+<hr>
+<h2 id="9-多级反馈队列（Feedback）"><a href="#9-多级反馈队列（Feedback）" class="headerlink" title="9. 多级反馈队列（Feedback）"></a>9. 多级反馈队列（Feedback）</h2><h3 id="思想-6"><a href="#思想-6" class="headerlink" title="思想"></a>思想</h3><p>建立多个优先级不同的就绪队列：</p>
+<ul>
+<li>高优先级队列时间片短</li>
+<li>低优先级队列时间片长</li>
+<li>进程会根据执行行为在不同队列间移动</li>
+</ul>
+<h3 id="为什么叫“反馈”"><a href="#为什么叫“反馈”" class="headerlink" title="为什么叫“反馈”"></a>为什么叫“反馈”</h3><p>因为系统根据进程“表现”动态调整其优先级：</p>
+<ul>
+<li>用不完时间片、经常阻塞：说明交互性强，优先级可高</li>
+<li>老是用满时间片：说明偏 CPU 型，优先级可逐渐降低</li>
+</ul>
+<h3 id="典型规则（常见教材版）"><a href="#典型规则（常见教材版）" class="headerlink" title="典型规则（常见教材版）"></a>典型规则（常见教材版）</h3><ol>
+<li>新进程先进入最高优先级队列</li>
+<li>若时间片用完未完成，则降到下一队列</li>
+<li>若阻塞后很快返回，可能保留较高优先级</li>
+<li>调度时总优先选择高优先级队列</li>
+</ol>
+<h3 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>兼顾交互作业和计算作业</li>
+<li>响应快</li>
+<li>灵活</li>
+<li>现代 OS 广泛采用类似思想</li>
+</ul>
+<h3 id="缺点-7"><a href="#缺点-7" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>实现复杂</li>
+<li>参数设置复杂</li>
+<li>可能产生饥饿，需要老化等机制修正</li>
+</ul>
+<h3 id="Mermaid-图示"><a href="#Mermaid-图示" class="headerlink" title="Mermaid 图示"></a>Mermaid 图示</h3><pre><code class=" mermaid">flowchart TD
+Q1[队列1 高优先级&lt;br/&gt;时间片最短] --&gt;|时间片用完| Q2[队列2 中优先级]
+Q2 --&gt;|时间片用完| Q3[队列3 低优先级]
+Q3 --&gt;|继续用满| Q4[更低优先级队列]
+
+N[新进程到达] --&gt; Q1
+Q1 --&gt; CPU[CPU]
+Q2 --&gt; CPU
+Q3 --&gt; CPU
+Q4 --&gt; CPU
+</code></pre>
+
+<hr>
+<h2 id="10-彩票调度"><a href="#10-彩票调度" class="headerlink" title="10. 彩票调度"></a>10. 彩票调度</h2><h3 id="思想-7"><a href="#思想-7" class="headerlink" title="思想"></a>思想</h3><p>给进程分配若干“彩票”，调度时随机抽一张，持有该彩票的进程获得资源。</p>
+<h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><ul>
+<li>彩票越多，获得 CPU 的概率越大</li>
+<li>是一种<strong>概率公平</strong>机制</li>
+</ul>
+<h3 id="特点-6"><a href="#特点-6" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>灵活</li>
+<li>可表达资源份额</li>
+<li>适合研究与特定系统设计</li>
+</ul>
+<hr>
+<h2 id="11-六大常考算法对比总表"><a href="#11-六大常考算法对比总表" class="headerlink" title="11. 六大常考算法对比总表"></a>11. 六大常考算法对比总表</h2><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>是否抢占</th>
+<th>核心依据</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FCFS</td>
+<td>否</td>
+<td>到达先后</td>
+<td>简单、公平直观</td>
+<td>护航效应，响应差</td>
+</tr>
+<tr>
+<td>SPN&#x2F;SJF</td>
+<td>否</td>
+<td>最短服务时间</td>
+<td>平均周转时间较优</td>
+<td>长作业饥饿，需要预测</td>
+</tr>
+<tr>
+<td>SRT</td>
+<td>是</td>
+<td>最短剩余时间</td>
+<td>平均性能更优</td>
+<td>抢占多，长作业易饿死</td>
+</tr>
+<tr>
+<td>HRRN</td>
+<td>否</td>
+<td>最高响应比</td>
+<td>兼顾短作业与等待公平</td>
+<td>需计算响应比</td>
+</tr>
+<tr>
+<td>RR</td>
+<td>是</td>
+<td>轮流按时间片</td>
+<td>公平、响应好</td>
+<td>时间片难选，切换开销</td>
+</tr>
+<tr>
+<td>Feedback</td>
+<td>是</td>
+<td>多级优先+行为反馈</td>
+<td>综合效果好，现代常用</td>
+<td>实现复杂</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="12-常见算法适用场景"><a href="#12-常见算法适用场景" class="headerlink" title="12. 常见算法适用场景"></a>12. 常见算法适用场景</h2><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>更适合的算法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>简单批处理</td>
+<td>FCFS、SPN</td>
+</tr>
+<tr>
+<td>追求平均周转时间</td>
+<td>SPN、SRT</td>
+</tr>
+<tr>
+<td>尽量避免长作业饥饿</td>
+<td>HRRN</td>
+</tr>
+<tr>
+<td>交互式分时系统</td>
+<td>RR</td>
+</tr>
+<tr>
+<td>现代通用 OS</td>
+<td>多级反馈队列</td>
+</tr>
+<tr>
+<td>概率资源分配</td>
+<td>彩票调度</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="13-“为什么这么考”——算法题思路"><a href="#13-“为什么这么考”——算法题思路" class="headerlink" title="13. “为什么这么考”——算法题思路"></a>13. “为什么这么考”——算法题思路</h2><p>调度题通常给：</p>
+<ul>
+<li>到达时间</li>
+<li>服务时间&#x2F;运行时间</li>
+<li>优先级</li>
+<li>时间片</li>
+</ul>
+<p>要求你求：</p>
+<ul>
+<li>执行顺序</li>
+<li>完成时间</li>
+<li>周转时间</li>
+<li>平均周转时间</li>
+<li>带权周转时间（有些老师爱考）</li>
+</ul>
+<h3 id="算题步骤模板"><a href="#算题步骤模板" class="headerlink" title="算题步骤模板"></a>算题步骤模板</h3><h4 id="Step-1：画时间轴"><a href="#Step-1：画时间轴" class="headerlink" title="Step 1：画时间轴"></a>Step 1：画时间轴</h4><h4 id="Step-2：按算法规则决定每一段谁运行"><a href="#Step-2：按算法规则决定每一段谁运行" class="headerlink" title="Step 2：按算法规则决定每一段谁运行"></a>Step 2：按算法规则决定每一段谁运行</h4><h4 id="Step-3：记录每个进程完成时刻"><a href="#Step-3：记录每个进程完成时刻" class="headerlink" title="Step 3：记录每个进程完成时刻"></a>Step 3：记录每个进程完成时刻</h4><h4 id="Step-4：计算周转时间"><a href="#Step-4：计算周转时间" class="headerlink" title="Step 4：计算周转时间"></a>Step 4：计算周转时间</h4><p>$$<br>周转时间 &#x3D; 完成时间 - 到达时间<br>$$</p>
+<h4 id="Step-5：若要求带权周转时间"><a href="#Step-5：若要求带权周转时间" class="headerlink" title="Step 5：若要求带权周转时间"></a>Step 5：若要求带权周转时间</h4><p>$$<br>带权周转时间 &#x3D; \frac{周转时间}{服务时间}<br>$$</p>
+<hr>
+<h2 id="14-高频考点"><a href="#14-高频考点" class="headerlink" title="14. 高频考点"></a>14. 高频考点</h2><ul>
+<li>调度算法评价指标</li>
+<li>抢占式与非抢占式区别</li>
+<li>FCFS &#x2F; RR &#x2F; SPN &#x2F; SRT &#x2F; HRRN &#x2F; Feedback 的思想与优缺点</li>
+<li>HRRN 公式</li>
+<li>RR 时间片长短影响</li>
+<li>多级反馈队列思想</li>
+</ul>
+<hr>
+<h2 id="15-易错点"><a href="#15-易错点" class="headerlink" title="15. 易错点"></a>15. 易错点</h2><ol>
+<li><strong>RR 是抢占式，因为靠时钟中断收回 CPU</strong></li>
+<li><strong>SPN 非抢占，SRT 抢占</strong></li>
+<li><strong>HRRN 公式不是单纯等待时间除服务时间，而是 <code>(等待+服务)/服务</code></strong></li>
+<li><strong>多级反馈队列并不是简单多个 RR 队列，而是带优先级反馈机制</strong></li>
+<li><strong>FCFS 看起来公平，但对短任务不友好</strong></li>
+</ol>
+<hr>
+<h2 id="16-简答题模板"><a href="#16-简答题模板" class="headerlink" title="16. 简答题模板"></a>16. 简答题模板</h2><h3 id="题目：简述时间片轮转调度算法及其特点"><a href="#题目：简述时间片轮转调度算法及其特点" class="headerlink" title="题目：简述时间片轮转调度算法及其特点"></a>题目：简述时间片轮转调度算法及其特点</h3><blockquote>
+<p>时间片轮转调度算法是一种抢占式调度算法。系统按照进程进入就绪队列的先后顺序，轮流把 CPU 分配给各进程，每次只允许进程运行一个时间片。当时间片用完时，由时钟中断收回处理器，并把该进程送回就绪队列尾部，再调度下一个进程。该算法实现简单、公平性较好、响应时间短，适合分时系统；但如果时间片过长会退化为先来先服务，过短则会导致频繁切换、系统开销增大。</p>
+</blockquote>
+<h3 id="题目：简述多级反馈队列调度算法思想"><a href="#题目：简述多级反馈队列调度算法思想" class="headerlink" title="题目：简述多级反馈队列调度算法思想"></a>题目：简述多级反馈队列调度算法思想</h3><blockquote>
+<p>多级反馈队列调度算法把就绪进程按优先级组织成多个队列，高优先级队列分配较短时间片，低优先级队列分配较长时间片。新到达进程通常先进入高优先级队列，若其时间片用完仍未完成，则被降到较低优先级队列；调度时始终优先选择高优先级队列中的进程。该算法能够根据进程执行行为动态调整优先级，兼顾交互型和计算型作业，是现代操作系统中常见的调度思想。</p>
+</blockquote>
+<hr>
+<h2 id="17-考前速背版"><a href="#17-考前速背版" class="headerlink" title="17. 考前速背版"></a>17. 考前速背版</h2><ul>
+<li><p>指标：<strong>利用率、响应时间、周转时间、吞吐量、公平性</strong></p>
+</li>
+<li><p>FCFS：先来先服务，非抢占</p>
+</li>
+<li><p>SPN：最短进程优先，非抢占</p>
+</li>
+<li><p>SRT：最短剩余时间优先，抢占</p>
+</li>
+<li><p>HRRN：最高响应比优先，非抢占<br>$$<br>HRRN &#x3D; \frac{等待+服务}{服务}<br>$$</p>
+</li>
+<li><p>RR：时间片轮转，抢占</p>
+</li>
+<li><p>Feedback：多级反馈，抢占，现代常用</p>
+</li>
+</ul>
+<hr>
+<h1 id="七、全章高频考点总汇"><a href="#七、全章高频考点总汇" class="headerlink" title="七、全章高频考点总汇"></a>七、全章高频考点总汇</h1><h2 id="高频考点-1：PSW、PCB、进程映像、上下文的区别"><a href="#高频考点-1：PSW、PCB、进程映像、上下文的区别" class="headerlink" title="高频考点 1：PSW、PCB、进程映像、上下文的区别"></a>高频考点 1：PSW、PCB、进程映像、上下文的区别</h2><table>
+<thead>
+<tr>
+<th>名词</th>
+<th>定义关键词</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PSW</td>
+<td>程序状态字，反映 CPU 当前状态</td>
+</tr>
+<tr>
+<td>PCB</td>
+<td>进程控制块，OS 管理进程的数据结构</td>
+</tr>
+<tr>
+<td>进程映像</td>
+<td>PCB + 程序 + 数据 + 栈等进程整体实体</td>
+</tr>
+<tr>
+<td>上下文</td>
+<td>进程恢复执行所需的环境与状态</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="高频考点-2：中断、异常、系统调用区别"><a href="#高频考点-2：中断、异常、系统调用区别" class="headerlink" title="高频考点 2：中断、异常、系统调用区别"></a>高频考点 2：中断、异常、系统调用区别</h2><ul>
+<li>中断：外部、异步</li>
+<li>异常：内部、同步、由当前指令引起</li>
+<li>系统调用：程序主动陷入内核请求服务</li>
+</ul>
+<hr>
+<h2 id="高频考点-3：三态模型与挂起模型"><a href="#高频考点-3：三态模型与挂起模型" class="headerlink" title="高频考点 3：三态模型与挂起模型"></a>高频考点 3：三态模型与挂起模型</h2><ul>
+<li>三态：运行、就绪、等待</li>
+<li>扩展：挂起就绪、挂起等待</li>
+<li>不能直接：<ul>
+<li>等待 → 运行</li>
+<li>就绪 → 等待</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="高频考点-4：模式切换-vs-进程切换"><a href="#高频考点-4：模式切换-vs-进程切换" class="headerlink" title="高频考点 4：模式切换 vs 进程切换"></a>高频考点 4：模式切换 vs 进程切换</h2><ul>
+<li>模式切换：权限变化</li>
+<li>进程切换：执行实体变化</li>
+<li>进程切换一定包含模式切换</li>
+<li>模式切换不一定包含进程切换</li>
+</ul>
+<hr>
+<h2 id="高频考点-5：线程-vs-进程"><a href="#高频考点-5：线程-vs-进程" class="headerlink" title="高频考点 5：线程 vs 进程"></a>高频考点 5：线程 vs 进程</h2><ul>
+<li>进程：资源分配单位</li>
+<li>线程：调度单位</li>
+<li>同进程线程共享资源，不共享寄存器&#x2F;栈</li>
+</ul>
+<hr>
+<h2 id="高频考点-6：KLT-vs-ULT"><a href="#高频考点-6：KLT-vs-ULT" class="headerlink" title="高频考点 6：KLT vs ULT"></a>高频考点 6：KLT vs ULT</h2><ul>
+<li>KLT：内核可见、能并行、切换较重</li>
+<li>ULT：用户可见、切换轻、阻塞拖整个进程</li>
+</ul>
+<hr>
+<h2 id="高频考点-7：调度算法对比"><a href="#高频考点-7：调度算法对比" class="headerlink" title="高频考点 7：调度算法对比"></a>高频考点 7：调度算法对比</h2><p>最爱考：</p>
+<ul>
+<li>FCFS</li>
+<li>RR</li>
+<li>SPN</li>
+<li>SRT</li>
+<li>HRRN</li>
+<li>多级反馈队列</li>
+</ul>
+<hr>
+<h1 id="八、期末简答题万能模板"><a href="#八、期末简答题万能模板" class="headerlink" title="八、期末简答题万能模板"></a>八、期末简答题万能模板</h1><h2 id="1-“概念-作用”型模板"><a href="#1-“概念-作用”型模板" class="headerlink" title="1. “概念 + 作用”型模板"></a>1. “概念 + 作用”型模板</h2><blockquote>
+<p>X 是指……。其主要作用是……。在操作系统中，X 用于……，从而实现……。</p>
+</blockquote>
+<p>适用：PSW、PCB、进程、线程、中断、调度等。</p>
+<hr>
+<h2 id="2-“过程步骤”型模板"><a href="#2-“过程步骤”型模板" class="headerlink" title="2. “过程步骤”型模板"></a>2. “过程步骤”型模板</h2><blockquote>
+<p>其过程大致分为以下几个步骤：<br>Step 1：……<br>Step 2：……<br>Step 3：……<br>最终……。</p>
+</blockquote>
+<p>适用：中断处理、进程切换、模式切换、系统调用过程。</p>
+<hr>
+<h2 id="3-“对比题”模板"><a href="#3-“对比题”模板" class="headerlink" title="3. “对比题”模板"></a>3. “对比题”模板</h2><blockquote>
+<p>二者的共同点是……；不同点主要体现在以下方面：<br>第一，……；<br>第二，……；<br>第三，……。<br>因此，A 更适合……，B 更适合……。</p>
+</blockquote>
+<p>适用：进程&#x2F;线程，KLT&#x2F;ULT，模式切换&#x2F;进程切换，抢占&#x2F;非抢占。</p>
+<hr>
+<h2 id="4-“为什么”型模板"><a href="#4-“为什么”型模板" class="headerlink" title="4. “为什么”型模板"></a>4. “为什么”型模板</h2><blockquote>
+<p>引入 X 的原因主要有三点：<br>第一，……；<br>第二，……；<br>第三，……。<br>因此，X 能够在……方面提高系统性能&#x2F;安全性&#x2F;并发性。</p>
+</blockquote>
+<p>适用：为什么要有线程、为什么要有特权指令、为什么要有中断、为什么要有原语。</p>
+<hr>
+<h1 id="九、考前速背版"><a href="#九、考前速背版" class="headerlink" title="九、考前速背版"></a>九、考前速背版</h1><h2 id="1-处理器与模式"><a href="#1-处理器与模式" class="headerlink" title="1. 处理器与模式"></a>1. 处理器与模式</h2><ul>
+<li>PC：下一条指令地址</li>
+<li>IR：当前指令</li>
+<li>CC：结果标志</li>
+<li>PSW：程序状态字</li>
+<li>指令分特权&#x2F;非特权</li>
+<li>模式分内核态&#x2F;用户态</li>
+</ul>
+<hr>
+<h2 id="2-中断"><a href="#2-中断" class="headerlink" title="2. 中断"></a>2. 中断</h2><ul>
+<li>OS 是中断驱动的</li>
+<li>中断：外部异步</li>
+<li>异常：内部同步</li>
+<li>系统调用：主动陷入</li>
+<li>中断处理后可能回原进程，也可能换进程</li>
+</ul>
+<hr>
+<h2 id="3-进程"><a href="#3-进程" class="headerlink" title="3. 进程"></a>3. 进程</h2><ul>
+<li>进程 &#x3D; 程序的一次运行活动</li>
+<li>进程 &#x3D; 资源分配和调度单位</li>
+<li>三态：运行、就绪、等待</li>
+<li>扩展态：挂起就绪、挂起等待</li>
+<li>等待不能直接到运行</li>
+</ul>
+<hr>
+<h2 id="4-PCB-映像-上下文"><a href="#4-PCB-映像-上下文" class="headerlink" title="4. PCB &#x2F; 映像 &#x2F; 上下文"></a>4. PCB &#x2F; 映像 &#x2F; 上下文</h2><ul>
+<li>PCB：进程档案</li>
+<li>进程映像：PCB + 程序 + 数据 + 栈</li>
+<li>上下文：恢复执行所需环境</li>
+</ul>
+<hr>
+<h2 id="5-原语与切换"><a href="#5-原语与切换" class="headerlink" title="5. 原语与切换"></a>5. 原语与切换</h2><ul>
+<li>原语：不可分割、原子性</li>
+<li>进程切换：保存旧上下文 + 调度 + 恢复新上下文</li>
+<li>模式切换：用户态 ↔ 内核态</li>
+<li>进程切换一定包含模式切换</li>
+</ul>
+<hr>
+<h2 id="6-线程"><a href="#6-线程" class="headerlink" title="6. 线程"></a>6. 线程</h2><ul>
+<li>进程管资源，线程管执行</li>
+<li>线程是调度单位</li>
+<li>线程共享进程资源</li>
+<li>各线程有自己的栈和寄存器</li>
+</ul>
+<hr>
+<h2 id="7-KLT-ULT"><a href="#7-KLT-ULT" class="headerlink" title="7. KLT &#x2F; ULT"></a>7. KLT &#x2F; ULT</h2><ul>
+<li>KLT：内核管理，能多核并行，切换开销大</li>
+<li>ULT：用户管理，切换快，但一个阻塞全进程阻塞</li>
+<li>混合策略：M:N，结合二者优点</li>
+</ul>
+<hr>
+<h2 id="8-调度算法"><a href="#8-调度算法" class="headerlink" title="8. 调度算法"></a>8. 调度算法</h2><ul>
+<li>FCFS：先来先服务，非抢占</li>
+<li>SPN：最短进程优先，非抢占</li>
+<li>SRT：最短剩余时间优先，抢占</li>
+<li>HRRN：最高响应比优先，非抢占</li>
+<li>RR：时间片轮转，抢占</li>
+<li>Feedback：多级反馈，抢占</li>
+</ul>
+<h3 id="必背公式"><a href="#必背公式" class="headerlink" title="必背公式"></a>必背公式</h3><p>$$<br>周转时间 &#x3D; 完成时间 - 到达时间<br>$$</p>
+<p>$$<br>带权周转时间 &#x3D; \frac{周转时间}{服务时间}<br>$$</p>
+<p>$$<br>HRRN &#x3D; \frac{等待时间 + 服务时间}{服务时间}<br>$$</p>
+<hr>
+<h1 id="结语式总括"><a href="#结语式总括" class="headerlink" title="结语式总括"></a>结语式总括</h1><p>处理器管理是操作系统最核心的组成部分之一。它以处理器硬件和寄存器为基础，以中断机制作为操作系统被激活的入口，以进程和线程作为执行实体，以 PCB、进程映像和上下文作为管理与恢复依据，并通过模式切换、进程切换以及各种调度算法实现处理器在多个任务之间的安全、高效和公平分配。理解本章的关键，不是死记名词，而是把“<strong>硬件—中断—进程&#x2F;线程—调度—切换</strong>”这条主线真正串起来。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="print-no-link">#操作系统</a>
+      
+        <a href="/tags/%E5%A4%8D%E4%B9%A0/" class="print-no-link">#复习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>处理器管理</div>
+      <div>http://example.com/2026/06/10/处理器管理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>QIHAN-se</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年6月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/04/16/%E6%80%8E%E6%A0%B7%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B(%E4%B8%8A)/" title="怎样理解进程(上)">
+                        <span class="hidden-mobile">怎样理解进程(上)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      
+<div class="duration" style="font-size: 1.20rem; margin: 0.15rem 0.15rem; color: #295943" > <i class="fas fa-calendar"></i> <span id="duration-container">人生缓缓&nbsp;自有答案</span> <script src="/js/Duration.js"></script> </div> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'zh-cn'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/zh-cn.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/star.js"></script>
+<script src="/js/ScrollAnimation.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
