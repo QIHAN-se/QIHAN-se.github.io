@@ -271,7 +271,7 @@
     window.onresize = function() {
       postsChart.resize();
     };
-    let dataPosts = [{"title":"怎样理解进程(上)","date":"2026-04-16","wordcount":2748,"path":"2026/04/16/怎样理解进程(上)/"},{"title":"操作系统-处理器","date":"2026-03-28","wordcount":2005,"path":"2026/03/28/操作系统-处理器/"},{"title":"处理器管理","date":"2026-06-10","wordcount":19586,"path":"2026/06/10/处理器管理/"},{"title":"算法探究：一道腾讯面试题的思考","date":"2026-03-15","wordcount":856,"path":"2026/03/15/算法探究：一道腾讯面试题的思考/"},{"title":"有关中断的一切","date":"2026-03-31","wordcount":3113,"path":"2026/03/31/有关中断的一切/"},{"title":"操作系统第一章","date":"2026-03-03","wordcount":4655,"path":"2026/03/03/操作系统第一章/"},{"title":"存储管理","date":"2026-06-10","wordcount":16479,"path":"2026/06/10/存储管理/"},{"title":"算法探究：递归与汉诺塔问题","date":"2026-03-27","wordcount":2175,"path":"2026/03/27/算法探究：递归与汉诺塔问题/"},{"title":"自动状态机","date":"2026-04-01","wordcount":7,"path":"2026/04/01/自动状态机/"},{"title":"设备管理","date":"2026-06-10","wordcount":18848,"path":"2026/06/10/设备管理/"},{"title":"词法分析-正则表达式","date":"2026-03-15","wordcount":996,"path":"2026/03/15/词法分析-正则表达式/"},{"title":"词法分析-状态转换图","date":"2026-03-27","wordcount":918,"path":"2026/03/27/词法分析-状态转换图/"}]
+    let dataPosts = [{"title":"操作系统-处理器","date":"2026-03-28","wordcount":2005,"path":"2026/03/28/操作系统-处理器/"},{"title":"怎样理解进程(上)","date":"2026-04-16","wordcount":2748,"path":"2026/04/16/怎样理解进程(上)/"},{"title":"存储管理","date":"2026-06-10","wordcount":16396,"path":"2026/06/10/存储管理/"},{"title":"算法探究：一道腾讯面试题的思考","date":"2026-03-15","wordcount":856,"path":"2026/03/15/算法探究：一道腾讯面试题的思考/"},{"title":"处理器管理","date":"2026-06-10","wordcount":19586,"path":"2026/06/10/处理器管理/"},{"title":"操作系统第一章","date":"2026-03-03","wordcount":4655,"path":"2026/03/03/操作系统第一章/"},{"title":"有关中断的一切","date":"2026-03-31","wordcount":3113,"path":"2026/03/31/有关中断的一切/"},{"title":"算法探究：递归与汉诺塔问题","date":"2026-03-27","wordcount":2175,"path":"2026/03/27/算法探究：递归与汉诺塔问题/"},{"title":"自动状态机","date":"2026-04-01","wordcount":7,"path":"2026/04/01/自动状态机/"},{"title":"设备管理","date":"2026-06-10","wordcount":18848,"path":"2026/06/10/设备管理/"},{"title":"词法分析-正则表达式","date":"2026-03-15","wordcount":996,"path":"2026/03/15/词法分析-正则表达式/"},{"title":"词法分析-状态转换图","date":"2026-03-27","wordcount":918,"path":"2026/03/27/词法分析-状态转换图/"}]
     const dataMap = new Map(dataPosts.map((obj) => [obj.date, {title: obj.title, wordCount: obj.wordcount, path: obj.path}]));
 
     function heatmap_width(months){
@@ -363,7 +363,7 @@
     series: {
         type: 'heatmap',
         coordinateSystem: 'calendar',
-        data: [["2026-04-16",2748],["2026-03-28",2005],["2026-06-10",19586],["2026-03-15",856],["2026-03-31",3113],["2026-03-03",4655],["2026-06-10",16479],["2026-03-27",2175],["2026-04-01",7],["2026-06-10",18848],["2026-03-15",996],["2026-03-27",918]]
+        data: [["2026-03-28",2005],["2026-04-16",2748],["2026-06-10",16396],["2026-03-15",856],["2026-06-10",19586],["2026-03-03",4655],["2026-03-31",3113],["2026-03-27",2175],["2026-04-01",7],["2026-06-10",18848],["2026-03-15",996],["2026-03-27",918]]
     }
   };
 
@@ -437,21 +437,6 @@
 
 
 
-
-
-  <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
-    mermaid.initialize({"theme":"default"});
-
-    Fluid.utils.listenDOMLoaded(function() {
-      Fluid.events.registerRefreshCallback(function() {
-        if ('mermaid' in window) {
-          mermaid.init();
-        }
-      });
-    });
-  });
-</script>
 
 
 
@@ -674,5 +659,46 @@
   <noscript>
     <div class="noscript-warning">&#x535A;&#x5BA2;&#x5728;&#x5141;&#x8BB8; JavaScript &#x8FD0;&#x884C;&#x7684;&#x73AF;&#x5883;&#x4E0B;&#x6D4F;&#x89C8;&#x6548;&#x679C;&#x66F4;&#x4F73;</div>
   </noscript>
-<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  (function() {
+    function initMermaid() {
+      // 1. 将 markdown 渲染后的 mermaid 代码块转换为 mermaid 可识别的格式
+      //    highlight.js 会生成 pre > code.language-mermaid
+      //    Fluid 的 mermaid tag 会生成 pre > code.mermaid
+      document.querySelectorAll('pre code[class*="mermaid"]').forEach(function(code) {
+        var pre = document.createElement('pre');
+        pre.className = 'mermaid';
+        pre.textContent = code.textContent;
+        var parent = code.parentElement;
+        if (parent && parent.tagName === 'PRE') {
+          parent.replaceWith(pre);
+        } else {
+          code.replaceWith(pre);
+        }
+      });
+
+      // 2. 如果页面不存在 mermaid 代码块，直接退出
+      var nodes = document.querySelectorAll('.mermaid');
+      if (nodes.length === 0) return;
+
+      // 3. 初始化并手动渲染（避免与主题旧版 mermaid 冲突）
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'default'
+      });
+      mermaid.run({
+        querySelector: '.mermaid'
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMermaid);
+    } else {
+      initMermaid();
+    }
+  })();
+</script>
+<script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

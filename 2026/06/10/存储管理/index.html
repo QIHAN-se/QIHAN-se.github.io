@@ -29,7 +29,7 @@
 <meta property="og:description" content="存储管理复习指南：第三章 存储管理（终极详细版） 目录 一、整章总览：存储管理到底在解决什么问题 二、3.1 存储管理基础 2.1 存储管理的主要模式 2.2 存储管理的功能 2.3 虚拟存储器概述 2.4 存储管理的硬件支撑   三、3.2 单连续分区存储管理 3.1 单用户连续分区与固定分区 3.2 可变分区存储管理   四、3.3 页式存储管理 4.1 页式存储管理基本原理 4.2 页式存储">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-10T03:49:16.000Z">
-<meta property="article:modified_time" content="2026-06-10T03:55:24.254Z">
+<meta property="article:modified_time" content="2026-06-10T04:22:41.582Z">
 <meta property="article:author" content="QIHAN-se">
 <meta property="article:tag" content="复习">
 <meta property="article:tag" content="操作系统">
@@ -261,7 +261,7 @@
         
         
         
-          138 分钟
+          137 分钟
         
       </span>
     
@@ -312,7 +312,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2026-06-10T11:55:24+08:00
+                    本文最后更新于 2026-06-10T12:22:41+08:00
                   
                   
 
@@ -389,41 +389,37 @@
 </li>
 </ol>
 <hr>
-<h2 id="整体知识框架"><a href="#整体知识框架" class="headerlink" title="整体知识框架"></a>整体知识框架</h2><pre><code class=" mermaid">graph TD
-    A[存储管理] --&gt; B[基础概念]
-    A --&gt; C[连续分配]
-    A --&gt; D[分页]
-    A --&gt; E[分段]
-    A --&gt; F[段页式]
-    A --&gt; G[虚拟存储]
+<h2 id="整体知识框架"><a href="#整体知识框架" class="headerlink" title="整体知识框架"></a>整体知识框架</h2><pre><code class=" mermaid">mindmap
+  root((存储管理))
+    基础概念
+      逻辑地址/物理地址
+      地址转换
+      保护/共享
+      硬件支撑
+    连续分配
+      单用户连续
+      固定分区
+      可变分区
+    分页
+      页/页框
+      页表
+      TLB快表
+      多级页表
+      反置页表
+    分段
+      段号+段内位移
+      段表
+      共享与保护
+    段页式
+      先分段
+      段内分页
+      段表+页表
+    虚拟存储
+      局部性
+      请求调页/调段
+      缺页/缺段中断
+      页面替换
 
-    B --&gt; B1[逻辑地址/物理地址]
-    B --&gt; B2[地址转换]
-    B --&gt; B3[保护/共享]
-    B --&gt; B4[硬件支撑]
-
-    C --&gt; C1[单用户连续]
-    C --&gt; C2[固定分区]
-    C --&gt; C3[可变分区]
-
-    D --&gt; D1[页/页框]
-    D --&gt; D2[页表]
-    D --&gt; D3[TLB快表]
-    D --&gt; D4[多级页表]
-    D --&gt; D5[反置页表]
-
-    E --&gt; E1[段号+段内位移]
-    E --&gt; E2[段表]
-    E --&gt; E3[共享与保护]
-
-    F --&gt; F1[先分段]
-    F --&gt; F2[段内分页]
-    F --&gt; F3[段表+页表]
-
-    G --&gt; G1[局部性]
-    G --&gt; G2[请求调页/调段]
-    G --&gt; G3[缺页/缺段中断]
-    G --&gt; G4[页面替换]
 </code></pre>
 
 <hr>
@@ -2554,21 +2550,6 @@
 
 
 
-  <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
-    mermaid.initialize({"theme":"default"});
-
-    Fluid.utils.listenDOMLoaded(function() {
-      Fluid.events.registerRefreshCallback(function() {
-        if ('mermaid' in window) {
-          mermaid.init();
-        }
-      });
-    });
-  });
-</script>
-
-
 
 
 
@@ -2856,5 +2837,46 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  (function() {
+    function initMermaid() {
+      // 1. 将 markdown 渲染后的 mermaid 代码块转换为 mermaid 可识别的格式
+      //    highlight.js 会生成 pre > code.language-mermaid
+      //    Fluid 的 mermaid tag 会生成 pre > code.mermaid
+      document.querySelectorAll('pre code[class*="mermaid"]').forEach(function(code) {
+        var pre = document.createElement('pre');
+        pre.className = 'mermaid';
+        pre.textContent = code.textContent;
+        var parent = code.parentElement;
+        if (parent && parent.tagName === 'PRE') {
+          parent.replaceWith(pre);
+        } else {
+          code.replaceWith(pre);
+        }
+      });
+
+      // 2. 如果页面不存在 mermaid 代码块，直接退出
+      var nodes = document.querySelectorAll('.mermaid');
+      if (nodes.length === 0) return;
+
+      // 3. 初始化并手动渲染（避免与主题旧版 mermaid 冲突）
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'default'
+      });
+      mermaid.run({
+        querySelector: '.mermaid'
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMermaid);
+    } else {
+      initMermaid();
+    }
+  })();
+</script>
+<script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

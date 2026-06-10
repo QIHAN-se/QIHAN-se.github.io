@@ -737,9 +737,9 @@ PCB 更像是进程的“管理档案”。</p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
-      
         <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="print-no-link">#操作系统</a>
+      
+        <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
       
     </div>
   
@@ -871,21 +871,6 @@ PCB 更像是进程的“管理档案”。</p>
 
 
 
-
-
-  <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
-    mermaid.initialize({"theme":"default"});
-
-    Fluid.utils.listenDOMLoaded(function() {
-      Fluid.events.registerRefreshCallback(function() {
-        if ('mermaid' in window) {
-          mermaid.init();
-        }
-      });
-    });
-  });
-</script>
 
 
 
@@ -1175,5 +1160,46 @@ PCB 更像是进程的“管理档案”。</p>
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  (function() {
+    function initMermaid() {
+      // 1. 将 markdown 渲染后的 mermaid 代码块转换为 mermaid 可识别的格式
+      //    highlight.js 会生成 pre > code.language-mermaid
+      //    Fluid 的 mermaid tag 会生成 pre > code.mermaid
+      document.querySelectorAll('pre code[class*="mermaid"]').forEach(function(code) {
+        var pre = document.createElement('pre');
+        pre.className = 'mermaid';
+        pre.textContent = code.textContent;
+        var parent = code.parentElement;
+        if (parent && parent.tagName === 'PRE') {
+          parent.replaceWith(pre);
+        } else {
+          code.replaceWith(pre);
+        }
+      });
+
+      // 2. 如果页面不存在 mermaid 代码块，直接退出
+      var nodes = document.querySelectorAll('.mermaid');
+      if (nodes.length === 0) return;
+
+      // 3. 初始化并手动渲染（避免与主题旧版 mermaid 冲突）
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'default'
+      });
+      mermaid.run({
+        querySelector: '.mermaid'
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMermaid);
+    } else {
+      initMermaid();
+    }
+  })();
+</script>
+<script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
