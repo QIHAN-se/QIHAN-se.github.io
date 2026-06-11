@@ -1,0 +1,1132 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" >
+
+
+
+<head><!-- hexo injector head_begin start --><meta name="msvalidate.01" content="0D58EE7D5C4A4AC77C5FFD19D7D2ADCB" />
+<meta name="google-site-verification" content="TCpxVUPihMio0gDgP8-jRGMDkamfBLxrZbxdt36PBvA" />
+<!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/phead.jpg">
+  <link rel="icon" href="/img/phead.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#efffe9">
+  <meta name="author" content="QIHAN-se">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在线中国象棋，可与电脑对弈，支持悔棋与重新开始。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="象棋对弈">
+<meta property="og:url" content="http://example.com/chess/index.html">
+<meta property="og:site_name" content="ShiXiaoHanA">
+<meta property="og:description" content="在线中国象棋，可与电脑对弈，支持悔棋与重新开始。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-06-11T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-11T03:42:20.733Z">
+<meta property="article:author" content="QIHAN-se">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>象棋对弈 - ShiXiaoHanA</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/ScrollAnimation.css">
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/glassBg.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#295943","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 40vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ShiXiaoHanA</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/game/" target="_self">
+                
+                <span>小游戏</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/chess/" target="_self">
+                
+                <span>象棋</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/cosmos/" target="_self">
+                <i class="iconfont clipboard-check"></i>
+                <span>看星星</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+          <!-- 天气板块 - 插入到这里（副标题上方） -->
+          
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="象棋对弈"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <style>
+#chess-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  background: #f5e6c8;
+  user-select: none;
+  -webkit-user-select: none;
+}
+#chess-wrap canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+}
+#chess-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px;
+  background: #e8d5b5;
+  border-top: 1px solid #d4c0a0;
+}
+#chess-bar button {
+  padding: 6px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #8b4513;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+#chess-bar button:hover {
+  opacity: 0.85;
+}
+#chess-bar button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+#chess-info {
+  text-align: center;
+  color: #5d4037;
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+</style>
+<div id="chess-wrap">
+  <canvas id="chess" width="530" height="590"></canvas>
+  <div id="chess-bar">
+    <button id="btn-undo">悔棋</button>
+    <button id="btn-restart">重新开始</button>
+  </div>
+</div>
+<div id="chess-info">你是红方（下方），点击棋子后点击目标位置移动</div>
+<script>
+(function() {
+  const canvas = document.getElementById('chess');
+  const ctx = canvas.getContext('2d');
+  const GS = 54; // 格子大小
+  const PAD = 25; // 边距
+  const W = 9, H = 10;
+
+  // 棋子定义：红方正数，黑方负数
+  const PNAME = {
+    1:'帅',2:'仕',3:'相',4:'马',5:'车',6:'炮',7:'兵',
+    '-1':'将','-2':'士','-3':'象','-4':'马','-5':'车','-6':'炮','-7':'卒'
+  };
+  const PVAL = {1:10000,2:150,3:200,4:300,5:500,6:300,7:100};
+  const RED = 1, BLACK = -1;
+
+  // 位置评估表（鼓励棋子走到好位置）
+  const POS = {};
+  POS[5] = [ // 车
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0]
+  ];
+  POS[4] = [ // 马
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0]
+  ];
+  // 简化：用对称表，黑方取反位置
+  function posVal(p, x, y) {
+    const v = Math.abs(p);
+    if (!POS[v]) return 0;
+    const py = p > 0 ? 9 - y : y;
+    return POS[v][py] ? (POS[v][py][x] || 0) : 0;
+  }
+
+  // 初始化棋盘
+  function newBoard() {
+    return [
+      [-5,-4,-3,-2,-1,-2,-3,-4,-5],
+      [0,0,0,0,0,0,0,0,0],
+      [0,-6,0,0,0,0,0,-6,0],
+      [-7,0,-7,0,-7,0,-7,0,-7],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [7,0,7,0,7,0,7,0,7],
+      [0,6,0,0,0,0,0,6,0],
+      [0,0,0,0,0,0,0,0,0],
+      [5,4,3,2,1,2,3,4,5]
+    ];
+  }
+
+  let board = newBoard();
+  let turn = RED; // 红方先走
+  let selected = null; // {x,y}
+  let history = [];
+  let status = 'playing'; // playing | over
+  let lastMove = null; // {fx,fy,tx,ty}
+  let thinking = false;
+
+  // 坐标转换
+  function gx(x) { return PAD + x * GS; }
+  function gy(y) { return PAD + y * GS; }
+  function igx(px) { return Math.round((px - PAD) / GS); }
+  function igy(py) { return Math.round((py - PAD) / GS); }
+
+  // 在棋盘内
+  function inside(x, y) { return x >= 0 && x < W && y >= 0 && y < H; }
+
+  // 走法生成
+  function getMoves(x, y) {
+    const p = board[y][x];
+    if (!p) return [];
+    const s = p > 0 ? 1 : -1;
+    const v = Math.abs(p);
+    const moves = [];
+    const add = (tx, ty) => { if (inside(tx, ty) && validMove(x, y, tx, ty)) moves.push({x:tx, y:ty}); };
+
+    if (v === 1) { // 帅/将
+      const ds = [[0,1],[0,-1],[1,0],[-1,0]];
+      for (let d of ds) {
+        const tx = x + d[0], ty = y + d[1];
+        if (inside(tx, ty) && tx >= 3 && tx <= 5 && ((s > 0 && ty >= 7) || (s < 0 && ty <= 2))) add(tx, ty);
+      }
+      // 照面
+      for (let dy = -1; dy >= -9; dy--) {
+        const ty = y + dy * s;
+        if (!inside(x, ty)) break;
+        const tp = board[ty][x];
+        if (tp) { if (Math.abs(tp) === 1 && tp * s < 0) moves.push({x, y: ty}); break; }
+      }
+    }
+    else if (v === 2) { // 士/仕
+      const ds = [[1,1],[1,-1],[-1,1],[-1,-1]];
+      for (let d of ds) {
+        const tx = x + d[0], ty = y + d[1];
+        if (inside(tx, ty) && tx >= 3 && tx <= 5 && ((s > 0 && ty >= 7) || (s < 0 && ty <= 2))) add(tx, ty);
+      }
+    }
+    else if (v === 3) { // 相/象
+      const ds = [[2,2],[2,-2],[-2,2],[-2,-2]];
+      for (let d of ds) {
+        const tx = x + d[0], ty = y + d[1];
+        const eyeX = (x + tx) / 2, eyeY = (y + ty) / 2;
+        if (inside(tx, ty) && (s > 0 ? ty >= 5 : ty <= 4) && !board[eyeY][eyeX]) add(tx, ty);
+      }
+    }
+    else if (v === 4) { // 马
+      const ds = [[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]];
+      for (let d of ds) {
+        const tx = x + d[0], ty = y + d[1];
+        const bx = x + (Math.abs(d[0]) === 2 ? d[0] / 2 : 0);
+        const by = y + (Math.abs(d[1]) === 2 ? d[1] / 2 : 0);
+        const legX = Math.abs(d[0]) === 2 ? x + d[0] / 2 : x;
+        const legY = Math.abs(d[1]) === 2 ? y + d[1] / 2 : y;
+        if (inside(tx, ty) && !board[legY][legX]) add(tx, ty);
+      }
+    }
+    else if (v === 5) { // 车
+      for (let d of [[0,1],[0,-1],[1,0],[-1,0]]) {
+        for (let step = 1; step < 10; step++) {
+          const tx = x + d[0] * step, ty = y + d[1] * step;
+          if (!inside(tx, ty)) break;
+          if (!board[ty][tx]) { add(tx, ty); continue; }
+          if (board[ty][tx] * s < 0) add(tx, ty);
+          break;
+        }
+      }
+    }
+    else if (v === 6) { // 炮
+      for (let d of [[0,1],[0,-1],[1,0],[-1,0]]) {
+        let jumped = false;
+        for (let step = 1; step < 10; step++) {
+          const tx = x + d[0] * step, ty = y + d[1] * step;
+          if (!inside(tx, ty)) break;
+          const tp = board[ty][tx];
+          if (!jumped) {
+            if (!tp) add(tx, ty); else jumped = true;
+          } else {
+            if (tp) { if (tp * s < 0) add(tx, ty); break; }
+          }
+        }
+      }
+    }
+    else if (v === 7) { // 兵/卒
+      const fwd = s > 0 ? -1 : 1;
+      add(x, y + fwd);
+      if ((s > 0 && y <= 4) || (s < 0 && y >= 5)) {
+        add(x + 1, y); add(x - 1, y);
+      }
+    }
+    return moves;
+  }
+
+  // 验证走法（用于悔棋后复盘或外部验证）
+  function validMove(fx, fy, tx, ty) {
+    const p = board[fy][fx];
+    if (!p) return false;
+    const tp = board[ty][tx];
+    if (tp && tp * p > 0) return false; // 不能吃自己
+    const s = p > 0 ? 1 : -1;
+    const v = Math.abs(p);
+
+    if (v === 1) {
+      if (tx < 3 || tx > 5) return false;
+      if (s > 0 && ty < 7) return false;
+      if (s < 0 && ty > 2) return false;
+      const dx = Math.abs(tx - fx), dy = Math.abs(ty - fy);
+      if (dx + dy !== 1) {
+        // 照面
+        if (dx !== 0 || ty * s <= fy * s) return false;
+        for (let y = fy - s; y !== ty; y -= s) if (board[y][fx]) return false;
+        return Math.abs(board[ty][tx]) === 1;
+      }
+      return true;
+    }
+    if (v === 2) {
+      if (tx < 3 || tx > 5) return false;
+      if (s > 0 && ty < 7) return false;
+      if (s < 0 && ty > 2) return false;
+      return Math.abs(tx - fx) === 1 && Math.abs(ty - fy) === 1;
+    }
+    if (v === 3) {
+      if (Math.abs(tx - fx) !== 2 || Math.abs(ty - fy) !== 2) return false;
+      if (s > 0 && ty < 5) return false;
+      if (s < 0 && ty > 4) return false;
+      return !board[(fy + ty) / 2][(fx + tx) / 2];
+    }
+    if (v === 4) {
+      const dx = tx - fx, dy = ty - fy;
+      if (Math.abs(dx) === 1 && Math.abs(dy) === 2) {
+        return !board[fy + dy / 2][fx];
+      }
+      if (Math.abs(dx) === 2 && Math.abs(dy) === 1) {
+        return !board[fy][fx + dx / 2];
+      }
+      return false;
+    }
+    if (v === 5) {
+      if (fx !== tx && fy !== ty) return false;
+      const stepX = tx === fx ? 0 : (tx > fx ? 1 : -1);
+      const stepY = ty === fy ? 0 : (ty > fy ? 1 : -1);
+      let x = fx + stepX, y = fy + stepY;
+      while (x !== tx || y !== ty) {
+        if (board[y][x]) return false;
+        x += stepX; y += stepY;
+      }
+      return !tp || tp * p < 0;
+    }
+    if (v === 6) {
+      if (fx !== tx && fy !== ty) return false;
+      const stepX = tx === fx ? 0 : (tx > fx ? 1 : -1);
+      const stepY = ty === fy ? 0 : (ty > fy ? 1 : -1);
+      let x = fx + stepX, y = fy + stepY, jumped = false;
+      while (x !== tx || y !== ty) {
+        if (board[y][x]) {
+          if (jumped) return false;
+          jumped = true;
+        }
+        x += stepX; y += stepY;
+      }
+      if (!tp) return !jumped;
+      return jumped && tp * p < 0;
+    }
+    if (v === 7) {
+      const fwd = s > 0 ? -1 : 1;
+      if (tx === fx && ty === fy + fwd) return true;
+      if ((s > 0 && fy <= 4) || (s < 0 && fy >= 5)) {
+        if (ty === fy && Math.abs(tx - fx) === 1) return true;
+      }
+      return false;
+    }
+    return false;
+  }
+
+  // 是否被将军
+  function inCheck(side) {
+    let kx, ky;
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      if (board[y][x] === side) { kx = x; ky = y; break; }
+    }
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const p = board[y][x];
+      if (p && p * side < 0) {
+        const moves = getMoves(x, y);
+        for (let m of moves) if (m.x === kx && m.y === ky) return true;
+      }
+    }
+    return false;
+  }
+
+  // 执行走法并返回是否合法（不被将死）
+  function doMove(fx, fy, tx, ty) {
+    const p = board[fy][fx];
+    const captured = board[ty][tx];
+    board[ty][tx] = p; board[fy][fx] = 0;
+    if (inCheck(p > 0 ? RED : BLACK)) {
+      board[fy][fx] = p; board[ty][tx] = captured;
+      return false;
+    }
+    history.push({fx, fy, tx, ty, p, captured, turn});
+    lastMove = {fx, fy, tx, ty};
+    turn = -turn;
+    return true;
+  }
+
+  function undo() {
+    if (!history.length || thinking) return;
+    // 撤销两步（AI + 玩家）
+    for (let i = 0; i < 2 && history.length; i++) {
+      const h = history.pop();
+      board[h.fy][h.fx] = h.p;
+      board[h.ty][h.tx] = h.captured;
+      turn = h.turn;
+    }
+    lastMove = history.length ? {fx: history[history.length-1].fx, fy: history[history.length-1].fy, tx: history[history.length-1].tx, ty: history[history.length-1].ty} : null;
+    status = 'playing';
+    selected = null;
+    draw();
+  }
+
+  function restart() {
+    board = newBoard();
+    turn = RED;
+    selected = null;
+    history = [];
+    status = 'playing';
+    lastMove = null;
+    thinking = false;
+    draw();
+  }
+
+  // 局面评估
+  function evaluate() {
+    let score = 0;
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const p = board[y][x];
+      if (p) {
+        const v = PVAL[Math.abs(p)] || 0;
+        score += (p > 0 ? 1 : -1) * (v + posVal(p, x, y));
+      }
+    }
+    return score;
+  }
+
+  // 所有走法
+  function allMoves(side) {
+    const ms = [];
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const p = board[y][x];
+      if (p && (p > 0 ? side === RED : side === BLACK)) {
+        for (let m of getMoves(x, y)) ms.push({fx: x, fy: y, tx: m.x, ty: m.y});
+      }
+    }
+    return ms;
+  }
+
+  // Alpha-Beta
+  function search(depth, alpha, beta, maximizing) {
+    if (depth === 0) return evaluate();
+    const side = maximizing ? BLACK : RED;
+    const moves = allMoves(side);
+    if (!moves.length) return maximizing ? -99999 : 99999;
+
+    // 排序：吃子优先
+    moves.sort((a, b) => {
+      const va = board[a.ty][a.tx] ? PVAL[Math.abs(board[a.ty][a.tx])] : 0;
+      const vb = board[b.ty][b.tx] ? PVAL[Math.abs(board[b.ty][b.tx])] : 0;
+      return vb - va;
+    });
+
+    for (let m of moves) {
+      const p = board[m.fy][m.fx];
+      const cap = board[m.ty][m.tx];
+      board[m.ty][m.tx] = p; board[m.fy][m.fx] = 0;
+      if (!inCheck(p > 0 ? RED : BLACK)) {
+        const val = search(depth - 1, alpha, beta, !maximizing);
+        board[m.fy][m.fx] = p; board[m.ty][m.tx] = cap;
+        if (maximizing) {
+          alpha = Math.max(alpha, val);
+          if (alpha >= beta) return alpha;
+        } else {
+          beta = Math.min(beta, val);
+          if (beta <= alpha) return beta;
+        }
+      } else {
+        board[m.fy][m.fx] = p; board[m.ty][m.tx] = cap;
+      }
+    }
+    return maximizing ? alpha : beta;
+  }
+
+  function aiMove() {
+    if (status !== 'playing' || turn !== BLACK) return;
+    thinking = true;
+    document.getElementById('btn-undo').disabled = true;
+
+    setTimeout(() => {
+      const moves = allMoves(BLACK);
+      let best = null, bestVal = -Infinity;
+      // 排序
+      moves.sort((a, b) => {
+        const va = board[a.ty][a.tx] ? PVAL[Math.abs(board[a.ty][a.tx])] : 0;
+        const vb = board[b.ty][b.tx] ? PVAL[Math.abs(board[b.ty][b.tx])] : 0;
+        return vb - va;
+      });
+      for (let m of moves) {
+        const p = board[m.fy][m.fx];
+        const cap = board[m.ty][m.tx];
+        board[m.ty][m.tx] = p; board[m.fy][m.fx] = 0;
+        if (!inCheck(BLACK)) {
+          const val = search(2, -Infinity, Infinity, false); // 深度2，足够快
+          board[m.fy][m.fx] = p; board[m.ty][m.tx] = cap;
+          if (val > bestVal) { bestVal = val; best = m; }
+        } else {
+          board[m.fy][m.fx] = p; board[m.ty][m.tx] = cap;
+        }
+      }
+
+      if (best) {
+        doMove(best.fx, best.fy, best.tx, best.ty);
+        checkGameOver();
+      }
+      thinking = false;
+      document.getElementById('btn-undo').disabled = false;
+      draw();
+    }, 150);
+  }
+
+  function checkGameOver() {
+    const moves = allMoves(turn);
+    let hasLegal = false;
+    for (let m of moves) {
+      const p = board[m.fy][m.fx];
+      const cap = board[m.ty][m.tx];
+      board[m.ty][m.tx] = p; board[m.fy][m.fx] = 0;
+      if (!inCheck(turn > 0 ? RED : BLACK)) hasLegal = true;
+      board[m.fy][m.fx] = p; board[m.ty][m.tx] = cap;
+      if (hasLegal) break;
+    }
+    if (!hasLegal) {
+      status = 'over';
+    }
+  }
+
+  // ================= 绘制 =================
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const bg = '#f5e6c8';
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // 木质纹理感背景
+    ctx.fillStyle = '#e8d5b5';
+    ctx.fillRect(PAD - 8, PAD - 8, GS * 8 + 16, GS * 9 + 16);
+
+    // 网格
+    ctx.strokeStyle = '#5d4037';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (let x = 0; x < W; x++) {
+      ctx.moveTo(gx(x), gy(0)); ctx.lineTo(gx(x), gy(4));
+      ctx.moveTo(gx(x), gy(5)); ctx.lineTo(gx(x), gy(9));
+    }
+    for (let y = 0; y < H; y++) {
+      ctx.moveTo(gx(0), gy(y)); ctx.lineTo(gx(8), gy(y));
+    }
+    ctx.stroke();
+
+    // 九宫斜线
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(gx(3), gy(0)); ctx.lineTo(gx(5), gy(2));
+    ctx.moveTo(gx(5), gy(0)); ctx.lineTo(gx(3), gy(2));
+    ctx.moveTo(gx(3), gy(7)); ctx.lineTo(gx(5), gy(9));
+    ctx.moveTo(gx(5), gy(7)); ctx.lineTo(gx(3), gy(9));
+    ctx.stroke();
+
+    // 楚河汉界
+    ctx.fillStyle = '#5d4037';
+    ctx.font = 'bold 18px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('楚 河', PAD + GS * 2.5, PAD + GS * 4.5);
+    ctx.fillText('汉 界', PAD + GS * 5.5, PAD + GS * 4.5);
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+
+    // 炮位/兵位十字标记
+    const marks = [[1,2],[7,2],[0,3],[2,3],[4,3],[6,3],[8,3],[1,7],[7,7],[0,6],[2,6],[4,6],[6,6],[8,6]];
+    ctx.strokeStyle = '#5d4037';
+    ctx.lineWidth = 1;
+    for (let [mx, my] of marks) {
+      const cx = gx(mx), cy = gy(my);
+      const l = 6;
+      if (mx > 0) { ctx.beginPath(); ctx.moveTo(cx - l, cy - l); ctx.lineTo(cx - 2, cy - l); ctx.moveTo(cx - l, cy - l); ctx.lineTo(cx - l, cy - 2); ctx.stroke(); }
+      if (mx < 8) { ctx.beginPath(); ctx.moveTo(cx + l, cy - l); ctx.lineTo(cx + 2, cy - l); ctx.moveTo(cx + l, cy - l); ctx.lineTo(cx + l, cy - 2); ctx.stroke(); }
+      if (mx > 0) { ctx.beginPath(); ctx.moveTo(cx - l, cy + l); ctx.lineTo(cx - 2, cy + l); ctx.moveTo(cx - l, cy + l); ctx.lineTo(cx - l, cy + 2); ctx.stroke(); }
+      if (mx < 8) { ctx.beginPath(); ctx.moveTo(cx + l, cy + l); ctx.lineTo(cx + 2, cy + l); ctx.moveTo(cx + l, cy + l); ctx.lineTo(cx + l, cy + 2); ctx.stroke(); }
+    }
+
+    // 最后一步高亮
+    if (lastMove) {
+      ctx.fillStyle = 'rgba(255, 235, 59, 0.35)';
+      ctx.fillRect(gx(lastMove.fx) - GS/2, gy(lastMove.fy) - GS/2, GS, GS);
+      ctx.fillRect(gx(lastMove.tx) - GS/2, gy(lastMove.ty) - GS/2, GS, GS);
+    }
+
+    // 选中高亮与可走提示
+    if (selected) {
+      ctx.strokeStyle = 'rgba(255, 152, 0, 0.8)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(gx(selected.x) - GS/2 + 2, gy(selected.y) - GS/2 + 2, GS - 4, GS - 4);
+      ctx.fillStyle = 'rgba(76, 175, 80, 0.25)';
+      for (let m of getMoves(selected.x, selected.y)) {
+        ctx.beginPath();
+        ctx.arc(gx(m.x), gy(m.y), 6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // 棋子
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const p = board[y][x];
+      if (p) drawPiece(gx(x), gy(y), p);
+    }
+
+    // 状态文字
+    ctx.font = 'bold 16px sans-serif';
+    ctx.textAlign = 'center';
+    if (status === 'over') {
+      const winner = turn === RED ? '黑方胜' : '红方胜';
+      ctx.fillStyle = 'rgba(0,0,0,0.45)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 28px sans-serif';
+      ctx.fillText('对局结束', canvas.width / 2, canvas.height / 2 - 15);
+      ctx.font = 'bold 20px sans-serif';
+      ctx.fillText(winner, canvas.width / 2, canvas.height / 2 + 20);
+      ctx.font = '14px sans-serif';
+      ctx.fillText('点击重新开始', canvas.width / 2, canvas.height / 2 + 50);
+    } else if (thinking) {
+      ctx.fillStyle = 'rgba(0,0,0,0.25)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 22px sans-serif';
+      ctx.fillText('电脑思考中...', canvas.width / 2, canvas.height / 2);
+    }
+    ctx.textAlign = 'left';
+  }
+
+  function drawPiece(x, y, p) {
+    const isRed = p > 0;
+    const r = GS * 0.38;
+    // 外圈
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = isRed ? '#fff8e1' : '#eceff1';
+    ctx.fill();
+    ctx.lineWidth = 2.5;
+    ctx.strokeStyle = isRed ? '#c62828' : '#263238';
+    ctx.stroke();
+    // 内圈
+    ctx.beginPath();
+    ctx.arc(x, y, r - 4, 0, Math.PI * 2);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = isRed ? 'rgba(198,40,40,0.35)' : 'rgba(38,50,56,0.35)';
+    ctx.stroke();
+    // 字
+    ctx.fillStyle = isRed ? '#c62828' : '#263238';
+    ctx.font = 'bold 22px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(PNAME[p], x, y + 1);
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+  }
+
+  // ================= 交互 =================
+  canvas.addEventListener('click', function(e) {
+    if (status === 'over' || thinking || turn !== RED) return;
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const px = (e.clientX - rect.left) * scaleX;
+    const py = (e.clientY - rect.top) * scaleY;
+    const x = igx(px), y = igy(py);
+    if (!inside(x, y)) return;
+
+    const p = board[y][x];
+    if (selected) {
+      if (selected.x === x && selected.y === y) {
+        selected = null;
+      } else if (p && p > 0) {
+        selected = {x, y};
+      } else {
+        const moves = getMoves(selected.x, selected.y);
+        if (moves.some(m => m.x === x && m.y === y)) {
+          if (doMove(selected.x, selected.y, x, y)) {
+            selected = null;
+            checkGameOver();
+            draw();
+            if (status === 'playing') aiMove();
+            return;
+          }
+        }
+        selected = null;
+      }
+    } else {
+      if (p && p > 0) selected = {x, y};
+    }
+    draw();
+  });
+
+  canvas.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    const t = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const px = (t.clientX - rect.left) * scaleX;
+    const py = (t.clientY - rect.top) * scaleY;
+    const x = igx(px), y = igy(py);
+    if (!inside(x, y)) return;
+
+    const p = board[y][x];
+    if (selected) {
+      if (selected.x === x && selected.y === y) {
+        selected = null;
+      } else if (p && p > 0) {
+        selected = {x, y};
+      } else {
+        const moves = getMoves(selected.x, selected.y);
+        if (moves.some(m => m.x === x && m.y === y)) {
+          if (doMove(selected.x, selected.y, x, y)) {
+            selected = null;
+            checkGameOver();
+            draw();
+            if (status === 'playing') aiMove();
+            return;
+          }
+        }
+        selected = null;
+      }
+    } else {
+      if (p && p > 0) selected = {x, y};
+    }
+    draw();
+  }, { passive: false });
+
+  document.getElementById('btn-undo').addEventListener('click', undo);
+  document.getElementById('btn-restart').addEventListener('click', restart);
+
+  // 初始绘制
+  draw();
+})();
+</script>
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      
+<div class="duration" style="font-size: 1.20rem; margin: 0.15rem 0.15rem; color: #295943" > <i class="fas fa-calendar"></i> <span id="duration-container">人生缓缓&nbsp;自有答案</span> <script src="/js/Duration.js"></script> </div> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/star.js"></script>
+<script src="/js/ScrollAnimation.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  (function() {
+    function initMermaid() {
+      // 1. 将 markdown 渲染后的 mermaid 代码块转换为 mermaid 可识别的格式
+      //    highlight.js 会生成 pre > code.language-mermaid
+      //    Fluid 的 mermaid tag 会生成 pre > code.mermaid
+      document.querySelectorAll('pre code[class*="mermaid"]').forEach(function(code) {
+        var pre = document.createElement('pre');
+        pre.className = 'mermaid';
+        pre.textContent = code.textContent;
+        var parent = code.parentElement;
+        if (parent && parent.tagName === 'PRE') {
+          parent.replaceWith(pre);
+        } else {
+          code.replaceWith(pre);
+        }
+      });
+
+      // 2. 如果页面不存在 mermaid 代码块，直接退出
+      var nodes = document.querySelectorAll('.mermaid');
+      if (nodes.length === 0) return;
+
+      // 3. 初始化并手动渲染（避免与主题旧版 mermaid 冲突）
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'default'
+      });
+      mermaid.run({
+        querySelector: '.mermaid'
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMermaid);
+    } else {
+      initMermaid();
+    }
+  })();
+</script>
+<script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

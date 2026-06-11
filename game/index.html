@@ -1,0 +1,1109 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" >
+
+
+
+<head><!-- hexo injector head_begin start --><meta name="msvalidate.01" content="0D58EE7D5C4A4AC77C5FFD19D7D2ADCB" />
+<meta name="google-site-verification" content="TCpxVUPihMio0gDgP8-jRGMDkamfBLxrZbxdt36PBvA" />
+<!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/phead.jpg">
+  <link rel="icon" href="/img/phead.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#efffe9">
+  <meta name="author" content="QIHAN-se">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一个简洁清爽的解压跑酷小游戏，支持多主题切换，按空格或点击屏幕跳跃，躲避障碍收集星星。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="跑酷小游戏">
+<meta property="og:url" content="http://example.com/game/index.html">
+<meta property="og:site_name" content="ShiXiaoHanA">
+<meta property="og:description" content="一个简洁清爽的解压跑酷小游戏，支持多主题切换，按空格或点击屏幕跳跃，躲避障碍收集星星。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-06-11T03:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-11T03:33:10.530Z">
+<meta property="article:author" content="QIHAN-se">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>跑酷小游戏 - ShiXiaoHanA</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+<link rel="stylesheet" href="/css/ScrollAnimation.css">
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/glassBg.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#295943","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 40vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ShiXiaoHanA</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/game/" target="_self">
+                
+                <span>小游戏</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/chess/" target="_self">
+                
+                <span>象棋</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/cosmos/" target="_self">
+                <i class="iconfont clipboard-check"></i>
+                <span>看星星</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+          <!-- 天气板块 - 插入到这里（副标题上方） -->
+          
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="跑酷小游戏"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <style>
+/* 让游戏区域在主题容器中尽量舒展 */
+#parkour-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(41,89,67,0.12);
+  background: linear-gradient(180deg, #e8f5e9 0%, #f1f8e9 60%, #ffffff 100%);
+  user-select: none;
+  -webkit-user-select: none;
+}
+#parkour-wrap canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+}
+#theme-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  padding: 5px 14px;
+  border: none;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: #444;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+#theme-btn:hover {
+  background: rgba(255,255,255,0.9);
+  transform: scale(1.06);
+}
+#parkour-hint {
+  text-align: center;
+  color: #44634f;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+</style>
+<div id="parkour-wrap">
+  <button id="theme-btn" title="点击切换主题">森林</button>
+  <canvas id="parkour" width="900" height="420"></canvas>
+</div>
+<div id="parkour-hint">按空格或点击屏幕跳跃 · 支持二段跳 · 右上角可切换主题</div>
+<script>
+(function() {
+  const canvas = document.getElementById('parkour');
+  const ctx = canvas.getContext('2d');
+
+  // ================= 主题系统 =================
+  const THEMES = {
+    forest: {
+      name: '森林',
+      skyTop: '#e8f5e9', skyMid: '#f1f8e9', skyBottom: '#ffffff',
+      cloud: 'rgba(255,255,255,0.85)',
+      hill: '#c8e6c9',
+      groundTop: '#a5d6a7', groundMid: '#81c784', grass: '#66bb6a',
+      trail: '41,89,67',
+      star: '#ffd54f', starGlow: '#ffd54f',
+      obstacle: '#ff8a65', obstacleHighlight: 'rgba(255,255,255,0.2)',
+      player: '#295943', eye: '#ffffff', pupil: '#295943', cheek: '255,138,101',
+      score: '#295943', best: '#44634f', speedLabel: '#81c784',
+      menuOverlay: 'rgba(255,255,255,0.55)', menuTitle: '#295943', menuSub: '#44634f', menuHint: '#66bb6a',
+      gameoverOverlay: 'rgba(255,255,255,0.45)', gameoverTitle: '#ff8a65', gameoverScore: '#295943', gameoverRecord: '#ffd54f', gameoverRetry: '#44634f',
+      jumpParticle: '#81c784', landParticle: '#81c784',
+      text10: '#66bb6a', text30: '#ffd54f',
+      deathParticle1: '#ff8a65', deathParticle2: '#ffd54f'
+    },
+    ocean: {
+      name: '深海',
+      skyTop: '#e3f2fd', skyMid: '#bbdefb', skyBottom: '#ffffff',
+      cloud: 'rgba(255,255,255,0.7)',
+      hill: '#90caf9',
+      groundTop: '#64b5f6', groundMid: '#42a5f5', grass: '#2196f3',
+      trail: '13,71,161',
+      star: '#ffe082', starGlow: '#ffe082',
+      obstacle: '#ef5350', obstacleHighlight: 'rgba(255,255,255,0.2)',
+      player: '#1565c0', eye: '#ffffff', pupil: '#1565c0', cheek: '239,83,80',
+      score: '#0d47a1', best: '#1565c0', speedLabel: '#64b5f6',
+      menuOverlay: 'rgba(255,255,255,0.55)', menuTitle: '#0d47a1', menuSub: '#1565c0', menuHint: '#42a5f5',
+      gameoverOverlay: 'rgba(255,255,255,0.45)', gameoverTitle: '#ef5350', gameoverScore: '#0d47a1', gameoverRecord: '#ffe082', gameoverRetry: '#1565c0',
+      jumpParticle: '#42a5f5', landParticle: '#42a5f5',
+      text10: '#42a5f5', text30: '#ffe082',
+      deathParticle1: '#ef5350', deathParticle2: '#ffe082'
+    },
+    sunset: {
+      name: '日落',
+      skyTop: '#fff3e0', skyMid: '#ffe0b2', skyBottom: '#ffcc80',
+      cloud: 'rgba(255,255,255,0.6)',
+      hill: '#ffcc80',
+      groundTop: '#ffb74d', groundMid: '#ffa726', grass: '#f57c00',
+      trail: '230,81,0',
+      star: '#ffee58', starGlow: '#ffee58',
+      obstacle: '#e53935', obstacleHighlight: 'rgba(255,255,255,0.25)',
+      player: '#e65100', eye: '#ffffff', pupil: '#e65100', cheek: '239,83,80',
+      score: '#bf360c', best: '#e65100', speedLabel: '#ffb74d',
+      menuOverlay: 'rgba(255,243,224,0.6)', menuTitle: '#bf360c', menuSub: '#e65100', menuHint: '#f57c00',
+      gameoverOverlay: 'rgba(255,243,224,0.5)', gameoverTitle: '#e53935', gameoverScore: '#bf360c', gameoverRecord: '#ffee58', gameoverRetry: '#e65100',
+      jumpParticle: '#ffa726', landParticle: '#ffa726',
+      text10: '#f57c00', text30: '#ffee58',
+      deathParticle1: '#e53935', deathParticle2: '#ffee58'
+    },
+    candy: {
+      name: '糖果',
+      skyTop: '#fce4ec', skyMid: '#f8bbd0', skyBottom: '#ffffff',
+      cloud: 'rgba(255,255,255,0.8)',
+      hill: '#f48fb1',
+      groundTop: '#f06292', groundMid: '#ec407a', grass: '#d81b60',
+      trail: '136,14,79',
+      star: '#fff176', starGlow: '#fff176',
+      obstacle: '#ab47bc', obstacleHighlight: 'rgba(255,255,255,0.2)',
+      player: '#c2185b', eye: '#ffffff', pupil: '#c2185b', cheek: '171,71,188',
+      score: '#880e4f', best: '#c2185b', speedLabel: '#f06292',
+      menuOverlay: 'rgba(255,255,255,0.55)', menuTitle: '#880e4f', menuSub: '#c2185b', menuHint: '#ec407a',
+      gameoverOverlay: 'rgba(255,255,255,0.45)', gameoverTitle: '#ab47bc', gameoverScore: '#880e4f', gameoverRecord: '#fff176', gameoverRetry: '#c2185b',
+      jumpParticle: '#ec407a', landParticle: '#ec407a',
+      text10: '#ec407a', text30: '#fff176',
+      deathParticle1: '#ab47bc', deathParticle2: '#fff176'
+    },
+    midnight: {
+      name: '暗夜',
+      skyTop: '#263238', skyMid: '#37474f', skyBottom: '#455a64',
+      cloud: 'rgba(255,255,255,0.1)',
+      hill: '#37474f',
+      groundTop: '#455a64', groundMid: '#546e7a', grass: '#607d8b',
+      trail: '176,190,197',
+      star: '#ffd54f', starGlow: '#ffd54f',
+      obstacle: '#ff7043', obstacleHighlight: 'rgba(255,255,255,0.15)',
+      player: '#80cbc4', eye: '#263238', pupil: '#80cbc4', cheek: '255,112,67',
+      score: '#80cbc4', best: '#b0bec5', speedLabel: '#546e7a',
+      menuOverlay: 'rgba(38,50,56,0.65)', menuTitle: '#80cbc4', menuSub: '#b0bec5', menuHint: '#4db6ac',
+      gameoverOverlay: 'rgba(38,50,56,0.55)', gameoverTitle: '#ff7043', gameoverScore: '#80cbc4', gameoverRecord: '#ffd54f', gameoverRetry: '#b0bec5',
+      jumpParticle: '#4db6ac', landParticle: '#4db6ac',
+      text10: '#4db6ac', text30: '#ffd54f',
+      deathParticle1: '#ff7043', deathParticle2: '#ffd54f'
+    }
+  };
+
+  let currentThemeName = localStorage.getItem('parkour_theme') || 'forest';
+  function T() { return THEMES[currentThemeName]; }
+
+  function nextTheme() {
+    const keys = Object.keys(THEMES);
+    currentThemeName = keys[(keys.indexOf(currentThemeName) + 1) % keys.length];
+    localStorage.setItem('parkour_theme', currentThemeName);
+    const btn = document.getElementById('theme-btn');
+    if (btn) btn.textContent = T().name;
+  }
+
+  // 初始化按钮
+  (function initThemeBtn() {
+    const btn = document.getElementById('theme-btn');
+    if (btn) {
+      btn.textContent = T().name;
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        nextTheme();
+      });
+    }
+  })();
+
+  // ================= 物理常量 =================
+  const GRAVITY = 0.35;
+  const JUMP = -8.5;
+  const GROUND_Y = 340;
+  const SPEED_START = 2.4;
+
+  // ================= 状态 =================
+  let state = 'menu'; // menu | playing | gameover
+  let score = 0;
+  let highScore = parseInt(localStorage.getItem('parkour_hs') || '0');
+  let speed = SPEED_START;
+  let distance = 0;
+  let frame = 0;
+
+  // ================= 对象池 =================
+  const player = {
+    x: 110, y: GROUND_Y - 40, w: 32, h: 32,
+    vy: 0, grounded: false, jumps: 0, maxJumps: 2,
+    squash: 1, stretch: 1,
+    trail: [],
+    alive: true
+  };
+
+  let obstacles = [];
+  let stars = [];
+  let particles = [];
+  let clouds = [];
+  let hills = [];
+  let texts = [];
+
+  // 初始化云朵和山丘
+  function initScenery() {
+    clouds = [];
+    for (let i = 0; i < 6; i++) {
+      clouds.push({ x: Math.random() * canvas.width, y: 30 + Math.random() * 100, s: 0.3 + Math.random() * 0.5, w: 60 + Math.random() * 80 });
+    }
+    hills = [];
+    for (let i = 0; i < 5; i++) {
+      hills.push({ x: i * 250 - 100, h: 60 + Math.random() * 60 });
+    }
+  }
+  initScenery();
+
+  // 生成障碍
+  function spawnObstacle() {
+    const type = Math.random() < 0.7 ? 'ground' : 'air';
+    const obs = {
+      x: canvas.width + 50,
+      y: type === 'ground' ? GROUND_Y - 36 : GROUND_Y - 90 - Math.random() * 50,
+      w: 28 + Math.random() * 16,
+      h: type === 'ground' ? 36 : 28,
+      type: type,
+      passed: false
+    };
+    obstacles.push(obs);
+  }
+
+  // 生成星星
+  function spawnStar() {
+    stars.push({
+      x: canvas.width + 40,
+      y: GROUND_Y - 50 - Math.random() * 140,
+      r: 10,
+      rot: Math.random() * Math.PI,
+      got: false,
+      bob: Math.random() * Math.PI * 2
+    });
+  }
+
+  // 粒子
+  function emitParticles(x, y, color, count, speedBase) {
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const spd = (Math.random() * 2 + 1) * (speedBase || 1);
+      particles.push({
+        x, y,
+        vx: Math.cos(angle) * spd,
+        vy: Math.sin(angle) * spd - 1,
+        life: 1,
+        decay: 0.02 + Math.random() * 0.03,
+        color,
+        size: 2 + Math.random() * 3
+      });
+    }
+  }
+
+  // 浮动文字
+  function spawnText(x, y, str, color) {
+    texts.push({ x, y, str, color, life: 1, vy: -1.5 });
+  }
+
+  // 输入
+  function jump() {
+    if (state === 'menu') {
+      startGame();
+      return;
+    }
+    if (state === 'gameover') {
+      resetGame();
+      state = 'playing';
+      return;
+    }
+    if (state !== 'playing') return;
+    if (player.jumps < player.maxJumps) {
+      player.vy = JUMP;
+      player.jumps++;
+      player.grounded = false;
+      player.squash = 0.88;
+      player.stretch = 1.10;
+      // 跳跃粒子
+      emitParticles(player.x + player.w/2, player.y + player.h, T().jumpParticle, 6, 1.5);
+    }
+  }
+
+  window.addEventListener('keydown', e => {
+    if (e.code === 'Space' || e.code === 'ArrowUp') {
+      e.preventDefault();
+      jump();
+    }
+  });
+  canvas.addEventListener('mousedown', e => { e.preventDefault(); jump(); });
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); jump(); }, { passive: false });
+
+  // 游戏控制
+  function startGame() {
+    state = 'playing';
+    score = 0;
+    distance = 0;
+    speed = SPEED_START;
+    frame = 0;
+    obstacles = [];
+    stars = [];
+    particles = [];
+    texts = [];
+    player.y = GROUND_Y - 40;
+    player.vy = 0;
+    player.jumps = 0;
+    player.grounded = false;
+    player.alive = true;
+    player.trail = [];
+    spawnObstacle();
+  }
+
+  function resetGame() {
+    state = 'menu';
+    score = 0;
+    distance = 0;
+    speed = SPEED_START;
+    obstacles = [];
+    stars = [];
+    particles = [];
+    texts = [];
+    player.y = GROUND_Y - 40;
+    player.vy = 0;
+    player.alive = true;
+    player.trail = [];
+  }
+
+  function gameOver() {
+    state = 'gameover';
+    player.alive = false;
+    if (score > highScore) {
+      highScore = score;
+      localStorage.setItem('parkour_hs', String(highScore));
+    }
+    emitParticles(player.x + player.w/2, player.y + player.h/2, T().deathParticle1, 30, 3);
+    emitParticles(player.x + player.w/2, player.y + player.h/2, T().deathParticle2, 15, 2);
+  }
+
+  // 碰撞检测（AABB）
+  function collides(a, b) {
+    const pad = 4;
+    return a.x + pad < b.x + b.w - pad &&
+           a.x + a.w - pad > b.x + pad &&
+           a.y + pad < b.y + b.h - pad &&
+           a.y + a.h - pad > b.y + pad;
+  }
+
+  // 更新
+  function update() {
+    frame++;
+
+    // 背景滚动
+    clouds.forEach(c => { c.x -= c.s * 0.5; if (c.x + c.w < -100) c.x = canvas.width + 100 + Math.random() * 200; });
+    hills.forEach(h => { h.x -= speed * 0.15; if (h.x < -300) h.x += hills.length * 250; });
+
+    if (state === 'playing') {
+      distance += speed;
+      // 缓慢加速
+      if (frame % 1200 === 0) speed += 0.08;
+
+      // 玩家物理
+      player.vy += GRAVITY;
+      player.y += player.vy;
+
+      // 地面碰撞
+      if (player.y + player.h >= GROUND_Y) {
+        player.y = GROUND_Y - player.h;
+        player.vy = 0;
+        if (!player.grounded) {
+          player.squash = 1.12;
+          player.stretch = 0.92;
+          emitParticles(player.x + player.w/2, player.y + player.h, T().landParticle, 4, 1);
+        }
+        player.grounded = true;
+        player.jumps = 0;
+      } else {
+        player.grounded = false;
+      }
+
+      // 形变恢复
+      player.squash += (1 - player.squash) * 0.12;
+      player.stretch += (1 - player.stretch) * 0.12;
+
+      // 拖尾
+      player.trail.push({ x: player.x + player.w/2, y: player.y + player.h/2, life: 1 });
+      if (player.trail.length > 12) player.trail.shift();
+      player.trail.forEach(t => t.life -= 0.08);
+
+      // 障碍
+      obstacles.forEach(o => {
+        o.x -= speed;
+        if (!o.passed && o.x + o.w < player.x) {
+          o.passed = true;
+          score += 10;
+          spawnText(o.x + 40, o.y - 10, '+10', T().text10);
+        }
+      });
+      obstacles = obstacles.filter(o => o.x + o.w > -50);
+
+      // 生成障碍
+      if (obstacles.length === 0 || (canvas.width - obstacles[obstacles.length - 1].x > 480 + Math.random() * 350)) {
+        spawnObstacle();
+      }
+
+      // 星星
+      stars.forEach(s => {
+        s.x -= speed;
+        s.rot += 0.04;
+        s.bob += 0.06;
+      });
+      stars = stars.filter(s => s.x > -50 && !s.got);
+      if (Math.random() < 0.015) spawnStar();
+
+      // 碰撞检测
+      const pRect = { x: player.x + 4, y: player.y + 4, w: player.w - 8, h: player.h - 8 };
+      for (let o of obstacles) {
+        if (collides(pRect, o)) {
+          gameOver();
+          break;
+        }
+      }
+      for (let s of stars) {
+        if (!s.got && collides(pRect, { x: s.x - s.r, y: s.y - s.r, w: s.r*2, h: s.r*2 })) {
+          s.got = true;
+          score += 30;
+          spawnText(s.x, s.y - 15, '+30', T().text30);
+          emitParticles(s.x, s.y, T().text30, 10, 2);
+        }
+      }
+    }
+
+    // 粒子更新
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.1;
+      p.life -= p.decay;
+    });
+    particles = particles.filter(p => p.life > 0);
+
+    // 文字更新
+    texts.forEach(t => {
+      t.y += t.vy;
+      t.life -= 0.02;
+    });
+    texts = texts.filter(t => t.life > 0);
+  }
+
+  // 绘制
+  function draw() {
+    const th = T();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 天空渐变
+    const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    grad.addColorStop(0, th.skyTop);
+    grad.addColorStop(0.6, th.skyMid);
+    grad.addColorStop(1, th.skyBottom);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // 云朵
+    ctx.fillStyle = th.cloud;
+    clouds.forEach(c => {
+      ctx.beginPath();
+      ctx.ellipse(c.x, c.y, c.w * 0.5, c.w * 0.25, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(c.x + c.w * 0.25, c.y - c.w * 0.1, c.w * 0.35, c.w * 0.2, 0, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // 远山
+    hills.forEach(h => {
+      ctx.fillStyle = th.hill;
+      ctx.beginPath();
+      ctx.moveTo(h.x, GROUND_Y);
+      ctx.quadraticCurveTo(h.x + 125, GROUND_Y - h.h, h.x + 250, GROUND_Y);
+      ctx.fill();
+    });
+
+    // 地面
+    ctx.fillStyle = th.groundTop;
+    ctx.fillRect(0, GROUND_Y, canvas.width, canvas.height - GROUND_Y);
+    ctx.fillStyle = th.groundMid;
+    ctx.fillRect(0, GROUND_Y + 8, canvas.width, canvas.height - GROUND_Y - 8);
+    // 草地点缀
+    ctx.fillStyle = th.grass;
+    for (let i = 0; i < canvas.width; i += 40) {
+      const gx = (i - (distance * 0.8) % 40);
+      ctx.beginPath();
+      ctx.moveTo(gx + 10, GROUND_Y + 2);
+      ctx.lineTo(gx + 15, GROUND_Y - 6);
+      ctx.lineTo(gx + 20, GROUND_Y + 2);
+      ctx.fill();
+    }
+
+    // 拖尾
+    player.trail.forEach(t => {
+      ctx.fillStyle = 'rgba(' + th.trail + ',' + (t.life * 0.25) + ')';
+      ctx.beginPath();
+      ctx.arc(t.x, t.y, 4 * t.life, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // 星星
+    stars.forEach(s => {
+      ctx.save();
+      ctx.translate(s.x, s.y + Math.sin(s.bob) * 4);
+      ctx.rotate(s.rot);
+      ctx.fillStyle = th.star;
+      ctx.shadowColor = th.starGlow;
+      ctx.shadowBlur = 10;
+      drawStar(ctx, 0, 0, 5, s.r, s.r * 0.5);
+      ctx.shadowBlur = 0;
+      ctx.restore();
+    });
+
+    // 障碍
+    obstacles.forEach(o => {
+      ctx.fillStyle = th.obstacle;
+      roundRect(ctx, o.x, o.y, o.w, o.h, 6);
+      ctx.fill();
+      ctx.fillStyle = th.obstacleHighlight;
+      roundRect(ctx, o.x + 3, o.y + 3, o.w - 6, o.h * 0.4, 4);
+      ctx.fill();
+    });
+
+    // 玩家
+    if (player.alive || state !== 'gameover') {
+      ctx.save();
+      ctx.translate(player.x + player.w/2, player.y + player.h);
+      ctx.scale(player.squash, player.stretch);
+      ctx.translate(-(player.x + player.w/2), -(player.y + player.h));
+      ctx.fillStyle = th.player;
+      roundRect(ctx, player.x, player.y, player.w, player.h, 8);
+      ctx.fill();
+      // 眼睛
+      ctx.fillStyle = th.eye;
+      ctx.beginPath();
+      ctx.arc(player.x + 10, player.y + 12, 5, 0, Math.PI * 2);
+      ctx.arc(player.x + 22, player.y + 12, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = th.pupil;
+      ctx.beginPath();
+      ctx.arc(player.x + 11, player.y + 12, 2.5, 0, Math.PI * 2);
+      ctx.arc(player.x + 23, player.y + 12, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+      // 腮红
+      ctx.fillStyle = 'rgba(' + th.cheek + ',0.35)';
+      ctx.beginPath();
+      ctx.arc(player.x + 7, player.y + 20, 4, 0, Math.PI * 2);
+      ctx.arc(player.x + 25, player.y + 20, 4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // 粒子
+    particles.forEach(p => {
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+
+    // 浮动文字
+    texts.forEach(t => {
+      ctx.globalAlpha = Math.max(0, t.life);
+      ctx.fillStyle = t.color;
+      ctx.font = 'bold 18px sans-serif';
+      ctx.fillText(t.str, t.x, t.y);
+    });
+    ctx.globalAlpha = 1;
+
+    // UI
+    ctx.fillStyle = th.score;
+    ctx.font = 'bold 22px sans-serif';
+    ctx.fillText('Score: ' + score, 24, 36);
+    ctx.font = '16px sans-serif';
+    ctx.fillStyle = th.best;
+    ctx.fillText('Best: ' + highScore, 24, 58);
+
+    // 速度指示
+    ctx.font = '14px sans-serif';
+    ctx.fillStyle = th.speedLabel;
+    ctx.fillText('Speed ' + speed.toFixed(1) + 'x', canvas.width - 100, 36);
+
+    // 菜单遮罩
+    if (state === 'menu') {
+      ctx.fillStyle = th.menuOverlay;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      drawCenterText('小跑酷', 52, th.menuTitle, -30);
+      drawCenterText('点击屏幕或按空格开始', 20, th.menuSub, 20);
+      drawCenterText('躲避障碍 · 收集星星', 16, th.menuHint, 48);
+    }
+
+    if (state === 'gameover') {
+      ctx.fillStyle = th.gameoverOverlay;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      drawCenterText('撞到了！', 48, th.gameoverTitle, -30);
+      drawCenterText('得分: ' + score, 26, th.gameoverScore, 15);
+      if (score >= highScore && score > 0) {
+        drawCenterText('新纪录！', 20, th.gameoverRecord, 45);
+      }
+      drawCenterText('点击或按空格再来一次', 18, th.gameoverRetry, 75);
+    }
+  }
+
+  function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius) {
+    let rot = Math.PI / 2 * 3;
+    let x = cx;
+    let y = cy;
+    let step = Math.PI / spikes;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - outerRadius);
+    for (let i = 0; i < spikes; i++) {
+      x = cx + Math.cos(rot) * outerRadius;
+      y = cy + Math.sin(rot) * outerRadius;
+      ctx.lineTo(x, y);
+      rot += step;
+      x = cx + Math.cos(rot) * innerRadius;
+      y = cy + Math.sin(rot) * innerRadius;
+      ctx.lineTo(x, y);
+      rot += step;
+    }
+    ctx.lineTo(cx, cy - outerRadius);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    if (w < 2 * r) r = w / 2;
+    if (h < 2 * r) r = h / 2;
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function drawCenterText(str, size, color, yOff) {
+    ctx.fillStyle = color;
+    ctx.font = 'bold ' + size + 'px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(str, canvas.width / 2, canvas.height / 2 + yOff);
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+  }
+
+  // 循环
+  function loop() {
+    update();
+    draw();
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+</script>
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      
+<div class="duration" style="font-size: 1.20rem; margin: 0.15rem 0.15rem; color: #295943" > <i class="fas fa-calendar"></i> <span id="duration-container">人生缓缓&nbsp;自有答案</span> <script src="/js/Duration.js"></script> </div> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/star.js"></script>
+<script src="/js/ScrollAnimation.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  (function() {
+    function initMermaid() {
+      // 1. 将 markdown 渲染后的 mermaid 代码块转换为 mermaid 可识别的格式
+      //    highlight.js 会生成 pre > code.language-mermaid
+      //    Fluid 的 mermaid tag 会生成 pre > code.mermaid
+      document.querySelectorAll('pre code[class*="mermaid"]').forEach(function(code) {
+        var pre = document.createElement('pre');
+        pre.className = 'mermaid';
+        pre.textContent = code.textContent;
+        var parent = code.parentElement;
+        if (parent && parent.tagName === 'PRE') {
+          parent.replaceWith(pre);
+        } else {
+          code.replaceWith(pre);
+        }
+      });
+
+      // 2. 如果页面不存在 mermaid 代码块，直接退出
+      var nodes = document.querySelectorAll('.mermaid');
+      if (nodes.length === 0) return;
+
+      // 3. 初始化并手动渲染（避免与主题旧版 mermaid 冲突）
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'default'
+      });
+      mermaid.run({
+        querySelector: '.mermaid'
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMermaid);
+    } else {
+      initMermaid();
+    }
+  })();
+</script>
+<script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
